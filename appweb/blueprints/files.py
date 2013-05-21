@@ -15,6 +15,10 @@ from foofind.utils.fooprint import Fooprint
 
 files = Fooprint('files', __name__)
 
+@files.route('')
+def test():
+    return "as"
+
 @files.route('/<lang>/<license>', methods=["POST"])
 @csrf.exempt
 def home():
