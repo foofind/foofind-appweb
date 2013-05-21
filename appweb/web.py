@@ -23,7 +23,8 @@ from foofind.utils.webassets_filters import JsSlimmer, CssSlimmer
 from foofind.utils import u, logging
 from foofind.utils.bots import is_search_bot, is_full_browser, check_rate_limit
 
-import app
+from appweb.blueprints.files import files
+from appweb.templates import register_filters
 
 def create_app(config=None, debug=False):
     '''
@@ -86,7 +87,7 @@ def create_app(config=None, debug=False):
     app.jinja_env.globals["u"] = u
 
     # Blueprints
-    app.register_blueprint(appweb)
+    app.register_blueprint(files)
 
     # Web Assets
     if not os.path.isdir(app.static_folder+"/gen"): os.mkdir(app.static_folder+"/gen")
@@ -98,8 +99,9 @@ def create_app(config=None, debug=False):
     register_filter(JsSlimmer)
     register_filter(CssSlimmer)
 
-    assets.register('css_torrents', Bundle('main.css', 'jquery.treeview.css', filters='pyscss', output='gen/main.css', debug=False), '960_24_col.css', filters='css_slimmer', output='gen/torrent.css')
-    assets.register('js_torrents', Bundle('jquery.js', 'jquery.treeview.js', 'torrents.js', "jquery.colorbox-min.js", filters='rjsmin', output='gen/torrents.js'), )
+    assets.register('css_blubster', Bundle('blubster/css/blubster.css', filters='pyscss', output='gen/main.css', debug=False), filters='css_slimmer', output='gen/blubster.css')
+    assets.register('css_foofind', Bundle('foofind/css/foofind.css', filters='pyscss', output='gen/main.css', debug=False), filters='css_slimmer', output='gen/foofind.css')
+    assets.register('js_appweb', Bundle('jquery.js', 'appweb.js', filters='rjsmin', output='gen/appweb.js'), )
 
     # proteccion CSRF
     csrf.init_app(app)
@@ -113,7 +115,6 @@ def create_app(config=None, debug=False):
 
     # Cache
     cache.init_app(app)
-    configdb.register_action("flush_cache", cache.clear, _unique=True)
 
     # Acceso a bases de datos
     filesdb.init_app(app)
@@ -137,9 +138,20 @@ def create_app(config=None, debug=False):
     eventmanager.interval(app.config["FOOCONN_UPDATE_INTERVAL"], filesdb.load_servers_conn)
     eventmanager.interval(app.config["FOOCONN_UPDATE_INTERVAL"], entitiesdb.connect)
 
-    # informacion de categorias
-    app_categories = app.config["TORRENTS_CATEGORIES"]
-    app_categories_by_url = {category.url:category for category in app_categories}
+    @app.url_value_preprocessor
+    def pull_lang_code(endpoint, values):
+        if values is None:
+            g.lang = g.license_name = None
+        else:
+            g.lang = values.pop('lang', None)
+            g.license_name = values.pop('license', None)
+
+    @app.url_defaults
+    def add_language_code(endpoint, values):
+        if not 'lang' in values and app.url_map.is_endpoint_expecting(endpoint, 'lang'):
+            values['lang'] = g.lang
+        if not 'license' in values and app.url_map.is_endpoint_expecting(endpoint, 'license'):
+            values['license'] = g.license_name
 
     @app.before_request
     def before_request():
@@ -179,19 +191,15 @@ def create_app(config=None, debug=False):
         error = e.code if hasattr(e,"code") else 500
         title, description = errors[error if error in errors else 500]
 
-        init_g(app, app_categories, app_categories_by_url)
-        g.title = "Torrents - " + title
+        init_g(app)
 
         return render_template('error.html', code=str(error), title=title, description=description), error
 
     return app
 
-def init_g(app, app_categories, app_categories_by_url):
+def init_g(app):
     # caracteristicas del cliente
     g.search_bot=is_search_bot()
-
-    # idioma ingles
-    g.lang = "en"
 
     # peticiones en modo preproduccion
     g.beta_request = request.url_root[request.url_root.index("//")+2:].startswith("beta.")
@@ -203,14 +211,5 @@ def init_g(app, app_categories, app_categories_by_url):
         app_static_prefix = app.config["STATIC_PREFIX"] or app.static_url_path
     g.static_prefix = app.assets.url = app_static_prefix
 
-    # dominio de la web
-    g.domain = "torrents.com"
-
-    # título de la página por defecto
-    g.title = "Torrents"
-
     g.keywords = {}
-
-    # busqueda actual
-    g.query = g.clean_query = None
-    g.category = None
+    g.args = {}
