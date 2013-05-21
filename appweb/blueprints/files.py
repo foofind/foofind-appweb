@@ -15,7 +15,7 @@ from foofind.utils.fooprint import Fooprint
 
 files = Fooprint('files', __name__)
 
-@files.route('')
+@files.route('/as')
 def test():
     return "as"
 
