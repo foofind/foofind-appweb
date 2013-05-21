@@ -26,6 +26,15 @@ from foofind.utils.bots import is_search_bot, is_full_browser, check_rate_limit
 from appweb.blueprints.files import files
 from appweb.templates import register_filters
 
+try:
+    from uwsgidecorators import postfork
+    @postfork
+    def start_eventmanager():
+        # Inicio del eventManager
+        eventmanager.start()
+except ImportError:
+    pass
+
 def create_app(config=None, debug=False):
     '''
     Inicializa la aplicación Flask. Carga los siguientes módulos:
@@ -86,6 +95,9 @@ def create_app(config=None, debug=False):
     # Registra valores/funciones para plantillas
     app.jinja_env.globals["u"] = u
 
+    # proteccion CSRF
+    csrf.init_app(app)
+
     # Blueprints
     app.register_blueprint(files)
 
@@ -100,11 +112,9 @@ def create_app(config=None, debug=False):
     register_filter(CssSlimmer)
 
     assets.register('css_blubster', Bundle('blubster/css/blubster.css', filters='pyscss', output='gen/main.css', debug=False), filters='css_slimmer', output='gen/blubster.css')
-    assets.register('css_foofind', Bundle('foofind/css/foofind.css', filters='pyscss', output='gen/main.css', debug=False), filters='css_slimmer', output='gen/foofind.css')
-    assets.register('js_appweb', Bundle('jquery.js', 'appweb.js', filters='rjsmin', output='gen/appweb.js'), )
+    '''assets.register('css_foofind', Bundle('foofind/css/foofind.css', filters='pyscss', output='gen/main.css', debug=False), filters='css_slimmer', output='gen/foofind.css')
+    assets.register('js_appweb', Bundle('jquery.js', 'appweb.js', filters='rjsmin', output='gen/appweb.js'), )'''
 
-    # proteccion CSRF
-    csrf.init_app(app)
 
     # Traducciones
     babel.init_app(app)
@@ -155,7 +165,6 @@ def create_app(config=None, debug=False):
 
     @app.before_request
     def before_request():
-
         # No preprocesamos la peticiones a static
         if request.path.startswith("/static/"):
             return

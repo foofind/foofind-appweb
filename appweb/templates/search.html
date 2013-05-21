@@ -6,18 +6,47 @@
     {%- endassets %}
 {% endblock %}
 {% block content %}
-    <div id="search">
-        {{flash()}}
-        <form method="post" action="{{ url_for('files.search') }}">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-            <input type="text" id="q" name="q" autocomplete="off" value="{{g.args['q']}}"/><button type="submit">Search</button>
-        </form>
-    </div>
-    <div id="fondo"></div>
-        {{ flash() }}
-        <ul id="results">
+    <div id="infotasks">
+        <div class="search-main">
+            {{flash()}}
+            <form method="post" action="{{ url_for('files.search') }}">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                <fieldset>
+                    <legend>Search form</legend>
+                    <div class="search-text">
+                        <label for="search-text">Search:</label>
+                        <input type="text" class="search-text" placeholder="Type here your search" id="q" name="q" autocomplete="off" value="">
+                    </div>
+                    <div class="search-filetype">
+                        <label for="search-filetype">Filetype</label>
+                        <select name="search-filetype" id="filetype" class="filetype">
+                            <option value="All" selected="">All</option>
+                            <option value="video">Video</option>
+                            <option value="audio">Audio</option>
+                            <option value="image">Image</option>
+                            <option value="document">Document</option>
+                            <option value="software">Software</option>
+                        </select>
+                        <ul class="filetype">
+                            <li class="filetype-all">All</li>
+                            <li class="filetype-video">Video</li>
+                            <li class="filetype-audio">Audio</li>
+                            <li class="filetype-image">Image</li>
+                            <li class="filetype-document">Document</li>
+                            <li class="filetype-software">Software</li>
+                        </ul>
+                    </div>
+                    <div class="search-button-find">
+                        <button type="submit" class="search-button-find"><img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-magni-off.png" alt="Find"></button>
+                    </div>
+                </fieldset>
+            </form>
+        </div><!--end of .search-main-->
+    </div><!--end of #infotasks-->
+
+    <div id="content">
+        <ul class="results">
             {% include "file.html" with context %}
-        </ul>
-        <a href="#" id="more"></a>
-    </div>
+        </ul><!--end of .results-->
+    </div><!--end of #content-->
 {% endblock %}

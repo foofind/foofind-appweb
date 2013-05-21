@@ -1,8 +1,92 @@
 {%- for file in files %}{%- set source_data=file['view']['sources'][file['view']['sources']|first] %}
-<li class="{{ file['view']['file_type'] }}">
-    <h3>
-        <a href="{{ source_data['urls'][0] }}" title="{{ file['view']['nfn'] }}" data-id="{{ file['file']['id'] }}">
-            {% if 'fnhs' in file['view'] %}{{ file['view']['fnhs']|safe }}{% else %}{{ file['view']['fn']|safe }}{% endif %}
-        </a>
-    </h3>
-</li>{%- endfor %}
+<li class="result-item result-odd result-{{ file['view']['file_type'] }}">
+    <div class="result-main-data">
+        <div class="result-title-info">
+            <div class="result-tile">
+                <p class="result-title">
+                    <span>
+                        {% if 'fnhs' in file['view'] %}{{ file['view']['fnhs']|safe }}{% else %}{{ file['view']['fn']|safe }}{% endif %}
+                    </span>
+                </p>
+            </div><!--end of div.result-title-->
+            <div class="result-info">
+                <ul class="result-info">
+                    <li class="sele-rating sele-rating-1">
+                        <span class="sele-seeds">
+                            22,000
+                            <abbr title="seeds">
+                            se.
+                            </abbr>
+                        </span>
+                        <span class="sele-dot"> · </span>
+                        <span class="sele-leechers">
+                            <abbr title="leechers">
+                            le.
+                            </abbr>
+                        </span>
+                    </li><!--end of .sele-rating-->
+                    <li class="sele-size">
+                        <span class="sele-size-value">
+                        10
+                        </span>
+                        <span class="sele-size-unit">
+                            <abbr title="gigabytes">
+                            GB
+                            </abbr>
+                        </span>
+                    </li><!--end of .sele-rating-->
+                </ul><!--end of ul.result-info-->
+            </div><!--end of div.result-info-->
+        </div><!--end of .result-title-info-->
+
+        <div class="result-rating-love">
+            <div class="result-rating">
+                <p class="result-rating">
+                    <span>
+                    ★★★☆☆
+                    </span>
+                </p>
+            </div><!--end of .result-rating-->
+
+            <div class="result-love">
+                <ul class="result-love">
+                    <li class="result-love">
+                        <a href="#" class="button button-off button-noright result-love-no">
+                            <span>
+                                <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-love-off.png">
+                            </span>
+                        </a>
+                    </li>
+                    <li class="result-hate">
+                        <a href="#" class="button button-off button-noleft result-hate-no">
+                            <span>
+                                <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-hate-off.png">
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div><!--end of .result-love-->
+        </div><!--end of .result-rating-love-->
+    </div><!--end of .result-main-data-->
+
+    <div class="result-actions">
+        <ul class="result-actions">
+            <li class="result-action-download">
+                <a href="{{ source_data['urls'][0] }}" class="button button-on">
+                    <span>
+                        <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-download-on.png"><p>Download</p>
+                    </span>
+                </a>
+            </li>
+            <li class="result-action-info">
+                <a href="#" class="button button-off">
+                    <span>
+                        <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-info-off.png">
+                    </span>
+                </a>
+            </li>
+        </ul>
+        <div><!--end of .result-actions-->
+
+</li><!--end of .result-item-->
+{%- endfor %}
