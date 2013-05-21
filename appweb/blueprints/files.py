@@ -27,6 +27,7 @@ from foofind.utils.seo import seoize_text
 files = Fooprint('files', __name__, dup_on_startswith="/<lang>")
 
 @files.route('/<lang>/<license>/', methods=["POST"])
+@csrf.exempt
 def home():
     '''
     Renderiza la portada de la pestaña find de la aplicación.
