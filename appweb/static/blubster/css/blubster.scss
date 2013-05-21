@@ -308,17 +308,17 @@ abbr {
   margin-right:2em;
 }
 .result-more-info-text{
-  float:left;
-  width:40em;
+  float:none;
   height:16.5em;
   padding-right:2em;
+  margin-right:1.4em;
   overflow:auto;
 }
 .result-more-info-text p{
   font-size:1.2em;
   margin-bottom:1em;
 }
-.result-more-info-text p:last-child{                                             /*css3*/
+.result-more-info-text p:last-child{
   margin-bottom:0;
 }
 .result-expanded .result-more-actions{
@@ -430,7 +430,6 @@ div.result-actions{
   position:relative;
   overflow:visible;
   float:right;
-  width:20%;
   min-width:18em !important;
   margin:1.3em 0 0 0;
 
