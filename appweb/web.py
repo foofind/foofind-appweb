@@ -211,5 +211,7 @@ def init_g(app):
         app_static_prefix = app.config["STATIC_PREFIX"] or app.static_url_path
     g.static_prefix = app.assets.url = app_static_prefix
 
-    g.keywords = {}
+    g.keywords = set()
     g.args = {}
+
+    g.page_description=g.title=""

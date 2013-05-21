@@ -3,6 +3,7 @@
     <div id="search">
         {{flash()}}
         <form method="post" action="{{ url_for('files.search') }}">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
             <input type="text" id="q" name="q" autocomplete="off" value=""/><button type="submit">Search</button>
         </form>
     </div>

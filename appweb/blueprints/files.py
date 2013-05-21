@@ -47,13 +47,11 @@ def search(query=None,filters=None):
             return redirect(url_for("files.home"))
         else: #sino se reemplazan los espacios que venian antes con un + en el query string y se extraen los filtros
             query = query.replace("+"," ").replace("/"," ")
-            filters=filters2url(request.args)
+            filters=filters2url(request.form)
             url_with_get_params=True
 
     query = query.replace("_"," ") if query is not None else None #para que funcionen la busqueda cuando vienen varias palabras
     dict_filters, has_changed = url2filters(filters) #procesar los parametros
-    if url_with_get_params or has_changed: #redirecciona si viene una url con get o si url2filters ha cambiado los parametros y no se mandan filtros si es un bot
-        return redirect(url_for(".search", query=query.replace(" ","_"), filters=filters2url(dict_filters)),302)
 
     # obtiene parametros de busqueda de la url
     if query:
@@ -67,7 +65,6 @@ def search(query=None,filters=None):
     sure = False
     total_found=0
 
-    searchd.search(query, filters=dict_filters, start=True)
     search_results = search_files(query, dict_filters, min_results=request.args.get("min_results",0), last_items=[])
 
     return render_template('search.html',
