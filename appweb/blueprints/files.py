@@ -4,15 +4,6 @@
 """
 import urllib, json, unicodedata, random, sys, bson
 from flask import request, render_template, g, current_app, jsonify, flash, redirect, url_for, abort, Markup
-from flask.ext.login import login_required, current_user
-from flask.ext.babel import gettext as _
-from flaskext.babel import format_datetime
-from datetime import datetime
-from timelib import strtotime
-from struct import pack, unpack
-from collections import OrderedDict
-from copy import deepcopy
-from base64 import b64encode, b64decode
 
 from foofind.blueprints.files import search_files, share
 from foofind.blueprints.files.fill_data import secure_fill_data, get_file_metadata, init_data, choose_filename
@@ -20,13 +11,11 @@ from foofind.blueprints.files.helpers import *
 from foofind.services import *
 from foofind.utils import url2mid, mid2bin, mid2hex, mid2url, bin2hex, u, canonical_url, logging, is_valid_url_fileid
 from foofind.utils.content_types import *
-from foofind.utils.splitter import split_phrase
 from foofind.utils.fooprint import Fooprint
-from foofind.utils.seo import seoize_text
 
-files = Fooprint('files', __name__, dup_on_startswith="/<lang>")
+files = Fooprint('files', __name__)
 
-@files.route('/<lang>/<license>/', methods=["POST"])
+@files.route('/<lang>/<license>', methods=["POST"])
 @csrf.exempt
 def home():
     '''
