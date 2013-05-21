@@ -1,0 +1,16 @@
+{% extends "appweb/base.html" %}
+{% from "helpers.html" import flash%}
+{% block head %}
+    {%- assets "js_search" %}
+        <script src="{{ ASSET_URL }}"></script>
+    {%- endassets %}
+{% endblock %}
+{% block content %}
+    <div id="fondo"></div>
+        {{ flash() }}
+        <ul id="results">
+            {% include "appweb/file.html" with context %}
+        </ul>
+        <a href="#" id="more"></a>
+    </div>
+{% endblock %}

@@ -1,0 +1,8 @@
+{%- for file in files %}{%- set source_data=file['view']['sources'][file['view']['sources']|first] %}
+<li class="{{ file['view']['file_type'] }}">
+    <h3>
+        <a href="{{ source_data['urls'][0] }}" title="{{ file['view']['nfn'] }}" data-id="{{ file['file']['id'] }}">
+            {% if 'fnhs' in file['view'] %}{{ file['view']['fnhs']|safe }}{% else %}{{ file['view']['fn']|safe }}{% endif %}
+        </a>
+    </h3>
+</li>{%- endfor %}

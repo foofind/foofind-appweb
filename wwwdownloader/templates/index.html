@@ -1,0 +1,22 @@
+{% extends "appweb/base.html" %}
+{% block content %}
+    <div id="search">
+        {{flash()}}
+        <form method="get" action="{{ url_for('appweb.search') }}">
+            <fieldset id="params">
+                <a></a>
+                {{- form.q(autocomplete="off",class="no") -}}
+                <span>
+                    <select id="type" class="no" name="type">
+                    {%- for value,option in form.type.choices %}
+                        <option value="{{ value }}" class="type_img img_{{ value }}">{{ option }}</option>
+                    {%- endfor %}
+                    </select>
+                </span>
+            </fieldset>
+            <fieldset>
+                {{- form.search_submit(**{"data-no_query":_("write_something")}) -}}
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

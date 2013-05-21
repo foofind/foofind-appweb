@@ -1,0 +1,20 @@
+{% from "helpers.html" import flash with context -%}
+<!DOCTYPE html>
+<html lang="{{g.lang}}" xml:lang="{{g.lang}}">
+    <head>
+        <meta charset="utf-8" />
+        {%- block assets_css -%}
+            {%- assets "css_all" -%}
+                <link type="text/css" href="{{ ASSET_URL }}" rel="stylesheet" />
+            {%- endassets -%}
+        {%- endblock -%}
+        {%- block assets_js -%}
+            {%- assets "js_all" -%}
+                <script src="{{ ASSET_URL }}"></script>
+            {%- endassets -%}
+        {%- endblock -%}
+    </head>
+    <body>
+        {%- block content %}{%- endblock %}
+    </body>
+</html>
