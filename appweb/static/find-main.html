@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>App - FIND</title>
+
+    <link rel="stylesheet" type="text/css" href="static/blubster/css/blubster.css" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="app">
+    <div class="find-main">
+        <div class="find-logo">
+            <img src="static/blubster/imgs/logo.blubster-classic.png" alt="Blubster">
+        </div><!--end of .logo-->
+        <div class="search-main">
+            <form method="post" action="#">
+                <fieldset>
+                    <legend>Search form</legend>
+                    <div class="search-text">
+                        <label for="search-text">Search:</label>
+                        <input type="text" name="search-text" class="search-text" placeholder="Type here your search">
+                    </div>
+                    <div class="search-filetype">
+                        <label for="search-filetype">Filetype</label>
+                        <select name="search-filetype" id="filetype" class="filetype">
+                            <option value="All" selected="">All</option>
+                            <option value="video">Video</option>
+                            <option value="audio">Audio</option>
+                            <option value="image">Image</option>
+                            <option value="document">Document</option>
+                            <option value="software">Software</option>
+                        </select>
+                        <ul class="filetype">
+                            <li class="filetype-all">All</li>
+                            <li class="filetype-video">Video</li>
+                            <li class="filetype-audio">Audio</li>
+                            <li class="filetype-image">Image</li>
+                            <li class="filetype-document">Document</li>
+                            <li class="filetype-software">Software</li>
+                        </ul>
+                    </div>
+                    <div class="search-button-find">
+                        <button type="submit" class="search-button-find"><img src="static/blubster/imgs/ico.button-18-magni-off.png" alt="Find"></button>
+                    </div>
+                </fieldset>
+            </form>
+        </div><!--end of .search-main-->
+    </div><!--end of .find-main-->
+
+    </div><!--end of #content-->
+</div><!--end of #app-->
+</body>
+</html>

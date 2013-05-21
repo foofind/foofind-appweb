@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>App - FIND</title>
+
+    <link rel="stylesheet" type="text/css" href="static/blubster/css/blubster.css" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="app">
+    <div id="infotasks">
+        <div class="search-main">
+            <form method="post" action="#">
+                <fieldset>
+                    <legend>Search form</legend>
+                    <div class="search-text">
+                        <label for="search-text">Search:</label>
+                        <input type="text" name="search-text" class="search-text" placeholder="Type here your search">
+                    </div>
+                    <div class="search-filetype">
+                        <label for="search-filetype">Filetype</label>
+                        <select name="search-filetype" id="filetype" class="filetype">
+                            <option value="All" selected="">All</option>
+                            <option value="video">Video</option>
+                            <option value="audio">Audio</option>
+                            <option value="image">Image</option>
+                            <option value="document">Document</option>
+                            <option value="software">Software</option>
+                        </select>
+                        <ul class="filetype">
+                            <li class="filetype-all">All</li>
+                            <li class="filetype-video">Video</li>
+                            <li class="filetype-audio">Audio</li>
+                            <li class="filetype-image">Image</li>
+                            <li class="filetype-document">Document</li>
+                            <li class="filetype-software">Software</li>
+                        </ul>
+                    </div>
+                    <div class="search-button-find">
+                        <button type="submit" class="search-button-find"><img src="static/blubster/imgs/ico.button-18-magni-off.png" alt="Find"></button>
+                    </div>
+                </fieldset>
+            </form>
+        </div><!--end of .search-main-->
+    </div><!--end of #infotasks-->
+
+
+    <div id="content">
+        <ul class="results">
+            <li class="result-item result-odd result-video">
+                <div class="result-main-data">
+                    <div class="result-title-info">
+                        <div class="result-tile">
+                            <p class="result-title">
+                                <span>
+                                Title title title title title title title title title title title title title
+                                </span>
+                            </p>
+                        </div><!--end of div.result-title-->
+                        <div class="result-info">
+                            <ul class="result-info">
+                                <li class="sele-rating sele-rating-1">
+                                    <span class="sele-seeds">
+                                        22,000
+                                        <abbr title="seeds">
+                                        se.
+                                        </abbr>
+                                    </span>
+                                    <span class="sele-dot"> · </span>
+                                    <span class="sele-leechers">
+                                        <abbr title="leechers">
+                                        le.
+                                        </abbr>
+                                    </span>
+                                </li><!--end of .sele-rating-->
+                                <li class="sele-size">
+                                    <span class="sele-size-value">
+                                    10
+                                    </span>
+                                    <span class="sele-size-unit">
+                                        <abbr title="gigabytes">
+                                        GB
+                                        </abbr>
+                                    </span>
+                                </li><!--end of .sele-rating-->
+                            </ul><!--end of ul.result-info-->
+                        </div><!--end of div.result-info-->
+                    </div><!--end of .result-title-info-->
+
+                    <div class="result-rating-love">
+                        <div class="result-rating">
+                            <p class="result-rating">
+                                <span>
+                                ★★★☆☆
+                                </span>
+                            </p>
+                        </div><!--end of .result-rating-->
+
+                        <div class="result-love">
+                            <ul class="result-love">
+                                <li class="result-love">
+                                    <a href="#" class="button button-off button-noright result-love-no">
+                                        <span>
+                                            <img src="static/blubster/imgs/ico.button-18-love-off.png">
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="result-hate">
+                                    <a href="#" class="button button-off button-noleft result-hate-no">
+                                        <span>
+                                            <img src="static/blubster/imgs/ico.button-18-hate-off.png">
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><!--end of .result-love-->
+                    </div><!--end of .result-rating-love-->
+                </div><!--end of .result-main-data-->
+
+                <div class="result-actions">
+                    <ul class="result-actions">
+                        <li class="result-action-download">
+                            <a href="#" class="button button-on">
+                                <span>
+                                    <img src="static/blubster/imgs/ico.button-18-download-on.png"><p>Download</p>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="result-action-info">
+                            <a href="#" class="button button-off">
+                                <span>
+                                    <img src="static/blubster/imgs/ico.button-18-info-off.png">
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div><!--end of .result-actions-->
+
+            </li><!--end of .result-item-->
+
+            <li class="result-item result-even result-video">
+                <div class="result-main-data">
+                    <div class="result-title-info">
+                        <div class="result-tile">
+                            <p class="result-title">
+                                <span>
+                                Title title title title title title title title title title title title title
+                                </span>
+                            </p>
+                        </div><!--end of div.result-title-->
+                        <div class="result-info">
+                            <ul class="result-info">
+                                <li class="sele-rating sele-rating-1">
+                                    <span class="sele-seeds">
+                                        22,000
+                                        <abbr title="seeds">
+                                            se.
+                                        </abbr>
+                                    </span>
+                                    <span class="sele-dot"> · </span>
+                                    <span class="sele-leechers">
+                                        <abbr title="leechers">
+                                            le.
+                                        </abbr>
+                                    </span>
+                                </li><!--end of .sele-rating-->
+                                <li class="sele-size">
+                                    <span class="sele-size-value">
+                                    10
+                                    </span>
+                                    <span class="sele-size-unit">
+                                        <abbr title="gigabytes">
+                                            GB
+                                        </abbr>
+                                    </span>
+                                </li><!--end of .sele-rating-->
+                            </ul><!--end of ul.result-info-->
+                        </div><!--end of div.result-info-->
+                    </div><!--end of .result-title-info-->
+
+                    <div class="result-rating-love">
+                        <div class="result-rating">
+                            <p class="result-rating">
+                                <span>
+                                ★★★☆☆
+                                </span>
+                            </p>
+                        </div><!--end of .result-rating-->
+
+                        <div class="result-love">
+                            <ul class="result-love">
+                                <li class="result-love">
+                                    <a href="#" class="button button-off button-noright result-love-no">
+                                        <span>
+                                            <img src="static/blubster/imgs/ico.button-18-love-off.png">
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="result-hate">
+                                    <a href="#" class="button button-off button-noleft result-hate-no">
+                                        <span>
+                                            <img src="static/blubster/imgs/ico.button-18-hate-off.png">
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><!--end of .result-love-->
+                    </div><!--end of .result-rating-love-->
+                </div><!--end of .result-main-data-->
+
+                <div class="result-actions">
+                    <ul class="result-actions">
+                        <li class="result-action-download">
+                            <a href="#" class="button button-on">
+                                <span>
+                                    <img src="static/blubster/imgs/ico.button-18-download-on.png"><p>Download</p>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="result-action-info">
+                            <a href="#" class="button button-off">
+                                <span>
+                                    <img src="static/blubster/imgs/ico.button-18-info-off.png">
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div><!--end of .result-actions-->
+
+            </li><!--end of .result-item-->
+            <li class="result-item result-odd result-video">
+                <div class="result-main-data">
+                    <div class="result-title-info">
+                        <div class="result-tile">
+                            <p class="result-title">
+                                <span>
+                                Title title title title title title title title title title title title title
+                                </span>
+                            </p>
+                        </div><!--end of div.result-title-->
+                        <div class="result-info">
+                            <ul class="result-info">
+                                <li class="sele-rating sele-rating-1">
+                                    <span class="sele-seeds">
+                                        22,000
+                                        <abbr title="seeds">
+                                            se.
+                                        </abbr>
+                                    </span>
+                                    <span class="sele-dot"> · </span>
+                                    <span class="sele-leechers">
+                                        <abbr title="leechers">
+                                            le.
+                                        </abbr>
+                                    </span>
+                                </li><!--end of .sele-rating-->
+                                <li class="sele-size">
+                                    <span class="sele-size-value">
+                                    10
+                                    </span>
+                                    <span class="sele-size-unit">
+                                        <abbr title="gigabytes">
+                                            GB
+                                        </abbr>
+                                    </span>
+                                </li><!--end of .sele-rating-->
+                            </ul><!--end of ul.result-info-->
+                        </div><!--end of div.result-info-->
+                    </div><!--end of .result-title-info-->
+
+                    <div class="result-rating-love">
+                        <div class="result-rating">
+                            <p class="result-rating">
+                                <span>
+                                ★★★☆☆
+                                </span>
+                            </p>
+                        </div><!--end of .result-rating-->
+
+                        <div class="result-love">
+                            <ul class="result-love">
+                                <li class="result-love">
+                                    <a href="#" class="button button-off button-noright result-love-no">
+                                        <span>
+                                            <img src="static/blubster/imgs/ico.button-18-love-off.png">
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="result-hate">
+                                    <a href="#" class="button button-off button-noleft result-hate-no">
+                                        <span>
+                                            <img src="static/blubster/imgs/ico.button-18-hate-off.png">
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><!--end of .result-love-->
+                    </div><!--end of .result-rating-love-->
+                </div><!--end of .result-main-data-->
+
+                <div class="result-actions">
+                    <ul class="result-actions">
+                        <li class="result-action-download">
+                            <a href="#" class="button button-on">
+                                <span>
+                                    <img src="static/blubster/imgs/ico.button-18-download-on.png"><p>Download</p>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="result-action-info">
+                            <a href="#" class="button button-off">
+                                <span>
+                                    <img src="static/blubster/imgs/ico.button-18-info-off.png">
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div><!--end of .result-actions-->
+
+            </li><!--end of .result-item-->
+            <li class="result-item result-even result-video result-expanded">
+                <div class="result-main-data">
+                    <div class="result-title-info">
+                        <div class="result-tile">
+                            <p class="result-title">
+                                <span>
+                                Title title title title title title title title title title title title title
+                                </span>
+                            </p>
+                        </div><!--end of div.result-title-->
+                        <div class="result-info">
+                            <ul class="result-info">
+                                <li class="sele-rating sele-rating-1">
+                                    <span class="sele-seeds">
+                                        22,000
+                                        <abbr title="seeds">
+                                            se.
+                                        </abbr>
+                                    </span>
+                                    <span class="sele-dot"> · </span>
+                                    <span class="sele-leechers">
+                                        <abbr title="leechers">
+                                            le.
+                                        </abbr>
+                                    </span>
+                                </li><!--end of .sele-rating-->
+                                <li class="sele-size">
+                                    <span class="sele-size-value">
+                                    10
+                                    </span>
+                                    <span class="sele-size-unit">
+                                        <abbr title="gigabytes">
+                                            GB
+                                        </abbr>
+                                    </span>
+                                </li><!--end of .sele-rating-->
+                            </ul><!--end of ul.result-info-->
+                        </div><!--end of div.result-info-->
+                    </div><!--end of .result-title-info-->
+
+                    <div class="result-rating-love">
+                        <div class="result-rating">
+                            <p class="result-rating">
+                                <span>
+                                ★★★☆☆
+                                </span>
+                            </p>
+                        </div><!--end of .result-rating-->
+
+                        <div class="result-love">
+                            <ul class="result-love">
+                                <li class="result-love">
+                                    <a href="#" class="button button-off button-noright result-love-no">
+                                        <span>
+                                            <img src="static/blubster/imgs/ico.button-18-love-off.png">
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="result-hate">
+                                    <a href="#" class="button button-off button-noleft result-hate-no">
+                                        <span>
+                                            <img src="static/blubster/imgs/ico.button-18-hate-off.png">
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><!--end of .result-love-->
+                    </div><!--end of .result-rating-love-->
+
+                    <div class="result-more-info">
+                        <div class="result-more-info-photo">
+                            <img src="images/chipmunk.png" alt="">
+                        </div>
+                        <div class="result-more-info-text">
+                            <p>Dramatic Chipmunk (a.k.a “Dramatic Prairie Dog”) is a short video clip featuring a sharp-eyed prairie dog from the Japanese TV Show Hello! Morning. Since its upload via YouTube in June 2007, the animal became most notable for its dramatic expression and theatrical demeanors, in similar vein to OMG cat and Inception cat.</p>
+                            <p>The prairie dog was first introduced in Episode 7 of Hello Morning! show in the segment known as “Mini Moni Chicca” in which a group of J-Pop idols presented a number of cute pet animals like bunnies, turtles among others.</p>
+                            <p>On June 6th, 2007, YouTube user magnets99 uploaded a clip titled “Dramatic Look” featuring the footage of prairie dog from the Japanese TV show, set to a sample audio taken from the score of the 1974 film Young Frankenstein arranged by John Morris.</p>
+                            <p>As of May 2011, this instance alone has over 30 million views. On June 19th, the same clip was re-uploaded by another YouTuber user cregets. As of May 2011, the duplicate video has over 29 million views.</p>
+                        </div>
+                    </div><!--end of .result-more-info-->
+                </div><!--end of .result-main-data-->
+
+                <div class="result-actions">
+                    <ul class="result-actions">
+                        <li class="result-action-download">
+                            <a href="#" class="button button-on">
+                                <span>
+                                    <img src="static/blubster/imgs/ico.button-18-download-on.png"><p>Download</p>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="result-action-info">
+                            <a href="#" class="button button-on">
+                                <span>
+                                    <img src="static/blubster/imgs/ico.button-18-info-on.png">
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="result-more-actions">
+                        <ul class="result-actions">
+                            <li class="result-action-share">
+                                <a href="#" class="button button-off">
+                                <span>
+                                    <img src="static/blubster/imgs/ico.button-18-share-off.png">
+                                </span>
+                                </a>
+                            </li>
+                            <li class="result-action-report">
+                                <a href="#" class="button button-off">
+                                <span>
+                                    <img src="static/blubster/imgs/ico.button-18-report-off.png">
+                                </span>
+                                </a>
+                                <div class="bubble action-report-bubble">
+                                    <span class="bubble-pin"></span>
+                                    <a href="#" class="bubble-close"></a>
+                                    <p class="title">Report this file</p>
+                                    <form method="post" action="#">
+                                        <fieldset>
+                                            <legend>Report this file</legend>
+                                            <ul>
+                                                <li>
+                                                    <input type="radio" name="report" value="report-1" class="radio">
+                                                    <label for="report">This is not what it was supposed to be.</label>
+                                                </li>
+                                                <li>
+                                                    <input type="radio" name="report" value="report-2" class="radio">
+                                                    <label for="report">Damaged file.</label>
+                                                </li>
+                                                <li>
+                                                    <input type="radio" name="report" value="report-3" class="radio">
+                                                    <label for="report">Copyright infringement.</label>
+                                                </li>
+                                                <li>
+                                                    <button type="submit" class="button">
+                                                        <p>Report</p>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!--end of .result-more-info-->
+                <div><!--end of .result-actions-->
+
+            </li><!--end of .result-item-->
+
+            <li class="result-item result-even result-video">
+                <div class="result-main-data">
+                    <div class="result-title-info">
+                        <div class="result-tile">
+                            <p class="result-title">
+                                <span>
+                                Title title title title title title title title title title title title title
+                                </span>
+                            </p>
+                        </div><!--end of div.result-title-->
+                        <div class="result-info">
+                            <ul class="result-info">
+                                <li class="sele-rating sele-rating-1">
+                                    <span class="sele-seeds">
+                                        22,000
+                                        <abbr title="seeds">
+                                            se.
+                                        </abbr>
+                                    </span>
+                                    <span class="sele-dot"> · </span>
+                                    <span class="sele-leechers">
+                                        <abbr title="leechers">
+                                            le.
+                                        </abbr>
+                                    </span>
+                                </li><!--end of .sele-rating-->
+                                <li class="sele-size">
+                                    <span class="sele-size-value">
+                                    10
+                                    </span>
+                                    <span class="sele-size-unit">
+                                        <abbr title="gigabytes">
+                                            GB
+                                        </abbr>
+                                    </span>
+                                </li><!--end of .sele-rating-->
+                            </ul><!--end of ul.result-info-->
+                        </div><!--end of div.result-info-->
+                    </div><!--end of .result-title-info-->
+
+                    <div class="result-rating-love">
+                        <div class="result-rating">
+                            <p class="result-rating">
+                                <span>
+                                ★★★☆☆
+                                </span>
+                            </p>
+                        </div><!--end of .result-rating-->
+
+                        <div class="result-love">
+                            <ul class="result-love">
+                                <li class="result-love">
+                                    <a href="#" class="button button-off button-noright result-love-no">
+                                        <span>
+                                            <img src="static/blubster/imgs/ico.button-18-love-off.png">
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="result-hate">
+                                    <a href="#" class="button button-off button-noleft result-hate-no">
+                                        <span>
+                                            <img src="static/blubster/imgs/ico.button-18-hate-off.png">
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><!--end of .result-love-->
+                    </div><!--end of .result-rating-love-->
+                </div><!--end of .result-main-data-->
+
+                <div class="result-actions">
+                    <ul class="result-actions">
+                        <li class="result-action-download">
+                            <a href="#" class="button button-on">
+                                <span>
+                                    <img src="static/blubster/imgs/ico.button-18-download-on.png"><p>Download</p>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="result-action-info">
+                            <a href="#" class="button button-off">
+                                <span>
+                                    <img src="static/blubster/imgs/ico.button-18-info-off.png">
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div><!--end of .result-actions-->
+
+            </li><!--end of .result-item-->
+            <li class="result-item result-odd result-video">
+                <div class="result-main-data">
+                    <div class="result-title-info">
+                        <div class="result-tile">
+                            <p class="result-title">
+                                <span>
+                                Title title title title title title title title title title title title title
+                                </span>
+                            </p>
+                        </div><!--end of div.result-title-->
+                        <div class="result-info">
+                            <ul class="result-info">
+                                <li class="sele-rating sele-rating-1">
+                                    <span class="sele-seeds">
+                                        22,000
+                                        <abbr title="seeds">
+                                            se.
+                                        </abbr>
+                                    </span>
+                                    <span class="sele-dot"> · </span>
+                                    <span class="sele-leechers">
+                                        <abbr title="leechers">
+                                            le.
+                                        </abbr>
+                                    </span>
+                                </li><!--end of .sele-rating-->
+                                <li class="sele-size">
+                                    <span class="sele-size-value">
+                                    10
+                                    </span>
+                                    <span class="sele-size-unit">
+                                        <abbr title="gigabytes">
+                                            GB
+                                        </abbr>
+                                    </span>
+                                </li><!--end of .sele-rating-->
+                            </ul><!--end of ul.result-info-->
+                        </div><!--end of div.result-info-->
+                    </div><!--end of .result-title-info-->
+
+                    <div class="result-rating-love">
+                        <div class="result-rating">
+                            <p class="result-rating">
+                                <span>
+                                ★★★☆☆
+                                </span>
+                            </p>
+                        </div><!--end of .result-rating-->
+
+                        <div class="result-love">
+                            <ul class="result-love">
+                                <li class="result-love">
+                                    <a href="#" class="button button-off button-noright result-love-no">
+                                        <span>
+                                            <img src="static/blubster/imgs/ico.button-18-love-off.png">
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="result-hate">
+                                    <a href="#" class="button button-off button-noleft result-hate-no">
+                                        <span>
+                                            <img src="static/blubster/imgs/ico.button-18-hate-off.png">
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><!--end of .result-love-->
+                    </div><!--end of .result-rating-love-->
+                </div><!--end of .result-main-data-->
+
+                <div class="result-actions">
+                    <ul class="result-actions">
+                        <li class="result-action-download">
+                            <a href="#" class="button button-on">
+                                <span>
+                                    <img src="static/blubster/imgs/ico.button-18-download-on.png"><p>Download</p>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="result-action-info">
+                            <a href="#" class="button button-off">
+                                <span>
+                                    <img src="static/blubster/imgs/ico.button-18-info-off.png">
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div><!--end of .result-actions-->
+
+            </li><!--end of .result-item-->
+        </ul><!--end of .results-->
+
+
+    </div><!--end of #content-->
+</div><!--end of #app-->
+</body>
+</html>
