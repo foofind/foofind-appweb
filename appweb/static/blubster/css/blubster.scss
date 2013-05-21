@@ -299,6 +299,8 @@ abbr {
 .result-expanded .result-more-info{
   clear:both;
   float:left;
+  overflow:visible;
+  width:auto;
 }
 .result-more-info-photo{
   float:left;
@@ -307,7 +309,7 @@ abbr {
 }
 .result-more-info-text{
   float:left;
-  width:50em;
+  width:40em;
   height:16.5em;
   padding-right:2em;
   overflow:auto;
@@ -516,13 +518,19 @@ ul.result-actions li{
   font-weight:bold;
   color:#19bffe;
 }
+.bubble ul{
+  width:auto;
+  overflow:hidden;
+}
 .bubble ul li{
+  width:auto;
   display:block;
   font-size:1.2em;
   margin-bottom:0.3em;
-  float:left;
+  float:none;
   clear:both;
   color:#e0e0e0;
+  overflow:hidden;
 }
 .bubble fieldset{
   border:none;
@@ -538,7 +546,7 @@ ul.result-actions li{
 }
 .bubble label{
   display:block;
-  width:20em;
+  width:19em;
   float:left;
 }
 
@@ -546,7 +554,6 @@ ul.result-actions li{
 // · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · BUTTONS
 .button{
   display:inline-block;
-  height:1.8em;
   width:auto;
   padding:0.6em 1em;
   margin:0 0.5em 0 0;
@@ -595,6 +602,14 @@ ul.result-actions li{
 
 .button-noleft{
 
+}
+
+.bubble .button{
+  padding:0.3em 1em 0;
+}
+.bubble .button p{
+ padding:0.1em 0 0.1em 0.2em;
+ font-size:1.2em;
 }
 
 // $icons: pause trick trash;
