@@ -11,30 +11,28 @@
             </div><!--end of div.result-title-->
             <div class="result-info">
                 <ul class="result-info">
-                    <li class="sele-rating sele-rating-1">
+                    <li class="sele-rating sele-rating-{{file['view']['health']}}">
                         <span class="sele-seeds">
-                            22,000
+                            {{file['view']['md']['seeds'] or "0"}}
                             <abbr title="seeds">
                             se.
                             </abbr>
                         </span>
                         <span class="sele-dot"> · </span>
                         <span class="sele-leechers">
+                            {{file['view']['md']['leechs'] or "0"}}
                             <abbr title="leechers">
                             le.
                             </abbr>
                         </span>
                     </li><!--end of .sele-rating-->
+                    {%- if 'z' in file['file'] and file['file']['z'] %}
                     <li class="sele-size">
                         <span class="sele-size-value">
-                        10
-                        </span>
-                        <span class="sele-size-unit">
-                            <abbr title="gigabytes">
-                            GB
-                            </abbr>
+                        {{ file['file']['z']|numbersizeformat }}
                         </span>
                     </li><!--end of .sele-rating-->
+                    {% endif %}
                 </ul><!--end of ul.result-info-->
             </div><!--end of div.result-info-->
         </div><!--end of .result-title-info-->
@@ -43,7 +41,7 @@
             <div class="result-rating">
                 <p class="result-rating">
                     <span>
-                    ★★★☆☆
+                    {{"★"*file['view']['rating'] + "☆"*(5-file['view']['rating'])}}
                     </span>
                 </p>
             </div><!--end of .result-rating-->
@@ -70,10 +68,14 @@
 
         <div class="result-more-info">
             <div class="result-more-info-photo">
-                image
+                {% if 'images_server' in file['view'] %}
+                <img alt="{{ source_data['source'] }}" src="http://{{ file['view']['first_image_server'] }}/{{ file['view']['images_id'] }}0" />
+                {% endif %}
             </div>
             <div class="result-more-info-text">
-                desc
+                {% if "short_desc" in file['view']['md'] %}
+                    <p>{{ file['view']['md']['short_desc']|truncate(400) }}</p>
+                {% endif %}
             </div>
         </div><!--end of .result-more-info-->
     </div><!--end of .result-main-data-->

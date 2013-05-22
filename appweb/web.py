@@ -191,9 +191,7 @@ def create_app(config=None, debug=False):
     def all_errors(e):
         error = e.code if hasattr(e,"code") else 500
         title, description = errors[error if error in errors else 500]
-
         init_g(app)
-
         return render_template('error.html', code=str(error), title=title, description=description), error
 
     return app

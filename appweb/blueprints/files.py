@@ -5,19 +5,24 @@
 import urllib, json, unicodedata, random, sys, bson
 from flask import request, render_template, g, current_app, jsonify, flash, redirect, url_for, abort, Markup
 
-from foofind.blueprints.files import search_files, share
-from foofind.blueprints.files.fill_data import secure_fill_data, get_file_metadata, init_data, choose_filename
+
+from foofind.blueprints.files import search_files
 from foofind.blueprints.files.helpers import *
+
+from foofind.blueprints.files import secure_fill_data as ff_secure_fill_data
+def aw_secure_fill_data(f,text,ntts):
+    return torrents_data(ff_secure_fill_data(f,text,ntts))
+import foofind.blueprints.files
+import foofind.blueprints.files.fill_data
+foofind.blueprints.files.secure_fill_data = aw_secure_fill_data
+foofind.blueprints.files.fill_data.secure_fill_data = aw_secure_fill_data
+
 from foofind.services import *
 from foofind.utils import url2mid, mid2bin, mid2hex, mid2url, bin2hex, u, canonical_url, logging, is_valid_url_fileid
 from foofind.utils.content_types import *
 from foofind.utils.fooprint import Fooprint
 
 files = Fooprint('files', __name__)
-
-@files.route('/as')
-def test():
-    return "as"
 
 @files.route('/<lang>/<license>', methods=["POST"])
 @csrf.exempt
@@ -46,6 +51,7 @@ def search(query=None,filters=None):
 
     query = query.replace("_"," ") if query is not None else None #para que funcionen la busqueda cuando vienen varias palabras
     dict_filters, has_changed = url2filters(filters) #procesar los parametros
+    dict_filters["src"] = "torrent"
 
     # obtiene parametros de busqueda de la url
     if query:
@@ -64,6 +70,118 @@ def search(query=None,filters=None):
     return render_template('search.html',
         query=query,
         files=search_results["files"],
-        share_url=url_for(".search", query=query.replace(" ","_"), filters=filters2url(dict_filters),_external=True),
     )
 
+def torrents_data(data):
+    valid_torrent = False
+    providers = []
+
+    if not data or not "sources" in data["view"]:
+        return None
+
+    for source in data["view"]["sources"].keys():
+        if source == "tmagnet":
+            valid_torrent = True
+        elif data["view"]["sources"][source]["icon"]=="torrent":
+            valid_torrent = True
+            providers.append(source)
+            if u"i" in data["view"]["sources"][source]["g"]:
+                data["view"]["sources"]["download_ind"] = data["view"]["sources"][source]
+            else:
+                data["view"]["sources"]["download"] = data["view"]["sources"][source]
+
+    # no tiene origenes validos
+    if not valid_torrent:
+        return None
+
+    desc = None
+    # organiza mejor la descripcion del fichero
+    if "description" in data["view"]["md"]:
+
+        # recupera la descripcion original
+        desc = data["view"]["md"]["description"]
+        del data["view"]["md"]["description"]
+
+        # inicializa variables
+        long_desc = False
+        short_desc = None
+        acum = []
+
+        # recorre las lineas de la descripcion
+        for line in desc.split("\n"):
+            # si llega a pasar despues acumular algo, hay que mostrar la desc larga
+            if acum:
+                long_desc = True
+
+            # ignora lineas con muchos caracteres repetidos
+            prev_char = repeat_count = 0
+            for char in line:
+                if prev_char==char:
+                    repeat_count+=1
+                else:
+                    repeat_count = 0
+                if repeat_count>5:
+                    line=""
+                    break
+                prev_char = char
+
+            # si la linea es "corta", la toma como fin de parrafo
+            if len(line)<50:
+                if acum:
+                    if line: acum.append(line)
+
+                    # si el parrafo es mas largo que 110, lo usa
+                    paraph = " ".join(acum)
+                    acum = [] # antes de seguir reinicia el acum
+                    paraph_len = len(paraph)
+                    if paraph_len>90:
+                        short_desc = paraph
+                        if paraph_len>140: # si no es suficientemente larga sigue buscando
+                            break
+                    continue
+            else: # si no, acumula
+                acum.append(line)
+
+        # procesa el parrafo final
+        if acum:
+            paraph = " ".join(acum)
+            paraph_len = len(paraph)
+            if paraph_len>90:
+                short_desc = paraph
+
+        # si hay descripcion corta se muestra y se decide si se debe mostrar la larga tambien
+        if short_desc:
+            data["view"]["md"]["short_desc"] = short_desc
+            long_desc = long_desc or len(short_desc)>400
+        else:
+            long_desc = True
+
+        if not long_desc and "nfo" in data["file"]["md"]:
+            desc = data["file"]["md"]["nfo"]
+            long_desc = True
+
+        if long_desc and short_desc!=desc:
+            if len(desc)>400:
+                data["view"]["md"]["long_desc"] = desc
+            else:
+                data["view"]["md"]["description"] = desc
+
+    # preview
+    if "torrent:thumbnail" in data["file"]["md"]:
+        data["view"]["thumbnail"] = data["file"]["md"]["torrent:thumbnail"]
+
+    # salud del torrent
+    try:
+        seeds = int(float(data['view']['md']['seeds'])) if 'seeds' in data['view']['md'] else 0
+    except:
+        seeds = 0
+    try:
+        leechs = int(float(data['view']['md']['leechs'])) if 'leechs' in data['view']['md'] else 0
+    except:
+        leechs = 0
+
+    base_rating = int(2/(leechs+1.)) if seeds==0 else min(10,int(seeds/(leechs+1.)*5))
+    data['view']['health'] = int(base_rating/2.5)
+    data['view']['rating'] = base_rating/2
+
+    return data
