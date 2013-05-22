@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% from "helpers.html" import flash%}
+{% block comm %}
+<!--sc{"_downloads":{"r":{{ files_info|safe }} } }ec-->
+{% endblock %}
 {% block head %}
     {%- assets "js_search" %}
         <script src="{{ ASSET_URL }}"></script>
     {%- endassets %}
 {% endblock %}
 {% block content %}
-    <!--sc{"_downloads":{"r":{{ files_info|safe }} } }ec-->
     <div id="infotasks">
         <div class="search-main">
             {{flash()}}
