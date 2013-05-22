@@ -93,7 +93,8 @@ def create_app(config=None, debug=False):
     app.register_blueprint(files)
 
     # Web Assets
-    if not os.path.isdir(app.static_folder+"/gen"): os.mkdir(app.static_folder+"/gen")
+    if not os.path.isdir(app.static_folder+"/blubster/gen"): os.mkdir(app.static_folder+"/blubster/gen")
+    if not os.path.isdir(app.static_folder+"/foofind/gen"): os.mkdir(app.static_folder+"/foofind/gen")
     assets = Environment(app)
     app.assets = assets
     assets.debug = app.debug
