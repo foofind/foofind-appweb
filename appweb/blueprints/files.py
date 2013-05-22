@@ -9,14 +9,6 @@ from flask import request, render_template, g, current_app, jsonify, flash, redi
 from foofind.blueprints.files import search_files
 from foofind.blueprints.files.helpers import *
 
-from foofind.blueprints.files import secure_fill_data as ff_secure_fill_data
-def aw_secure_fill_data(f,text,ntts):
-    return torrents_data(ff_secure_fill_data(f,text,ntts))
-import foofind.blueprints.files
-import foofind.blueprints.files.fill_data
-foofind.blueprints.files.secure_fill_data = aw_secure_fill_data
-foofind.blueprints.files.fill_data.secure_fill_data = aw_secure_fill_data
-
 from foofind.services import *
 from foofind.utils import url2mid, mid2bin, mid2hex, mid2url, bin2hex, u, canonical_url, logging, is_valid_url_fileid
 from foofind.utils.content_types import *
@@ -66,33 +58,41 @@ def search(query=None,filters=None):
     total_found=0
 
     search_results = search_files(query, dict_filters, min_results=request.args.get("min_results",0), last_items=[])
+    files_list = []
+    files_info = {}
+    for index, afile in enumerate(search_results["files"]):
+        afile_torrent, torrent_info = torrents_data(afile)
+        if not afile_torrent:
+            continue
+        afile_torrent["index"] = index
+        files_list.append(afile_torrent)
+        files_info[str(index)] = torrent_info
 
     return render_template('search.html',
         query=query,
-        files=search_results["files"],
+        files=files_list,
+        files_info = json.dumps(files_info),
     )
 
 def torrents_data(data):
     valid_torrent = False
-    providers = []
 
     if not data or not "sources" in data["view"]:
-        return None
+        return None, None
 
-    for source in data["view"]["sources"].keys():
+    sources_list = []
+    torrent_info = {"sources": sources_list}
+    for source, item in data["view"]["sources"].iteritems():
         if source == "tmagnet":
+            torrent_info["magnet"] = item["urls"][0]
             valid_torrent = True
-        elif data["view"]["sources"][source]["icon"]=="torrent":
+        elif item["icon"]=="torrent":
             valid_torrent = True
-            providers.append(source)
-            if u"i" in data["view"]["sources"][source]["g"]:
-                data["view"]["sources"]["download_ind"] = data["view"]["sources"][source]
-            else:
-                data["view"]["sources"]["download"] = data["view"]["sources"][source]
+            sources_list.extend(item["urls"])
 
     # no tiene origenes validos
     if not valid_torrent:
-        return None
+        return None, None
 
     desc = None
     # organiza mejor la descripcion del fichero
@@ -184,4 +184,8 @@ def torrents_data(data):
     data['view']['health'] = int(base_rating/2.5)
     data['view']['rating'] = base_rating/2
 
-    return data
+    # informacion para el torrent
+    torrent_info["seeds"] = seeds
+    torrent_info["leechs"] = leechs
+
+    return data, torrent_info
