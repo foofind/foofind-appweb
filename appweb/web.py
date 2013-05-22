@@ -26,15 +26,6 @@ from foofind.utils.bots import is_search_bot, is_full_browser, check_rate_limit
 from appweb.blueprints.files import files
 from appweb.templates import register_filters
 
-try:
-    from uwsgidecorators import postfork
-    @postfork
-    def start_eventmanager():
-        # Inicio del eventManager
-        eventmanager.start()
-except ImportError:
-    pass
-
 def create_app(config=None, debug=False):
     '''
     Inicializa la aplicación Flask. Carga los siguientes módulos:
