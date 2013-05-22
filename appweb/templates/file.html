@@ -67,6 +67,15 @@
                 </ul>
             </div><!--end of .result-love-->
         </div><!--end of .result-rating-love-->
+
+        <div class="result-more-info">
+            <div class="result-more-info-photo">
+                image
+            </div>
+            <div class="result-more-info-text">
+                desc
+            </div>
+        </div><!--end of .result-more-info-->
     </div><!--end of .result-main-data-->
 
     <div class="result-actions">
@@ -86,7 +95,56 @@
                 </a>
             </li>
         </ul>
-        <div><!--end of .result-actions-->
-
+        <div class="result-more-actions">
+            <ul class="result-actions">
+                <li class="result-action-share">
+                    <a href="#" class="button button-off">
+                    <span>
+                        <img src="blubster/imgs/ico.button-18-share-off.png">
+                    </span>
+                    </a>
+                </li>
+                <li class="result-action-report">
+                    <a href="#" class="button button-off">
+                    <span>
+                        <img src="blubster/imgs/ico.button-18-report-off.png">
+                    </span>
+                    </a>
+                    <div class="bubble action-report-bubble">
+                        <span class="bubble-pin"></span>
+                        <a href="#" class="bubble-close"></a>
+                        <p class="title">Report this file</p>
+                        <form method="post" action="#">
+                            <fieldset>
+                                <legend>Report this file</legend>
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="report" value="report-1" class="radio">
+                                        <label for="report">This is not what it was supposed to be.</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="report" value="report-2" class="radio">
+                                        <label for="report">Damaged file.</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="report" value="report-3" class="radio">
+                                        <label for="report">Copyright infringement.</label>
+                                    </li>
+                                    <li>
+                                        <button type="submit" class="button button-off">
+                                            <img src="blubster/imgs/ico.button-14-report-off.png">
+                                            <p>
+                                                Report
+                                            </p>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </fieldset>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div><!--end of .result-more-info-->
+    </div><!--end of .result-actions-->
 </li><!--end of .result-item-->
 {%- endfor %}
