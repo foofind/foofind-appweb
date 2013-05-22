@@ -170,6 +170,15 @@ abbr {
   margin:0 0 0 1em;
   width:14em;
   float:left;
+  opacity:0.80;
+  filter:alpha(opacity=80); /* <IE8 */
+}
+.search-main input.search-text:hover{
+  opacity:1.00;
+  filter:alpha(opacity=100); /* <IE8 */
+}
+.search-main input.search-text:focus{
+  outline:none;
 }
 .search-main div.search-filetype{
   background:url(../imgs/bg.separator-25.png) 100% 0.5em no-repeat;
@@ -245,6 +254,12 @@ abbr {
   padding:0.3em 1em;
   background:#fff;
   cursor:pointer;
+  opacity:0.80;
+  filter:alpha(opacity=80); /* <IE8 */
+}
+.search-main button:hover{
+  opacity:1.00;
+  filter:alpha(opacity=100); /* <IE8 */
 }
 
 // · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · CONTENT
@@ -346,6 +361,9 @@ p.result-title{
   font-size:1.6em;
   font-style:italic;
   font-weight:bold;
+}
+p.result-title strong{
+  color:#19bffe;
 }
 
 // · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · INFO
