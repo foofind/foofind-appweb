@@ -185,6 +185,7 @@ def torrents_data(data):
     data['view']['rating'] = base_rating/2
 
     # informacion para el torrent
+    torrent_info["name"] = data['view']['fn']
     torrent_info["seeds"] = seeds
     torrent_info["leechs"] = leechs
 
