@@ -292,6 +292,7 @@ abbr {
   margin-bottom: 0; }
 
 .result-expanded .result-more-actions {
+  display: block;
   clear: both;
   float: left; }
 
@@ -403,6 +404,16 @@ ul.result-actions li {
   padding-bottom: 1em;
   margin-bottom: 0.3em;
   background: url(../imgs/ico.arrow-down-on.png) 45% 100% no-repeat; }
+
+.result-action-info a {
+  cursor:pointer;
+}
+.result-action-info .button-on span img {
+    content: url(../imgs/ico.button-18-info-on.png);
+}
+
+.result-more-actions {
+  display: none;}
 
 .result-expanded .result-more-actions {
   position: relative;

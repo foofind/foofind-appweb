@@ -1,5 +1,5 @@
 {%- for file in files %}{%- set source_data=file['view']['sources'][file['view']['sources']|first] %}
-<li class="result-item result-odd result-{{ file['view']['file_type'] }} result-expanded">
+<li class="result-item result-odd result-{{ file['view']['file_type'] }}">
     <div class="result-main-data">
         <div class="result-title-info">
             <div class="result-tile">
@@ -49,14 +49,14 @@
             <div class="result-love">
                 <ul class="result-love">
                     <li class="result-love">
-                        <a href="#" class="button button-off button-noright result-love-no">
+                        <a href="" class="button button-off button-noright result-love-no">
                             <span>
                                 <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-love-off.png">
                             </span>
                         </a>
                     </li>
                     <li class="result-hate">
-                        <a href="#" class="button button-off button-noleft result-hate-no">
+                        <a href="" class="button button-off button-noleft result-hate-no">
                             <span>
                                 <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-hate-off.png">
                             </span>
@@ -90,7 +90,7 @@
                 </a>
             </li>
             <li class="result-action-info">
-                <a href="#" class="button button-off">
+                <a class="button button-off">
                     <span>
                         <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-info-off.png">
                     </span>
