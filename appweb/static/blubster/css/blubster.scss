@@ -4,14 +4,14 @@ colours
 */
 
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · GENERAL
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · GENERAL */
 body {
   font-size:62.5%;
   line-height:150%;
   font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
   text-align: center;
   color: #333;
-  background: #eaeaea;
+  background:#eaeaea;
 }
 
 *, html {
@@ -59,7 +59,7 @@ abbr {
   text-decoration: none;
 }
 
-/* scrollbar */
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · SCROLLBAR */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -79,7 +79,7 @@ abbr {
   -webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,0.3);
 }
 
-/* app */
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · APP */
 #app{
   width:100%;
   border:none;
@@ -89,7 +89,7 @@ abbr {
   overflow:hidden;
 }
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · FIND HOME
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · FIND HOME */
 .find-main{
   width:53em;
   position:absolute;
@@ -116,7 +116,7 @@ abbr {
   overflow:visible;
 }
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · INFOTASKS
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · INFOTASKS */
 #infotasks{
   background:#fff;
   width:100%;
@@ -126,7 +126,7 @@ abbr {
   position:relative;
 }
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · FIND SEARCH
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · FIND SEARCH */
 .search-main{
   background:#fff;
   width:auto;
@@ -170,7 +170,17 @@ abbr {
   margin:0 0 0 1em;
   width:14em;
   float:left;
+  opacity:0.80;
+  filter:alpha(opacity=80); /* <IE8 */
 }
+.search-main input.search-text:hover{
+  opacity:1.00;
+  filter:alpha(opacity=100); /* <IE8 */
+}
+.search-main input.search-text:focus{
+  outline: none;
+}
+
 .search-main div.search-filetype{
   background:url(../imgs/bg.separator-25.png) 100% 0.5em no-repeat;
   width:20em;
@@ -245,16 +255,22 @@ abbr {
   padding:0.3em 1em;
   background:#fff;
   cursor:pointer;
+  opacity:0.80;
+  filter:alpha(opacity=80); /* <IE8 */
+}
+.search-main button:hover{
+  opacity:1.00;
+  filter:alpha(opacity=100); /* <IE8 */
 }
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · CONTENT
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · CONTENT */
 #content{
   background:#eaeaea;
   width:100%;
   border-bottom:1px solid #ccc;
 }
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · RESULT ITEM
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · RESULT ITEM */
 .result-item{
   width:auto;
   height:6em;
@@ -291,7 +307,7 @@ abbr {
   background-image:url(../imgs/ico.filetype-24-img-off.png);
 }
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · result item - EXPANDED
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · result item - EXPANDED */
 
 .result-expanded{
   height:24em;
@@ -327,7 +343,7 @@ abbr {
 }
 
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · RESULTS
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · RESULTS */
 .result-main-data{
   background:url(../imgs/bg.separator-50.png) 100% 0.5em no-repeat;
   overflow:hidden;
@@ -335,7 +351,7 @@ abbr {
   width:80%;
 }
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · TITLE & INFO
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · TITLE & INFO */
 div.result-title-info{
   display:block;
   float:left;
@@ -347,8 +363,11 @@ p.result-title{
   font-style:italic;
   font-weight:bold;
 }
+p.result-title strong{
+  color:#19bffe;
+}
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · INFO
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · INFO */
 ul.result-info{
   margin-top:0;
   width:auto;
@@ -363,7 +382,7 @@ ul.result-info span{
   font-size:1.1em;
 }
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · info - SEEDS & LEECHERS
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · info - SEEDS & LEECHERS */
 .sele-rating{
   padding-left:2.5em;
 }
@@ -387,14 +406,14 @@ ul.result-info span{
   padding-left:2em;
 }
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · RATING & LOVE
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · RATING & LOVE */
 div.result-rating-love{
   display:block;
   min-width:18em !important;
   float:right;
   margin:1.3em 0 0 0;
 }
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · rating & love - RATING
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · rating & love - RATING */
 div.result-rating{
   display:block;
   overflow:hidden;
@@ -407,7 +426,7 @@ p.result-rating{
    font-size:1.4em;
 }
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · rating & love - LOVE
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · rating & love - LOVE */
 ul.result-love{
   display:block;
   overflow:hidden;
@@ -424,7 +443,7 @@ ul.result-love li{
   float:left;
 }
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ACTIONS
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ACTIONS */
 div.result-actions{
   display:block;
   position:relative;
@@ -445,7 +464,7 @@ ul.result-actions li{
   float:left;
 }
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · actions - EXPANDED
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · actions - EXPANDED */
 .result-expanded .result-action-info{
   position:relative;
   overflow:visible;
@@ -466,7 +485,7 @@ ul.result-actions li{
   overflow:visible;
 }
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · BUBBLES
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · BUBBLES */
 .bubble{
   position:absolute;
   display:block;
@@ -550,7 +569,7 @@ ul.result-actions li{
 }
 
 
-// · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · BUTTONS
+/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · BUTTONS */
 .button{
   display:inline-block;
   width:auto;
@@ -599,10 +618,6 @@ ul.result-actions li{
   color:#fff;
 }
 
-.button-noleft{
-
-}
-
 .bubble .button{
   padding:0.3em 1em 0;
 }
@@ -610,11 +625,3 @@ ul.result-actions li{
  padding:0.1em 0 0.1em 0.2em;
  font-size:1.2em;
 }
-
-// $icons: pause trick trash;
-// @each $icon in $icons {
-//  .button-30-#{$icon}-on {
-//  @extend %button;
-//  background: ;
-//  }
-// }
