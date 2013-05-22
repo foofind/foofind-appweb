@@ -1,6 +1,7 @@
 {% from "helpers.html" import flash with context -%}
 <!DOCTYPE html>
 <html>
+{% block comm %}{% endblock %}
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>App - FIND</title>
@@ -13,7 +14,6 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-{% block comm %}{% endblock %}
 <div id="app">
     {%- block content %}{%- endblock %}
 </div><!--end of #app-->
