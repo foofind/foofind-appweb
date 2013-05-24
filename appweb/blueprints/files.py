@@ -188,5 +188,6 @@ def torrents_data(data):
     torrent_info["name"] = data['view']['fn']
     torrent_info["seeds"] = seeds
     torrent_info["leechs"] = leechs
+    torrent_info["type"] = data['view']['file_type']
 
     return data, torrent_info

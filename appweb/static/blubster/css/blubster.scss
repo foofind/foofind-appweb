@@ -246,13 +246,12 @@ abbr {
   background-position:0.6em 0.5em;
 }
 
-
 .search-main button{
   display:inline-block;
   height:1.8em;
   width:auto;
   margin-top:0.2em;
-  padding:0.3em 1em;
+  padding:0.3em 0.9em;
   background:#fff;
   cursor:pointer;
   opacity:0.80;
@@ -307,12 +306,17 @@ abbr {
   background-image:url(../imgs/ico.filetype-24-img-off.png);
 }
 
+.result-more-info, .result-more-actions {
+  display:none;
+}
+
 /* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · result item - EXPANDED */
 
 .result-expanded{
   height:24em;
 }
 .result-expanded .result-more-info{
+  display:block;
   clear:both;
   float:left;
   overflow:visible;
@@ -338,6 +342,7 @@ abbr {
   margin-bottom:0;
 }
 .result-expanded .result-more-actions{
+  display:block;
   clear:both;
   float:left;
 }
@@ -472,6 +477,15 @@ ul.result-actions li{
   margin-bottom:0.3em;
   background:url(../imgs/ico.arrow-down-on.png) 45% 100% no-repeat;
 }
+
+.result-action-info a {
+  cursor:pointer;
+}
+
+.result-action-info .button-on span img {
+    content: url(../imgs/ico.button-18-info-on.png);
+}
+
 .result-expanded .result-more-actions{
   position:relative;
   overflow:visible;
