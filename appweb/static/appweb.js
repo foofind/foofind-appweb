@@ -1,5 +1,4 @@
 document.observe("dom:loaded", function() {
-    console.log("b");
     $$(".result-action-info > a").each(function (o){
         $(o).observe("click", function(event) {
             var element = Event.element(event).up("a");
