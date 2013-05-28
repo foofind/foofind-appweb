@@ -8,7 +8,7 @@
                         {% if 'fnhs' in file['view'] %}{{ file['view']['fnhs']|safe }}{% else %}{{ file['view']['fn']|safe }}{% endif %}
                     </span>
                 </p>
-            </div><!--end of div.result-title-->
+            </div>{# end of div.result-title #}
             <div class="result-info">
                 <ul class="result-info">
                     <li class="sele-rating sele-rating-{{file['view']['health']}}">
@@ -25,17 +25,17 @@
                             le.
                             </abbr>
                         </span>
-                    </li><!--end of .sele-rating-->
+                    </li>{# end of .sele-rating #}
                     {%- if 'z' in file['file'] and file['file']['z'] %}
                     <li class="sele-size">
                         <span class="sele-size-value">
                         {{ file['file']['z']|numbersizeformat }}
                         </span>
-                    </li><!--end of .sele-rating-->
+                    </li>{# end of .sele-rating #}
                     {% endif %}
-                </ul><!--end of ul.result-info-->
-            </div><!--end of div.result-info-->
-        </div><!--end of .result-title-info-->
+                </ul>{# end of ul.result-info #}
+            </div>{# end of div.result-info #}
+        </div>{# end of .result-title-info #}
 
         <div class="result-rating-love">
             <div class="result-rating">
@@ -44,7 +44,7 @@
                     {{"★"*file['view']['rating'] + "☆"*(5-file['view']['rating'])}}
                     </span>
                 </p>
-            </div><!--end of .result-rating-->
+            </div>{# end of .result-rating #}
 
             <div class="result-love">
                 <ul class="result-love">
@@ -63,8 +63,8 @@
                         </a>
                     </li>
                 </ul>
-            </div><!--end of .result-love-->
-        </div><!--end of .result-rating-love-->
+            </div>{# end of .result-love #}
+        </div>{# end of .result-rating-love #}
 
         <div class="result-more-info">
             <div class="result-more-info-photo">
@@ -77,8 +77,8 @@
                     <p>{{ file['view']['md']['short_desc']|truncate(400) }}</p>
                 {% endif %}
             </div>
-        </div><!--end of .result-more-info-->
-    </div><!--end of .result-main-data-->
+        </div>{# end of .result-more-info #}
+    </div>{# end of .result-main-data #}
 
     <div class="result-actions">
         <ul class="result-actions">
@@ -112,41 +112,9 @@
                         <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-report-off.png">
                     </span>
                     </a>
-                    <div class="bubble action-report-bubble">
-                        <span class="bubble-pin"></span>
-                        <a href="#" class="bubble-close"></a>
-                        <p class="title">Report this file</p>
-                        <form method="post" action="#">
-                            <fieldset>
-                                <legend>Report this file</legend>
-                                <ul>
-                                    <li>
-                                        <input type="radio" name="report" value="report-1" class="radio">
-                                        <label for="report">This is not what it was supposed to be.</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="report" value="report-2" class="radio">
-                                        <label for="report">Damaged file.</label>
-                                    </li>
-                                    <li>
-                                        <input type="radio" name="report" value="report-3" class="radio">
-                                        <label for="report">Copyright infringement.</label>
-                                    </li>
-                                    <li>
-                                        <button type="submit" class="button button-off">
-                                            <img src="{{g.static_prefix}}/blubster/imgs/ico.button-14-report-off.png">
-                                            <p>
-                                                Report
-                                            </p>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </fieldset>
-                        </form>
-                    </div>
                 </li>
             </ul>
-        </div><!--end of .result-more-info-->
-    </div><!--end of .result-actions-->
-</li><!--end of .result-item-->
+        </div>{# end of .result-more-info #}
+    </div>{# end of .result-actions #}
+</li>{# end of .result-item #}
 {%- endfor %}
