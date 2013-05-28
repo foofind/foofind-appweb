@@ -15,8 +15,7 @@
                         <input type="text" class="search-text" placeholder="Type here your search" id="q" name="q" autocomplete="off" value="">
                     </div>
                     <div class="search-filetype">
-                        <label for="search-filetype">Filetype</label>
-                        <select name="search-filetype" id="filetype" class="filetype">
+                        <select name="t" id="filetype_combo" class="filetype">
                             <option value="All" selected="">All</option>
                             <option value="video">Video</option>
                             <option value="audio">Audio</option>
@@ -24,8 +23,8 @@
                             <option value="document">Document</option>
                             <option value="software">Software</option>
                         </select>
-                        <ul class="filetype">
-                            <li class="filetype-all">All</li>
+                        <ul class="filetype" id="filetype_ul">
+                            <li class="filetype-all active">All</li>
                             <li class="filetype-video">Video</li>
                             <li class="filetype-audio">Audio</li>
                             <li class="filetype-image">Image</li>

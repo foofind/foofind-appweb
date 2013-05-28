@@ -18,19 +18,18 @@
                     <legend>Search form</legend>
                     <div class="search-text">
                         <label for="search-text">Search:</label>
-                        <input type="text" class="search-text" placeholder="Type here your search" id="q" name="q" autocomplete="off" value="">
+                        <input type="text" class="search-text" placeholder="Type here your search" id="q" name="q" autocomplete="off" value="{{g.args['q']}}">
                     </div>
                     <div class="search-filetype">
-                        <label for="search-filetype">Filetype</label>
-                        <select name="search-filetype" id="filetype" class="filetype">
-                            <option value="All" selected="">All</option>
-                            <option value="video">Video</option>
-                            <option value="audio">Audio</option>
-                            <option value="image">Image</option>
-                            <option value="document">Document</option>
-                            <option value="software">Software</option>
+                        <select name="t" id="filetype_combo" class="filetype">
+                            <option value="All" {{"selected=''" if not g.args['type']}}>All</option>
+                            <option value="video" {{"selected=''" if "video" in g.args['type']}}>Video</option>
+                            <option value="audio" {{"selected=''" if "audio" in g.args['type']}}>Audio</option>
+                            <option value="image" {{"selected=''" if "image" in g.args['type']}}>Image</option>
+                            <option value="document" {{"selected=''" if "document" in g.args['type']}}>Document</option>
+                            <option value="software" {{"selected=''" if "software" in g.args['type']}}>Software</option>
                         </select>
-                        <ul class="filetype">
+                        <ul class="filetype" id="filetype_ul">
                             <li class="filetype-all">All</li>
                             <li class="filetype-video">Video</li>
                             <li class="filetype-audio">Audio</li>
@@ -52,4 +51,37 @@
             {% include "file.html" with context %}
         </ul><!--end of .results-->
     </div><!--end of #content-->
+
+    <div class="bubble action-report-bubble">
+        <span class="bubble-pin"></span>
+        <a href="#" class="bubble-close"></a>
+        <p class="title">Report this file</p>
+        <form method="post" action="#">
+            <fieldset>
+                <legend>Report this file</legend>
+                <ul>
+                    <li>
+                        <input type="radio" name="report" value="report-1" class="radio">
+                        <label for="report">This is not what it was supposed to be.</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="report" value="report-2" class="radio">
+                        <label for="report">Damaged file.</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="report" value="report-3" class="radio">
+                        <label for="report">Copyright infringement.</label>
+                    </li>
+                    <li>
+                        <button type="submit" class="button button-off">
+                            <img src="{{g.static_prefix}}/blubster/imgs/ico.button-14-report-off.png">
+                            <p>
+                                Report
+                            </p>
+                        </button>
+                    </li>
+                </ul>
+            </fieldset>
+        </form>
+    </div>
 {% endblock %}
