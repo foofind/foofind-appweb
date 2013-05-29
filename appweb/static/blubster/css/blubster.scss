@@ -487,10 +487,6 @@ ul.result-actions li{
   cursor:pointer;
 }
 
-.result-action-info .button-on span img {
-    content: url(../imgs/ico.button-18-info-on.png);
-}
-
 .result-expanded .result-more-actions{
   position:relative;
   overflow:visible;
@@ -502,10 +498,6 @@ ul.result-actions li{
 .result-more-actions ul li{
   position:relative;
   overflow:visible;
-}
-
-.result-action-report .button-on span img {
-    content: url(../imgs/ico.button-18-report-on.png);
 }
 
 /* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · BUBBLES */
@@ -626,10 +618,16 @@ ul.result-actions li{
 .button-off{
   background:#ccc;
   border:1px solid #bababa;
+  span img:first-child + img {
+    display:none
+  }
 }
 .button-on{
   background:#19bffe;
   border:1px solid #17afe8;
+  span img:first-child {
+    display:none
+  }
 }
 .button-off:hover{
    background:#ccc url(../imgs/bg.button-off.png) 50% 50% repeat-x;
