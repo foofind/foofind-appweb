@@ -1,4 +1,4 @@
-{%- block card -%}
+{%- macro card(item) -%}
 <li class="{{item.class}}">
     {%- if item.new %}
     <span class="new">New</span>
@@ -40,8 +40,8 @@
         </li>
     </ul>
 </li>
-{%- endblock -%}
-{%- block category -%}
+{%- endmacro -%}
+{%- macro category(item) -%}
 <li class="play-category-{{item.category}}{% if item.selected }} play-selected{% endif %}">
     <a href="#">
         <span>
@@ -49,7 +49,7 @@
         </span>
     </a>
 </li>
-{%- endblock -%}
+{%- endmacro -%}
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,13 +100,13 @@
                 </div><!--end of .breadcrumbs-->
                 <div class="play-items">
                     <ul>
-                        {%- for item in playitems %}{{ self.card() }}{%- endfor %}
+                        {%- for item in playitems %}{{ self.card(item) }}{%- endfor %}
                     </ul>
                 </div><!--end of .play-items-->
             </div>
             <div class="play-left">
                 <ul class="play-category">
-                    {% for item in categories %}{{ self.category() }}{%- endfor %}
+                    {% for item in categories %}{{ self.category(item) }}{%- endfor %}
                 </ul>
             </div>
         </div> <!--end of .play-->
