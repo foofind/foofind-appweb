@@ -4,7 +4,7 @@ colours
 */
 
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · GENERAL */
+/* ----------------------------------------------------------- GENERAL */
 body {
   font-size:62.5%;
   line-height:150%;
@@ -15,7 +15,7 @@ body {
 }
 
 
-*, html, body, div, form { margin: 0; padding: 0; border: 0 none; }
+*, html, body, div, form { margin: 0; padding: 0; border: 0 none}
 
 ul, ol, dl {
   margin: 0;
@@ -81,7 +81,7 @@ abbr {
 #app{
   width:100%;
   border:none;
-  margin:0 auto;
+  margin:0;
   padding:0;
   text-align:left;
   overflow:hidden;
@@ -270,8 +270,12 @@ abbr {
 /* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · CONTENT */
 #content{
   background:#eaeaea;
-  width:100%;
-  border-bottom:1px solid #ccc;
+  position:absolute;
+  left:0px;
+  top:62px;
+  bottom:0px;
+  right:0px;
+  overflow:auto;
 }
 /* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · RESULT ITEM */
 .result-item {
