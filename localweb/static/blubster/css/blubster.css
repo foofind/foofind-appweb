@@ -1,14 +1,13 @@
-@charset "UTF-8";
 /*
 colours
 
 */
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · PLAY - GENERAL */
-.play {
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - PLAY & SETTINGS - GENERAL */
+.play, .settings {
   width: 100%;
   margin: 0 auto; }
 
-.play-wrapright {
+.play-wrapright, .settings-wrapright {
   float: left;
   width: 100%;
   min-height: 40em;
@@ -16,17 +15,17 @@ colours
   padding-bottom: 100em;
   margin-bottom: -100em; }
 
-.play-breadcrumbs, .play-items {
+.play-breadcrumbs, .play-items, .settings-options {
   margin-left: 18em; }
 
 .play-breadcrumbs {
   background-color: #0080b2; }
 
-.play-items {
+.play-items, .settings-options {
   overflow-y: scroll;
   background-color: #eaeaea; }
 
-.play-left {
+.play-left, .settings-left {
   float: left;
   width: 18em;
   min-height: 40em;
@@ -35,26 +34,26 @@ colours
   padding-bottom: 100em;
   margin-bottom: -100em; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · PLAY - LEFT */
-.play-category {
+.play-category, .settings-category {
   margin-top: 6em;
   padding-left: 2em; }
 
-.play-category li {
+.play-category li, .settings-category li {
   font-size: 1.5em;
   text-transform: uppercase; }
 
-.play-category li a {
+.play-category li a, .settings-category li a {
   display: block;
   padding: 0.75em 1em 0.75em 1.8em;
   color: #def6ff; }
 
-.play-category li:hover a {
+.play-category li:hover a, .settings-category li:hover a {
   color: #fff; }
 
-.play-category li.play-selected {
+.play-category li.play-selected, .settings-category li.settings-selected {
   background: url(../imgs/bg.category-menu-selected.png) top right repeat-y; }
 
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - PLAY CATEGORIES - LEFT */
 .play-category li.play-category-all a {
   background: url(../imgs/ico.filetype-16-all-on.png) 0 50% no-repeat; }
 
@@ -76,7 +75,29 @@ colours
 .play-category li.play-category-doc a {
   background: url(../imgs/ico.filetype-16-doc-on.png) 0 50% no-repeat; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · play BREADCRUMBS */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - PLAY CATEGORIES - LEFT */
+.settings-category li.settings-category-general a {
+  background: url(../imgs/ico.settings-16-general-on.png) 0 50% no-repeat; }
+
+.settings-category li.settings-category-connection a {
+  background: url(../imgs/ico.settings-16-connection-on.png) 0 50% no-repeat; }
+
+.settings-category li.settings-category-sharing a {
+  background: url(../imgs/ico.settings-16-sharing-on.png) 0 50% no-repeat; }
+
+.settings-category li.settings-category-downloads a {
+  background: url(../imgs/ico.settings-16-downloads-on.png) 0 50% no-repeat; }
+
+.settings-category li.settings-category-display a {
+  background: url(../imgs/ico.settings-16-display-on.png) 0 50% no-repeat; }
+
+.settings-category li.settings-category-player a {
+  background: url(../imgs/ico.settings-16-player-on.png) 0 50% no-repeat; }
+
+.settings-category li.settings-category-socialmedia a {
+  background: url(../imgs/ico.settings-16-socialmedia-on.png) 0 50% no-repeat; }
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - play BREADCRUMBS */
 .play-breadcrumbs ul {
   overflow: hidden;
   width: 100%;
@@ -101,7 +122,7 @@ colours
   width: auto;
   color: #fff; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · play ITEMS */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - play ITEMS */
 .play-items {
   padding: 1.5em; }
 
@@ -252,7 +273,7 @@ colours
   color: #fff;
   text-transform: lowercase; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · REVERSE */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - REVERSE */
 .reverse, .reverse:hover {
   background: #6f6f6f; }
   .reverse .new, .reverse:hover .new {
@@ -290,7 +311,7 @@ colours
   .reverse .button, .reverse:hover .button {
     width: 12.5em; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · PLAY SEARCH & TASKS */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - PLAY SEARCH & TASKS */
 .tasks {
   float: left;
   position: absolute;
@@ -375,7 +396,7 @@ colours
   filter: alpha(opacity=100);
   /* <IE8 */ }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · BUBBLES */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BUBBLES */
 .bubble {
   position: absolute;
   display: block;
@@ -482,7 +503,7 @@ colours
   width: 19em;
   float: left; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · BUTTONS */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BUTTONS */
 .button {
   display: inline-block;
   width: auto;
@@ -546,3 +567,5 @@ colours
 .bubble .button p {
   padding: 0.1em 0 0.1em 0.2em;
   font-size: 1.2em; }
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BUTTONS */

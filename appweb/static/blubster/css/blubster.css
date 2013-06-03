@@ -1,9 +1,8 @@
-@charset "UTF-8";
 /*
 colours
 
 */
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · GENERAL */
+/* ----------------------------------------------------------- GENERAL */
 body {
   font-size: 62.5%;
   line-height: 150%;
@@ -49,7 +48,7 @@ abbr {
   border: 0;
   text-decoration: none; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · SCROLLBAR */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - SCROLLBAR */
 ::-webkit-scrollbar {
   width: 10px; }
 
@@ -68,16 +67,16 @@ abbr {
   background: #888;
   -webkit-box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3); }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · APP */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - APP */
 #app {
   width: 100%;
   border: none;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   text-align: left;
   overflow: hidden; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · FIND HOME */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - FIND HOME */
 .find-main {
   width: 53em;
   position: absolute;
@@ -102,7 +101,7 @@ abbr {
   position: relative;
   overflow: visible; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · INFOTASKS */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - INFOTASKS */
 #infotasks {
   background: #fff;
   width: 100%;
@@ -111,7 +110,7 @@ abbr {
   border-bottom: 1px solid #ccc;
   position: relative; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · FIND SEARCH */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - FIND SEARCH */
 .search-main {
   background: #fff;
   width: auto;
@@ -239,13 +238,17 @@ abbr {
   filter: alpha(opacity=100);
   /* <IE8 */ }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · CONTENT */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - CONTENT */
 #content {
   background: #eaeaea;
-  width: 100%;
-  border-bottom: 1px solid #ccc; }
+  position: absolute;
+  left: 0px;
+  top: 62px;
+  bottom: 0px;
+  right: 0px;
+  overflow: auto; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · RESULT ITEM */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - RESULT ITEM */
 .result-item {
   width: auto;
   border-top: 1px solid #f5f5f5;
@@ -286,7 +289,7 @@ abbr {
 .result-more-info, .result-more-actions {
   display: none; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · result item - EXPANDED */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - result item - EXPANDED */
 .result-expanded {
   height: auto; }
   .result-expanded .result-more-info {
@@ -318,14 +321,14 @@ abbr {
 .result-more-info-text p:last-child {
   margin-bottom: 0; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · RESULTS */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - RESULTS */
 .result-main-data {
   background: url(../imgs/bg.separator-50.png) 100% 0.5em no-repeat;
   overflow: hidden;
   float: left;
   width: 80%; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · TITLE & INFO */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - TITLE & INFO */
 div.result-title-info {
   display: block;
   float: left;
@@ -340,7 +343,7 @@ p.result-title {
 p.result-title strong {
   color: #19bffe; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · INFO */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - INFO */
 ul.result-info {
   margin-top: 0;
   width: auto;
@@ -354,7 +357,7 @@ ul.result-info li {
 ul.result-info span {
   font-size: 1.1em; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · info - SEEDS & LEECHERS */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - info - SEEDS & LEECHERS */
 .sele-rating {
   padding-left: 2.5em; }
 
@@ -377,14 +380,14 @@ ul.result-info span {
   font-weight: bold;
   padding-left: 2em; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · RATING & LOVE */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - RATING & LOVE */
 div.result-rating-love {
   display: block;
   min-width: 18em !important;
   float: right;
   margin: 1.3em 0 0 0; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · rating & love - RATING */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - rating & love - RATING */
 div.result-rating {
   display: block;
   overflow: hidden;
@@ -396,7 +399,7 @@ p.result-rating {
   color: #19c0ff;
   font-size: 1.4em; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · rating & love - LOVE */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - rating & love - LOVE */
 ul.result-love {
   display: block;
   overflow: hidden;
@@ -412,7 +415,7 @@ ul.result-love li {
   width: auto;
   float: left; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ACTIONS */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ACTIONS */
 div.result-actions {
   display: block;
   position: relative;
@@ -431,7 +434,7 @@ ul.result-actions li {
   width: auto;
   float: left; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · actions - EXPANDED */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - actions - EXPANDED */
 .result-expanded .result-action-info {
   position: relative;
   overflow: visible;
@@ -454,7 +457,7 @@ ul.result-actions li {
   position: relative;
   overflow: visible; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · BUBBLES */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BUBBLES */
 .bubble {
   position: absolute;
   display: none;
@@ -540,7 +543,7 @@ ul.result-actions li {
   width: 19em;
   float: left; }
 
-/* · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · BUTTONS */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BUTTONS */
 .button {
   width: auto;
   padding: 0.6em 1em;
