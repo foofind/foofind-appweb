@@ -11,9 +11,7 @@ colours
   float: left;
   width: 100%;
   min-height: 40em;
-  background-color: #eaeaea;
-  padding-bottom: 100em;
-  margin-bottom: -100em; }
+  background-color: #eaeaea; }
 
 .play-breadcrumbs, .play-items, .settings-options {
   margin-left: 18em; }
@@ -53,6 +51,26 @@ colours
 .play-category li.play-selected, .settings-category li.settings-selected {
   background: url(../imgs/bg.category-menu-selected.png) top right repeat-y; }
 
+.section-title, .section-subtitle, .section-subtitle2 {
+  padding: 0.2em 0;
+  margin: 0 0 1em;
+  width: auto;
+  display: block;
+  font-weight: bold;
+  float: left;
+  clear: both; }
+
+.section-title {
+  border-bottom: 1px solid #ccc;
+  font-size: 1.5em; }
+
+.section-subtitle {
+  font-size: 1.3em; }
+
+p.section-subtitle2 {
+  font-size: 1.2em;
+  font-style: italic; }
+
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - PLAY CATEGORIES - LEFT */
 .play-category li.play-category-all a {
   background: url(../imgs/ico.filetype-16-all-on.png) 0 50% no-repeat; }
@@ -75,7 +93,7 @@ colours
 .play-category li.play-category-doc a {
   background: url(../imgs/ico.filetype-16-doc-on.png) 0 50% no-repeat; }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - PLAY CATEGORIES - LEFT */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - SETTINGS CATEGORIES - LEFT */
 .settings-category li.settings-category-general a {
   background: url(../imgs/ico.settings-16-general-on.png) 0 50% no-repeat; }
 
@@ -273,7 +291,7 @@ colours
   color: #fff;
   text-transform: lowercase; }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - REVERSE */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - play REVERSE */
 .reverse, .reverse:hover {
   background: #6f6f6f; }
   .reverse .new, .reverse:hover .new {
@@ -568,4 +586,103 @@ colours
   padding: 0.1em 0 0.1em 0.2em;
   font-size: 1.2em; }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BUTTONS */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - SETTINGS */
+.settings-options {
+  padding: 3em; }
+
+.settings-options legend {
+  display: none; }
+
+.settings-options ul {
+  float: left;
+  clear: both;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 0 1em; }
+
+.settings-options ul li {
+  float: left;
+  clear: both;
+  width: 100%;
+  padding: 0.5em 0;
+  overflow: hidden; }
+
+.settings-options label, .settings-options input, .settings-options ul li p, .settings-options ul li button {
+  float: left;
+  font-size: 1.2em; }
+
+.settings-options input {
+  padding: 0.5em 1em;
+  margin: 0 0.5em 0 0;
+  background: #fff;
+  display: block;
+  border-top: 1px solid #d2d2d2;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px; }
+
+.settings-options select {
+  margin: 0.5em 1.5em 0.5em 1em;
+  background: #fff;
+  display: block;
+  border-top: 1px solid #d2d2d2;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px; }
+
+.settings-options label {
+  padding: 0.5em;
+  margin: 0 0.5em 0 0;
+  background: none;
+  display: block; }
+
+.settings-options ul li p {
+  padding: 0.5em;
+  margin: 0 0.5em 0 0;
+  background: none;
+  display: block; }
+
+.settings-options button {
+  padding: 0.5em 1em;
+  margin: 0 0.5em 0 0;
+  background: #ccc;
+  display: block;
+  border-top: 1px solid #d2d2d2;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  cursor: pointer; }
+
+.settings-options input.checkbox, .settings-options input.radio {
+  padding: 0;
+  margin: 0.6em 0.5em 0.4em 0.05em;
+  display: block;
+  width: auto;
+  border-top: 1px solid #d2d2d2; }
+
+.settings-options .shortest {
+  width: 2em; }
+
+.settings-options .veryshort {
+  width: 3.5em; }
+
+.settings-options .short {
+  width: 7em; }
+
+.settings-options .medium {
+  width: 14em; }
+
+.settings-options .large {
+  width: 21em; }
+
+.settings-options .verylarge {
+  width: 28cm; }
+
+.settings-options .long-auto {
+  width: auto; }
+
+.label-textright {
+  text-align: right; }
+
+.margin-left3 {
+  margin-left: 3em; }
