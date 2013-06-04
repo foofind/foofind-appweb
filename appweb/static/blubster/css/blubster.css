@@ -116,7 +116,9 @@ abbr {
   position: absolute;
   z-index: 90;
   width: 100%;
-  text-align: center; }
+  text-align: center;
+  top: 1em;
+  overflow: visible; }
   .undo p {
     font-size: 1.4em;
     display: inline;
