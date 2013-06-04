@@ -149,7 +149,7 @@ p.section-subtitle2 {
   margin: 1.5em;
   position: relative;
   overflow: visible;
-  background: #dedede;
+  background: #dedede url(../imgs/bg.corner-edit-o020.png) bottom right no-repeat;
   width: 18em;
   height: 22.5em; }
   .file a {
@@ -157,34 +157,34 @@ p.section-subtitle2 {
   .file .actions {
     display: none; }
   .file:hover {
-    background: #bde0ec url(../imgs/bg.corner-edit.png) bottom right no-repeat; }
-    .file:hover .play-bg {
-      display: block;
-      width: 15em;
-      height: 15em;
-      background: url(../imgs/bg.dark-for-play.png) top left repeat;
-      position: absolute;
-      z-index: 2; }
-      .file:hover .play-bg .play-button {
-        display: block;
-        width: 15em;
-        height: 15em;
-        background: url(../imgs/ico.button-64-play-on.png) 50% 50% no-repeat;
-        position: absolute;
-        z-index: 3; }
-  .file .image {
+    background: #bde0ec url(../imgs/bg.corner-edit-o020.png) bottom right no-repeat; }
+  .file .a-image {
     width: 15em;
     height: 15em;
     margin: 1.5em;
     display: block;
     position: relative;
     overflow: hidden; }
-    .file .image img {
+    .file .a-image:hover .play-bg {
+      display: block;
+      width: 15em;
+      height: 15em;
+      background: url(../imgs/bg.dark-for-play.png) top left repeat;
+      position: absolute;
+      z-index: 2; }
+      .file .a-image:hover .play-bg .play-button {
+        display: block;
+        width: 15em;
+        height: 15em;
+        background: url(../imgs/ico.button-64-play-on.png) 50% 50% no-repeat;
+        position: absolute;
+        z-index: 3; }
+    .file .a-image img {
       min-width: 100%;
       max-width: 140%;
       min-height: 100%;
       max-height: 140%; }
-    .file .image .downloading {
+    .file .a-image .downloading {
       position: absolute;
       overflow: hidden;
       top: 13em;
@@ -197,7 +197,7 @@ p.section-subtitle2 {
       border-radius: 4px;
       -webkit-border-radius: 4px;
       -moz-border-radius: 4px; }
-      .file .image .downloading .downloaded {
+      .file .a-image .downloading .downloaded {
         display: block;
         width: 10em;
         height: 0.5em;
@@ -205,16 +205,18 @@ p.section-subtitle2 {
         border-radius: 4px;
         -webkit-border-radius: 4px;
         -moz-border-radius: 4px; }
-  .file .text {
+  .file .a-text {
     padding: 0 1.5em 1.5em;
     display: block;
     width: 15em;
-    height: 3.5em;
+    height: 3em;
     position: relative;
     overflow: hidden; }
-    .file .text em {
+    .file .a-text:hover {
+      background: url(../imgs/bg.corner-edit.png) bottom right no-repeat; }
+    .file .a-text em {
       font-style: italic; }
-    .file .text p {
+    .file .a-text p {
       height: 2.6em;
       overflow: hidden;
       font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;

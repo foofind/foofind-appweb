@@ -165,7 +165,7 @@ p.section-subtitle2{
   margin:1.5em;
   position:relative;
   overflow:visible;
-  background:#dedede;
+  background:#dedede url(../imgs/bg.corner-edit-o020.png) bottom right no-repeat;
   width:18em;
   height:22.5em;
 
@@ -178,9 +178,19 @@ p.section-subtitle2{
   }
 
   &:hover{
-    background:#bde0ec url(../imgs/bg.corner-edit.png) bottom right no-repeat;
+    background:#bde0ec url(../imgs/bg.corner-edit-o020.png) bottom right no-repeat;
+  }
 
-    .play-bg{
+  .a-image{
+
+    width:15em;
+    height:15em;
+    margin:1.5em;
+    display:block;
+    position:relative;
+    overflow:hidden;
+
+    &:hover .play-bg{
       display:block;
       width:15em;
       height:15em;
@@ -197,16 +207,6 @@ p.section-subtitle2{
         z-index:3;
       }
     }
-  }
-
-  .image{
-
-    width:15em;
-    height:15em;
-    margin:1.5em;
-    display:block;
-    position:relative;
-    overflow:hidden;
 
     img{
       min-width: 100%;
@@ -241,13 +241,17 @@ p.section-subtitle2{
     }
   }
 
-  .text{
+  .a-text{
     padding:0 1.5em 1.5em;
     display:block;
     width:15em;
-    height:3.5em;
+    height:3em;
     position:relative;
     overflow:hidden;
+
+    &:hover{
+      background:url(../imgs/bg.corner-edit.png) bottom right no-repeat;
+    }
 
     em{
       font-style:italic;
