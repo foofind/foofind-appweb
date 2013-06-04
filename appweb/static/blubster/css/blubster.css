@@ -105,7 +105,7 @@ abbr {
 #infotasks {
   background: #fff;
   width: 100%;
-  padding: 0 2em;
+  padding: 0;
   height: 6em;
   border-bottom: 1px solid #ccc;
   position: relative; }
@@ -117,27 +117,28 @@ abbr {
   z-index: 90;
   width: 100%;
   text-align: center;
-  top: 1em;
   overflow: visible; }
   .undo p {
     font-size: 1.4em;
     display: inline;
     text-align: center;
-    padding: 0.5em 1em;
-    width: auto;
-    background: #bde0ec;
-    border: 1px solid #98d3e7;
-    border-bottom-left-radius: 4px;
-    -webkit-border-bottom-left-radius: 4px;
-    -moz-border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    -webkit-border-bottom-right-radius: 4px;
-    -moz-border-bottom-right-radius: 4px;
-    box-shadow: 0.3em 1em 3em #666; }
-    .undo p a {
-      text-decoration: underline;
-      color: #02a0dd;
-      font-weight: bold; }
+    width: auto; }
+    .undo p span {
+      background: #bde0ec;
+      padding: 0.5em 1em;
+      display: inline-block;
+      border: 1px solid #98d3e7;
+      border-bottom-left-radius: 4px;
+      -webkit-border-bottom-left-radius: 4px;
+      -moz-border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      -webkit-border-bottom-right-radius: 4px;
+      -moz-border-bottom-right-radius: 4px;
+      box-shadow: 0.3em 1em 3em #666; }
+      .undo p span a {
+        text-decoration: underline;
+        color: #02a0dd;
+        font-weight: bold; }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - FIND SEARCH */
 .search-main {
