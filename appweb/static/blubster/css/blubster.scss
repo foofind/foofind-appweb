@@ -364,6 +364,7 @@ abbr {
 
   .result-more-info{
     display:block;
+    clear:left;
     float:left;
     width:100%;
 
@@ -372,7 +373,7 @@ abbr {
       margin-top:1em;
       margin-right:2em;
       img {
-        width:18em;
+        max-width:13em;
       }
     }
     .result-more-info-text{
@@ -458,8 +459,8 @@ ul.result-info {
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - RATING & LOVE */
 div.result-rating-love{
   float: right;
-  width: 17em;
-  margin:1.3em 0 0 -17em;
+  width: 18em;
+  margin:1.3em 0 0 -18em;
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - rating & love - RATING */
 div.result-rating{
