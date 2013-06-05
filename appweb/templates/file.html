@@ -1,86 +1,96 @@
 {%- for file in files %}{%- set source_data=file['view']['sources'][file['view']['sources']|first] %}
 <li class="result-item result-odd result-{{ file['view']['file_type'] }}">
-    <div class="result-main-data">
-        <div class="result-title-info">
-            <div class="result-tile">
-                <p class="result-title">
-                    <span>
-                        {% if 'fnhs' in file['view'] %}{{ file['view']['fnhs']|safe }}{% else %}{{ file['view']['fn']|safe }}{% endif %}
-                    </span>
-                </p>
-            </div>{# end of div.result-title #}
-            <div class="result-info">
-                <ul class="result-info">
-                    <li class="sele-rating sele-rating-{{file['view']['health']}}">
-                        <span class="sele-seeds">
-                            {{file['view']['md']['seeds'] or "0"}}
-                            <abbr title="seeds">
-                            se.
-                            </abbr>
-                        </span>
-                        <span class="sele-dot"> · </span>
-                        <span class="sele-leechers">
-                            {{file['view']['md']['leechs'] or "0"}}
-                            <abbr title="leechers">
-                            le.
-                            </abbr>
-                        </span>
-                    </li>{# end of .sele-rating #}
-                    {%- if 'z' in file['file'] and file['file']['z'] %}
-                    <li class="sele-size">
-                        <span class="sele-size-value">
-                        {{ file['file']['z']|numbersizeformat }}
-                        </span>
-                    </li>{# end of .sele-rating #}
-                    {% endif %}
-                </ul>{# end of ul.result-info #}
-            </div>{# end of div.result-info #}
-        </div>{# end of .result-title-info #}
-
-        <div class="result-rating-love">
-            <div class="result-rating">
-                <p class="result-rating">
-                    <span>
-                    {{"★"*file['view']['rating'] + "☆"*(5-file['view']['rating'])}}
-                    </span>
-                </p>
-            </div>{# end of .result-rating #}
-
-            <div class="result-love">
-                <ul class="result-love">
-                    <li class="result-love">
-                        <a href="" class="button button-off button-noright result-love-no">
+    <div class="wrap-result">
+        <div class="result-main-data">
+            <div class="wrap-result-title">
+                <div class="result-title-info">
+                    <div class="result-title">
+                        <p class="result-title">
                             <span>
-                                <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-love-off.png">
-                                <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-love-on.png">
+                                {% if 'fnhs' in file['view'] %}{{ file['view']['fnhs']|safe }}{% else %}{{ file['view']['fn']|safe }}{% endif %}
                             </span>
-                        </a>
-                    </li>
-                    <li class="result-hate">
-                        <a href="" class="button button-off button-noleft result-hate-no">
-                            <span>
-                                <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-hate-off.png">
-                                <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-hate-on.png">
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>{# end of .result-love #}
-        </div>{# end of .result-rating-love #}
+                        </p>
+                    </div>{# end of div.result-title #}
+                    <div class="result-info">
+                        <ul class="result-info">
+                            <li class="sele-rating sele-rating-{{file['view']['health']}}">
+                                <span class="sele-seeds">
+                                    {{file['view']['md']['seeds'] or "0"}}
+                                    <abbr title="seeds">
+                                    se.
+                                    </abbr>
+                                </span>
+                                <span class="sele-dot"> · </span>
+                                <span class="sele-leechers">
+                                    {{file['view']['md']['leechs'] or "0"}}
+                                    <abbr title="leechers">
+                                    le.
+                                    </abbr>
+                                </span>
+                            </li>{# end of .sele-rating #}
+                            {%- if 'z' in file['file'] and file['file']['z'] %}
+                            {% set size, unit = number_size_format(file['file']['z']) %}
+                            <li class="sele-size">
+                                <span class="sele-size-value">
+                                {{ size }}
+                                </span>
+                                <span class="sele-size-unit">
+                                    <abbr title="{{ unit[1] }}">
+                                    {{ unit[0] }}
+                                    </abbr>
+                                </span>
+                            </li>{# end of .sele-rating #}
+                            {% endif %}
+                        </ul>{# end of ul.result-info #}
+                    </div>{# end of div.result-info #}
+                </div>{# end of .result-title-info #}
+            </div>{# end of .wrap-result-title #}
 
-        <div class="result-more-info">
-            <div class="result-more-info-photo">
+            <div class="result-rating-love">
+                <div class="result-rating">
+                    <p class="result-rating">
+                        <span>
+                        {{("&#9733;"*file['view']['rating'] + "&#9734;"*(5-file['view']['rating']))|safe}}
+                        </span>
+                    </p>
+                </div>{# end of .result-rating #}
+
+                <div class="result-love">
+                    <ul class="result-love">
+                        <li class="result-love">
+                            <a href="" class="button button-off button-noright result-love-no">
+                                <span>
+                                    <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-love-off.png">
+                                    <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-love-on.png">
+                                </span>
+                            </a>
+                        </li>
+                        <li class="result-hate">
+                            <a href="" class="button button-off button-noleft result-hate-no">
+                                <span>
+                                    <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-hate-off.png">
+                                    <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-hate-on.png">
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>{# end of .result-love #}
+            </div>{# end of .result-rating-love #}
+
+            <div class="result-more-info">
                 {% if 'images_server' in file['view'] %}
-                <img alt="{{ source_data['source'] }}" src="http://{{ file['view']['first_image_server'] }}/{{ file['view']['images_id'] }}0" />
+                <div class="result-more-info-photo">
+                    <img alt="{{ file['view']['fn']|safe }}" src="http://{{ file['view']['first_image_server'] }}/{{ file['view']['images_id'] }}0" />
+                </div>
                 {% endif %}
-            </div>
-            <div class="result-more-info-text">
-                {% if "short_desc" in file['view']['md'] %}
-                    <p>{{ file['view']['md']['short_desc']|truncate(400) }}</p>
-                {% endif %}
-            </div>
-        </div>{# end of .result-more-info #}
-    </div>{# end of .result-main-data #}
+                <div class="result-more-info-text">
+                    {% if "short_desc" in file['view']['md'] %}
+                        <p>{{ file['view']['md']['short_desc'] }}</p>
+                    {% endif %}
+                </div>
+            </div>{# end of .result-more-info #}
+        </div>{# end of .result-main-data #}
+    </div>{# end of .wrap-result #}
 
     <div class="result-actions">
         <ul class="result-actions">

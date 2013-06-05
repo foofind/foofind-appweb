@@ -1,7 +1,4 @@
-/*
-colours
-
-*/
+$minwidth:600px;
 
 
 /* ----------------------------------------------------------- GENERAL */
@@ -12,10 +9,14 @@ body {
   text-align: center;
   color: #333;
   background:#eaeaea;
+  overflow:hidden;
+}
+html {
+  overflow:hidden;
 }
 
 
-*, html, body, div, form { margin: 0; padding: 0; border: 0 none}
+*, html, body, div, form { margin: 0; padding: 0; border: 0 none;}
 
 ul, ol, dl {
   margin: 0;
@@ -116,6 +117,7 @@ abbr {
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - INFOTASKS */
 #infotasks{
+  min-width:$minwidth;
   background:#fff;
   width:100%;
   padding:0;
@@ -143,7 +145,6 @@ abbr {
     span{
       background:#bde0ec;
       padding:0.5em 1em;
-      display:inline-block;
       border:1px solid #98d3e7;
       border-bottom-left-radius: 4px;
       -webkit-border-bottom-left-radius: 4px;
@@ -157,9 +158,8 @@ abbr {
         text-decoration: underline;
         color:#02a0dd;
         font-weight:bold;
-    }
-
-
+      }
+      display:inline-block;*display:inline;zoom:1;
     }
   }
 }
@@ -319,17 +319,14 @@ abbr {
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - RESULT ITEM */
 .result-item {
-  width:auto;
+  *float:left;
+  min-width:$minwidth;
   border-top:1px solid #f5f5f5;
   border-bottom:1px solid #ccc;
   background-repeat: no-repeat;
   height:6em;
-  padding:0em 0em 0em 5.8em;
-  margin:0;
   overflow:hidden;
   background-position: 2em 1.7em;
-  *display:inline;
-  zoom:1;
 }
 .result-odd{
   background-color:#eaeaea;
@@ -367,181 +364,179 @@ abbr {
 
   .result-more-info{
     display:block;
-    clear:both;
     float:left;
-    overflow:visible;
-    width:auto;
+    width:100%;
+
+    .result-more-info-photo{
+      float:left;
+      margin-top:1em;
+      margin-right:2em;
+      img {
+        width:18em;
+      }
+    }
+    .result-more-info-text{
+      float:none;
+      padding-right:2em;
+      margin-right:1.4em;
+      p {
+        font-size:1.2em;
+        margin-top:1em;
+      }
+    }
   }
-  .result-more-actions{
-    display:block;
-    clear:both;
-    float:left;
-  }
-}
-.result-more-info-photo{
-  float:left;
-  width:18em;
-  margin-right:2em;
-}
-.result-more-info-text{
-  float:none;
-  padding-right:2em;
-  margin-right:1.4em;
-  overflow:auto;
-}
-.result-more-info-text p{
-  font-size:1.2em;
-  margin-bottom:1em;
-}
-.result-more-info-text p:last-child{
-  margin-bottom:0;
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - RESULTS */
+.wrap-result, .wrap-result-title {
+   float: left;
+   width: 100%;
+}
 .result-main-data{
+  margin-left:7em;
   background:url(../imgs/bg.separator-50.png) 100% 0.5em no-repeat;
   overflow:hidden;
-  float:left;
-  width:80%;
+  margin-right:18em;
+  padding-bottom:2em;
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - TITLE & INFO */
 div.result-title-info{
-  display:block;
-  float:left;
-  overflow:hidden;
-  margin:1em 1em 0 0;
-}
-p.result-title{
-  font-size:1.6em;
-  font-style:italic;
-  font-weight:bold;
-}
-p.result-title strong{
-  color:#19bffe;
+  margin:1em 18em 0 0;
+
+  p {
+    white-space:nowrap;
+    font-size:1.6em;
+    font-style:italic;
+    font-weight:bold;
+    line-height:1.3em;
+    text-overflow:ellipsis;
+    overflow:hidden;
+
+    strong{
+      color:#19bffe;
+    }
+  }
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - INFO */
-ul.result-info{
-  margin-top:0;
-  width:auto;
-  overflow:hidden;
-}
-ul.result-info li{
-  width:auto;
-  float:left;
-  margin:1em 0;
-}
-ul.result-info span{
-  font-size:1.1em;
-}
+ul.result-info {
+  margin-top:1em;
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - info - SEEDS & LEECHERS */
-.sele-rating{
-  padding-left:2.5em;
-}
-.sele-rating-0{
-  background:url(../imgs/ico.signal-0.gif) 0 50% no-repeat;
-}
-.sele-rating-1{
-  background:url(../imgs/ico.signal-1.gif) 0 50% no-repeat;
-}
-.sele-rating-2{
-  background:url(../imgs/ico.signal-2.gif) 0 50% no-repeat;
-}
-.sele-rating-3{
-  background:url(../imgs/ico.signal-3.gif) 0 50% no-repeat;
-}
-.sele-rating-4{
-  background:url(../imgs/ico.signal-4.gif) 0 50% no-repeat;
-}
-.sele-size{
-  font-weight:bold;
-  padding-left:2em;
+  li {
+    float:left;
+  }
+  span{
+    font-size:1.1em;
+  }
+
+  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - info - SEEDS & LEECHERS */
+  .sele-rating{
+    padding-left:2.5em;
+  }
+  .sele-rating-0{
+    background:url(../imgs/ico.signal-0.gif) 0 50% no-repeat;
+  }
+  .sele-rating-1{
+    background:url(../imgs/ico.signal-1.gif) 0 50% no-repeat;
+  }
+  .sele-rating-2{
+    background:url(../imgs/ico.signal-2.gif) 0 50% no-repeat;
+  }
+  .sele-rating-3{
+    background:url(../imgs/ico.signal-3.gif) 0 50% no-repeat;
+  }
+  .sele-rating-4{
+    background:url(../imgs/ico.signal-4.gif) 0 50% no-repeat;
+  }
+  .sele-size{
+    font-weight:bold;
+    padding-left:2em;
+  }
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - RATING & LOVE */
 div.result-rating-love{
-  display:block;
-  min-width:18em !important;
-  float:right;
-  margin:1.3em 0 0 0;
+  float: right;
+  width: 17em;
+  margin:1.3em 0 0 -17em;
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - rating & love - RATING */
 div.result-rating{
-  display:block;
-  overflow:hidden;
-  width:auto;
   float:left;
   margin:1em 1em 0 0;
-}
-p.result-rating{
+  font-family: 'Arial Unicode MS',Arial;
+
+  p {
    color:#19c0ff;
    font-size:1.4em;
+  }
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - rating & love - LOVE */
-ul.result-love{
-  display:block;
-  overflow:hidden;
-  width:18em;
+div.result-love {
   float:left;
-}
-ul.result-love{
-   display:block;
-   overflow:hidden;
-   width:auto;
-}
-ul.result-love li{
-  width:auto;
-  float:left;
-}
 
+  li{
+    float:left;
+  }
+}
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ACTIONS */
-div.result-actions{
-  display:block;
-  position:relative;
-  overflow:visible;
-  float:right;
-  min-width:18em !important;
-  margin:1.3em 0 0 0;
 
-}
-ul.result-actions{
-  overflow:hidden;
-  width:auto;
-  float:left;
-  margin-left:1em;
-}
-ul.result-actions li{
-  width:auto;
-  float:left;
+
+div.result-actions{
+  float: right;
+  width: 17em;
+  margin-left: -18em;
+  padding:1.3em 0em;
+  ul.result-actions{
+    text-align:center;
+    overflow:hidden;
+    width:auto;
+    float:left;
+    margin-left:1em;
+
+    li {
+      vertical-align:top;
+      p {
+        vertical-align:baseline;
+        padding:0.1em;
+      }
+      display:inline-block;*display:inline;zoom:1;
+    }
+  }
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - actions - EXPANDED */
-.result-expanded .result-action-info{
-  position:relative;
-  overflow:visible;
-  padding-bottom:1em;
-  margin-bottom:0.3em;
-  background:url(../imgs/ico.arrow-down-on.png) 45% 100% no-repeat;
-}
+.result-expanded {
+  div.result-title-info p {
+    white-space:normal;
+    word-wrap: break-word;
+    overflow:visible;
+  }
 
-.result-action-info a {
-  cursor:pointer;
-}
+  .result-more-actions{
+    display:block;
+    float:left;
+  }
 
-.result-expanded .result-more-actions{
-  position:relative;
-  overflow:visible;
-}
-.result-more-actions ul{
-  position:relative;
-  overflow:visible;
-}
-.result-more-actions ul li{
-  position:relative;
-  overflow:visible;
+  .result-action-info {
+    a {
+      cursor:pointer;
+    }
+    position:relative;
+    overflow:visible;
+    padding-bottom:1em;
+    margin-bottom:0.3em;
+    background:url(../imgs/ico.arrow-down-on.png) 45% 100% no-repeat;
+  }
+ .result-more-actions{
+    ul{
+      li{
+        float:left;
+      }
+    }
+  }
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BUBBLES */
@@ -639,9 +634,7 @@ ul.result-actions li{
   border-radius: 2px;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
-  display:inline-block;
-  *display:inline;
-  zoom:1;
+  display:inline-block;*display:inline;zoom:1;
 }
 .button:hover{
   opacity:1.0;
