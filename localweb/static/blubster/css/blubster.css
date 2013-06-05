@@ -152,8 +152,9 @@ p.section-subtitle2 {
   background: #dedede url(../imgs/bg.corner-edit-o020.png) bottom right no-repeat;
   width: 18em;
   height: 22.5em; }
-  .file a {
-    color: #333; }
+  .file a.a-image, .file a.a-text {
+    color: #333;
+    display: block; }
   .file .actions {
     display: none; }
   .file:hover {
@@ -258,7 +259,7 @@ p.section-subtitle2 {
   position: absolute;
   top: 0;
   left: 0;
-  background: url(../imgs/bg.file-fyietype-corner.png) top left no-repeat; }
+  background: url(../imgs/bg.file-filetype-corner.png) top left no-repeat; }
   .filetype span {
     width: 3.6em;
     height: 3.6em;
@@ -328,8 +329,25 @@ p.section-subtitle2 {
     line-height: 1.4em;
     color: #19bffe;
     margin-bottom: 1em; }
-  .reverse .button, .reverse:hover .button {
-    width: 12.5em; }
+  .reverse ul, .reverse:hover ul {
+    margin: 0;
+    overflow: hidden;
+    width: auto; }
+    .reverse ul li, .reverse:hover ul li {
+      overflow: hidden;
+      width: auto;
+      margin-bottom: 0.2em; }
+      .reverse ul li .button, .reverse:hover ul li .button {
+        width: 12.5em;
+        height: 1.8em; }
+      .reverse ul li ul li, .reverse:hover ul li ul li {
+        float: left;
+        display: block;
+        width: 4.2em; }
+        .reverse ul li ul li.reverse-action-play, .reverse:hover ul li ul li.reverse-action-play {
+          margin: 0 1em; }
+        .reverse ul li ul li .button, .reverse:hover ul li ul li .button {
+          width: 2em; }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - PLAY SEARCH & TASKS */
 .tasks {
@@ -530,6 +548,8 @@ p.section-subtitle2 {
   width: auto;
   padding: 0.6em 1em;
   margin: 0 0.5em 0 0;
+  overflow: hidden;
+  position: relative;
   opacity: 0.80;
   filter: alpha(opacity=80);
   /* <IE8 */
@@ -546,41 +566,50 @@ p.section-subtitle2 {
     float: left;
     text-transform: lowercase;
     font-weight: normal;
-    font-style: italic; }
+    font-style: italic;
+    font-weight: bold; }
   .button img {
     float: left; }
+  .button .toggle {
+    position: absolute;
+    top: 0.3em;
+    right: 0.3em; }
 
 .button-off {
   background: #ccc;
   border: 1px solid #bababa; }
   .button-off span img:first-child + img {
     display: none; }
+  .button-off:hover {
+    background: #cccccc url(../imgs/bg.button-off.png) 50% 50% repeat-x; }
+  .button-off p {
+    color: #6c6c6c; }
+
+.button-disabled {
+  cursor: default;
+  opacity: 0.30;
+  filter: alpha(opacity=30);
+  /* <IE8 */
+  background: #ccc;
+  border: 1px solid #bababa; }
+  .button-disabled span img:first-child + img {
+    display: none; }
+  .button-disabled:hover {
+    opacity: 0.20;
+    filter: alpha(opacity=20);
+    /* <IE8 */ }
+  .button-disabled p {
+    color: #6c6c6c; }
 
 .button-on {
   background: #19bffe;
   border: 1px solid #17afe8; }
   .button-on span img:first-child {
     display: none; }
-
-.button-off {
-  background: #ccc;
-  border: 1px solid #bababa; }
-
-.button-on {
-  background: #19bffe;
-  border: 1px solid #17afe8; }
-
-.button-off:hover {
-  background: #cccccc url(../imgs/bg.button-off.png) 50% 50% repeat-x; }
-
-.button-on:hover {
-  background: #19bffe url(../imgs/bg.button-on.png) 50% 50% repeat-x; }
-
-.button-off p {
-  color: #6c6c6c; }
-
-.button-on p {
-  color: #fff; }
+  .button-on:hover {
+    background: #19bffe url(../imgs/bg.button-on.png) 50% 50% repeat-x; }
+  .button-on p {
+    color: #fff; }
 
 .bubble .button {
   padding: 0.3em 1em 0; }

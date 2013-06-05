@@ -169,8 +169,9 @@ p.section-subtitle2{
   width:18em;
   height:22.5em;
 
-  a{
+  a.a-image, a.a-text{
     color:#333;
+    display:block;
   }
 
   .actions{
@@ -315,7 +316,7 @@ p.section-subtitle2{
   position:absolute;
   top:0;
   left:0;
-  background:url(../imgs/bg.file-fyietype-corner.png) top left no-repeat;
+  background:url(../imgs/bg.file-filetype-corner.png) top left no-repeat;
 
   span{
     width:3.6em;
@@ -407,10 +408,40 @@ p.section-subtitle2{
     margin-bottom:1em;
   }
 
-  .button{
-    width:12.5em;
-  }
+  ul{
+    margin:0;
+    overflow:hidden;
+    width:auto;
 
+    li{
+      overflow:hidden;
+      width:auto;
+      margin-bottom:0.2em;
+
+      .button{
+        width:12.5em;
+        height:1.8em;
+      }
+
+      ul{
+
+
+        li{
+          float:left;
+          display:block;
+          width:4.2em;
+
+          &.reverse-action-play{
+            margin:0 1em;
+          }
+
+          .button{
+            width:2em;
+          }
+        }
+      }
+    }
+  }
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - PLAY SEARCH & TASKS */
@@ -634,6 +665,8 @@ p.section-subtitle2{
   width:auto;
   padding:0.6em 1em;
   margin:0 0.5em 0 0;
+  overflow:hidden;
+  position:relative;
   opacity:0.80;
   filter:alpha(opacity=80); /* <IE8 */
   border-radius: 2px;
@@ -652,10 +685,17 @@ p.section-subtitle2{
     text-transform:lowercase;
     font-weight:normal;
     font-style:italic;
+    font-weight:bold;
   }
 
   img{
     float:left;
+  }
+
+  .toggle{
+    position:absolute;
+    top:0.3em;
+    right:0.3em;
   }
 }
 
@@ -665,6 +705,34 @@ p.section-subtitle2{
   span img:first-child + img {
     display:none;
   }
+
+  &:hover{
+    background:#ccc url(../imgs/bg.button-off.png) 50% 50% repeat-x;
+  }
+
+  p{
+    color:#6c6c6c;
+  }
+}
+
+.button-disabled{
+  cursor:default;
+  opacity:0.30;
+  filter:alpha(opacity=30); /* <IE8 */
+  background:#ccc;
+  border:1px solid #bababa;
+  span img:first-child + img {
+    display:none;
+  }
+
+  &:hover{
+    opacity:0.20;
+    filter:alpha(opacity=20); /* <IE8 */
+  }
+
+  p{
+    color:#6c6c6c;
+  }
 }
 .button-on{
   background:#19bffe;
@@ -672,27 +740,14 @@ p.section-subtitle2{
   span img:first-child {
     display:none;
   }
-}
 
-.button-off{
-  background:#ccc;
-  border:1px solid #bababa;
-}
-.button-on{
-  background:#19bffe;
-  border:1px solid #17afe8;
-}
-.button-off:hover{
-   background:#ccc url(../imgs/bg.button-off.png) 50% 50% repeat-x;
-}
-.button-on:hover{
-  background:#19bffe url(../imgs/bg.button-on.png) 50% 50% repeat-x;
-}
-.button-off p{
-  color:#6c6c6c;
-}
-.button-on p{
-  color:#fff;
+  &:hover{
+    background:#19bffe url(../imgs/bg.button-on.png) 50% 50% repeat-x;
+  }
+
+  p{
+    color:#fff;
+  }
 }
 
 .bubble .button{
