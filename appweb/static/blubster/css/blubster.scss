@@ -315,8 +315,16 @@ abbr {
   top:62px;
   bottom:0px;
   right:0px;
-  overflow:auto;
+  overflow-x:auto;
+  overflow-y:scroll;
 }
+
+#loading-results {
+  background:white;
+  text-align:center;
+  padding: 5em;
+}
+
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - RESULT ITEM */
 .result-item {
   *float:left;

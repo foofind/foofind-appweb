@@ -3,12 +3,16 @@
     Controladores de las páginas de búsqueda y de fichero.
 """
 import json
-from flask import request, render_template, g, current_app, flash, redirect, url_for
+from flask import request, render_template, g, current_app, flash, redirect, url_for, jsonify, make_response
+
+from base64 import b64decode
+from struct import unpack
 
 from foofind.blueprints.files import search_files
 from foofind.blueprints.files.helpers import *
 
 from foofind.services import *
+from foofind.utils import logging
 from foofind.utils.content_types import *
 from foofind.utils.fooprint import Fooprint
 
@@ -49,21 +53,54 @@ def search():
     total_found=0
 
     search_results = search_files(query, filters, min_results=50, last_items=[], non_group=True)
-    files_list = []
-    files_info = {}
-    for index, afile in enumerate(search_results["files"]):
-        afile_torrent, torrent_info = torrents_data(afile)
-        if not afile_torrent:
-            continue
-        afile_torrent["index"] = index
-        files_list.append(afile_torrent)
-        files_info[str(index)] = torrent_info
-
     return render_template('search.html',
-        query=query,
-        files=files_list,
-        files_info = json.dumps(files_info),
+        query=query, filetype=filetype, last_items=search_results["last_items"],
+        files=[torrents_data(afile) for afile in search_results["files"]]
     )
+
+@files.route('/<lang>/<license>/searcha',methods=['POST'])
+@csrf.exempt
+def searcha():
+    '''
+    Responde las peticiones de busqueda por ajax
+    '''
+
+    query=request.form.get("query",None)
+    filetype=request.form.get("filetype",None)
+
+    if not query: #si no se ha buscado nada se manda al inicio
+        logging.error("Invalid data for AJAX search request.")
+        return jsonify({})
+
+    query = query.replace("_"," ") if query is not None else None #para que funcionen la busqueda cuando vienen varias palabras
+    filters = {"src":"torrent"}
+    if filetype and filetype in CONTENTS_CATEGORY:
+        filters["type"] = [filetype]
+    args = filters.copy()
+    args["q"] = query
+    g.args=args
+
+    last_items = []
+    try:
+        last_items = b64decode(str(request.form["last_items"]) if "last_items" in request.form else "", "-_")
+        if last_items:
+            last_items = unpack("%dh"%(len(last_items)/2), last_items)
+    except BaseException as e:
+        logging.error("Error parsing last_items information from request.")
+
+    #sources que se pueden elegir
+    fetch_global_data()
+
+    sure = False
+    total_found=0
+
+    search_results = search_files(query, filters, min_results=0, last_items=last_items, non_group=True)
+
+    response = make_response(render_template('file.html',files=[torrents_data(afile) for afile in search_results["files"]]))
+    del search_results["files"]
+
+    response.headers["X-JSON"]=json.dumps(search_results)
+    return response
 
 def torrents_data(data):
     valid_torrent = False
@@ -169,11 +206,7 @@ def torrents_data(data):
     base_rating = int(2/(leechs+1.)) if seeds==0 else min(10,int(seeds/(leechs+1.)*5))
     data['view']['health'] = int(base_rating/2.5)
     data['view']['rating'] = base_rating/2
+    data['view']['seeds'] = seeds
+    data['view']['leechs'] = leechs
 
-    # informacion para el torrent
-    torrent_info["name"] = data['view']['fn']
-    torrent_info["seeds"] = seeds
-    torrent_info["leechs"] = leechs
-    torrent_info["type"] = data['view']['file_type']
-
-    return data, torrent_info
+    return data

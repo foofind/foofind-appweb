@@ -31,9 +31,9 @@ def number_size_format(size, lang="en"):
     Formatea un tamaño de fichero en el idioma actual
     '''
     if not size:
-        return ""
+        return None, None
     elif int(float(size))==0:
-        return "0 B"
+        return "0", ("B","bytes")
 
     if lang in format_cache:
         decimal_sep, group_sep = format_cache[lang]
@@ -42,7 +42,7 @@ def number_size_format(size, lang="en"):
 
     try:
         if size<1000: # no aplica para los bytes
-            return str(size)+" B"
+            return str(size), ("B","bytes")
         else:
             size = log(float(size),1000)
             number = 1000**(size-int(size))
@@ -57,4 +57,4 @@ def number_size_format(size, lang="en"):
             ) + dec_part, (("KB","kilobytes"),("MB","megabytes"),("GB","gigabytes"),("TB","terabytes"))[int(size)-1]
     except BaseException as e:
         logging.exception(e)
-        return ""
+        return None, None

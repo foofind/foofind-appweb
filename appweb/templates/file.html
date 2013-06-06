@@ -1,5 +1,6 @@
 {%- for file in files %}{%- set source_data=file['view']['sources'][file['view']['sources']|first] %}
-<li class="result-item result-odd result-{{ file['view']['file_type'] }}">
+<!--FI:{{ file['file']['id'] }} {"name":"{{ file['view']['fn'] }}","type":"{{ file['view']['file_type'] }}","seeds":"{{ file['view']['seeds'] }}","leechs":"{{ file['view']['leechs'] }}"}-->
+<li data-id="{{ file['file']['id'] }}" class="result-item just-added result-odd result-{{ file['view']['file_type'] }}">
     <div class="wrap-result">
         <div class="result-main-data">
             <div class="wrap-result-title">
@@ -28,8 +29,8 @@
                                     </abbr>
                                 </span>
                             </li>{# end of .sele-rating #}
-                            {%- if 'z' in file['file'] and file['file']['z'] %}
-                            {% set size, unit = number_size_format(file['file']['z']) %}
+                            {% set size, unit = number_size_format(file['file'].get('z',0)) %}
+                            {%- if size %}
                             <li class="sele-size">
                                 <span class="sele-size-value">
                                 {{ size }}
@@ -95,7 +96,7 @@
     <div class="result-actions">
         <ul class="result-actions">
             <li class="result-action-download">
-                <a href="download:{{file['index']}}" class="button button-on">
+                <a href="download:{{ file['file']['id'] }}" class="button button-on">
                     <span>
                         <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-download-on.png"><p>Download</p>
                     </span>
