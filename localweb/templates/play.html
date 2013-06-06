@@ -1,70 +1,132 @@
+{%- macro undo(num) -%}
+<span>You've just deleted <strong>{{ num }} file{% if num != 0%}s{% endif %}</strong> from your library. <a href="#">Undo</a></span>
+{%- endmacro -%}
+
+{%- macro toolbar_tasks(num, total) -%}
+{% if num > -1 %}<strong>{{num}}</strong> of {% endif %}{{total}} files on your {{APP_SHORT_NAME}} library
+{%- endmacro -%}
+
+{%- macro breadcrumb(item) -%}
+<li>
+    <a href="#">{{ item.name }}</a>
+</li>
+{%- endmacro -%}
+
 {%- macro card(item) -%}
-<li class="{{item.class}}">
+<li class="file{# reverse #}">
     {%- if item.new %}
     <span class="new">New</span>
     {%- endif %}
-    <div class="image">
-        <div class="filetype">
-            <span class="filetype-{{ item.category }}"></span>
+     <a href="#a" class="a-image">
+        <div class="image">
+            <div class="filetype">
+                <span class="filetype-{{ item.category }}"></span>
+            </div>
+            <span class="play-bg"><span class="play-button"></span></span>
+            <img src="images/chipmunk.png">
+            <div class="downloading">
+                <div class="downloaded" style="width:{{item.progress*100}}%"></div>
+            </div>
         </div>
-        <img src="images/chipmunk.png">
-    </div>
-    <div class="text">
-        <p>
-            {{- item.title -}}
-        </p>
-    </div>
-    <ul class="actions">
-        <li class="action-play">
-            <a href="#" class="action"></a>
-        </li>
-        <li class="action-info">
-            <a href="#" class="action"></a>
-            <div class="bubble info-bubble">
-                <span class="bubble-pin"></span>
-                <a href="#" class="bubble-close"></a>
-                <p class="title">{{- item.title -}}</p>
-                <div class="bubble-more-info">
-                    <div class="bubble-more-info-photo">
-                        <img src="images/chipmunk.png">
-                    </div><!--end of .bubble-more-info-photo-->
-                    <div class="bubble-more-info-text">
-                        {{ item.description }}
-                    </div><!--end of .bubble-more-info-text-->
-                </div><!--end of .bubble-more-info-->
-            </div><!--end of .info-bubble-->
+    </a>
+    <a href="#b" class="a-text">
+        <div class="text">
+            <p>
+                {{- item.name -}}
+            </p>
+        </div>
+    </a>
+    <div class="info-card">
+        <a href="#" class="reverse-close"></a>
+        <p class="title">{{- item.name -}}</p>
+        <ul class="reverse-actions">
+            <li class="reverse-3actions">
+                <ul>
+                    <li class="reverse-action-delete">
+                        <a href="#" class="button button-off">
+                        <span>
+                            <img src="blubster/imgs/ico.button-18-trash-off.png">
+                            <img src="blubster/imgs/ico.button-18-trash-on.png">
+                        </span>
+                        </a>
+                    </li>
+                    <li class="reverse-action-play">
+                        <a href="#" class="button button-on">
+                        <span>
+                            <img src="blubster/imgs/ico.button-18-play-off.png">
+                            <img src="blubster/imgs/ico.button-18-play-on.png">
+                        </span>
+                        </a>
+                    </li>
+                    <li class="reverse-action-share">
+                        <a href="#" class="button button-off">
+                        <span>
+                            <img src="blubster/imgs/ico.button-18-share-off.png">
+                            <img src="blubster/imgs/ico.button-18-share-on.png">
+                        </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="reverse-action-rename">
+                <a href="#" class="button button-off">
+                <span>
+                    <img src="blubster/imgs/ico.button-18-rename-off.png">
+                    <img src="blubster/imgs/ico.button-18-rename-on.png">
+                    <p>Rename</p>
+                </span>
+                </a>
+            </li>
+            <li class="reverse-action-p2p">
+                <a href="#" class="button button-off">
+                <span>
+                    <img src="blubster/imgs/ico.button-18-p2p-off.png">
+                    <img src="blubster/imgs/ico.button-18-p2p-on.png">
+                    <p>seed</p>
 
-        </li>
-        <li class="action-more">
-            <a href="#" class="action"></a>
-        </li>
-    </ul>
+                    <span>
+                        <img src="blubster/imgs/ico.toggle-24-on.png" class="toggle">
+                        <img src="blubster/imgs/ico.toggle-24-off.png" class="toggle">
+                    </span>
+                </span>
+                </a>
+            </li>
+        </ul>
+    </div><!--end of .info-card-->
 </li>
 {%- endmacro -%}
+
 {%- macro category(item) -%}
-<li class="play-category-{{item.category}}{% if item.selected }} play-selected{% endif %}">
+<li class="play-category-{{item.css}}{% if item.selected %} play-selected{% endif %}">
     <a href="#">
         <span>
-            {{ item.category|capitalize }}
+            {{ item.name|capitalize }}
         </span>
     </a>
 </li>
 {%- endmacro -%}
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>App - PLAY</title>
 
-    <link rel="stylesheet" type="text/css" href="http://appweb.foofind.com/static/blubster/css/blubster.css" />
+    <link rel="stylesheet" type="text/css" href="blubster/css/blubster_base.css" />
     <link rel="stylesheet" type="text/css" href="blubster/css/blubster.css" />
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="blubster/css/blubster_fixes.css" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css' />
+    <script type="text/javascript">{{script}}</script>
 </head>
 <body>
 <div id="app">
     <div id="infotasks">
+        <div class="undo">
+            <p id="js_undo">{# filled by js #}</p>
+        </div>
         <div class="tasks">
-            <p><strong>{{numfiles}}</strong> of {{totalfiles}} files on your Blubster library</p>
+            <p id="js_tasks">Loading...</p>
         </div>
         <div class="search-play">
             <form method="post" action="#">
@@ -88,24 +150,18 @@
 
             <div class="play-wrapright">
                 <div class="play-breadcrumbs">
-                    <ul>
-                        {%- for item in breadcrumbs %}
-                        <li>
-                            <a href="#">
-                                Folder 1
-                            </a>
-                        </li>
-                        {%- endfor %}
+                    <ul id="js_breadcrumbs">
+                        {%- for item in breadcrumbs %}{{ self.breadcrumb(item) }}{%- endfor %}
                     </ul>
                 </div><!--end of .breadcrumbs-->
                 <div class="play-items">
-                    <ul>
+                    <ul id="js_cards">
                         {%- for item in playitems %}{{ self.card(item) }}{%- endfor %}
                     </ul>
                 </div><!--end of .play-items-->
             </div>
             <div class="play-left">
-                <ul class="play-category">
+                <ul class="play-category"  id="js_categories">
                     {% for item in categories %}{{ self.category(item) }}{%- endfor %}
                 </ul>
             </div>
