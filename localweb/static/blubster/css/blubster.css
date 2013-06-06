@@ -228,14 +228,14 @@ p.section-subtitle2 {
     margin-top: 0.5em;
     overflow: visible;
     position: relative; }
-    .file .actions li {
+    .file .actions li.reverse-3actions {
       display: block;
       width: auto;
       float: left;
       margin-right: 1em;
       overflow: visible;
       position: relative; }
-      .file .actions li a.action {
+      .file .actions li.reverse-3actions a.action {
         display: block;
         width: 1.4em;
         height: 1.4em; }
@@ -295,11 +295,13 @@ p.section-subtitle2 {
   text-transform: lowercase; }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - play REVERSE */
-.reverse, .reverse:hover {
+.reverse {
   background: #6f6f6f; }
-  .reverse .new, .reverse:hover .new {
+  .reverse:hover {
+    background: #6f6f6f; }
+  .reverse .new {
     display: none; }
-  .reverse a.reverse-close, .reverse:hover a.reverse-close {
+  .reverse a.reverse-close {
     position: absolute;
     top: 0;
     right: 0;
@@ -312,13 +314,13 @@ p.section-subtitle2 {
     opacity: 0.80;
     filter: alpha(opacity=80);
     /* <IE8 */ }
-    .reverse a.reverse-close:hover, .reverse:hover a.reverse-close:hover {
+    .reverse a.reverse-close:hover {
       opacity: 1.00;
       filter: alpha(opacity=100);
       /* <IE8 */ }
-  .reverse .info-card, .reverse:hover .info-card {
+  .reverse .info-card {
     padding: 1.5em; }
-  .reverse p.title, .reverse:hover p.title {
+  .reverse p.title {
     font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
     color: #fff;
     font-size: 1.2em;
@@ -329,25 +331,28 @@ p.section-subtitle2 {
     line-height: 1.4em;
     color: #19bffe;
     margin-bottom: 1em; }
-  .reverse ul, .reverse:hover ul {
+  .reverse ul {
     margin: 0;
     overflow: hidden;
     width: auto; }
-    .reverse ul li, .reverse:hover ul li {
-      overflow: hidden;
+    .reverse ul li {
       width: auto;
       margin-bottom: 0.2em; }
-      .reverse ul li .button, .reverse:hover ul li .button {
+      .reverse ul li .button {
         width: 12.5em;
         height: 1.8em; }
-      .reverse ul li ul li, .reverse:hover ul li ul li {
-        float: left;
-        display: block;
-        width: 4.2em; }
-        .reverse ul li ul li.reverse-action-play, .reverse:hover ul li ul li.reverse-action-play {
-          margin: 0 1em; }
-        .reverse ul li ul li .button, .reverse:hover ul li ul li .button {
-          width: 2em; }
+      .reverse ul li ul {
+        overflow: hidden;
+        width: auto; }
+        .reverse ul li ul li {
+          float: left;
+          display: block;
+          width: 4.2em;
+          overflow: visible; }
+          .reverse ul li ul li.reverse-action-play {
+            margin: 0 1em; }
+          .reverse ul li ul li a.button {
+            width: 2em; }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - PLAY SEARCH & TASKS */
 .tasks {
@@ -439,14 +444,13 @@ p.section-subtitle2 {
 .bubble {
   position: absolute;
   display: block;
-  background: #6c6c6c;
-  width: 38em;
+  background: #0080b2;
+  width: 19em;
   height: 16em;
   padding: 1em;
   z-index: 3;
-  top: -1em;
-  left: -10em;
-  bottom: -2.3em;
+  top: 3.8em;
+  left: -13.5em;
   overflow: visible;
   border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -459,12 +463,12 @@ p.section-subtitle2 {
     width: 2.5em;
     height: 1.3em;
     z-index: 2;
-    left: 29.4em;
+    right: 4em;
     top: -1.3em; }
   .bubble a.bubble-close {
     position: absolute;
     top: 0;
-    left: 36.5em;
+    left: 17.5em;
     z-index: 2;
     display: block;
     float: none;
@@ -478,6 +482,42 @@ p.section-subtitle2 {
       opacity: 1.00;
       filter: alpha(opacity=100);
       /* <IE8 */ }
+  .bubble p.title {
+    font-size: 1.2em;
+    margin-bottom: 0;
+    font-weight: bold;
+    color: #19bffe; }
+    .bubble p.title:hover {
+      margin-bottom: 0; }
+  .bubble p.subtitle {
+    position: relative;
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+    font-weight: normal;
+    color: #19bffe; }
+    .bubble p.subtitle .cog {
+      position: absolute;
+      top: 0.2em;
+      right: 0; }
+  .bubble ul {
+    width: auto;
+    overflow: hidden; }
+    .bubble ul.share li {
+      float: left;
+      width: auto; }
+      .bubble ul.share li bubble.button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 5em !important; }
+  .bubble fieldset {
+    border: none; }
+  .bubble legend {
+    display: none; }
+  .bubble textarea {
+    width: 14.4em;
+    font-size: 1.2em;
+    padding: 0.5em 0.7em; }
   .bubble .bubble-more-info {
     clear: both;
     float: left;
@@ -504,44 +544,21 @@ p.section-subtitle2 {
         .bubble .bubble-more-info .bubble-more-info-text p:last-child {
           margin-bottom: 0; }
 
-.bubble p.title {
-  font-size: 1.2em;
-  margin-right: 2em;
-  margin-bottom: 1em;
-  font-weight: bold;
-  color: #19bffe; }
+.js-bubble-show {
+  display: block !important; }
 
-.bubble ul {
-  width: auto;
-  overflow: hidden; }
-
-.bubble ul li {
-  width: auto;
-  display: block;
-  font-size: 1.2em;
-  margin-bottom: 0.3em;
-  float: none;
-  clear: both;
-  color: #e0e0e0;
-  overflow: hidden; }
-
-.bubble fieldset {
-  border: none; }
-
-.bubble legend {
-  display: none; }
-
-.bubble input.radio {
-  display: block;
-  margin-right: 0.5em;
-  width: auto;
-  float: left; }
-
-.bubble label {
-  display: block;
-  width: 19em;
-  float: left; }
-
+/*
+.bubble ul li{
+  width:auto;
+  display:block;
+  font-size:1.2em;
+  margin-bottom:0.3em;
+  float:none;
+  clear:both;
+  color:#e0e0e0;
+  overflow:hidden;
+}
+*/
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BUTTONS */
 .button {
   display: inline-block;
@@ -595,8 +612,8 @@ p.section-subtitle2 {
   .button-disabled span img:first-child + img {
     display: none; }
   .button-disabled:hover {
-    opacity: 0.20;
-    filter: alpha(opacity=20);
+    opacity: 0.30;
+    filter: alpha(opacity=30);
     /* <IE8 */ }
   .button-disabled p {
     color: #6c6c6c; }
@@ -618,32 +635,38 @@ p.section-subtitle2 {
   padding: 0.1em 0 0.1em 0.2em;
   font-size: 1.2em; }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - SETTINGS */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - SETTINGS & REPORT */
 .settings-options {
   padding: 3em; }
 
-.settings-options legend {
+.report {
+  background: #0080b2; }
+
+.settings-options legend,
+.report legend {
   display: none; }
 
-.settings-options ul {
+.settings-options ul, .report ul {
   float: left;
   clear: both;
   width: 100%;
   overflow: hidden;
   margin: 0 0 1em; }
 
-.settings-options ul li {
+.settings-options ul li, .report ul li {
   float: left;
   clear: both;
   width: 100%;
   padding: 0.5em 0;
   overflow: hidden; }
 
-.settings-options label, .settings-options input, .settings-options ul li p, .settings-options ul li button {
+.settings-options label, .settings-options input, .settings-options textarea, .settings-options ul li p, .settings-options ul li button,
+.report label, .report input, .report textarea, .report ul li p, .report ul li button {
   float: left;
   font-size: 1.2em; }
 
-.settings-options input {
+.settings-options input,
+.report input {
   padding: 0.5em 1em;
   margin: 0 0.5em 0 0;
   background: #fff;
@@ -653,7 +676,8 @@ p.section-subtitle2 {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px; }
 
-.settings-options select {
+.settings-options select,
+.report select {
   margin: 0.5em 1.5em 0.5em 1em;
   background: #fff;
   display: block;
@@ -662,19 +686,36 @@ p.section-subtitle2 {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px; }
 
-.settings-options label {
+.settings-options label,
+.report label {
   padding: 0.5em;
   margin: 0 0.5em 0 0;
   background: none;
   display: block; }
 
-.settings-options ul li p {
+.report label {
+  color: #fff; }
+
+.settings-options textarea,
+.report textarea {
+  padding: 0.5em 1em;
+  margin: 0 0.5em 0 0;
+  background: #fff;
+  display: block;
+  border-top: 1px solid #d2d2d2;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px; }
+
+.settings-options ul li p,
+.report ul li p {
   padding: 0.5em;
   margin: 0 0.5em 0 0;
   background: none;
   display: block; }
 
-.settings-options button {
+.settings-options button
+.report button {
   padding: 0.5em 1em;
   margin: 0 0.5em 0 0;
   background: #ccc;
@@ -685,32 +726,37 @@ p.section-subtitle2 {
   -moz-border-radius: 4px;
   cursor: pointer; }
 
-.settings-options input.checkbox, .settings-options input.radio {
+.settings-options input.checkbox, .settings-options input.radio,
+.report input.checkbox, .report input.radio {
   padding: 0;
   margin: 0.6em 0.5em 0.4em 0.05em;
   display: block;
   width: auto;
   border-top: 1px solid #d2d2d2; }
 
-.settings-options .shortest {
+.settings-options .submit,
+.report .submit {
+  margin: 1em; }
+
+input.shortest, label.shortest, select.shortest, textarea.shortest {
   width: 2em; }
 
-.settings-options .veryshort {
+input.veryshort, label.veryshort, select.veryshort, textarea.veryshort {
   width: 3.5em; }
 
-.settings-options .short {
+input.short, label.short, select.short, textarea.short {
   width: 7em; }
 
-.settings-options .medium {
+input.medium, label.medium, select.medium, textarea.medium {
   width: 14em; }
 
-.settings-options .large {
+input.large, label.large, select.large, textarea.large {
   width: 21em; }
 
-.settings-options .verylarge {
+input.verylarge, label.verylarge, select.verylarge, textarea.verylarge {
   width: 28em; }
 
-.settings-options .long-auto {
+input.long-auto, label.long-auto, select.long-auto, textarea.long-auto {
   width: auto; }
 
 .label-textright {

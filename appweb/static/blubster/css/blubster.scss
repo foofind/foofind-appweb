@@ -326,7 +326,7 @@ abbr {
   background-repeat: no-repeat;
   height:6em;
   overflow:hidden;
-  background-position: 2em 1.7em;
+  background-position: 1.5em 1.5em;
 }
 .result-odd{
   background-color:#eaeaea;
@@ -540,90 +540,6 @@ div.result-actions{
   }
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BUBBLES */
-.bubble {
-  position:absolute;
-  display:none;
-  background:#6c6c6c;
-  width:26em;
-  height:11em;
-  margin-left:-20em;
-  margin-top:4em;
-  padding:1em;
-  z-index:3;
-  overflow:visible;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  box-shadow: 0.3em 1em 3em #666;
-}
-.js-bubble-show {
-  display:block !important;
-}
-.bubble .bubble-pin{
-  position:absolute;
-  display:block;
-  background:url(../imgs/bg.bubble-triangle-top.png) 50% no-repeat;
-  width:2.5em;
-  height:1.3em;
-  z-index:2;
-  left:20.7em;
-  top:-1.3em;
-}
-.bubble .bubble-close{
-  position: absolute;
-  top: 0;
-  left: 24.5em;
-  z-index: 2;
-  display: block;
-  float: none;
-  width: 3.6em;
-  height: 3.6em;
-  background: url(../imgs/bg.corner-close.png) 0 0 no-repeat;
-  opacity:0.80;
-  filter:alpha(opacity=80); /* <IE8 */
-}
-.bubble .bubble-close:hover{
-  opacity:1.00;
-  filter:alpha(opacity=100); /* <IE8 */
-}
-.bubble p.title{
-  font-size:1.2em;
-  margin-bottom:1em;
-  font-weight:bold;
-  color:#19bffe;
-}
-.bubble ul{
-  width:auto;
-  overflow:hidden;
-}
-.bubble ul li{
-  width:auto;
-  display:block;
-  font-size:1.2em;
-  margin-bottom:0.3em;
-  float:none;
-  clear:both;
-  color:#e0e0e0;
-  overflow:hidden;
-}
-.bubble fieldset{
-  border:none;
-}
-.bubble legend{
-  display:none;
-}
-.bubble input.radio{
-  display:block;
-  margin-right:0.5em;
-  width:auto;
-  float:left;
-}
-.bubble label{
-  display:block;
-  width:19em;
-  float:left;
-}
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BUTTONS */
 .button{
