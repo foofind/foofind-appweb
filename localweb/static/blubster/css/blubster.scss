@@ -274,7 +274,7 @@ p.section-subtitle2{
     overflow:visible;
     position:relative;
 
-    li{
+    li.reverse-3actions{
       display:block;
       width:auto;
       float:left;
@@ -365,8 +365,12 @@ p.section-subtitle2{
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - play REVERSE */
 
-.reverse, .reverse:hover{
+.reverse{
   background:#6f6f6f;
+
+  &:hover{
+    background:#6f6f6f;
+  }
 
   .new{
     display:none;
@@ -414,7 +418,6 @@ p.section-subtitle2{
     width:auto;
 
     li{
-      overflow:hidden;
       width:auto;
       margin-bottom:0.2em;
 
@@ -424,18 +427,20 @@ p.section-subtitle2{
       }
 
       ul{
-
+        overflow:hidden;
+        width:auto;
 
         li{
           float:left;
           display:block;
           width:4.2em;
+          overflow:visible;
 
           &.reverse-action-play{
             margin:0 1em;
           }
 
-          .button{
+          a.button{
             width:2em;
           }
         }
@@ -536,14 +541,13 @@ p.section-subtitle2{
 .bubble{
   position:absolute;
   display:block;
-  background:#6c6c6c;
-  width:38em;
+  background:#0080b2;
+  width:19em;
   height:16em;
   padding:1em;
   z-index:3;
-  top:-1em;
-  left:-10em;
-  bottom:-2.3em;
+  top:3.8em;
+  left:-13.5em;
   overflow:visible;
   border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -557,14 +561,14 @@ p.section-subtitle2{
     width:2.5em;
     height:1.3em;
     z-index:2;
-    left:29.4em;
+    right:4em;
     top:-1.3em;
   }
 
   a.bubble-close{
     position: absolute;
     top: 0;
-    left: 36.5em;
+    left: 17.5em;
     z-index: 2;
     display: block;
     float: none;
@@ -578,6 +582,60 @@ p.section-subtitle2{
       opacity:1.00;
       filter:alpha(opacity=100); /* <IE8 */
     }
+  }
+
+  p.title{
+    font-size:1.2em;
+    margin-bottom:0;
+    font-weight:bold;
+    color:#19bffe;
+
+    &:hover{
+      margin-bottom:0;
+    }
+  }
+
+  p.subtitle{
+    position:relative;
+    font-size:1.2em;
+    margin-bottom:0.5em;
+    font-weight:normal;
+    color:#19bffe;
+
+    .cog{
+      position:absolute;
+      top:0.2em;
+      right:0;
+    }
+  }
+
+  ul{
+    width:auto;
+    overflow:hidden;
+
+    &.share li{
+      float:left;
+      width:auto;
+
+      bubble.button{
+        position:absolute;
+        right:0;
+        top:0;
+        width:5em !important;
+      }
+    }
+  }
+
+  fieldset{
+    border:none;
+  }
+  legend{
+    display:none;
+  }
+  textarea{
+    width:14.4em;
+    font-size:1.2em;
+    padding:0.5em 0.7em;
   }
 
   .bubble-more-info{
@@ -618,18 +676,11 @@ p.section-subtitle2{
   }
 }
 
+.js-bubble-show {
+  display:block !important;
+}
 
-.bubble p.title{
-  font-size:1.2em;
-  margin-right:2em;
-  margin-bottom:1em;
-  font-weight:bold;
-  color:#19bffe;
-}
-.bubble ul{
-  width:auto;
-  overflow:hidden;
-}
+/*
 .bubble ul li{
   width:auto;
   display:block;
@@ -640,24 +691,7 @@ p.section-subtitle2{
   color:#e0e0e0;
   overflow:hidden;
 }
-.bubble fieldset{
-  border:none;
-}
-.bubble legend{
-  display:none;
-}
-.bubble input.radio{
-  display:block;
-  margin-right:0.5em;
-  width:auto;
-  float:left;
-}
-.bubble label{
-  display:block;
-  width:19em;
-  float:left;
-}
-
+*/
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BUTTONS */
 .button{
@@ -726,8 +760,8 @@ p.section-subtitle2{
   }
 
   &:hover{
-    opacity:0.20;
-    filter:alpha(opacity=20); /* <IE8 */
+    opacity:0.30;
+    filter:alpha(opacity=30); /* <IE8 */
   }
 
   p{
@@ -758,16 +792,20 @@ p.section-subtitle2{
  font-size:1.2em;
 }
 
-/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - SETTINGS */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - SETTINGS & REPORT */
 
 .settings-options{
   padding:3em;
 }
-.settings-options legend{
+.report{
+  background:#0080b2;
+}
+.settings-options legend,
+.report legend{
    display:none;
 }
 
-.settings-options ul{
+.settings-options ul, .report ul{
   float:left;
   clear:both;
   width:100%;
@@ -775,7 +813,7 @@ p.section-subtitle2{
   margin:0 0 1em;
 }
 
-.settings-options ul li{
+.settings-options ul li, .report ul li{
   float:left;
   clear:both;
   width:100%;
@@ -783,11 +821,13 @@ p.section-subtitle2{
   overflow:hidden;
 }
 
-.settings-options label, .settings-options input, .settings-options ul li p, .settings-options ul li button{
+.settings-options label, .settings-options input, .settings-options textarea, .settings-options ul li p, .settings-options ul li button,
+.report label, .report input, .report textarea, .report ul li p, .report ul li button{
   float:left;
   font-size:1.2em;
 }
-.settings-options input{
+.settings-options input,
+.report input{
   padding:0.5em 1em;
   margin:0 0.5em 0 0;
   background: #fff;
@@ -797,7 +837,8 @@ p.section-subtitle2{
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
 }
-.settings-options select{
+.settings-options select,
+.report select{
   margin:0.5em 1.5em 0.5em 1em;
   background: #fff;
   display: block;
@@ -806,19 +847,36 @@ p.section-subtitle2{
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
 }
-.settings-options label{
+.settings-options label,
+.report label{
   padding:0.5em;
   margin:0 0.5em 0 0;
   background: none;
   display: block;
 }
-.settings-options ul li p{
+.report label{
+  color:#fff;
+}
+.settings-options textarea,
+.report textarea{
+  padding:0.5em 1em;
+  margin:0 0.5em 0 0;
+  background: #fff;
+  display: block;
+  border-top: 1px solid #d2d2d2;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+}
+.settings-options ul li p,
+.report ul li p{
   padding:0.5em;
   margin:0 0.5em 0 0;
   background: none;
   display: block;
 }
-.settings-options button{
+.settings-options button
+.report button{
   padding:0.5em 1em;
   margin:0 0.5em 0 0;
   background: #ccc;
@@ -829,32 +887,37 @@ p.section-subtitle2{
   -moz-border-radius: 4px;
   cursor:pointer;
 }
-.settings-options input.checkbox, .settings-options input.radio{
+.settings-options input.checkbox, .settings-options input.radio,
+.report input.checkbox, .report input.radio{
   padding:0;
   margin:0.6em 0.5em 0.4em 0.05em;
   display: block;
   width:auto;
   border-top: 1px solid #d2d2d2;
 }
-.settings-options .shortest{
+.settings-options .submit,
+.report .submit{
+  margin:1em;
+}
+input.shortest, label.shortest, select.shortest, textarea.shortest{
   width:2em;
 }
-.settings-options .veryshort{
+input.veryshort, label.veryshort, select.veryshort, textarea.veryshort{
   width:3.5em;
 }
-.settings-options .short{
+input.short, label.short, select.short, textarea.short{
   width:7em;
 }
-.settings-options .medium{
+input.medium, label.medium, select.medium, textarea.medium{
   width:14em;
 }
-.settings-options .large{
+input.large, label.large, select.large, textarea.large{
   width:21em;
 }
-.settings-options .verylarge{
+input.verylarge, label.verylarge, select.verylarge, textarea.verylarge{
   width:28em;
 }
-.settings-options .long-auto{
+input.long-auto, label.long-auto, select.long-auto, textarea.long-auto{
   width:auto;
 }
 .label-textright{
