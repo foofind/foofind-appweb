@@ -52,7 +52,16 @@
         <ul id="results">
             {% include "file.html" with context %}
         </ul><!--end of .results-->
-        <div id="loading-results">Loading results</div>
+        <div id="no-results" class="error">
+            <div class="error-img">
+                <img src="{{g.static_prefix}}/blubster/imgs/ico.error-sad-280.png" alt="No results">
+            </div><!--end of .error-img-->
+            <div class="error-text">
+                <p class="error-title">No results!</p>
+                <p>There are no results for your search. Try another search!</p>
+            </div>
+        </div>
+        <div id="loading-results"><div>Loading results</div></div>
     </div><!--end of #content-->
 
 

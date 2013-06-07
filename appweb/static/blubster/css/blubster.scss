@@ -317,12 +317,23 @@ abbr {
   right:0px;
   overflow-x:auto;
   overflow-y:scroll;
+
+  #no-results {
+    display:none;
+  }
+
+  &.no-results {
+    #no-results {
+      display:block !important;
+    }
+  }
 }
 
 #loading-results {
+  width:auto;
   background:white;
   text-align:center;
-  padding: 5em;
+  div {width:400px;padding:5em}
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - RESULT ITEM */
@@ -613,35 +624,27 @@ div.result-actions{
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ERROR PAGE */
-.error{
-  width:50em;
+.error {
   position:absolute;
-  top:50%;
   margin-top:-21em;
+  top:50%;
   left:50%;
+  width:50em;
   margin-left:-25em;
-  overflow:hidden;
 
   .error-img{
-    overflow:hidden;
-    display:block;
     height:28em;
+    text-align: center;
     top:0;
-    position:relative;
-    text-align:center;
-
     img{
       margin:0 auto;
     }
   }
 
   .error-text{
-    margin-top:3em;
-    position:relative;
-    overflow:hidden;
+    margin:2em 0em 5em;
 
-    p{
-      font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
+    p {
       text-align: center;
       color: #333;
       font-size:1.4em;

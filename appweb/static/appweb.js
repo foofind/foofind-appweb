@@ -2,13 +2,13 @@
 var MAX_ERROR_COUNT = 15;
 
 // objetos de la pagina
-var current_search_form, report, content, results, loading_results;
+var current_search_form, report, content, no_results, results, loading_results;
 
 // estado de la pagina
 var loaded_ids = {}, errors_count = 0;
 
 // actividad de la pagina
-var requesting = null, pending = false, stopped = false;
+var requesting = null, stopped = false;
 
 document.observe("dom:loaded", function() {
     current_search_form = $('current_search');
@@ -16,48 +16,49 @@ document.observe("dom:loaded", function() {
     content = $("content");
     report = $$(".report")[0];
     loading_results = $("loading-results");
-    loading_results.hide();
 
-    // Solo en pagina de busqueda, que hay burbuja
-    if (report) {
+    // Solo en pagina de busqueda, que hay resultados
+    if (results) {
         report.button = false;
         updateItems(report);
+
+        // Nueva busqueda
+        $("new_search").observe('submit', function() {
+            stop();
+            results.update();
+            loading_results.show();
+        });
+
+        // Pide más resultados
+        content.observe('scroll', scrollHandler);
+        scrollHandler();
     }
-
-    // Nueva busqueda
-    $("new_search").observe('submit', function() {
-        stop();
-        results.update();
-        loading_results.show();
-    });
-
-    // Carga de más resultados
-    content.observe('scroll', scrollHandler);
-    scrollHandler();
 });
 
 function scrollHandler() {
     var height = content.getHeight();
-    if (height>content.scrollHeight-content.scrollTop-height)
+    if (height>content.scrollHeight-content.scrollTop-height) {
         getMoreItems();
+        return true;
+    }
+    return false;
 }
 
 function stop() {
     stopped = true;
-    if (requesting)
+    if (requesting) {
         requesting.transport.abort();
+    }
 }
 
 function getMoreItems(){
     // No sigue si ha habido demasiados errores o si se ha parado la busqueda
-    if (errors_count>MAX_ERROR_COUNT || stopped)
+    if (errors_count>MAX_ERROR_COUNT || stopped) {
         return;
+    }
 
-    if (requesting) {
-        pending = true;
-    } else {
+    if (!requesting) {
         loading_results.show();
-        pending = false;
         requesting = new Ajax.Request('searcha', {
             method: 'post',
             parameters: current_search_form.serialize(true),
@@ -66,13 +67,14 @@ function getMoreItems(){
                 if (data["files_ids"].length>0)
                     errors_count=0;
 
-                console.log(data);
                 // Si se ha llegado al final, no carga mas
-                if (data["end"]) {
+                if (data["end"] && data["sure"]) {
+                    if (data["total_found"]==0)
+                        content.addClassName("no-results");
                     loading_results.hide();
                     stopped = true;
                 } else
-                    setTimeout(function(){requesting=null; if (pending) getMoreItems(); else loading_results.hide();}, data["wait"]);
+                    setTimeout(function(){requesting=null; if (!scrollHandler()) loading_results.hide();}, data["wait"]);
 
                 // Almacena nuevos resultados
                 $("last_items").value = data["last_items"];
