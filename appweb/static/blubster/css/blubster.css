@@ -525,7 +525,7 @@ div.result-actions {
   width: 50em;
   position: absolute;
   top: 50%;
-  margin-top: -19em;
+  margin-top: -21em;
   left: 50%;
   margin-left: -25em;
   overflow: hidden; }
@@ -548,3 +548,7 @@ div.result-actions {
       color: #333;
       font-size: 1.4em;
       line-height: 1.4em; }
+      .error .error-text p.error-title {
+        font-size: 1.8em;
+        font-weight: bold;
+        margin-bottom: 1em; }
