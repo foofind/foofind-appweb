@@ -279,7 +279,13 @@ abbr {
   top: 62px;
   bottom: 0px;
   right: 0px;
-  overflow: auto; }
+  overflow-x: auto;
+  overflow-y: scroll; }
+
+#loading-results {
+  background: white;
+  text-align: center;
+  padding: 5em; }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - RESULT ITEM */
 .result-item {
@@ -513,3 +519,32 @@ div.result-actions {
 .bubble .button p {
   padding: 0.1em 0 0.1em 0.2em;
   font-size: 1.2em; }
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ERROR PAGE */
+.error {
+  width: 50em;
+  position: absolute;
+  top: 50%;
+  margin-top: -19em;
+  left: 50%;
+  margin-left: -25em;
+  overflow: hidden; }
+  .error .error-img {
+    overflow: hidden;
+    display: block;
+    height: 28em;
+    top: 0;
+    position: relative;
+    text-align: center; }
+    .error .error-img img {
+      margin: 0 auto; }
+  .error .error-text {
+    margin-top: 3em;
+    position: relative;
+    overflow: hidden; }
+    .error .error-text p {
+      font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
+      text-align: center;
+      color: #333;
+      font-size: 1.4em;
+      line-height: 1.4em; }

@@ -611,3 +611,41 @@ div.result-actions{
  padding:0.1em 0 0.1em 0.2em;
  font-size:1.2em;
 }
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ERROR PAGE */
+.error{
+  width:50em;
+  position:absolute;
+  top:50%;
+  margin-top:-19em;
+  left:50%;
+  margin-left:-25em;
+  overflow:hidden;
+
+  .error-img{
+    overflow:hidden;
+    display:block;
+    height:28em;
+    top:0;
+    position:relative;
+    text-align:center;
+
+    img{
+      margin:0 auto;
+    }
+  }
+
+  .error-text{
+    margin-top:3em;
+    position:relative;
+    overflow:hidden;
+
+    p{
+      font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
+      text-align: center;
+      color: #333;
+      font-size:1.4em;
+      line-height:1.4em;
+    }
+  }
+}
