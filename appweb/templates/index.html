@@ -7,6 +7,9 @@
         <div class="search-main">
             {{flash()}}
             <form method="post" action="{{ url_for('files.search') }}">
+                    {% if g.wakalaka %}
+                        <input type="hidden" name="wklk" value="1">
+                    {%endif%}
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                 <fieldset>
                     <legend>Search form</legend>

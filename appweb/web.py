@@ -198,6 +198,9 @@ def create_app(config=None, debug=False):
     return app
 
 def init_g(app):
+
+    g.wakalaka = bool(request.form.get("wklk", False))
+
     # caracteristicas del cliente
     g.search_bot=is_search_bot()
 

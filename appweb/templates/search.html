@@ -15,6 +15,9 @@
             <input type="hidden" id="last_items" name="last_items" value="{{last_items}}">
             </form>
             <form id="new_search" method="post" action="{{ url_for('files.search') }}">
+    {% if g.wakalaka %}
+        <input type="hidden" name="wklk" value="1">
+    {%endif%}
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                 <fieldset>
                     <legend>Search form</legend>
