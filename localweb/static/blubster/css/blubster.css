@@ -695,6 +695,8 @@ p.section-subtitle2 {
 
 .report label {
   color: #fff; }
+  .report label a {
+    color: #19bffe; }
 
 .settings-options textarea,
 .report textarea {
@@ -736,7 +738,7 @@ p.section-subtitle2 {
 
 .settings-options .submit,
 .report .submit {
-  margin: 1em; }
+  margin: 0 1em 1em; }
 
 input.shortest, label.shortest, select.shortest, textarea.shortest {
   width: 2em; }
@@ -762,5 +764,8 @@ input.long-auto, label.long-auto, select.long-auto, textarea.long-auto {
 .label-textright {
   text-align: right; }
 
+.margin-left2 {
+  margin-left: 2em !important; }
+
 .margin-left3 {
-  margin-left: 3em; }
+  margin-left: 3em !important; }
