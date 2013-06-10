@@ -2,7 +2,7 @@
 var MAX_ERROR_COUNT = 15;
 
 // objetos de la pagina
-var current_search_form, report, content, no_results, results, loading_results;
+var  content, results, loading_results, current_search_form, report, report_form, report_file_id;
 
 // estado de la pagina
 var loaded_ids = {}, errors_count = 0;
@@ -11,17 +11,24 @@ var loaded_ids = {}, errors_count = 0;
 var requesting = null, stopped = false;
 
 document.observe("dom:loaded", function() {
-    current_search_form = $('current_search');
-    results = $("results");
     content = $("content");
-    report = $("report");
-    report_file_id = $("file_id");
+    results = $("results");
     loading_results = $("loading-results");
+    current_search_form = $('current_search');
+    report = $("report");
+    report_form = $("report_form");
+    report_file_id = $("file_id");
 
     // Solo en pagina de busqueda, que hay resultados
     if (results) {
         report.button = false;
         updateItems(report);
+
+        // Formulario de quejas
+        report_form.observe('submit', function(event) {
+            sendReport();
+            Event.stop(event);
+        });
 
         // Nueva busqueda
         $("new_search").observe('submit', function() {
@@ -143,4 +150,34 @@ function toggle(button, parent, className){
         button.addClassName("button-off").removeClassName("button-on");
         parent.removeClassName(className);
     }
+}
+
+
+function sendReport(){
+    report_request = new Ajax.Request('complaint', {
+        method: 'post',
+        parameters: report_form.serialize(true),
+        onSuccess: function(transport) {
+            $$(".wrong").each(function(item){item.removeClassName("wrong");});
+            result = eval(transport.responseText);
+            if (result===true) {
+                report_form.reset();
+                toggle(report.button, report, "js-show");
+                report.button = false;
+                alert("Your complaint has been sent.");
+            } else if (result===false) {
+                report_form.reset();
+                toggle(report.button, report, "js-show");
+                report.button = false;
+                alert("Error!");
+            } else {
+                alert("Invalid values!");
+                for (field in result){
+                    $(result[field]).addClassName("wrong");
+                }
+            }
+        },
+        onFailure: function(transport) {
+        }
+    });
 }

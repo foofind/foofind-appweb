@@ -224,12 +224,12 @@ def complaint():
         if form.validate():
             urlreported = "/download/"+form.file_id.data+"/"
             pagesdb.create_complaint(dict([("linkreported","-"),("urlreported",urlreported),("ip",request.remote_addr)]+[(field.name,field.data) for field in form]))
-            return "True"
+            return "true"
         else:
             return repr(form.errors.keys())
     except BaseException as e:
         logging.error("Error on file complaint.")
-        return "False"
+        return "false"
 
 class ReportLinkForm(Form):
     '''

@@ -68,7 +68,7 @@
     </div><!--end of #content-->
 
     <div id="report">
-        <form method="post" action="{{url_for('files.complaint')}}">
+        <form id="report_form" method="post" action="{{url_for('files.complaint')}}">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
             <input type="hidden" name="file_id" id="file_id" value="">
             <fieldset>
