@@ -158,7 +158,7 @@ function sendReport(){
         method: 'post',
         parameters: report_form.serialize(true),
         onSuccess: function(transport) {
-            $$(".wrong").each(function(item){item.removeClassName("wrong");});
+            $$(".wrong").each(function(item){item.removeClassName("wrong")});
             result = eval(transport.responseText);
             if (result===true) {
                 report_form.reset();
@@ -171,13 +171,15 @@ function sendReport(){
                 report.button = false;
                 alert("Error!");
             } else {
+                result.each(function(item){$(item).addClassName("wrong")});
                 alert("Invalid values!");
-                for (field in result){
-                    $(result[field]).addClassName("wrong");
-                }
             }
         },
         onFailure: function(transport) {
+            report_form.reset();
+            toggle(report.button, report, "js-show");
+            report.button = false;
+            alert("Error!");
         }
     });
 }

@@ -510,7 +510,7 @@ div.result-love {
 
 div.result-actions{
   float: right;
-  width: 17em;
+  width: 18em;
   margin-left: -18em;
   padding:1.3em 0em;
   ul.result-actions{
@@ -524,7 +524,8 @@ div.result-actions{
       vertical-align:top;
       p {
         vertical-align:baseline;
-        padding:0.1em;
+        padding-top:0.1em;
+        padding-bottom:0.1em;
       }
       display:inline-block;*display:inline;zoom:1;
     }
@@ -661,34 +662,25 @@ div.result-actions{
   z-index:1;
   position:absolute;
   width:40em;
-  height:40em;
+  height:48em;
   top:50%;
   left:50%;
   margin-left:-20em;
-  margin-top:-20em;
+  margin-top:-24em;
   display:none;
 
-  legend{
-    display:none;
-  }
 
   ul{
-    float:left;
-    clear:both;
     width:100%;
-    overflow:hidden;
     margin:0 0 1em;
 
     li{
-      float:left;
-      clear:both;
       width:100%;
       padding:0.5em 0;
-      overflow:hidden;
     }
   }
 
-  label, input, textarea, ul li p,  ul li button{
+  label, input, textarea, p, button{
     float:left;
     font-size:1.2em;
   }
@@ -721,8 +713,6 @@ div.result-actions{
   textarea{
     padding:0.5em 1em;
     margin:0 0.5em 0 0;
-    background: #fff;
-    display: block;
     border-top: 1px solid #d2d2d2;
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -731,14 +721,11 @@ div.result-actions{
   ul li p{
     padding:0.5em;
     margin:0 0.5em 0 0;
-    background: none;
-    display: block;
   }
-  button{
+  button {
     padding:0.5em 1em;
     margin:0 0.5em 0 0;
     background: #ccc;
-    display: block;
     border-top: 1px solid #d2d2d2;
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -753,7 +740,7 @@ div.result-actions{
     border-top: 1px solid #d2d2d2;
   }
   .submit{
-    margin:0 1em 1em;
+    margin:1em 1em;
   }
   input.shortest, label.shortest, select.shortest, textarea.shortest{
     width:2em;
