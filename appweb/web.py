@@ -121,6 +121,7 @@ def create_app(config=None, debug=False):
 
     # Acceso a bases de datos
     filesdb.init_app(app)
+    pagesdb.init_app(app)
     feedbackdb.init_app(app)
     entitiesdb.init_app(app)
 

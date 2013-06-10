@@ -1,5 +1,8 @@
 $minwidth:600px;
 
+.js-show {
+  display:block !important;
+}
 
 /* ----------------------------------------------------------- GENERAL */
 body {
@@ -616,14 +619,6 @@ div.result-actions{
   color:#fff;
 }
 
-.bubble .button{
-  padding:0.3em 1em 0;
-}
-.bubble .button p{
- padding:0.1em 0 0.1em 0.2em;
- font-size:1.2em;
-}
-
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ERROR PAGE */
 .error {
   position:absolute;
@@ -657,5 +652,132 @@ div.result-actions{
         margin-bottom:1em;
       }
     }
+  }
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - REPORT */
+#report {
+  background:#0080b2;
+  z-index:1;
+  position:absolute;
+  width:40em;
+  height:40em;
+  top:50%;
+  left:50%;
+  margin-left:-20em;
+  margin-top:-20em;
+  display:none;
+
+  legend{
+    display:none;
+  }
+
+  ul{
+    float:left;
+    clear:both;
+    width:100%;
+    overflow:hidden;
+    margin:0 0 1em;
+
+    li{
+      float:left;
+      clear:both;
+      width:100%;
+      padding:0.5em 0;
+      overflow:hidden;
+    }
+  }
+
+  label, input, textarea, ul li p,  ul li button{
+    float:left;
+    font-size:1.2em;
+  }
+
+  input{
+    padding:0.5em 1em;
+    margin:0 0.5em 0 0;
+    background: #fff;
+    display: block;
+    border-top: 1px solid #d2d2d2;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+  }
+  label{
+    color:#fff;
+    padding:0.5em;
+    margin:0 0.5em 0 0;
+    background: none;
+    display: block;
+    a{
+      color:#19bffe;
+    }
+  }
+  textarea{
+    padding:0.5em 1em;
+    margin:0 0.5em 0 0;
+    background: #fff;
+    display: block;
+    border-top: 1px solid #d2d2d2;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+  }
+  ul li p{
+    padding:0.5em;
+    margin:0 0.5em 0 0;
+    background: none;
+    display: block;
+  }
+  button{
+    padding:0.5em 1em;
+    margin:0 0.5em 0 0;
+    background: #ccc;
+    display: block;
+    border-top: 1px solid #d2d2d2;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    cursor:pointer;
+  }
+  input.checkbox, input.radio{
+    padding:0;
+    margin:0.6em 0.5em 0.4em 0.05em;
+    display: block;
+    width:auto;
+    border-top: 1px solid #d2d2d2;
+  }
+  .submit{
+    margin:0 1em 1em;
+  }
+  input.shortest, label.shortest, select.shortest, textarea.shortest{
+    width:2em;
+  }
+  input.veryshort, label.veryshort, select.veryshort, textarea.veryshort{
+    width:3.5em;
+  }
+  input.short, label.short, select.short, textarea.short{
+    width:7em;
+  }
+  input.medium, label.medium, select.medium, textarea.medium{
+    width:14em;
+  }
+  input.large, label.large, select.large, textarea.large{
+    width:21em;
+  }
+  input.verylarge, label.verylarge, select.verylarge, textarea.verylarge{
+    width:28em;
+  }
+  input.long-auto, label.long-auto, select.long-auto, textarea.long-auto{
+    width:auto;
+  }
+  .label-textright{
+    text-align:right;
+  }
+  .margin-left2{
+    margin-left:2em !important;
+  }
+  .margin-left3{
+    margin-left:3em !important;
   }
 }

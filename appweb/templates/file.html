@@ -51,7 +51,7 @@
                 <div class="result-rating">
                     <p class="result-rating">
                         <span>
-                        {{("&#9733;"*file['view']['rating'] + "&#9734;"*(5-file['view']['rating']))|safe}}
+                        {{(('<img src="'+g.static_prefix+'/blubster/imgs/ico.star-14-full.png">')*file['view']['rating'] + ('<img src="'+g.static_prefix+'/blubster/imgs/ico.star-14-empty.png">')*(5-file['view']['rating']))|safe}}
                         </span>
                     </p>
                 </div>{# end of .result-rating #}

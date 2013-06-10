@@ -4,6 +4,7 @@
 """
 import json
 from flask import request, render_template, g, current_app, flash, redirect, url_for, jsonify, make_response
+from flask.ext.wtf import Form, BooleanField, TextField, TextAreaField, SubmitField, Required, Email, Length
 
 from base64 import b64decode
 from struct import unpack
@@ -12,9 +13,11 @@ from foofind.blueprints.files import search_files
 from foofind.blueprints.files.helpers import *
 
 from foofind.services import *
-from foofind.utils import logging
+from foofind.utils import logging, hex2url
 from foofind.utils.content_types import *
 from foofind.utils.fooprint import Fooprint
+
+
 
 files = Fooprint('files', __name__)
 
@@ -210,3 +213,35 @@ def torrents_data(data):
     data['view']['leechs'] = leechs
 
     return data
+
+@files.route('/<lang>/<license>/complaint', methods=['POST'])
+def complaint():
+    '''
+    Procesa los datos del formulario para reportar enlaces.
+    '''
+    try:
+        form = ReportLinkForm(request.form)
+        if form.validate():
+            urlreported = "/download/"+form.file_id.data+"/"
+            pagesdb.create_complaint(dict([("linkreported","-"),("urlreported",urlreported),("ip",request.remote_addr)]+[(field.name,field.data) for field in form]))
+            return "True"
+        else:
+            return repr(form.errors.keys())
+    except BaseException as e:
+        logging.error("Error on file complaint.")
+        return "False"
+
+class ReportLinkForm(Form):
+    '''
+    Formulario para reportar enlaces
+    '''
+    file_id = TextField(validators=[Required(), Length(16,16)])
+    name = TextField(validators=[Required()])
+    surname = TextField(validators=[Required()])
+    company = TextField()
+    email = TextField(validators=[Required(),Email()])
+    phonenumber = TextField()
+    reason = TextField(validators=[Required()])
+    message = TextAreaField(validators=[Required()])
+    accept_tos = BooleanField(validators=[Required()])
+    submit = SubmitField()

@@ -14,7 +14,8 @@ document.observe("dom:loaded", function() {
     current_search_form = $('current_search');
     results = $("results");
     content = $("content");
-    report = $$(".report")[0];
+    report = $("report");
+    report_file_id = $("file_id");
     loading_results = $("loading-results");
 
     // Solo en pagina de busqueda, que hay resultados
@@ -105,7 +106,7 @@ function updateItems(report){
             // Clicks fuera de la burbuja de reportar
             if (report.button && (!Event.element(event).descendantOf(report)))
             {
-                toggle(report.button, report, "js-report-show");
+                toggle(report.button, report, "js-show");
                 report.button = false;
             } else {
                 var stop = true;
@@ -116,11 +117,10 @@ function updateItems(report){
                 if (result) {
                     if (!button || button.up(".result-action-info")) {
                         toggle(result.down(".result-action-info .button"), result, "result-expanded");
-                    } else if (button.up(".report")) {
-                        toggle(button, report, "js-report-show");
+                    } else if (button.up(".result-action-report")) {
+                        toggle(button, report, "js-show");
                         var buttonPos = Element.cumulativeOffset(button);
-                        report.style.top = buttonPos[1]+"px";
-                        report.style.left = buttonPos[0]+"px";
+                        report_file_id.value = result.readAttribute("data-id");
                         report.button = button;
                     }
                     else
