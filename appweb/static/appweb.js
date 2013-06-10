@@ -113,8 +113,7 @@ function updateItems(report){
             // Clicks fuera de la burbuja de reportar
             if (report.button && (!Event.element(event).descendantOf(report)))
             {
-                toggle(report.button, report, "js-show");
-                report.button = false;
+                clearReport();
             } else {
                 var stop = true;
                 var result = $(this);
@@ -161,14 +160,10 @@ function sendReport(){
             $$(".wrong").each(function(item){item.removeClassName("wrong")});
             result = eval(transport.responseText);
             if (result===true) {
-                report_form.reset();
-                toggle(report.button, report, "js-show");
-                report.button = false;
+                clearReport();
                 alert("Your complaint has been sent.");
             } else if (result===false) {
-                report_form.reset();
-                toggle(report.button, report, "js-show");
-                report.button = false;
+                clearReport();
                 alert("Error!");
             } else {
                 result.each(function(item){$(item).addClassName("wrong")});
@@ -176,10 +171,14 @@ function sendReport(){
             }
         },
         onFailure: function(transport) {
-            report_form.reset();
-            toggle(report.button, report, "js-show");
-            report.button = false;
+            clearReport();
             alert("Error!");
         }
     });
+}
+
+function clearReport(){
+    report_form.reset();
+    toggle(report.button, report, "js-show");
+    report.button = false;
 }
