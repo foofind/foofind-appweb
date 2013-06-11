@@ -231,7 +231,7 @@ def complaint():
         logging.error("Error on file complaint.")
         return "false"
 
-@user.route('/<lang>/<license>/vote',methods=['POST'])
+@files.route('/<lang>/<license>/vote',methods=['POST'])
 def vote():
     '''
     Gestiona las votaciones de archivos
