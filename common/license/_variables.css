@@ -2,7 +2,7 @@
 Syntax error: Undefined variable: "$license".
         on line 4 of _variables.scss
 
-1: //blubster
+1: // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BLUBSTER
 2: 
 3: $color: red;
 4: @if $license == blubster {
@@ -53,4 +53,4 @@ _variables.scss:4
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$license\".\A         on line 4 of _variables.scss\A \A 1: //blubster\A 2: \A 3: $color: red;\A 4: @if $license == blubster {\A 5:   //default values are for this license\A 6: } @else if $license == foofind {\A 7:   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - FOOFIND\A 8:   $color: blue;\A 9: } @else if $license == torrents {"; }
+  content: "Syntax error: Undefined variable: \"$license\".\A         on line 4 of _variables.scss\A \A 1: // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BLUBSTER\A 2: \A 3: $color: red;\A 4: @if $license == blubster {\A 5:   //default values are for this license\A 6: } @else if $license == foofind {\A 7:   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - FOOFIND\A 8:   $color: blue;\A 9: } @else if $license == torrents {"; }

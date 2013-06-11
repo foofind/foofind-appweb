@@ -1,4 +1,4 @@
-//blubster
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - BLUBSTER
 
 $color: red;
 @if $license == blubster {
@@ -7,5 +7,6 @@ $color: red;
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - FOOFIND
   $color: blue;
 } @else if $license == torrents {
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - TORRENTS
   $color: yellow;
 }
