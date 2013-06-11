@@ -1,0 +1,11 @@
+//blubster
+
+$color: red;
+@if $license == blubster {
+  //default values are for this license
+} @else if $license == foofind {
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - FOOFIND
+  $color: blue;
+} @else if $license == torrents {
+  $color: yellow;
+}
