@@ -2,7 +2,7 @@
 var MAX_ERROR_COUNT = 15;
 
 // objetos de la pagina
-var  content, results, loading_results, current_search_form, report, report_form, report_file_id;
+var  content, results, loading_results, current_search_form, report, report_form, report_file_id, report_request, vote_request;
 
 // estado de la pagina
 var loaded_ids = {}, errors_count = 0;
@@ -121,12 +121,26 @@ function updateItems(report){
                 if (!button.match(".button"))
                     button = button.up(".button");
                 if (result) {
+                    file_id = result.readAttribute("data-id");
+
                     if (!button || button.up(".result-action-info")) {
                         toggle(result.down(".result-action-info .button"), result, "result-expanded");
+                    } else if (button.up(".result-hate")) { // TIENE que ir antes que love
+                        if (toggle(button, null, null, "on")) {
+                            voteFile(file_id, result.readAttribute("data-server"), 0);
+                            toggle(result.down(".result-love > .button"), null, null, "off");
+                            stop = false;
+                        }
+                    } else if (button.up(".result-love")) {
+                        if (toggle(button, null, null, "on")) {
+                            voteFile(file_id, result.readAttribute("data-server"), 1);
+                            toggle(result.down(".result-hate > .button"), null, null, "off");
+                            stop = false;
+                        }
                     } else if (button.up(".result-action-report")) {
                         toggle(button, report, "js-show");
                         var buttonPos = Element.cumulativeOffset(button);
-                        report_file_id.value = result.readAttribute("data-id");
+                        report_file_id.value = file_id;
                         report.button = button;
                     }
                     else
@@ -141,18 +155,22 @@ function updateItems(report){
     });
 }
 
-function toggle(button, parent, className){
-    if (button.hasClassName("button-off")) {
+function toggle(button, parent, className, force){
+    if (button.hasClassName("button-off") && force!="off") {
         button.addClassName("button-on").removeClassName("button-off");
-        parent.addClassName(className);
-    } else {
+        if (parent) parent.addClassName(className);
+    } else if (button.hasClassName("button-on") && force!="on") {
         button.addClassName("button-off").removeClassName("button-on");
-        parent.removeClassName(className);
+        if (parent) parent.removeClassName(className);
+    } else {
+        return false; // no ha hecho nada
     }
+    return true;
 }
 
 
 function sendReport(){
+    if (report_request) return;
     report_request = new Ajax.Request('complaint', {
         method: 'post',
         parameters: report_form.serialize(true),
@@ -181,4 +199,21 @@ function clearReport(){
     report_form.reset();
     toggle(report.button, report, "js-show");
     report.button = false;
+}
+
+function voteFile(file_id, server, vote){
+    if (vote_request) return;
+    vote_request = new Ajax.Request('vote', {
+        method: 'post',
+        parameters: {"file_id":file_id, "server":server, "vote":vote, "_csrf_token":$F("_csrf_token")},
+        onSuccess: function(transport) {
+            result = eval(transport.responseText);
+            if (result!="true") {
+                alert("Error!");
+            }
+        },
+        onFailure: function(transport) {
+            alert("Error!");
+        }
+    });
 }

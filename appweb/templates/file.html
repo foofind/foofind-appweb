@@ -1,6 +1,6 @@
 {%- for file in files %}{%- set source_data=file['view']['sources'][file['view']['sources']|first] %}
 <!--FI:{{ file['file']['id'] }} {"name":"{{ file['view']['fn'] }}","type":"{{ file['view']['file_type'] }}","seeds":"{{ file['view']['seeds'] }}","leechs":"{{ file['view']['leechs'] }}"}-->
-<li data-id="{{ file['file']['id'] }}" class="result-item just-added result-odd result-{{ file['view']['file_type'] }}">
+<li data-id="{{ file['file']['id'] }}" data-server="{{ file['file']['s'] }}" class="result-item just-added result-odd result-{{ file['view']['file_type'] }}">
     <div class="wrap-result">
         <div class="result-main-data">
             <div class="wrap-result-title">
@@ -59,7 +59,7 @@
                 <div class="result-love">
                     <ul class="result-love">
                         <li class="result-love">
-                            <a href="" class="button button-off button-noright result-love-no">
+                            <a href="vote:1{{ file['file']['id'] }}" class="button button-off button-noright">
                                 <span>
                                     <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-love-off.png">
                                     <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-love-on.png">
@@ -67,7 +67,7 @@
                             </a>
                         </li>
                         <li class="result-hate">
-                            <a href="" class="button button-off button-noleft result-hate-no">
+                            <a href="vote:0{{ file['file']['id'] }}" class="button button-off button-noleft">
                                 <span>
                                     <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-hate-off.png">
                                     <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-hate-on.png">
