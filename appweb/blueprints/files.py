@@ -231,6 +231,25 @@ def complaint():
         logging.error("Error on file complaint.")
         return "false"
 
+@files.route('/<lang>/<license>/vote',methods=['POST'])
+def vote():
+    '''
+    Gestiona las votaciones de archivos
+    '''
+    ok = False
+    try:
+        file_id=url2mid(request.form.get("file_id",None))
+        server=int(request.form.get("server",0))
+        vote=int(request.form.get("vote",0))
+        if server>1 and file_id and vote in (0,1):
+            file_info = usersdb.set_file_vote(file_id, None, g.lang, vote)
+            filesdb.update_file({"_id":file_id, "vs":file_info, "s":server}, direct_connection=True)
+            ok = True
+    except BaseException as e:
+        logging.error("Error on vote.")
+
+    return "true" if ok else "false"
+
 class ReportLinkForm(Form):
     '''
     Formulario para reportar enlaces
