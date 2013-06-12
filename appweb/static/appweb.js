@@ -42,13 +42,14 @@ document.observe("dom:loaded", function() {
         {
             clearReport();
         }
-        if (stop_event)
+        if (stop_event) {
             Event.stop(event);
+            stop_event = false;
+        }
     });
 
     // Solo en pagina de busqueda, que hay resultados
     if (content) {
-
         results = $("results");
         loading_results = $("loading-results");
         current_search_form = $('current_search');
