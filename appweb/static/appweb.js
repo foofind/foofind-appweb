@@ -2,8 +2,8 @@
 var MAX_ERROR_COUNT = 15;
 
 // objetos de la pagina
-var content, results, new_filetype, filetype_select, filetype_active; // siempre
-var loading_results, current_search_form, report, report_form, report_file_id, report_request, vote_request; // busqueda
+var content, new_filetype, filetype_select, filetype_active; // siempre
+var results, loading_results, current_search_form, report, report_form, report_file_id, report_request, vote_request; // busqueda
 
 // estado de la pagina
 var loaded_ids = {}, errors_count = 0, stop_event=false;
@@ -13,7 +13,6 @@ var requesting = null, stopped = false;
 
 document.observe("dom:loaded", function() {
     content = $("content");
-    results = $("results");
     new_filetype = $("new_filetype");
 
     filetype_select = $("filetype_select");
@@ -48,8 +47,9 @@ document.observe("dom:loaded", function() {
     });
 
     // Solo en pagina de busqueda, que hay resultados
-    if (results) {
+    if (content) {
 
+        results = $("results");
         loading_results = $("loading-results");
         current_search_form = $('current_search');
         report = $("report");
