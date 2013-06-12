@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>App - SETTINGS</title>
+    <link rel="stylesheet" type="text/css" href="blubster/css/blubster_base.css" />
+    <link rel="stylesheet" type="text/css" href="blubster/css/blubster.css" />
+    <link rel="stylesheet" type="text/css" href="blubster/css/blubster_fixes.css" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="js/prototype.min.js"></script>
+    <script type="text/javascript" src="js/socket.io.min.js"></script>
+    <script type="text/javascript" src="js/settings.js"></script>
+</head>
+<body>
+<div id="app">
+    <div id="infotasks">
+        <div class="tasks">
+            <p>SETTINGS</p>
+        </div>
+    </div><!--end of #infotasks-->
+
+
+    <div id="content">
+        <div class="settings">
+            <div class="settings-wrapright">
+                <div class="settings-options">
+
+                    <form method="post" action="#">
+                    <fieldset>
+                    <legend>Settings</legend>
+
+                    <p class="section-title">General</p>
+                    <input type="hidden" name="utf8-fix" id="utf8-fix" value="✓">
+                    <ul>
+                        <li>
+                            <button name="set-default" id="set-default" class="long-auto">Set as default torrent client</button>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="prevent-sleeping" id="prevent-sleeping" class="checkbox">
+                            <label for="prevent-sleeping" class="verylarge">Prevent the computer from sleeping/suspending</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" name="run-startup" id="run-startup" class="checkbox">
+                            <label for="run-startup" class="verylarge">Run application on startup</label>
+                        </li>
+                        <li>
+                            <p class="section-subtitle2">Updates</p>
+                            <ul>
+                                <li>
+                                    <input type="radio" name="updates" id="updates-never" class="radio">
+                                    <label for="updates-never"  class="verylarge">Never</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="updates" id="updates-check" class="radio">
+                                    <label for="updates-check" class="verylarge">Check for updates automatically</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="updates" id="updates-install" class="radio">
+                                    <label for="updates-install" class="verylarge">Install updates automatically</label>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+
+                    <p class="section-title">Connection</p>
+                    <p class="section-subtitle">Standard mode</p>
+                    <ul>
+                        <li>
+                            <label for="standard-upload-speed-limit" class="large label-textright">Upload speed limit:</label>
+                            <input type="text" name="standard-upload-speed-limit" id="standard-upload-speed-limit" class="shortest" maxlength="3">
+                            <p>Kb./sec.</p>
+                        </li>
+                        <li>
+                            <label for="standard-download-speed-limit" class="large label-textright">Download speed limit:</label>
+                            <input type="text" name="standard-download-speed-limit" id="standard-download-speed-limit" class="shortest" maxlength="3">
+                            <p>Kb./sec.</p>
+                        </li>
+                        <li>
+                            <label for="standard-maximum-simultaneous-downloads" class="large label-textright">Maximum simultaneous downloads:</label>
+                            <input type="text" name="standard-maximum-simultaneous-downloads" id="standard-maximum-simultaneous-downloads" class="shortest" maxlength="3">
+                        </li>
+                        <li>
+                            <label for="standard-connections-per-download" class="large label-textright">Connections per download:</label>
+                            <input type="text" name="standard-connections-per-download" id="standard-connections-per-download" class="shortest" maxlength="3">
+                        </li>
+                    </ul>
+                    <p class="section-subtitle">Standard mode</p>
+                    <ul>
+                        <li>
+                            <label for="snail-upload-speed-limit" class="large label-textright">Upload speed limit:</label>
+                            <input type="text" name="snail-upload-speed-limit" id="snail-upload-speed-limit" class="shortest" maxlength="3">
+                            <p>Kb./sec.</p>
+                        </li>
+                        <li>
+                            <label for="snail-download-speed-limit" class="large label-textright">Download speed limit:</label>
+                            <input type="text" name="snail-download-speed-limit" id="snail-download-speed-limit" class="shortest" maxlength="3">
+                            <p>Kb./sec.</p>
+                        </li>
+                        <li>
+                            <label for="snail-maximum-simultaneous-downloads" class="large label-textright">Maximum simultaneous downloads:</label>
+                            <input type="text" name="snail-maximum-simultaneous-downloads" id="snail-maximum-simultaneous-downloads" class="shortest" maxlength="3">
+                        </li>
+                        <li>
+                            <label for="snail-connections-per-download" class="large label-textright">Connections per download:</label>
+                            <input type="text" name="snail-connections-per-download" id="snail-connections-per-download" class="shortest" maxlength="3">
+                        </li>
+                    </ul>
+                    <p class="section-subtitle">Advanced</p>
+                    <ul>
+                        <li>
+                            <label for="tcp-listen-port" class="large label-textright">TCP listen port:</label>
+                            <input type="text" name="tcp-listen-port" id="tcp-listen-port" class="medium">
+                        </li>
+                        <li>
+                            <label for="udp-listen-port" class="large label-textright">UDP listen port:</label>
+                            <input type="text" name="udp-listen-port" id="udp-listen-port" class="medium">
+                        </li>
+                        <li>
+                            <p class="section-subtitle2">Proxy Settings</p>
+                            <ul>
+                                <li>
+                                    <label for="proxy-host" class="short label-textright">Host:</label>
+                                    <input type="text" name="proxy-host" id="proxy-host" class="medium">
+                                </li>
+                                <li>
+                                    <label for="proxy-port" class="short label-textright">Port:</label>
+                                    <input type="text" name="proxy-port" id="proxy-port" class="medium">
+                                </li>
+                                <li>
+                                    <label for="proxy-user" class="short label-textright">User:</label>
+                                    <input type="text" name="proxy-user" id="proxy-user" class="medium">
+                                </li>
+                                <li>
+                                    <label for="proxy-pass" class="short label-textright">Pass:</label>
+                                    <input type="text" name="proxy-pass" id="proxy-pass" class="medium">
+                                </li>
+                                <li>
+                                    <label for="proxy-socks" class="short label-textright">SOCKS:</label>
+                                    <input type="text" name="proxy-socks" id="proxy-socks" class="medium">
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+
+
+                    <p class="section-title">Downloads</p>
+                    <ul>
+                        <li>
+                            <label for="downloads-folder" class="medium label-textright">Downloads folder:</label>
+                            <input type="text" name="downloads-folder" id="downloads-folder" class="large">
+                            <button class="long-auto">Change</button>
+                        </li>
+                        <li>
+                            <label for="notify-downloads" class="medium label-textright">Notify finished downloads</label>
+                            <input type="checkbox" name="notify-downloads" id="notify-downloads" class="checkbox">
+                            <label for="notify-downloads-sound" class="short label-textright">With sound</label>
+                            <input type="checkbox" name="notify-downloads-sound" id="notify-downloads-sound" class="checkbox disabled">
+                        </li>
+                    </ul>
+
+
+
+                    <p class="section-title">Sharing</p>
+                    <p class="section-subtitle">Seed files after downloading:</p>
+                    <ul>
+                        <li>
+                            <input type="radio" name="sharing" id="sharing-disabled" class="radio" selected="selected">
+                            <label for="sharing-disabled" class="short">Disabled</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="sharing" id="sharing-minutes" class="radio">
+                            <p class="veryshort">For</p>
+                            <input type="text" name="snail-connections-per-download" class="shortest" maxlength="3">
+                            <label for="sharing-minutes" class="short">minutes</label>
+                        </li>
+                        <li>
+                            <input type="radio" name="sharing" id="sharing-ratio" class="radio">
+                            <p class="veryshort">Until</p>
+                            <input type="text" name="snail-connections-per-download" class="shortest" maxlength="3">
+                            <label for="sharing-ratio" class="short">ratio</label>
+                        </li>
+                    </ul>
+
+
+
+                    <p class="section-title">Display</p>
+                    <ul>
+                        <li>
+                            <label for="font-size" class="short label-textright">Font Size:</label>
+                            <select id="font-size">
+                                <option value="volvo">Big</option>
+                                <option value="saab" selected>Medium</option>
+                                <option value="mercedes">Small</option>
+                            </select>
+                        </li>
+                    </ul>
+
+
+
+                    <p class="section-title">Social Media</p>
+                    <p class="section-subtitle">Facebook</p>
+                    <ul>
+                        <li>
+                            <label for="facebook-user" class="veryshort label-textright">Email:</label>
+                            <input type="text" name="facebook-user" id="facebook-user" class="medium">
+                            <label for="facebook-pass" class="veryshort label-textright">Pass:</label>
+                            <input type="password" name="facebook-pass" id="facebook-pass" class="short">
+                        </li>
+                    </ul>
+                    <p class="section-subtitle">Twitter</p>
+                    <ul>
+                        <li>
+                            <label for="twitter-user" class="veryshort label-textright">Email:</label>
+                            <input type="text" name="twitter-user" id="twitter-user" class="medium">
+                            <label for="twitter-pass" class="veryshort label-textright">Pass:</label>
+                            <input type="password" name="twitter-pass" id="twitter-pass" class="short">
+                        </li>
+                    </ul>
+                </div><!--end of .settings-options-->
+            </div>
+            <div class="settings-left">
+                <ul class="settings-category">
+                    <li class="settings-category-general">
+                        <a href="#">
+                            <span>
+                                General
+                            </span>
+                        </a>
+                    </li>
+                    <li class="settings-category-connection settings-selected">
+                        <a href="#">
+                            <span>
+                                Connection
+                            </span>
+                        </a>
+                    </li>
+                    <li class="settings-category-downloads">
+                        <a href="#">
+                            <span>
+                                Downloads
+                            </span>
+                        </a>
+                    </li>
+                    <li class="settings-category-sharing">
+                        <a href="#">
+                            <span>
+                                Sharing
+                            </span>
+                        </a>
+                    </li>
+                    <li class="settings-category-display">
+                        <a href="#">
+                            <span>
+                                Display
+                            </span>
+                        </a>
+                    </li>
+                    <li class="settings-category-player">
+                        <a href="#">
+                            <span>
+                                Player
+                            </span>
+                        </a>
+                    </li>
+                    <li class="settings-category-socialmedia">
+                        <a href="#">
+                            <span>
+                                Social Media
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+
+
+
+                </fieldset>
+                </form>
+            </div><!--end of .settings-options-->
+        </div> <!--end of .settings-->
+
+
+    </div><!--end of #content-->
+</div><!--end of #app-->
+</body>
+</html>
