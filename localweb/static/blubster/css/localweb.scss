@@ -1,37 +1,21 @@
-@import "../../../../common/common";
-
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - PLAY & SETTINGS - GENERAL */
+.play-breadcrumbs {
+  background-color: #0080b2; }
 
-.play, .settings{
-  width: 100%;
-  margin: 0 auto;
-}
-.play-wrapright, .settings-wrapright{
-  float: left;
-  width: 100%;
-  min-height: 40em;
-  background-color: #eaeaea;
-}
-.play-breadcrumbs, .play-items, .settings-options{
-  margin-left: 18em;
-}
-.play-breadcrumbs{
-  background-color:#0080b2;
-}
-.play-items, .settings-options{
-  overflow-y:scroll;
-  background-color:#eaeaea;
-}
-.play-left, .settings-left{
-  float: left;
+.play-items, .settings-options {
+  position:absolute;
+  left:18em; right:0; top:6em; bottom:0;
+  overflow-y: auto;
+  background-color: #eaeaea; }
+
+.play-left, .settings-left {
+  position:absolute;
+  left:0; bottom:0; top:6em;
+  overflow-y: auto;
   width: 18em;
-  min-height: 40em;
-  margin-left: -100%;
   background-color: #02a0dd;
-  padding-bottom:100em;
-  margin-bottom:-100em;
-}
+  padding-bottom:3em;}
 
 .play-category, .settings-category{
   margin-top:6em;
@@ -127,8 +111,6 @@ p.section-subtitle2{
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - play BREADCRUMBS */
 
 .play-breadcrumbs ul{
-  overflow:hidden;
-  width:100%;
   padding-left:3em;
 }
 .play-breadcrumbs ul li{

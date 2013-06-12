@@ -111,14 +111,16 @@ def torrents_data(data):
         return None, None
 
     sources_list = []
-    torrent_info = {"sources": sources_list}
+    magnet = None
     for source, item in data["view"]["sources"].iteritems():
         if source == "tmagnet":
-            torrent_info["magnet"] = item["urls"][0]
+            magnet = item["urls"][0]
             valid_torrent = True
         elif item["icon"]=="torrent":
             valid_torrent = True
             sources_list.extend(item["urls"])
+
+    data['view']["torrent_sources"] = (', "magnet":"'+magnet+'"' if magnet else "") + (', "sources":[' + ",".join('"'+source+'"' for source in sources_list) + ']')
 
     # no tiene origenes validos
     if not valid_torrent:
