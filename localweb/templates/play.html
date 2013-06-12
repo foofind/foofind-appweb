@@ -195,16 +195,18 @@
                 {% for item in categories %}{{ category(item) }}{%- endfor %}
             </ul>
         </div>
-        <div class="play-breadcrumbs">
-            <ul id="js_breadcrumbs">
-                {%- for item in breadcrumbs %}{{ breadcrumb(item) }}{%- endfor %}
-            </ul>
-        </div><!--end of .breadcrumbs-->
-        <div class="play-items">
-            <ul id="js_cards">
-                {%- for item in playitems %}{{ card(item) }}{%- endfor %}
-            </ul>
-        </div><!--end of .play-items-->
+        <div class="play-right">
+            <div class="play-breadcrumbs">
+                <ul id="js_breadcrumbs">
+                    {%- for item in breadcrumbs %}{{ breadcrumb(item) }}{%- endfor %}
+                </ul>
+            </div><!--end of .breadcrumbs-->
+            <div class="play-items">
+                <ul id="js_cards">
+                    {%- for item in playitems %}{{ card(item) }}{%- endfor %}
+                </ul>
+            </div><!--end of .play-items-->
+        </div>
     </div> <!--end of .play-->
 </div><!--end of #app-->
 </body>
