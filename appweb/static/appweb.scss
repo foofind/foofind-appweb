@@ -126,7 +126,8 @@ abbr {
   padding:0;
   height:6em;
   border-bottom:1px solid #ccc;
-  position:relative;
+  position:absolute;
+  z-index:1;
 }
 
 
@@ -168,7 +169,7 @@ abbr {
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - FIND SEARCH */
-.search-main{
+.search-main {
   background:#fff;
   width:auto;
   height:3.4em;
@@ -181,134 +182,117 @@ abbr {
   top:50%;
   margin-top:-1.7em;
   margin-left:2em;
-}
-.search-main fieldset{
-  border:1px solid #ececec;
-  height:3.4em;
-  display:block;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-}
-.search-main legend, .search-main label{
-  display:none;
-}
-.search-main div{
-  float:left;
-  display:block;
-}
-.search-main input, .search-main select, .search-main button{
-  border:none;
-  font-size:1.5em;
-}
-.search-main div.search-text{
-  background:url(../imgs/bg.separator-25.png) 100% 0.5em no-repeat;
-  width:28em;
-  padding:0;
-}
-.search-main input.search-text{
-  background:url(../imgs/ico.button-18-pencil-off.png) 0 50% no-repeat;
-  padding:0.5em 1em 0.5em 2em;
-  margin:0 0 0 1em;
-  width:14em;
-  float:left;
-  opacity:0.80;
-}
-.search-main input.search-text:hover{
-  opacity:1.00;
-}
-.search-main input.search-text:focus{
-  outline: none;
-}
 
-.search-main div.search-filetype{
-  background:url(../imgs/bg.separator-25.png) 100% 0.5em no-repeat;
-  width:18em;
-  padding:0;
-  position:relative;
-}
-#filetype_combo{
-  width:90%;
-  float:left;
-  background: none;
-  color: #666;
-  padding: 0em;
-  margin: 0.5em;
-}
-
-#filetype_ul{
-  display:none;
-  width:100%;
-  cursor:pointer;
-  background:#fff;
-  overflow:hidden;
-  box-shadow: 0.3em 1em 3em #666;
-
-  &:hover > li {
-    display:block;
-    border-bottom:1px solid #ccc !important;
+  .search-border {
+    border:1px solid #ececec;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
   }
 
-  > li {
-    font-size:1.5em;
-    padding:0.5em 1.5em 0.5em 2.5em;
-    float:none;
-    border: none;
-    border-bottom:1px solid #ccc;
-    background-repeat:no-repeat;
+  legend, label{
     display:none;
+  }
+  div {
+    float:left;
+    display:block;
+  }
+  input, button {
+    border:none;
+    font-size:1.5em;
+  }
+  div.search-text{
+    background:url(../imgs/bg.separator-25.png) 100% 0.5em no-repeat;
+    width:28em;
+  }
+  input.search-text{
+    background:url(../imgs/ico.button-18-pencil-off.png) 0 50% no-repeat;
+    padding:0.5em 1em 0.5em 2em;
+    margin:0 0 0 1em;
+    width:14em;
+    float:left;
+    opacity:0.80;
+  }
+  input.search-text:hover{
+    opacity:1.00;
+  }
+  input.search-text:focus{
+    outline: none;
+  }
+  div.search-filetype{
+    background:url(../imgs/bg.separator-25.png) 100% 0.5em no-repeat;
+    padding:0 1px 0 0;
+    position:relative;
+  }
+  .search-filetype {
+    #filetype_select {
+      &.loading {
+        height:3.4em;
+        overflow:hidden;
+      }
+      list-style:none;
+      position:absolute;
+      left:0px; top:0px;
+      width: auto;
 
-    &.active {
+      cursor:pointer;
+      background:#fff;
+      box-shadow: 0.3em 1em 3em #666;
+
+      > li {
+        border: none;
+        border-bottom:1px solid #ccc;
+        padding:0em;
+      }
+    }
+    span {
+      width:8em;
+      font-size:1.5em;
+      padding:0.6em 1.5em 0.7em 2.5em;
       display:block;
-      border:none;
-    }
+      color:black;
+      background-repeat: no-repeat;
 
-    &:hover{
-      background-color:#eee;
-    }
+      &:hover{
+        background-color:#eee;
+      }
 
-    &.filetype-all{
-      background-image:url(../imgs/ico.filetype-18-all-off.png);
-      background-position:0.5em 0.5em;
-    }
-    &.filetype-video{
-      background-image:url(../imgs/ico.filetype-18-vid-off.png);
-      background-position:0.6em 0.5em;
-    }
-    &.filetype-audio{
-      background-image:url(../imgs/ico.filetype-18-mus-off.png);
-      background-position:0.6em 0.5em;
-    }
-    &.filetype-image{
-      background-image:url(../imgs/ico.filetype-18-img-off.png);
-      background-position:0.5em 0.5em;
-    }
-    &.filetype-document{
-      background-image:url(../imgs/ico.filetype-18-doc-off.png);
-      background-position:0.6em 0.5em;
-    }
-    &.filetype-software{
-      background-image:url(../imgs/ico.filetype-18-pc-off.png);
-      background-position:0.3em 0.5em;
-      border-bottom:none;
+      &.all{
+        background-image:url(../imgs/ico.filetype-18-all-off.png);
+        background-position:0.5em 0.55em;
+      }
+      &.video{
+        background-image:url(../imgs/ico.filetype-18-vid-off.png);
+        background-position:0.6em 0.55em;
+      }
+      &.audio{
+        background-image:url(../imgs/ico.filetype-18-mus-off.png);
+        background-position:0.6em 0.55em;
+      }
+      &.image{
+        background-image:url(../imgs/ico.filetype-18-img-off.png);
+        background-position:0.5em 0.55em;
+      }
+      &.document{
+        background-image:url(../imgs/ico.filetype-18-doc-off.png);
+        background-position:0.6em 0.55em;
+      }
+      &.software{
+        background-image:url(../imgs/ico.filetype-18-pc-off.png);
+        background-position:0.4em 0.55em;
+      }
     }
   }
-}
 
-.search-main button{
-  height:1.8em;
-  width:auto;
-  margin-top:0.2em;
-  padding:0.3em 0.9em;
-  background:#fff;
-  cursor:pointer;
-  opacity:0.80;
-  filter:alpha(opacity=80); /* <IE8 */
-  display:inline-block;*display:inline;zoom:1;
-}
-.search-main button:hover{
-  opacity:1.00;
-  filter:alpha(opacity=100); /* <IE8 */
+  button{
+    height:1.8em;
+    width:auto;
+    margin:0.2em 0.4em 0em;
+    padding:0.3em 0.4em;
+    background:#fff;
+    cursor:pointer;
+    display:inline-block;*display:inline;zoom:1;
+  }
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - CONTENT */
@@ -359,6 +343,9 @@ abbr {
 }
 .result-item:hover{
   background-color:#bde0ec;
+}
+.result-unknown{
+  background-image:url(../imgs/ico.filetype-24-all-off.png);
 }
 .result-video{
   background-image:url(../imgs/ico.filetype-24-vid-off.png);
@@ -571,12 +558,12 @@ div.result-actions{
   padding:0.6em 1em;
   margin:0 0.5em 0 0;
   opacity:0.80;
+  cursor:pointer;
   filter:alpha(opacity=80); /* <IE8 */
-  border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
+  @include rounded-corners(2px);
   display:inline-block;*display:inline;zoom:1;
 }
+
 .button:hover{
   opacity:1.0;
   filter:alpha(opacity=100); /* <IE8 */

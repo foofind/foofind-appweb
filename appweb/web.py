@@ -96,19 +96,19 @@ def create_app(config=None, debug=False):
     app.register_blueprint(files)
 
     # Web Assets
-    scss.config.LOAD_PATHS = [app.static_folder]
+    scss.config.LOAD_PATHS = [os.path.dirname(os.path.dirname(app.static_folder))]
 
     if not os.path.isdir(app.static_folder+"/gen"): os.mkdir(app.static_folder+"/gen")
     if not os.path.isdir(app.static_folder+"/blubster/gen"): os.mkdir(app.static_folder+"/blubster/gen")
     if not os.path.isdir(app.static_folder+"/foofind/gen"): os.mkdir(app.static_folder+"/foofind/gen")
     app.assets = assets = Environment(app)
     assets.debug = app.debug
-    assets.versions = "timestamp"
+    assets.versions = "hash"
 
     register_filter(JsSlimmer)
     register_filter(CssSlimmer)
 
-    assets.register('css_blubster', Bundle('blubster/css/blubster.scss', filters='pyscss', output='blubster/gen/blubster.css', debug=False), filters='css_slimmer', output='blubster/gen/blubster.css')
+    assets.register('css_blubster', Bundle('blubster/css/blubster.scss', filters='pyscss', output='blubster/gen/blubster.css', debug=False, depends='appweb.scss'), filters='css_slimmer', output='blubster/gen/blubster.css')
     '''assets.register('css_foofind', Bundle('foofind/css/foofind.scss', filters='pyscss', output='foofind/gen/foofind.css', debug=False), filters='css_slimmer', output='foofind/gen/foofind.css', debug=app.debug)'''
     assets.register('js_appweb', Bundle('prototype.js', 'appweb.js', filters='rjsmin', output='gen/appweb.js'), )
 
@@ -188,7 +188,7 @@ def create_app(config=None, debug=False):
 
     @app.after_request
     def after_request(response):
-        response.headers["X-UA-Compatible"] = "IE-edge"
+        response.headers["X-UA-Compatible"] = "IE=edge"
         return response
 
     # Páginas de error

@@ -2,7 +2,8 @@
 var MAX_ERROR_COUNT = 15;
 
 // objetos de la pagina
-var  content, results, loading_results, current_search_form, report, report_form, report_file_id, report_request, vote_request;
+var content, results, new_filetype, filetype_select, filetype_active; // siempre
+var loading_results, current_search_form, report, report_form, report_file_id, report_request, vote_request; // busqueda
 
 // estado de la pagina
 var loaded_ids = {}, errors_count = 0;
@@ -13,14 +14,33 @@ var requesting = null, stopped = false;
 document.observe("dom:loaded", function() {
     content = $("content");
     results = $("results");
-    loading_results = $("loading-results");
-    current_search_form = $('current_search');
-    report = $("report");
-    report_form = $("report_form");
-    report_file_id = $("file_id");
+    new_filetype = $("new_filetype");
+
+    filetype_select = $("filetype_select");
+    filetype_active = $("filetype_active");
+    filetype_active.innerHTML = $$("#filetype_select li ."+new_filetype.value)[0].outerHTML;
+    filetype_select.toggle(false);
+    filetype_select.removeClassName("loading");
+    filetype_active.observe("click", function() {
+        filetype_select.toggle(true);
+    });
+
+    $$("#filetype_select li").each(function(item){item.observe("click", function() {
+        var html = this.innerHTML;
+        filetype_active.innerHTML = html;
+        filetype_select.toggle(false);
+        new_filetype.value = $(this).firstDescendant().className;
+    });});
 
     // Solo en pagina de busqueda, que hay resultados
     if (results) {
+
+        loading_results = $("loading-results");
+        current_search_form = $('current_search');
+        report = $("report");
+        report_form = $("report_form");
+        report_file_id = $("file_id");
+
         report.button = false;
         updateItems(report);
 

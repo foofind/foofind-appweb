@@ -1,4 +1,6 @@
-body{
-  background-color: $color;
-  font-weight:bold;
+@mixin rounded-corners($size) {
+  border-radius: $size;
+  -webkit-border-radius: $size;
+  -moz-border-radius: $size;
+  /*behavior: url(/static/border-radius.htc);*/
 }

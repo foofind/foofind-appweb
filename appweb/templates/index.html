@@ -13,27 +13,22 @@
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                 <fieldset>
                     <legend>Search form</legend>
+
                     <div class="search-text">
-                        <label for="search-text">Search:</label>
+                        <label for="q">Search:</label>
                         <input type="text" class="search-text" placeholder="Type here your search" id="q" name="q" autocomplete="off" value="">
                     </div>
                     <div class="search-filetype">
-                        <select name="t" id="filetype_combo" class="filetype">
-                            <option value="All" selected="">All</option>
-                            <option value="video">Video</option>
-                            <option value="audio">Audio</option>
-                            <option value="image">Image</option>
-                            <option value="document">Document</option>
-                            <option value="software">Software</option>
-                        </select>
-                        <ul class="filetype" id="filetype_ul">
-                            <li class="filetype-all active">All</li>
-                            <li class="filetype-video">Video</li>
-                            <li class="filetype-audio">Audio</li>
-                            <li class="filetype-image">Image</li>
-                            <li class="filetype-document">Document</li>
-                            <li class="filetype-software">Software</li>
+                        <div id="filetype_active"></div>
+                        <ul id="filetype_select">
+                            <li><a href="#" class="all">All</a></li>
+                            <li><a href="#" class="video">Video</a></li>
+                            <li><a href="#" class="audio">Audio</a></li>
+                            <li><a href="#" class="image">Image</a></li>
+                            <li><a href="#" class="document">Document</a></li>
+                            <li><a href="#" class="software">Software</a></li>
                         </ul>
+                        <input type="hidden" id="new_filetype" name="t" value="all">
                     </div>
                     <div class="search-button-find">
                         <button type="submit" class="search-button-find"><img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-magni-off.png" alt="Find"></button>

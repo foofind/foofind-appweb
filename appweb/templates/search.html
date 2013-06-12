@@ -7,48 +7,44 @@
 {% endblock %}
 {% block content %}
     <div id="infotasks">
+        {{flash()}}
         <div class="search-main">
-            {{flash()}}
-            <form id="current_search">
-                <input type="hidden" id="_csrf_token" name="_csrf_token" value="{{ csrf_token() }}">
-                <input type="hidden" id="query" name="query" value="{{query}}">
-                <input type="hidden" id="filetype" name="filetype" value="{{filetype}}">
-                <input type="hidden" id="last_items" name="last_items" value="{{last_items}}">
-            </form>
-            <form id="new_search" method="post" action="{{ url_for('files.search') }}">
-                {% if g.wakalaka %}
-                    <input type="hidden" name="wklk" value="1">
-                {%endif%}
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-                <fieldset>
-                    <legend>Search form</legend>
-                    <div class="search-text">
-                        <label for="search-text">Search:</label>
-                        <input type="text" class="search-text" placeholder="Type here your search" id="q" name="q" autocomplete="off" value="{{g.args['q']}}">
-                    </div>
-                    <div class="search-filetype">
-                        <select name="t" id="filetype_combo" class="filetype">
-                            <option value="All" {{"selected=''" if not g.args['type']}}>All</option>
-                            <option value="video" {{"selected=''" if "video" in g.args['type']}}>Video</option>
-                            <option value="audio" {{"selected=''" if "audio" in g.args['type']}}>Audio</option>
-                            <option value="image" {{"selected=''" if "image" in g.args['type']}}>Image</option>
-                            <option value="document" {{"selected=''" if "document" in g.args['type']}}>Document</option>
-                            <option value="software" {{"selected=''" if "software" in g.args['type']}}>Software</option>
-                        </select>
-                        <ul class="filetype" id="filetype_ul">
-                            <li class="filetype-all">All</li>
-                            <li class="filetype-video">Video</li>
-                            <li class="filetype-audio">Audio</li>
-                            <li class="filetype-image">Image</li>
-                            <li class="filetype-document">Document</li>
-                            <li class="filetype-software">Software</li>
-                        </ul>
-                    </div>
-                    <div class="search-button-find">
-                        <button type="submit" class="search-button-find"><img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-magni-off.png" alt="Find"></button>
-                    </div>
-                </fieldset>
-            </form>
+            <div class="search-border">
+                <form id="current_search">
+                    <input type="hidden" id="_csrf_token" name="_csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" id="query" name="query" value="{{query}}">
+                    <input type="hidden" id="filetype" name="filetype" value="{{filetype}}">
+                    <input type="hidden" id="last_items" name="last_items" value="{{last_items}}">
+                </form>
+                <form id="new_search" method="post" action="{{ url_for('files.search') }}">
+                    {% if g.wakalaka %}
+                        <input type="hidden" name="wklk" value="1">
+                    {%endif%}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                    <fieldset>
+                        <legend>Search form</legend>
+                        <div class="search-text">
+                            <label for="q">Search:</label>
+                            <input type="text" class="search-text" placeholder="Type here your search" id="q" name="q" autocomplete="off" value="{{g.args['q']}}">
+                        </div>
+                        <div class="search-filetype">
+                            <div id="filetype_active"></div>
+                            <ul id="filetype_select" class="loading">
+                                <li><span class="all">All</span></li>
+                                <li><span class="video">Video</span></li>
+                                <li><span class="audio">Audio</span></li>
+                                <li><span class="image">Image</span></li>
+                                <li><span class="document">Document</span></li>
+                                <li><span class="software">Software</span></li>
+                            </ul>
+                            <input type="hidden" id="new_filetype" name="t" value="{{g.args['type'][0] if g.args['type'] else 'all' }}">
+                        </div>
+                        <div class="search-button-find">
+                            <button type="submit" class="search-button-find"><img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-magni-off.png" alt="Find"></button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
         </div><!--end of .search-main-->
     </div><!--end of #infotasks-->
 
