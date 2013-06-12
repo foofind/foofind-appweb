@@ -18,22 +18,25 @@
     <span class="new">New</span>
     {%- endif %}
      <a href="#a" class="a-image">
+
         <div class="image">
             <div class="filetype">
-                <span class="filetype-{{ item.category }}"></span>
+                <span class="filetype-{{ item.filetype }}"></span>
             </div>
             <span class="play-bg"><span class="play-button"></span></span>
+            {% if item.type == "folder" %}
+            <img src="blubster/imgs/bg.placeholder-folder.png">
+            {% else %}
             <img src="images/chipmunk.png">
-            <div class="downloading">
+            {% endif %}
+            <div class="downloading{%if item.progress < 1 %} visible{% endif %}">
                 <div class="downloaded" style="width:{{item.progress*100}}%"></div>
             </div>
         </div>
     </a>
     <a href="#b" class="a-text">
         <div class="text">
-            <p>
-                {{- item.name -}}
-            </p>
+            <p>{{- item.name -}}</p>
         </div>
     </a>
     <div class="info-card">
@@ -65,6 +68,47 @@
                             <img src="blubster/imgs/ico.button-18-share-on.png">
                         </span>
                         </a>
+                        <div class="bubble action-report-bubble">
+                            <span class="bubble-pin"></span>
+                            <a href="#" class="bubble-close"></a>
+                            <p class="title">Share:</p>
+                            <form method="post" action="#">
+                                <fieldset>
+                                    <legend>Share:</legend>
+                                    <textarea rows="5" cols="25"></textarea>
+                                    <p class="subtitle">
+                                        {{- "Share to:" -}}
+                                        <a href="#" class="cog">
+                                            <img src="blubster/imgs/ico.button-10-cog-on.png">
+                                        </a>
+                                    </p>
+                                    <ul class="share">
+                                        <li>
+                                            <a href="#" class="button button-off">
+                                            <span>
+                                                <img src="blubster/imgs/ico.button-18-facebook-off.png">
+                                                <img src="blubster/imgs/ico.button-18-facebook-on.png">
+                                            </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="button button-off">
+                                            <span>
+                                                <img src="blubster/imgs/ico.button-18-twitter-off.png">
+                                                <img src="blubster/imgs/ico.button-18-twitter-on.png">
+                                            </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <button type="submit" class="button button-on">
+                                                <img src="blubster/imgs/ico.button-18-share-on.png">
+                                                <p>Share</p>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </fieldset>
+                            </form>
+                        </div>
                     </li>
                 </ul>
             </li>
@@ -112,12 +156,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>App - PLAY</title>
-
     <link rel="stylesheet" type="text/css" href="blubster/css/blubster_base.css" />
     <link rel="stylesheet" type="text/css" href="blubster/css/blubster.css" />
     <link rel="stylesheet" type="text/css" href="blubster/css/blubster_fixes.css" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css' />
-    <script type="text/javascript">{{script}}</script>
+    <script type="text/javascript" src="js/prototype.min.js"></script>
+    <script type="text/javascript" src="js/socket.io.min.js"></script>
+    <script type="text/javascript" src="js/play.js"></script>
 </head>
 <body>
 <div id="app">
@@ -126,7 +171,7 @@
             <p id="js_undo">{# filled by js #}</p>
         </div>
         <div class="tasks">
-            <p id="js_tasks">Loading...</p>
+            <p id="js_tasks">{% if num_files is defined %}{{ toolbar_tasks(num_files, total_files) }}{% endif %}</p>
         </div>
         <div class="search-play">
             <form method="post" action="#">
@@ -147,22 +192,20 @@
     <div class="play">
         <div class="play-left">
             <ul class="play-category"  id="js_categories">
-                {% for item in categories %}{{ self.category(item) }}{%- endfor %}
+                {% for item in categories %}{{ category(item) }}{%- endfor %}
             </ul>
         </div>
         <div class="play-breadcrumbs">
             <ul id="js_breadcrumbs">
-                {%- for item in breadcrumbs %}{{ self.breadcrumb(item) }}{%- endfor %}
+                {%- for item in breadcrumbs %}{{ breadcrumb(item) }}{%- endfor %}
             </ul>
         </div><!--end of .breadcrumbs-->
         <div class="play-items">
             <ul id="js_cards">
-                {%- for item in playitems %}{{ self.card(item) }}{%- endfor %}
+                {%- for item in playitems %}{{ card(item) }}{%- endfor %}
             </ul>
         </div><!--end of .play-items-->
     </div> <!--end of .play-->
-
-
 </div><!--end of #app-->
 </body>
 </html>
