@@ -1,13 +1,15 @@
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - PLAY & SETTINGS - GENERAL */
 .play-breadcrumbs {
-  background-color: #0080b2; }
+  background-color: #0080b2;
+}
 
 .play-items, .settings-options {
   position:absolute;
   left:18em; right:0; top:6em; bottom:0;
   overflow-y: auto;
-  background-color: #eaeaea; }
+  background-color: #eaeaea;
+}
 
 .play-left, .settings-left {
   position:absolute;
@@ -15,7 +17,8 @@
   overflow-y: auto;
   width: 18em;
   background-color: #02a0dd;
-  padding-bottom:3em;}
+  padding-bottom:3em;
+}
 
 .play-category, .settings-category{
   margin-top:6em;
