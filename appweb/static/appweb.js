@@ -6,7 +6,7 @@ var content, results, new_filetype, filetype_select, filetype_active; // siempre
 var loading_results, current_search_form, report, report_form, report_file_id, report_request, vote_request; // busqueda
 
 // estado de la pagina
-var loaded_ids = {}, errors_count = 0;
+var loaded_ids = {}, errors_count = 0, stop_event=false;
 
 // actividad de la pagina
 var requesting = null, stopped = false;
@@ -21,16 +21,31 @@ document.observe("dom:loaded", function() {
     filetype_active.innerHTML = $$("#filetype_select li ."+new_filetype.value)[0].outerHTML;
     filetype_select.toggle(false);
     filetype_select.removeClassName("loading");
-    filetype_active.observe("click", function() {
+    filetype_active.observe("click", function(event) {
         filetype_select.toggle(true);
     });
 
-    $$("#filetype_select li").each(function(item){item.observe("click", function() {
-        var html = this.innerHTML;
-        filetype_active.innerHTML = html;
-        filetype_select.toggle(false);
-        new_filetype.value = $(this).firstDescendant().className;
-    });});
+    $$("#filetype_select li").each(function(item){
+        item.observe("click", function() {
+            var html = this.innerHTML;
+            filetype_active.innerHTML = html;
+            filetype_select.toggle(false);
+            new_filetype.value = $(this).firstDescendant().className;
+        });
+    });
+
+    $(document).observe('click', function(event) {
+        var source = Event.element(event);
+        if (filetype_select.visible() && !source.descendantOf(filetype_select) && !source.descendantOf(filetype_active)) {
+            filetype_select.toggle(false);
+        }
+        if (report && report.button && source!=report.button && !source.descendantOf(report.button) && !source.descendantOf(report))
+        {
+            clearReport();
+        }
+        if (stop_event)
+            Event.stop(event);
+    });
 
     // Solo en pagina de busqueda, que hay resultados
     if (results) {
@@ -130,46 +145,38 @@ function updateItems(report){
         loaded_ids[item_id] = true;
 
         item.observe("click", function(event) {
-            // Clicks fuera de la burbuja de reportar
-            if (report.button && (!Event.element(event).descendantOf(report)))
-            {
-                clearReport();
-            } else {
-                var stop = true;
-                var result = $(this);
-                var button = Event.element(event);
-                if (!button.match(".button"))
-                    button = button.up(".button");
-                if (result) {
-                    file_id = result.readAttribute("data-id");
+            stop_event = false;
+            var result = $(this);
+            var button = Event.element(event);
+            if (!button.match(".button"))
+                button = button.up(".button");
 
-                    if (!button || button.up(".result-action-info")) {
-                        toggle(result.down(".result-action-info .button"), result, "result-expanded");
-                    } else if (button.up(".result-hate")) { // TIENE que ir antes que love
-                        if (toggle(button, null, null, "on")) {
-                            voteFile(file_id, result.readAttribute("data-server"), 0);
-                            toggle(result.down(".result-love > .button"), null, null, "off");
-                            stop = false;
-                        }
-                    } else if (button.up(".result-love")) {
-                        if (toggle(button, null, null, "on")) {
-                            voteFile(file_id, result.readAttribute("data-server"), 1);
-                            toggle(result.down(".result-hate > .button"), null, null, "off");
-                            stop = false;
-                        }
-                    } else if (button.up(".result-action-report")) {
-                        toggle(button, report, "js-show");
+            if (result) {
+                file_id = result.readAttribute("data-id");
+
+                if (!button || button.up(".result-action-info")) {
+                    toggle(result.down(".result-action-info .button"), result, "result-expanded");
+                    stop_event = true;
+                } else if (button.up(".result-hate")) { // TIENE que ir antes que love
+                    if (toggle(button, null, null, "on")) {
+                        voteFile(file_id, result.readAttribute("data-server"), 0);
+                        toggle(result.down(".result-love > .button"), null, null, "off");
+                    }
+                } else if (button.up(".result-love")) {
+                    if (toggle(button, null, null, "on")) {
+                        voteFile(file_id, result.readAttribute("data-server"), 1);
+                        toggle(result.down(".result-hate > .button"), null, null, "off");
+                    }
+                } else if (button.up(".result-action-report")) {
+                    toggle(button, report, "js-show", "");
+                    if (report.hasClassName("js-show")) {
                         var buttonPos = Element.cumulativeOffset(button);
                         report_file_id.value = file_id;
                         report.button = button;
                     }
-                    else
-                        stop = false;
+                    stop_event = true;
                 }
             }
-
-            if (stop)
-                Event.stop(event);
         });
         item.removeClassName("just-added");
     });
@@ -219,7 +226,7 @@ function sendReport(){
 
 function clearReport(){
     report_form.reset();
-    toggle(report.button, report, "js-show");
+    toggle(report.button, report, "js-show", "off");
     report.button = false;
 }
 

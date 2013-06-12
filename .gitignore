@@ -1,1 +1,4 @@
 .idea
+.dropbox
+.DS_Store
+**.sass-cache
