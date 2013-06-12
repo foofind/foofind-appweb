@@ -1,6 +1,3 @@
-.js-show {
-  display: block !important; }
-
 /* ----------------------------------------------------------- GENERAL */
 body {
   font-size: 62.5%;
@@ -11,6 +8,10 @@ body {
   background: #eaeaea;
   overflow: hidden; }
 
+.js-show {
+  display: block !important; }
+
+/* ----------------------------------------------------------- GENERAL */
 html {
   overflow: hidden; }
 

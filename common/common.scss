@@ -4,3 +4,14 @@
   -moz-border-radius: $size;
   /*behavior: url(/static/border-radius.htc);*/
 }
+
+/* ----------------------------------------------------------- GENERAL */
+body {
+  font-size:62.5%;
+  line-height:150%;
+  font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
+  text-align: center;
+  color: #333;
+  background:#eaeaea;
+  overflow:hidden;
+}
