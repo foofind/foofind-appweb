@@ -5,6 +5,7 @@
 import json
 from flask import request, render_template, g, current_app, flash, redirect, url_for, jsonify, make_response
 from flask.ext.wtf import Form, BooleanField, TextField, TextAreaField, SubmitField, Required, Email, Length
+from flask.ext.login import current_user
 
 from base64 import b64decode
 from struct import unpack
@@ -13,11 +14,9 @@ from foofind.blueprints.files import search_files
 from foofind.blueprints.files.helpers import *
 
 from foofind.services import *
-from foofind.utils import logging, hex2url
+from foofind.utils import logging, hex2url, url2mid
 from foofind.utils.content_types import *
 from foofind.utils.fooprint import Fooprint
-
-
 
 files = Fooprint('files', __name__)
 
@@ -242,7 +241,7 @@ def vote():
         server=int(request.form.get("server",0))
         vote=int(request.form.get("vote",0))
         if server>1 and file_id and vote in (0,1):
-            file_info = usersdb.set_file_vote(file_id, None, g.lang, vote)
+            file_info = usersdb.set_file_vote(file_id, current_user, g.lang, vote)
             filesdb.update_file({"_id":file_id, "vs":file_info, "s":server}, direct_connection=True)
             ok = True
     except BaseException as e:

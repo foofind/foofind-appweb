@@ -187,10 +187,12 @@ function sendReport(){
                 result.each(function(item){$(item).addClassName("wrong")});
                 alert("Invalid values!");
             }
+            report_request = null;
         },
         onFailure: function(transport) {
             clearReport();
             alert("Error!");
+            report_request = null;
         }
     });
 }
@@ -208,12 +210,14 @@ function voteFile(file_id, server, vote){
         parameters: {"file_id":file_id, "server":server, "vote":vote, "_csrf_token":$F("_csrf_token")},
         onSuccess: function(transport) {
             result = eval(transport.responseText);
-            if (result!="true") {
+            if (!result) {
                 alert("Error!");
             }
+            vote_request = null;
         },
         onFailure: function(transport) {
-            alert("Error!");
+            alert("Error2!");
+            vote_request = null;
         }
     });
 }

@@ -10,14 +10,15 @@
         <div class="search-main">
             {{flash()}}
             <form id="current_search">
-            <input type="hidden" id="query" name="query" value="{{query}}">
-            <input type="hidden" id="filetype" name="filetype" value="{{filetype}}">
-            <input type="hidden" id="last_items" name="last_items" value="{{last_items}}">
+                <input type="hidden" id="_csrf_token" name="_csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" id="query" name="query" value="{{query}}">
+                <input type="hidden" id="filetype" name="filetype" value="{{filetype}}">
+                <input type="hidden" id="last_items" name="last_items" value="{{last_items}}">
             </form>
             <form id="new_search" method="post" action="{{ url_for('files.search') }}">
-    {% if g.wakalaka %}
-        <input type="hidden" name="wklk" value="1">
-    {%endif%}
+                {% if g.wakalaka %}
+                    <input type="hidden" name="wklk" value="1">
+                {%endif%}
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                 <fieldset>
                     <legend>Search form</legend>
@@ -70,7 +71,7 @@
     <div id="report">
         <form id="report_form" method="post" action="{{url_for('files.complaint')}}">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="file_id" id="file_id" value="">
+            <input type="hidden" id="file_id" name="file_id" value="">
             <fieldset>
                 <legend>Report</legend>
                 <ul>

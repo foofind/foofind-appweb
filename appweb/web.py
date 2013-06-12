@@ -17,6 +17,7 @@ from webassets.filter import register_filter
 from hashlib import md5
 
 from foofind.web import allerrors
+from foofind.user import User
 
 from foofind.services import *
 from foofind.utils.webassets_filters import JsSlimmer, CssSlimmer
@@ -25,6 +26,8 @@ from foofind.utils.bots import is_search_bot, is_full_browser, check_rate_limit
 
 from appweb.blueprints.files import files
 from appweb.templates import register_filters
+
+import scss
 
 def create_app(config=None, debug=False):
     '''
@@ -93,11 +96,12 @@ def create_app(config=None, debug=False):
     app.register_blueprint(files)
 
     # Web Assets
+    scss.config.LOAD_PATHS = [app.static_folder]
+
     if not os.path.isdir(app.static_folder+"/gen"): os.mkdir(app.static_folder+"/gen")
     if not os.path.isdir(app.static_folder+"/blubster/gen"): os.mkdir(app.static_folder+"/blubster/gen")
     if not os.path.isdir(app.static_folder+"/foofind/gen"): os.mkdir(app.static_folder+"/foofind/gen")
-    assets = Environment(app)
-    app.assets = assets
+    app.assets = assets = Environment(app)
     assets.debug = app.debug
     assets.versions = "timestamp"
 
@@ -105,7 +109,7 @@ def create_app(config=None, debug=False):
     register_filter(CssSlimmer)
 
     assets.register('css_blubster', Bundle('blubster/css/blubster.scss', filters='pyscss', output='blubster/gen/blubster.css', debug=False), filters='css_slimmer', output='blubster/gen/blubster.css')
-    '''assets.register('css_foofind', Bundle('foofind/css/foofind.scss', filters='pyscss', output='foofind/gen/foofind.css', debug=False), filters='css_slimmer', output='foofind/gen/foofind.css')'''
+    '''assets.register('css_foofind', Bundle('foofind/css/foofind.scss', filters='pyscss', output='foofind/gen/foofind.css', debug=False), filters='css_slimmer', output='foofind/gen/foofind.css', debug=app.debug)'''
     assets.register('js_appweb', Bundle('prototype.js', 'appweb.js', filters='rjsmin', output='gen/appweb.js'), )
 
 
@@ -116,6 +120,11 @@ def create_app(config=None, debug=False):
     def get_locale():
         return "en"
 
+    # Autenticación
+    auth.setup_app(app)
+    auth.user_loader(User.current_user)
+    auth.anonymous_user = User.current_user
+
     # Cache
     cache.init_app(app)
 
@@ -124,6 +133,7 @@ def create_app(config=None, debug=False):
     pagesdb.init_app(app)
     feedbackdb.init_app(app)
     entitiesdb.init_app(app)
+    usersdb.init_app(app)
 
     # Servicio de búsqueda
     @app.before_first_request
