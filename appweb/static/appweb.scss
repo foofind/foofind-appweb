@@ -318,10 +318,22 @@ abbr {
 }
 
 #loading-results {
-  width:auto;
-  background:white;
+  width:90%;
+  background:#eaeaea;
   text-align:center;
-  div {width:400px;padding:5em}
+  margin:0 auto;
+  overflow: hidden;
+
+  div{
+    background:url(../imgs/ico.loader.gif) 50% 50% no-repeat;
+    width:5em;
+    padding:5em;
+    margin:0 auto;
+    overflow: hidden;
+    display: block;
+    text-align:center;
+  }
+
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - RESULT ITEM */
