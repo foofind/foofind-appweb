@@ -1,0 +1,66 @@
+/*
+Syntax error: Undefined mixin 'rounded-corners'.
+        on line 563 of appweb/static/appweb.scss, in `rounded-corners'
+        from line 563 of appweb/static/appweb.scss
+
+558:   padding:0.6em 1em;
+559:   margin:0 0.5em 0 0;
+560:   opacity:0.80;
+561:   cursor:pointer;
+562:   filter:alpha(opacity=80); /* <IE8 */
+563:   @include rounded-corners(2px);
+564:   display:inline-block;*display:inline;zoom:1;
+565: }
+566: 
+567: .button:hover{
+568:   opacity:1.0;
+
+Backtrace:
+appweb/static/appweb.scss:563:in `rounded-corners'
+appweb/static/appweb.scss:563
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:253:in `visit_mixin'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:100:in `visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `map'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:320:in `visit_rule'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:100:in `visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `map'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:128:in `visit_root'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:100:in `visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:7:in `visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/root_node.rb:20:in `render'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/engine.rb:315:in `_render'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/engine.rb:262:in `render'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:362:in `update_stylesheet'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:203:in `block in update_stylesheets'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:201:in `each'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:201:in `update_stylesheets'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/plugin.rb:81:in `update_stylesheets'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/exec.rb:432:in `watch_or_update'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/exec.rb:315:in `process_result'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/exec.rb:41:in `parse'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/exec.rb:21:in `parse!'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/bin/scss:9:in `<top (required)>'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/bin/scss:23:in `load'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/bin/scss:23:in `<main>'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/bin/ruby_noexec_wrapper:14:in `eval'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/bin/ruby_noexec_wrapper:14:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined mixin 'rounded-corners'.\A         on line 563 of appweb/static/appweb.scss, in `rounded-corners'\A         from line 563 of appweb/static/appweb.scss\A \A 558:   padding:0.6em 1em;\A 559:   margin:0 0.5em 0 0;\A 560:   opacity:0.80;\A 561:   cursor:pointer;\A 562:   filter:alpha(opacity=80); /* <IE8 */\A 563:   @include rounded-corners(2px);\A 564:   display:inline-block;*display:inline;zoom:1;\A 565: }\A 566: \A 567: .button:hover{\A 568:   opacity:1.0;"; }
