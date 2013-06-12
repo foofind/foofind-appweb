@@ -12,13 +12,6 @@
         {%- endassets -%}
     {% endif %}
 
-    {%- assets "js_appweb" -%}
-        <script src="{{ ASSET_URL }}"></script>
-    {%- endassets -%}
-    <![if !IE]>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
-    <![endif]>
-
     <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-808946-22']);_gaq.push(['_trackPageview']);
@@ -29,6 +22,13 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
+
+    {%- assets "js_appweb" -%}
+        <script src="{{ ASSET_URL }}"></script>
+    {%- endassets -%}
+    <![if !IE]>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
+    <![endif]>
 </head>
 <body>
 <div id="app">

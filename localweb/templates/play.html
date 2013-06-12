@@ -144,33 +144,25 @@
         </div><!--end of .search-main-->
     </div><!--end of #infotasks-->
 
-
-    <div id="content">
-        <div class="play">
-
-            <div class="play-wrapright">
-                <div class="play-breadcrumbs">
-                    <ul id="js_breadcrumbs">
-                        {%- for item in breadcrumbs %}{{ self.breadcrumb(item) }}{%- endfor %}
-                    </ul>
-                </div><!--end of .breadcrumbs-->
-                <div class="play-items">
-                    <ul id="js_cards">
-                        {%- for item in playitems %}{{ self.card(item) }}{%- endfor %}
-                    </ul>
-                </div><!--end of .play-items-->
-            </div>
-            <div class="play-left">
-                <ul class="play-category"  id="js_categories">
-                    {% for item in categories %}{{ self.category(item) }}{%- endfor %}
-                </ul>
-            </div>
-        </div> <!--end of .play-->
+    <div class="play">
+        <div class="play-left">
+            <ul class="play-category"  id="js_categories">
+                {% for item in categories %}{{ self.category(item) }}{%- endfor %}
+            </ul>
+        </div>
+        <div class="play-breadcrumbs">
+            <ul id="js_breadcrumbs">
+                {%- for item in breadcrumbs %}{{ self.breadcrumb(item) }}{%- endfor %}
+            </ul>
+        </div><!--end of .breadcrumbs-->
+        <div class="play-items">
+            <ul id="js_cards">
+                {%- for item in playitems %}{{ self.card(item) }}{%- endfor %}
+            </ul>
+        </div><!--end of .play-items-->
+    </div> <!--end of .play-->
 
 
-
-
-    </div><!--end of #content-->
 </div><!--end of #app-->
 </body>
 </html>
