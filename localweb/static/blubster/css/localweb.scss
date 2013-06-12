@@ -1,13 +1,11 @@
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - PLAY & SETTINGS - GENERAL */
 .play-breadcrumbs {
-  height:4em;
-  margin-left:18em;
   background-color: #0080b2; }
 
 .play-items, .settings-options {
   position:absolute;
-  left:18em; right:0; top:10em; bottom:0;
+  left:18em; right:0; top:6em; bottom:0;
   overflow-y: auto;
   background-color: #eaeaea; }
 
@@ -113,8 +111,6 @@ p.section-subtitle2{
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - play BREADCRUMBS */
 
 .play-breadcrumbs ul{
-  overflow:hidden;
-  width:100%;
   padding-left:3em;
 }
 .play-breadcrumbs ul li{
