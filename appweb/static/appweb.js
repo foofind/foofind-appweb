@@ -3,7 +3,7 @@ var MAX_ERROR_COUNT = 15;
 
 // objetos de la pagina
 var content, new_filetype, filetype_select, filetype_active; // siempre
-var results, loading_results, current_search_form, report, report_form, report_file_id, report_request, vote_request; // busqueda
+var results, loading_results, current_search_form, report, close_report, report_form, report_file_id, report_request, vote_request; // busqueda
 
 // estado de la pagina
 var loaded_ids = {}, errors_count = 0, stop_event=false;
@@ -38,7 +38,7 @@ document.observe("dom:loaded", function() {
         if (filetype_select.visible() && !source.descendantOf(filetype_select) && !source.descendantOf(filetype_active)) {
             filetype_select.toggle(false);
         }
-        if (report && report.button && source!=report.button && !source.descendantOf(report.button) && !source.descendantOf(report))
+        if (report && report.button && (source==close_report || (source!=report.button && !source.descendantOf(report.button) && !source.descendantOf(report))))
         {
             clearReport();
         }
@@ -54,6 +54,7 @@ document.observe("dom:loaded", function() {
         loading_results = $("loading-results");
         current_search_form = $('current_search');
         report = $("report");
+        close_report = $("close_report");
         report_form = $("report_form");
         report_file_id = $("file_id");
 

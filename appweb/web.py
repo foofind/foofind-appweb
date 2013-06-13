@@ -155,7 +155,8 @@ def create_app(config=None, debug=False):
     @app.url_value_preprocessor
     def pull_lang_code(endpoint, values):
         if values is None:
-            g.lang = g.license_name = None
+            g.lang = "en"
+            g.license_name = "blubster"
         else:
             g.lang = values.pop('lang', None)
             g.license_name = values.pop('license', None)

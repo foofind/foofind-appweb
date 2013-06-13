@@ -1,6 +1,6 @@
 {%- for file in files %}{%- set source_data=file['view']['sources'][file['view']['sources']|first] %}
 <!--FI:{{ file['file']['id'] }} {"name":"{{ file['view']['fn'] }}","type":"{{ file['view']['file_type'] }}","seeds":"{{ file['view']['seeds'] }}","leechs":"{{ file['view']['leechs'] }}" {{(', "img":"http://'~file['view']['first_image_server']~'/'~file['view']['images_id']~'0"')|safe if 'images_server' in file['view'] }} {{file['view']['torrent_sources']|safe}} }-->
-<li data-id="{{ file['file']['id'] }}" data-server="{{ file['file']['s'] }}" class="result-item just-added result-odd result-{{ file['view']['file_type'] }}">
+<li data-id="{{ file['file']['id'] }}" data-server="{{ file['file']['s'] }}" class="result-item just-added result-{{loop.cycle('odd', 'even')}} result-{{ file['view']['file_type'] }}">
     <div class="wrap-result">
         <div class="result-main-data">
             <div class="wrap-result-title">

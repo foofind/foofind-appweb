@@ -7,11 +7,25 @@
     {%- assets "css_blubster" -%}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
     {%- endassets -%}
+    {%- assets "js_appweb" -%}
+        <script src="{{ ASSET_URL }}"></script>
+    {%- endassets -%}
+    <![if !IE]>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
+    <![endif]>
 </head>
 <body>
 <div id="app">
-    <div>upps</div>
+    <form id="go_home" method="POST" action="{{url_for('files.home')}}"></form>
+    <div class="error">
+        <div class="error-img">
+            <img src="{{g.static_prefix}}/blubster/imgs/ico.error-oops-280.png" alt="Error">
+        </div><!--end of .error-img-->
+        <div class="error-text">
+            <p class="error-title">Oops, you found an error!</p>
+            <p>Sorry we couldn't complete the request. <a href="javascript:$('go_home').submit()">Click here</a> to try another search.</p>
+        </div><!--end of .error-text-->
+    </div><!--end of .error-->
 </div><!--end of #app-->
 </body>
 </html>
