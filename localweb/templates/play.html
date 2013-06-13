@@ -23,10 +23,11 @@
             <div class="filetype">
                 <span class="filetype-{{ item.filetype }}"></span>
             </div>
-            <span class="play-bg"><span class="play-button"></span></span>
             {% if item.type == "folder" %}
+            <span class="folder-bg"><span class="folder-button"></span></span>
             <img src="blubster/imgs/bg.placeholder-folder.png">
             {% else %}
+            <span class="play-bg"><span class="play-button"></span></span>
             <img src="images/chipmunk.png">
             {% endif %}
             <div class="downloading{%if item.progress < 1 %} visible{% endif %}">
@@ -43,7 +44,15 @@
         <a href="#" class="reverse-close"></a>
         <p class="title">{{- item.name -}}</p>
         <ul class="reverse-actions">
-            <li class="reverse-3actions">
+            <li class="reverse-action-play">
+                <a href="#" class="button button-on">
+                <span>
+                    <img src="blubster/imgs/ico.button-18-play-off.png">
+                    <img src="blubster/imgs/ico.button-18-play-on.png">
+                </span>
+                </a>
+            </li>
+            {#<li class="reverse-3actions">
                 <ul>
                     <li class="reverse-action-delete">
                         <a href="#" class="button button-off">
@@ -111,7 +120,7 @@
                         </div>
                     </li>
                 </ul>
-            </li>
+            </li>#}
             <li class="reverse-action-rename">
                 <a href="#" class="button button-off">
                 <span>
@@ -121,20 +130,19 @@
                 </span>
                 </a>
             </li>
-            <li class="reverse-action-p2p">
+            {#<li class="reverse-action-p2p">
                 <a href="#" class="button button-off">
                 <span>
                     <img src="blubster/imgs/ico.button-18-p2p-off.png">
                     <img src="blubster/imgs/ico.button-18-p2p-on.png">
                     <p>seed</p>
-
                     <span>
                         <img src="blubster/imgs/ico.toggle-24-on.png" class="toggle">
                         <img src="blubster/imgs/ico.toggle-24-off.png" class="toggle">
                     </span>
                 </span>
                 </a>
-            </li>
+            </li>#}
         </ul>
     </div><!--end of .info-card-->
 </li>
