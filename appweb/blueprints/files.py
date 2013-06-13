@@ -20,7 +20,7 @@ from foofind.utils.fooprint import Fooprint
 
 files = Fooprint('files', __name__)
 
-@files.route('/<lang>/<license>', methods=["POST"])
+@files.route('/<lang>', methods=["POST"])
 @csrf.exempt
 def home():
     '''
@@ -28,7 +28,7 @@ def home():
     '''
     return render_template('index.html')
 
-@files.route('/<lang>/<license>/search', methods=["POST"])
+@files.route('/<lang>/search', methods=["POST"])
 def search():
     '''
     Gestiona las URL de busqueda de archivos para la aplicacion.
@@ -61,7 +61,7 @@ def search():
         result_number=search_results["result_number"],
     )
 
-@files.route('/<lang>/<license>/searcha',methods=['POST'])
+@files.route('/<lang>/searcha',methods=['POST'])
 @csrf.exempt
 def searcha():
     '''
@@ -216,7 +216,7 @@ def torrents_data(data):
 
     return data
 
-@files.route('/<lang>/<license>/complaint', methods=['POST'])
+@files.route('/<lang>/complaint', methods=['POST'])
 def complaint():
     '''
     Procesa los datos del formulario para reportar enlaces.
@@ -233,7 +233,7 @@ def complaint():
         logging.error("Error on file complaint.")
         return "false"
 
-@files.route('/<lang>/<license>/vote',methods=['POST'])
+@files.route('/<lang>/vote',methods=['POST'])
 def vote():
     '''
     Gestiona las votaciones de archivos
