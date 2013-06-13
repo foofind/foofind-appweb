@@ -177,7 +177,7 @@ def create_app(config=None, debug=False):
         init_g(app)
 
         # ignora peticiones sin blueprint
-        if request.blueprint is None and request.path.endswith("/"):
+        if request.blueprint is None and len(request.path)>1 and request.path.endswith("/"):
             if "?" in request.url:
                 root = request.url_root[:-1]
                 path = request.path.rstrip("/")
@@ -230,3 +230,5 @@ def init_g(app):
     g.args = {}
 
     g.page_description=g.title=""
+
+    g.license_name = "foofind" if "foofind" in request.url_root else "blubster"
