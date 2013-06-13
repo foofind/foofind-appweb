@@ -1,9 +1,64 @@
-/* ----------------------------------------------------------- GENERAL */
-body {
-  font-size: 62.5%;
-  line-height: 150%;
-  font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
-  text-align: center;
-  color: #333;
-  background: #eaeaea;
-  overflow: hidden; }
+/*
+Syntax error: Undefined variable: "$general_text_color".
+        on line 14 of common/common.scss
+
+9: body {
+10:   font-size:62.5%;
+11:   line-height:150%;
+12:   font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
+13:   text-align: center;
+14:   color: $general_text_color;
+15:   background: $general_background_color;
+16:   overflow:hidden;
+17: }
+
+Backtrace:
+common/common.scss:14
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/script/variable.rb:49:in `_perform'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/script/node.rb:40:in `perform'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:298:in `visit_prop'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:100:in `visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `map'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:320:in `visit_rule'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:100:in `visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `map'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:128:in `visit_root'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:100:in `visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:7:in `visit'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/root_node.rb:20:in `render'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/engine.rb:315:in `_render'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/engine.rb:262:in `render'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:362:in `update_stylesheet'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:203:in `block in update_stylesheets'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:201:in `each'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/plugin/compiler.rb:201:in `update_stylesheets'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/plugin.rb:81:in `update_stylesheets'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/exec.rb:432:in `watch_or_update'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/exec.rb:315:in `process_result'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/exec.rb:41:in `parse'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/exec.rb:21:in `parse!'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/bin/scss:9:in `<top (required)>'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/bin/scss:23:in `load'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/bin/scss:23:in `<main>'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/bin/ruby_noexec_wrapper:14:in `eval'
+/Users/aru/.rvm/gems/ruby-2.0.0-p195/bin/ruby_noexec_wrapper:14:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined variable: \"$general_text_color\".\A         on line 14 of common/common.scss\A \A 9: body {\A 10:   font-size:62.5%;\A 11:   line-height:150%;\A 12:   font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;\A 13:   text-align: center;\A 14:   color: $general_text_color;\A 15:   background: $general_background_color;\A 16:   overflow:hidden;\A 17: }"; }

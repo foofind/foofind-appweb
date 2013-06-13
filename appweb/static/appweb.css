@@ -1,23 +1,23 @@
 /*
 Syntax error: Undefined mixin 'rounded-corners'.
-        on line 575 of appweb/static/appweb.scss, in `rounded-corners'
-        from line 575 of appweb/static/appweb.scss
+        on line 567 of appweb/static/appweb.scss, in `rounded-corners'
+        from line 567 of appweb/static/appweb.scss
 
-570:   padding:0.6em 1em;
-571:   margin:0 0.5em 0 0;
-572:   opacity:0.80;
-573:   cursor:pointer;
-574:   filter:alpha(opacity=80); /* <IE8 */
-575:   @include rounded-corners(2px);
-576:   display:inline-block;*display:inline;zoom:1;
-577: }
-578: 
-579: .button:hover{
-580:   opacity:1.0;
+562:   padding:0.6em 1em;
+563:   margin:0 0.5em 0 0;
+564:   opacity:0.80;
+565:   cursor:pointer;
+566:   filter:alpha(opacity=80); /* <IE8 */
+567:   @include rounded-corners(2px);
+568:   display:inline-block;*display:inline;zoom:1;
+569: }
+570: 
+571: .button:hover{
+572:   opacity:1.0;
 
 Backtrace:
-appweb/static/appweb.scss:575:in `rounded-corners'
-appweb/static/appweb.scss:575
+appweb/static/appweb.scss:567:in `rounded-corners'
+appweb/static/appweb.scss:567
 /Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:253:in `visit_mixin'
 /Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/base.rb:37:in `visit'
 /Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:100:in `visit'
@@ -63,4 +63,4 @@ appweb/static/appweb.scss:575
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined mixin 'rounded-corners'.\A         on line 575 of appweb/static/appweb.scss, in `rounded-corners'\A         from line 575 of appweb/static/appweb.scss\A \A 570:   padding:0.6em 1em;\A 571:   margin:0 0.5em 0 0;\A 572:   opacity:0.80;\A 573:   cursor:pointer;\A 574:   filter:alpha(opacity=80); /* <IE8 */\A 575:   @include rounded-corners(2px);\A 576:   display:inline-block;*display:inline;zoom:1;\A 577: }\A 578: \A 579: .button:hover{\A 580:   opacity:1.0;"; }
+  content: "Syntax error: Undefined mixin 'rounded-corners'.\A         on line 567 of appweb/static/appweb.scss, in `rounded-corners'\A         from line 567 of appweb/static/appweb.scss\A \A 562:   padding:0.6em 1em;\A 563:   margin:0 0.5em 0 0;\A 564:   opacity:0.80;\A 565:   cursor:pointer;\A 566:   filter:alpha(opacity=80); /* <IE8 */\A 567:   @include rounded-corners(2px);\A 568:   display:inline-block;*display:inline;zoom:1;\A 569: }\A 570: \A 571: .button:hover{\A 572:   opacity:1.0;"; }
