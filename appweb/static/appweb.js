@@ -197,14 +197,13 @@ function toggle(button, parent, className, force){
     return true;
 }
 
-
+var messages = ["Some values are missing. Please fill all the fields marked with a star (*).\n\n", "Invalid format for the email. Please check that it is a valid email address.\n\n", "You have to accept our terms of use and privacy policy by clicking on the checkbox.\n\n"];
 function sendReport(){
     if (report_request) return;
     report_request = new Ajax.Request('complaint', {
         method: 'post',
         parameters: report_form.serialize(true),
         onSuccess: function(transport) {
-            $$(".wrong").each(function(item){item.removeClassName("wrong")});
             result = eval(transport.responseText);
             if (result===true) {
                 clearReport();
@@ -213,14 +212,27 @@ function sendReport(){
                 clearReport();
                 alert("Error!");
             } else {
-                result.each(function(item){$(item).addClassName("wrong")});
-                alert("Invalid values!");
+                var wrongs = [false, false, false];
+                result.each(function(item){
+                    var field = $(item);
+                    field.addClassName("wrong");
+                    if (item=="email" && field.getValue().length>0)
+                        wrongs[1]=true;
+                    else if (item=="accept_tos")
+                        wrongs[2]=true;
+                    else
+                        wrongs[0]=true;
+                    });
+                var message="";
+                for (var i=0;i<3;i++)
+                    if (wrongs[i]) message+=messages[i];
+                alert(message);
             }
             report_request = null;
         },
         onFailure: function(transport) {
             clearReport();
-            alert("Error!");
+            alert("We coulnd't process your request due to an internal error. Our sysadmins have been alerted.");
             report_request = null;
         }
     });
@@ -228,6 +240,7 @@ function sendReport(){
 
 function clearReport(){
     report_form.reset();
+    $$("#report .wrong").each(function(item){item.removeClassName("wrong")});
     toggle(report.button, report, "js-show", "off");
     report.button = false;
 }
@@ -240,12 +253,12 @@ function voteFile(file_id, server, vote){
         onSuccess: function(transport) {
             result = eval(transport.responseText);
             if (!result) {
-                alert("Error!");
+                alert("We coulnd't process your request due to an internal error. Our sysadmins have been alerted.");
             }
             vote_request = null;
         },
         onFailure: function(transport) {
-            alert("Error2!");
+            alert("We coulnd't process your request due to an internal error. Our sysadmins have been alerted.");
             vote_request = null;
         }
     });
