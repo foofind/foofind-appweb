@@ -343,10 +343,10 @@ p.section-subtitle2 {
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - PLAY SEARCH & TASKS */
 .tasks {
-  float: left;
   position: absolute;
   top: 50%;
-  left: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
   margin-top: -1.25em; }
   .tasks p {
     font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;

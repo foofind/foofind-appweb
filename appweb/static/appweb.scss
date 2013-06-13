@@ -53,6 +53,13 @@ abbr {
   text-decoration: none;
 }
 
+.left{
+  float:left;
+}
+.right{
+  float:right;
+}
+
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - SCROLLBAR */
 ::-webkit-scrollbar {
   width: 10px;
@@ -224,6 +231,7 @@ abbr {
       }
       list-style:none;
       position:absolute;
+      background:url(../imgs/ico.arrow-down-off.png) 50% 100% no-repeat;
       left:0px; top:0px;
       width: auto;
 
@@ -649,11 +657,12 @@ div.result-actions{
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - REPORT */
 #report {
-  background:#0080b2;
+  background:#6f6f6f;
   z-index:1;
   position:absolute;
-  width:40em;
+  width:39.5em;
   height:48em;
+  padding:1.5em;
   top:50%;
   left:50%;
   margin-left:-20em;
@@ -665,9 +674,40 @@ div.result-actions{
     margin:0 0 1em;
 
     li{
+      overflow:hidden;
       width:100%;
       padding:0.5em 0;
     }
+  }
+
+  a.close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    display: block;
+    float: none;
+    width: 3.6em;
+    height: 3.6em;
+    background: url(../imgs/bg.corner-close.png) 0 0 no-repeat;
+    opacity:0.80;
+    filter:alpha(opacity=80); /* <IE8 */
+
+    &:hover{
+      opacity:1.00;
+      filter:alpha(opacity=100); /* <IE8 */
+    }
+
+  legend{
+    font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
+    color:#fff;
+    font-size:1.2em;
+    overflow:hidden;
+    font-size:1.2em;
+    font-weight:bold;
+    line-height:1.4em;
+    color:#19bffe;
+    margin-bottom:1em;
   }
 
   label, input, textarea, p, button{
@@ -676,8 +716,7 @@ div.result-actions{
   }
 
   .wrong {
-    background-color:#ffc;
-    border:1px solid #ffc;
+    background-color:#ffd0d0;
   }
 
   input{

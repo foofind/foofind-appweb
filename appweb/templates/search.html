@@ -46,6 +46,9 @@
                 </form>
             </div>
         </div><!--end of .search-main-->
+        <div class="tasks right">
+            <p>555 results for <strong>bla bla bla</strong></p>
+        </div>
     </div><!--end of #infotasks-->
 
     <div id="content">
@@ -65,6 +68,7 @@
     </div><!--end of #content-->
 
     <div id="report">
+        <a href="#" class="close"></a>
         <form id="report_form" method="post" action="{{url_for('files.complaint')}}">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
             <input type="hidden" id="file_id" name="file_id" value="">
@@ -72,11 +76,11 @@
                 <legend>Report</legend>
                 <ul>
                     <li>
-                        <label for="name" class="medium label-textright">Name:</label>
+                        <label for="name" class="medium label-textright">* Name:</label>
                         <input type="text" name="name" id="name" class="medium">
                     </li>
                     <li>
-                        <label for="surname" class="medium label-textright">Surname:</label>
+                        <label for="surname" class="medium label-textright">* Surname:</label>
                         <input type="text" name="surname" id="surname" class="medium">
                     </li>
                     <li>
@@ -84,7 +88,7 @@
                         <input type="text" name="company" id="company" class="medium">
                     </li>
                     <li>
-                        <label for="email" class="medium label-textright">Email:</label>
+                        <label for="email" class="medium label-textright">* Email:</label>
                         <input type="text" name="email" id="email" class="medium">
                     </li>
                     <li>
@@ -92,16 +96,16 @@
                         <input type="text" name="phone" id="phone" class="medium">
                     </li>
                     <li>
-                        <label for="reason" class="medium label-textright">Complaint reason:</label>
+                        <label for="reason" class="medium label-textright">* Complaint reason:</label>
                         <input type="text" name="reason" id="reason" class="medium">
                     </li>
                     <li>
-                        <label for="message" class="medium label-textright">Message:</label>
+                        <label for="message" class="medium label-textright">* Message:</label>
                         <textarea name="message" id="message" class="medium" rows="5" cols="25"></textarea>
                     </li>
                     <li>
                         <input type="checkbox" name="accept_tos" id="accept_tos" class="checkbox margin-left2">
-                        <label for="accept_tos" class="long-auto">I have read and accept the <a href="http://foofind.com/es/tos" target="_blank">Terms of use</a> and <a href="http://foofind.com/es/privacy" target="_blank">Privacy policy</a>.</label>
+                        <label for="accept_tos" class="long-auto">* I have read and accept the <a href="http://foofind.com/es/tos" target="_blank">Terms of use</a> and <a href="http://foofind.com/es/privacy" target="_blank">Privacy policy</a>.</label>
                     </li>
                 </ul>
                 <input type="submit" class="button button-off submit">
