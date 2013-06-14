@@ -67,6 +67,7 @@ document.observe("dom:loaded", function() {
         $("new_search").observe('submit', function() {
             stop();
             results.innerHTML = "";
+            content.removeClassName("no-results");
             loading_results.show();
         });
 
