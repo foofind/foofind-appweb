@@ -155,17 +155,14 @@ def create_app(config=None, debug=False):
     @app.url_value_preprocessor
     def pull_lang_code(endpoint, values):
         if values is None:
-            g.lang = g.license_name = None
+            g.lang = "en"
         else:
             g.lang = values.pop('lang', None)
-            g.license_name = values.pop('license', None)
 
     @app.url_defaults
     def add_language_code(endpoint, values):
         if not 'lang' in values and app.url_map.is_endpoint_expecting(endpoint, 'lang'):
             values['lang'] = g.lang
-        if not 'license' in values and app.url_map.is_endpoint_expecting(endpoint, 'license'):
-            values['license'] = g.license_name
 
     @app.before_request
     def before_request():
@@ -176,7 +173,7 @@ def create_app(config=None, debug=False):
         init_g(app)
 
         # ignora peticiones sin blueprint
-        if request.blueprint is None and request.path.endswith("/"):
+        if request.blueprint is None and len(request.path)>1 and request.path.endswith("/"):
             if "?" in request.url:
                 root = request.url_root[:-1]
                 path = request.path.rstrip("/")
@@ -211,6 +208,7 @@ def create_app(config=None, debug=False):
 def init_g(app):
 
     g.wakalaka = bool(request.form.get("wklk", False))
+    g.license_name = "foofind" if "foofind" in request.url_root else "blubster"
 
     # caracteristicas del cliente
     g.search_bot=is_search_bot()
@@ -229,3 +227,4 @@ def init_g(app):
     g.args = {}
 
     g.page_description=g.title=""
+

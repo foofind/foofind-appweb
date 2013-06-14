@@ -47,7 +47,7 @@
             </div>
         </div><!--end of .search-main-->
         <div class="tasks right">
-            <p>555 results for <strong>bla bla bla</strong></p>
+            {{result_number|safe}}
         </div>
     </div><!--end of #infotasks-->
 
@@ -68,12 +68,13 @@
     </div><!--end of #content-->
 
     <div id="report">
-        <a href="#" class="close"></a>
+        <a href="#" id="close_report" class="close"></a>
         <form id="report_form" method="post" action="{{url_for('files.complaint')}}">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
             <input type="hidden" id="file_id" name="file_id" value="">
             <fieldset>
                 <legend>Report</legend>
+                <label>Fields marked with a star (*) are required.</label>
                 <ul>
                     <li>
                         <label for="name" class="medium label-textright">* Name:</label>
