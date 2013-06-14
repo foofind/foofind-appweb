@@ -1,5 +1,8 @@
 // Constantes
 var MAX_ERROR_COUNT = 15;
+var ERROR_MESSAGE = "We coulnd't process your request due to an internal error. We will try to fix it as soon as possible.";
+var EMAIL_REQUEST = "In the meantime, you can send your request to the following email address: blablablabla@mp2p.net.";
+var VALIDATION_MESSAGES = ["Some values are missing. Please fill all the fields marked with a star (*).\n\n", "Invalid format for the email. Please check that it is a valid email address.\n\n", "You have to accept our terms of use and privacy policy by clicking on the checkbox.\n\n"];
 
 // objetos de la pagina
 var content, new_filetype, filetype_select, filetype_active; // siempre
@@ -20,17 +23,10 @@ document.observe("dom:loaded", function() {
     filetype_active.innerHTML = $$("#filetype_select li ."+new_filetype.value)[0].outerHTML;
     filetype_select.toggle(false);
     filetype_select.removeClassName("loading");
-    filetype_active.observe("click", function(event) {
-        filetype_select.toggle(true);
-    });
+    filetype_active.observe("click", filetype_active_click);
 
     $$("#filetype_select li").each(function(item){
-        item.observe("click", function() {
-            var html = this.innerHTML;
-            filetype_active.innerHTML = html;
-            filetype_select.toggle(false);
-            new_filetype.value = $(this).firstDescendant().className;
-        });
+        item.observe("click", filetype_select_click);
     });
 
     $(document).observe('click', function(event) {
@@ -80,6 +76,16 @@ document.observe("dom:loaded", function() {
     }
 });
 
+function filetype_active_click(event) {
+    filetype_select.toggle(true);
+}
+function filetype_select_click() {
+    var html = this.innerHTML;
+    filetype_active.innerHTML = html;
+    filetype_select.toggle(false);
+    new_filetype.value = $(this).firstDescendant().className;
+}
+
 function scrollHandler() {
     var height = content.getHeight();
     if (height>content.scrollHeight-content.scrollTop-height) {
@@ -107,89 +113,95 @@ function getMoreItems(){
         requesting = new Ajax.Request('searcha', {
             method: 'post',
             parameters: current_search_form.serialize(true),
-            onSuccess: function(transport, data) {
-                // Reinicia errores si llegan resultados
-                if (data["files_ids"].length>0)
-                    errors_count=0;
-
-                // Si se ha llegado al final, no carga mas
-                if (data["end"] && data["sure"]) {
-                    if (data["total_found"]==0)
-                        content.addClassName("no-results");
-                    loading_results.hide();
-                    stopped = true;
-                } else
-                    setTimeout(function(){requesting=null; if (!scrollHandler()) loading_results.hide();}, data["wait"]);
-
-                // Almacena nuevos resultados
-                $("last_items").value = data["last_items"];
-                results.insert(transport.responseText);
-                updateItems(report);
-            },
-            onFailure: function() {
-                errors_count+=1;
-            }
+            onSuccess: getMoreItems_onSuccess,
+            onFailure: getMoreItems_onFailure
         });
     }
 }
 
+function getMoreItems_onSuccess(transport, data)  {
+    // Reinicia errores si llegan resultados
+    if (data["files_ids"].length>0)
+        errors_count=0;
+
+    // Si se ha llegado al final, no carga mas
+    if (data["end"] && data["sure"]) {
+        if (data["total_found"]==0)
+            content.addClassName("no-results");
+        loading_results.hide();
+        stopped = true;
+    } else
+        setTimeout(function(){requesting=null; if (!scrollHandler()) loading_results.hide();}, data["wait"]);
+
+    // Almacena nuevos resultados
+    $("last_items").value = data["last_items"];
+    results.insert(transport.responseText);
+    updateItems(report);
+}
+function getMoreItems_onFailure() {
+    errors_count+=1;
+}
+
 function updateItems(report){
     // Configura items
-    $$(".result-item.just-added").each(function (result_item){
-        var item = $(result_item);
-        var item_id = item.readAttribute("data-id");
+    $$(".result-item.just-added").each(updateItem);
+}
 
-        // comprueba que no exista ya en los resultados
-        if (item_id in loaded_ids) {
-            item.remove();
-            return;
-        }
-        loaded_ids[item_id] = true;
+function updateItem(result_item) {
+    var item = $(result_item);
+    var item_id = item.readAttribute("data-id");
 
-        item.observe("click", function(event) {
-            stop_event = false;
-            var result = $(this);
-            var button = Event.element(event);
-            if (!button.match(".button"))
-                button = button.up(".button");
+    // comprueba que no exista ya en los resultados
+    if (item_id in loaded_ids) {
+        item.remove();
+        return;
+    }
+    loaded_ids[item_id] = true;
 
-            if (result) {
-                file_id = result.readAttribute("data-id");
+    item.observe("click", item_click);
+    item.removeClassName("just-added");
 
-                if (!button || button.up(".result-action-info")) {
-                    toggle(result.down(".result-action-info .button"), result, "result-expanded");
-                    stop_event = true;
-                } else if (button.up(".result-hate")) { // TIENE que ir antes que love
-                    if (toggle(button, null, null, "on")) {
-                        voteFile(file_id, result.readAttribute("data-server"), 0);
-                        toggle(result.down(".result-love > .button"), null, null, "off");
-                    }
-                } else if (button.up(".result-love")) {
-                    if (toggle(button, null, null, "on")) {
-                        voteFile(file_id, result.readAttribute("data-server"), 1);
-                        toggle(result.down(".result-hate > .button"), null, null, "off");
-                    }
-                } else if (button.up(".result-action-report")) {
-                    toggle(button, report, "js-show", "");
-                    if (report.hasClassName("js-show")) {
-                        var buttonPos = Element.cumulativeOffset(button);
-                        report_file_id.value = file_id;
-                        report.button = button;
-                    }
-                    stop_event = true;
-                }
+    // añade clase par o impar
+    if (results_count%2==0)
+        item.addClassName("result-odd");
+    else
+        item.addClassName("result-even");
+    results_count+=1;
+}
+
+function item_click(event) {
+    stop_event = false;
+    var result = $(this);
+    var button = Event.element(event);
+    if (!button.match(".button"))
+        button = button.up(".button");
+
+    if (result) {
+        file_id = result.readAttribute("data-id");
+
+        if (!button || button.up(".result-action-info")) {
+            toggle(result.down(".result-action-info .button"), result, "result-expanded");
+            stop_event = true;
+        } else if (button.up(".result-hate")) { // TIENE que ir antes que love
+            if (toggle(button, null, null, "on")) {
+                voteFile(file_id, result.readAttribute("data-server"), 0);
+                toggle(result.down(".result-love > .button"), null, null, "off");
             }
-        });
-        item.removeClassName("just-added");
-
-        // añade clase par o impar
-        if (results_count%2==0)
-            item.addClassName("result-odd");
-        else
-            item.addClassName("result-even");
-        results_count+=1;
-        $("q").setValue(results_count);
-    });
+        } else if (button.up(".result-love")) {
+            if (toggle(button, null, null, "on")) {
+                voteFile(file_id, result.readAttribute("data-server"), 1);
+                toggle(result.down(".result-hate > .button"), null, null, "off");
+            }
+        } else if (button.up(".result-action-report")) {
+            toggle(button, report, "js-show", "");
+            if (report.hasClassName("js-show")) {
+                var buttonPos = Element.cumulativeOffset(button);
+                report_file_id.value = file_id;
+                report.button = button;
+            }
+            stop_event = true;
+        }
+    }
 }
 
 function toggle(button, parent, className, force){
@@ -205,7 +217,6 @@ function toggle(button, parent, className, force){
     return true;
 }
 
-var messages = ["Some values are missing. Please fill all the fields marked with a star (*).\n\n", "Invalid format for the email. Please check that it is a valid email address.\n\n", "You have to accept our terms of use and privacy policy by clicking on the checkbox.\n\n"];
 function sendReport(){
     if (report_request) return;
     report_request = new Ajax.Request('complaint', {
@@ -233,14 +244,14 @@ function sendReport(){
                     });
                 var message="";
                 for (var i=0;i<3;i++)
-                    if (wrongs[i]) message+=messages[i];
+                    if (wrongs[i]) message+=VALIDATION_MESSAGES[i];
                 alert(message);
             }
             report_request = null;
         },
         onFailure: function(transport) {
             clearReport();
-            alert("We coulnd't process your request due to an internal error. Our sysadmins have been alerted.");
+            alert(ERROR_MESSAGE + " " + EMAIL_REQUEST);
             report_request = null;
         }
     });
@@ -261,12 +272,12 @@ function voteFile(file_id, server, vote){
         onSuccess: function(transport) {
             result = eval(transport.responseText);
             if (!result) {
-                alert("We coulnd't process your request due to an internal error. Our sysadmins have been alerted.");
+                alert(ERROR_MESSAGE);
             }
             vote_request = null;
         },
         onFailure: function(transport) {
-            alert("We coulnd't process your request due to an internal error. Our sysadmins have been alerted.");
+            alert(ERROR_MESSAGE);
             vote_request = null;
         }
     });
