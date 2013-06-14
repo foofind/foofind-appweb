@@ -109,7 +109,7 @@ def create_app(config=None, debug=False):
     register_filter(CssSlimmer)
 
     assets.register('css_blubster', Bundle('blubster/css/blubster.scss', filters='pyscss', output='blubster/gen/blubster.css', debug=False, depends='appweb.scss'), filters='css_slimmer', output='blubster/gen/blubster.css')
-    '''assets.register('css_foofind', Bundle('foofind/css/foofind.scss', filters='pyscss', output='foofind/gen/foofind.css', debug=False), filters='css_slimmer', output='foofind/gen/foofind.css', debug=app.debug)'''
+    assets.register('css_foofind', Bundle('foofind/css/foofind.scss', filters='pyscss', output='foofind/gen/foofind.css', debug=False), filters='css_slimmer', output='foofind/gen/foofind.css')
     assets.register('js_appweb', Bundle('prototype.js', 'appweb.js', filters='rjsmin', output='gen/appweb.js'), )
 
 

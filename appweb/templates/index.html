@@ -2,7 +2,7 @@
 {% block content %}
     <div class="find-main">
         <div class="find-logo">
-            <img src="{{g.static_prefix}}/blubster/imgs/logo.blubster-classic.png" alt="Blubster">
+            <img src="{{g.static_prefix}}/{{g.license_name}}/logo.png" alt="Blubster">
         </div><!--end of .logo-->
         <div class="search-main">
             {{flash()}}
@@ -30,7 +30,7 @@
                         <input type="hidden" id="new_filetype" name="t" value="all">
                     </div>
                     <div class="search-button-find">
-                        <button type="submit" class="search-button-find"><img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-magni-off.png" alt="Find"></button>
+                        <button type="submit" class="search-button-find"><img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-magni-off.png" alt="Find"></button>
                     </div>
                 </fieldset>
             </form>
