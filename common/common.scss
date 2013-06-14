@@ -10,7 +10,6 @@ body {
   font-size:62.5%;
   line-height:150%;
   font-family: $general_font_family;
-  text-align: center;
   color: $general_text_color;
   background: $general_background_color;
   overflow:hidden;
@@ -73,7 +72,16 @@ abbr {
   float:right;
 }
 
-/* ----------------------------------------------------------- PLAY SEARCH & TASKS */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - INFOTASKS */
+#infotasks{
+  min-width:$minwidth;
+  background:#fff;
+  width:100%;
+  padding:0;
+  height:6em;
+  border-bottom:1px solid #ccc;
+  position:absolute;
+  z-index:1;
 
 .tasks{
   margin-left:2em;
@@ -86,4 +94,5 @@ abbr {
     line-height:1.5em;
     height:1.5em;
   }
+}
 }
