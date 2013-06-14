@@ -1,5 +1,6 @@
 $minwidth:600px;
 
+
 .js-show {
   display:block !important;
 }
@@ -90,9 +91,9 @@ $minwidth:600px;
     width:auto;
 
     span{
-      background:#bde0ec;
+      background:$bgcolor1;
       padding:0.5em 1em;
-      border:1px solid #98d3e7;
+      border:1px solid $bcolor1;
       border-bottom-left-radius: 4px;
       -webkit-border-bottom-left-radius: 4px;
       -moz-border-bottom-left-radius: 4px;
@@ -298,7 +299,7 @@ $minwidth:600px;
   background-color:#dedede;
 }
 .result-item:hover{
-  background-color:#bde0ec;
+  background-color:$bgcolor1;
 }
 .result-unknown{
   background-image:url(../imgs/ico.filetype-24-all-off.png);
@@ -381,7 +382,7 @@ div.result-title-info{
     overflow:hidden;
 
     strong{
-      color:#19bffe;
+      color:$color1;
     }
   }
 }
@@ -544,8 +545,8 @@ div.result-actions{
   }
 }
 .button-on{
-  background:#19bffe;
-  border:1px solid #17afe8;
+  background: $color1;
+  border:1px solid $bcolor2;
   span img:first-child {
     display:none;
   }
@@ -554,7 +555,7 @@ div.result-actions{
    background:#ccc url(../imgs/bg.button-off.png) 50% 50% repeat-x;
 }
 .button-on:hover{
-  background:#19bffe url(../imgs/bg.button-on.png) 50% 50% repeat-x;
+  background:$color1 url(../imgs/bg.button-on.png) 50% 50% repeat-x;
 }
 .button-off p{
   color:#6c6c6c;
@@ -651,7 +652,7 @@ div.result-actions{
     font-size:1.2em;
     font-weight:bold;
     line-height:1.4em;
-    color:#19bffe;
+    color:$color1;
     margin-bottom:1em;
   }
 
@@ -681,7 +682,7 @@ div.result-actions{
     background: none;
     display: block;
     a{
-      color:#19bffe;
+      color:$color1;
     }
   }
   textarea{
