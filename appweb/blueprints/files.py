@@ -58,7 +58,7 @@ def search():
     return render_template('search.html',
         query=query, filetype=filetype, last_items=search_results["last_items"],
         files=[torrents_data(afile) for afile in search_results["files"]],
-        result_number=search_results["result_number"],
+        result_number=search_results["result_number"]
     )
 
 @files.route('/<lang>/searcha',methods=['POST'])

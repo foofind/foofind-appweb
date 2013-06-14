@@ -3,7 +3,7 @@ var MAX_ERROR_COUNT = 15;
 
 // objetos de la pagina
 var content, new_filetype, filetype_select, filetype_active; // siempre
-var results, loading_results, current_search_form, report, close_report, report_form, report_file_id, report_request, vote_request; // busqueda
+var results, loading_results, current_search_form, results_count=0, report, close_report, report_form, report_file_id, report_request, vote_request; // busqueda
 
 // estado de la pagina
 var loaded_ids = {}, errors_count = 0, stop_event=false;
@@ -70,7 +70,7 @@ document.observe("dom:loaded", function() {
         // Nueva busqueda
         $("new_search").observe('submit', function() {
             stop();
-            results.update();
+            results.innerHTML = "";
             loading_results.show();
         });
 
@@ -181,6 +181,14 @@ function updateItems(report){
             }
         });
         item.removeClassName("just-added");
+
+        // añade clase par o impar
+        if (results_count%2==0)
+            item.addClassName("result-odd");
+        else
+            item.addClassName("result-even");
+        results_count+=1;
+        $("q").setValue(results_count);
     });
 }
 

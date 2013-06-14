@@ -76,11 +76,9 @@ abbr {
 /* ----------------------------------------------------------- PLAY SEARCH & TASKS */
 
 .tasks{
-  position:absolute;
-  top:50%;
   margin-left:2em;
   margin-right:2em;
-  margin-top:-1.25em;
+  margin-top:1.75em;
 
   p{
     font-family: $general_font_family;
