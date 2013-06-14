@@ -20,6 +20,15 @@ from foofind.utils.fooprint import Fooprint
 
 files = Fooprint('files', __name__)
 
+def weight_processor(w, ct, r, nr):
+    return w if w else -10
+
+def tree_visitor(item):
+    if item[0]=="_w" or item[0]=="_u":
+        return None
+    else:
+        return item[1]["_w"]
+
 @files.route('/<lang>', methods=["POST"])
 @csrf.exempt
 def home():
@@ -54,7 +63,7 @@ def search():
     sure = False
     total_found=0
 
-    search_results = search_files(query, filters, min_results=50, last_items=[], non_group=True)
+    search_results = search_files(query, filters, min_results=50, last_items=[], non_group=True, order=("@weight*(r+10)", "e DESC, ok DESC, r DESC, fs DESC", "@weight*(r+10)"), weight_processor=weight_processor, tree_visitor=tree_visitor)
     return render_template('search.html',
         query=query, filetype=filetype, last_items=search_results["last_items"],
         files=[torrents_data(afile) for afile in search_results["files"]],
