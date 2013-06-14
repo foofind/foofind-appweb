@@ -51,7 +51,7 @@
                 <div class="result-rating">
                     <p class="result-rating">
                         <span>
-                        {{(('<img src="'+g.static_prefix+'/blubster/imgs/ico.star-14-full.png">')*file['view']['rating'] + ('<img src="'+g.static_prefix+'/blubster/imgs/ico.star-14-empty.png">')*(5-file['view']['rating']))|safe}}
+                        {{(('<img src="'+g.static_prefix+'/'+g.license_name+'/imgs/ico.star-14-full.png">')*file['view']['rating'] + ('<img src="'+g.static_prefix+'/'+g.license_name+'/imgs/ico.star-14-empty.png">')*(5-file['view']['rating']))|safe}}
                         </span>
                     </p>
                 </div>{# end of .result-rating #}
@@ -61,16 +61,16 @@
                         <li class="result-love">
                             <a href="vote:1{{ file['file']['id'] }}" class="button button-off button-noright">
                                 <span>
-                                    <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-love-off.png">
-                                    <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-love-on.png">
+                                    <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-love-off.png">
+                                    <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-love-on.png">
                                 </span>
                             </a>
                         </li>
                         <li class="result-hate">
                             <a href="vote:0{{ file['file']['id'] }}" class="button button-off button-noleft">
                                 <span>
-                                    <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-hate-off.png">
-                                    <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-hate-on.png">
+                                    <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-hate-off.png">
+                                    <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-hate-on.png">
                                 </span>
                             </a>
                         </li>
@@ -98,16 +98,16 @@
             <li class="result-action-download">
                 <a href="download:{{ file['file']['id'] }}" class="button button-on">
                     <span>
-                        <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-download-off.png">
-                        <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-download-on.png"><p>Download</p>
+                        <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-download-off.png">
+                        <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-download-on.png"><p>Download</p>
                     </span>
                 </a>
             </li>
             <li class="result-action-info">
                 <a class="button button-off">
                     <span>
-                        <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-info-off.png">
-                        <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-info-on.png">
+                        <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-info-off.png">
+                        <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-info-on.png">
                     </span>
                 </a>
             </li>
@@ -117,16 +117,16 @@
                 {#<li class="result-action-share">
                     <a href="#" class="button button-off">
                     <span>
-                        <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-share-off.png">
-                        <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-share-on.png">
+                        <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-share-off.png">
+                        <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-share-on.png">
                     </span>
                     </a>
                 </li>#}
                 <li class="result-action-report">
                     <a href="#" class="button button-off">
                     <span>
-                        <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-report-off.png">
-                        <img src="{{g.static_prefix}}/blubster/imgs/ico.button-18-report-on.png">
+                        <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-report-off.png">
+                        <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-report-on.png">
                     </span>
                     </a>
                 </li>

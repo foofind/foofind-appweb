@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>App - FIND</title>
     {% if g.wakalaka %}
-        <link rel="stylesheet" type="text/css" href="http://test.wakalaka.es/blubster/appweb/static/blubster/css/blubster.css"/>
+        <link rel="stylesheet" type="text/css" href="http://test.wakalaka.es/{{g.license_name}}/appweb/static/{{g.license_name}}/css/{{g.license_name}}.css"/>
     {% else %}
         {%- assets "css_" + g.license_name -%}
             <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
