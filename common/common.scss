@@ -9,9 +9,83 @@
 body {
   font-size:62.5%;
   line-height:150%;
-  font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
+  font-family: $general_font_family;
   text-align: center;
   color: $general_text_color;
   background: $general_background_color;
   overflow:hidden;
+}
+
+*, html, body, div, form {
+  margin: 0;
+  padding: 0;
+  border: 0 none;
+}
+
+html {
+  overflow:hidden;
+}
+
+ul, ol, dl {
+  margin: 0;
+  list-style: none;
+}
+
+li, dt, dd {
+  list-style: none;
+}
+
+a img {
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+hr {
+  clear: both;
+  width: 100%;
+  color: $general_background_color;
+  border: none;
+  background: $general_background_color;
+  font-size: 0.1em;
+  line-height: 0.1em;
+}
+
+img {
+  border:none;
+}
+
+abbr {
+  border: 0;
+  text-decoration: none;
+}
+
+.left{
+  float:left;
+}
+.right{
+  float:right;
+}
+
+/* ----------------------------------------------------------- PLAY SEARCH & TASKS */
+
+.tasks{
+  position:absolute;
+  top:50%;
+  margin-left:2em;
+  margin-right:2em;
+  margin-top:-1.25em;
+
+  p{
+    font-family: $general_font_family;
+    font-size:1.5em;
+    line-height:1.5em;
+    height:1.5em;
+  }
 }

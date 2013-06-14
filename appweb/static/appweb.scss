@@ -4,62 +4,6 @@ $minwidth:600px;
   display:block !important;
 }
 
-/* ----------------------------------------------------------- GENERAL */
-
-html {
-  overflow:hidden;
-}
-
-
-*, html, body, div, form { margin: 0; padding: 0; border: 0 none;}
-
-ul, ol, dl {
-  margin: 0;
-  list-style: none;
-}
-
-li, dt, dd {
-  list-style: none;
-}
-
-a img {
-  border: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
-hr {
-  clear: both;
-  width: 100%;
-  color: #fff;
-  border: none;
-  background: #fff;
-  font-size: 0.1em;
-  line-height: 0.1em;
-}
-
-img {
-  border:none;
-}
-
-abbr {
-  border: 0;
-  text-decoration: none;
-}
-
-.left{
-  float:left;
-}
-.right{
-  float:right;
-}
-
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - SCROLLBAR */
 ::-webkit-scrollbar {
   width: 10px;

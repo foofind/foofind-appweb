@@ -1,15 +1,15 @@
 /*
 Syntax error: Invalid CSS after "}": expected "}", was ""
-        on line 805 of appweb/static/appweb.scss
+        on line 749 of appweb/static/appweb.scss
 
-800:   }
-801:   .margin-left3{
-802:     margin-left:3em !important;
-803:   }
-804: }
+744:   }
+745:   .margin-left3{
+746:     margin-left:3em !important;
+747:   }
+748: }
 
 Backtrace:
-appweb/static/appweb.scss:805
+appweb/static/appweb.scss:749
 /Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/scss/parser.rb:1146:in `expected'
 /Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/scss/parser.rb:1084:in `expected'
 /Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/scss/parser.rb:1079:in `tok!'
@@ -40,4 +40,4 @@ appweb/static/appweb.scss:805
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Invalid CSS after \"}\": expected \"}\", was \"\"\A         on line 805 of appweb/static/appweb.scss\A \A 800:   }\A 801:   .margin-left3{\A 802:     margin-left:3em !important;\A 803:   }\A 804: }"; }
+  content: "Syntax error: Invalid CSS after \"}\": expected \"}\", was \"\"\A         on line 749 of appweb/static/appweb.scss\A \A 744:   }\A 745:   .margin-left3{\A 746:     margin-left:3em !important;\A 747:   }\A 748: }"; }

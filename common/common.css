@@ -1,11 +1,13 @@
 /*
-Syntax error: Undefined variable: "$general_text_color".
-        on line 14 of common/common.scss
+Syntax error: Undefined variable: "$general_font_family".
+        on line 12 of common/common.scss
 
+7: 
+8: /* ----------------------------------------------------------- GENERAL */
 9: body {
 10:   font-size:62.5%;
 11:   line-height:150%;
-12:   font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
+12:   font-family: $general_font_family;
 13:   text-align: center;
 14:   color: $general_text_color;
 15:   background: $general_background_color;
@@ -13,7 +15,7 @@ Syntax error: Undefined variable: "$general_text_color".
 17: }
 
 Backtrace:
-common/common.scss:14
+common/common.scss:12
 /Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/script/variable.rb:49:in `_perform'
 /Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/script/node.rb:40:in `perform'
 /Users/aru/.rvm/gems/ruby-2.0.0-p195/gems/sass-3.2.9/lib/sass/tree/visitors/perform.rb:298:in `visit_prop'
@@ -61,4 +63,4 @@ common/common.scss:14
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$general_text_color\".\A         on line 14 of common/common.scss\A \A 9: body {\A 10:   font-size:62.5%;\A 11:   line-height:150%;\A 12:   font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;\A 13:   text-align: center;\A 14:   color: $general_text_color;\A 15:   background: $general_background_color;\A 16:   overflow:hidden;\A 17: }"; }
+  content: "Syntax error: Undefined variable: \"$general_font_family\".\A         on line 12 of common/common.scss\A \A 7: \A 8: /* ----------------------------------------------------------- GENERAL */\A 9: body {\A 10:   font-size:62.5%;\A 11:   line-height:150%;\A 12:   font-family: $general_font_family;\A 13:   text-align: center;\A 14:   color: $general_text_color;\A 15:   background: $general_background_color;\A 16:   overflow:hidden;\A 17: }"; }
