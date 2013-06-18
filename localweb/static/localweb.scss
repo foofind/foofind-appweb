@@ -388,7 +388,7 @@ p.section-subtitle2{
     font-size:1.2em;
     font-weight:bold;
     line-height:1.4em;
-    color:$color1;
+    color:$color3;
     margin-bottom:1em;
   }
 
@@ -553,7 +553,7 @@ p.section-subtitle2{
     font-size:1.2em;
     margin-bottom:0;
     font-weight:bold;
-    color:$color1;
+    color:$color3;
 
     &:hover{
       margin-bottom:0;
@@ -565,7 +565,7 @@ p.section-subtitle2{
     font-size:1.2em;
     margin-bottom:0.5em;
     font-weight:normal;
-    color:$color1;
+    color:$color3;
 
     .cog{
       position:absolute;
@@ -823,7 +823,7 @@ p.section-subtitle2{
   color:#fff;
 
   a{
-    color:$color1;
+    color:$color3;
   }
 }
 .settings-options textarea,
