@@ -7,7 +7,6 @@
 {% endblock %}
 {% block content %}
     <div id="infotasks">
-        {{flash()}}
         <div class="search-main">
             <div class="search-border">
                 <form id="current_search">
@@ -60,8 +59,13 @@
                 <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.error-sad-280.png" alt="No results">
             </div><!--end of .error-img-->
             <div class="error-text">
-                <p class="error-title">No results!</p>
-                <p>There are no results for your search. Try another search!</p>
+                {%- if query %}
+                    <p class="error-title">No results!</p>
+                    <p>There are no results for this search. Feel free to try with other search terms.</p>
+                {%- else %}
+                    <p class="error-title">Please write something!</p>
+                    <p>No search terms. Please write something to search and try again.</p>
+                {%- endif %}
             </div>
         </div>
         <div id="loading-results"><div> </div></div>

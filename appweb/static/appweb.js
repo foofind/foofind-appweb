@@ -71,9 +71,17 @@ document.observe("dom:loaded", function() {
             loading_results.show();
         });
 
-        // Pide más resultados
-        content.observe('scroll', scrollHandler);
-        scrollHandler();
+
+        if ($F("query")=="")
+        {
+            // Mensaje de no has buscado nada
+            content.addClassName("no-results");
+            loading_results.hide();
+        } else {
+            // Pide más resultados
+            content.observe('scroll', scrollHandler);
+            scrollHandler();
+        }
     }
 });
 

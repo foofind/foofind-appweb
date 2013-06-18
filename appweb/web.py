@@ -7,7 +7,7 @@ import foofind.globals
 import os, os.path
 from foofind import defaults
 from collections import OrderedDict
-from flask import Flask, g, request, render_template, redirect, abort, url_for, make_response, get_flashed_messages
+from flask import Flask, g, request, render_template, redirect, abort, url_for, make_response
 from flask.ext.assets import Environment, Bundle
 from flask.ext.babel import get_translations, gettext as _
 from flask.ext.login import current_user

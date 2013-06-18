@@ -3,7 +3,7 @@
     Controladores de las páginas de búsqueda y de fichero.
 """
 import json
-from flask import request, render_template, g, current_app, flash, redirect, url_for, jsonify, make_response
+from flask import request, render_template, g, current_app, redirect, url_for, jsonify, make_response
 from flask.ext.wtf import Form, BooleanField, TextField, TextAreaField, SubmitField, Required, Email, Length
 from flask.ext.login import current_user
 
@@ -45,11 +45,9 @@ def search():
     query=request.form.get("q",None)
     filetype=request.form.get("t",None)
 
-    if not query: #si no se ha buscado nada se manda al inicio
-        flash("write_something")
-        return redirect(url_for(".home"))
+    if query: #si no se ha buscado nada se manda al inicio
+        query = query.replace("_"," ") if query is not None else None #para que funcionen la busqueda cuando vienen varias palabras
 
-    query = query.replace("_"," ") if query is not None else None #para que funcionen la busqueda cuando vienen varias palabras
     filters = {"src":"torrent"}
     if filetype and filetype in CONTENTS_CATEGORY:
         filters["type"] = [filetype]
@@ -57,13 +55,14 @@ def search():
     args["q"] = query
     g.args=args
 
-    #sources que se pueden elegir
-    fetch_global_data()
-
     sure = False
     total_found=0
 
-    search_results = search_files(query, filters, min_results=50, last_items=[], non_group=True, order=("@weight*(r+10)", "e DESC, ok DESC, r2 DESC, fs DESC, uri1 DESC", "@weight*(r+10)"), weight_processor=weight_processor, tree_visitor=tree_visitor)
+    if query:
+        search_results = search_files(query, filters, min_results=50, last_items=[], non_group=True, order=("@weight*(r+10)", "e DESC, ok DESC, r2 DESC, fs DESC, uri1 DESC", "@weight*(r+10)"), weight_processor=weight_processor, tree_visitor=tree_visitor)
+    else:
+        search_results = {"last_items":[], "files":[], "result_number":""}
+
     return render_template('search.html',
         query=query, filetype=filetype, last_items=search_results["last_items"],
         files=[torrents_data(afile) for afile in search_results["files"]],
@@ -99,9 +98,6 @@ def searcha():
             last_items = unpack("%dh"%(len(last_items)/2), last_items)
     except BaseException as e:
         logging.error("Error parsing last_items information from request.")
-
-    #sources que se pueden elegir
-    fetch_global_data()
 
     sure = False
     total_found=0

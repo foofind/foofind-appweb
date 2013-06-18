@@ -5,7 +5,6 @@
             <img src="{{g.static_prefix}}/{{g.license_name}}/logo.png" alt="{{g.license_name|capitalize}}">
         </div><!--end of .logo-->
         <div class="search-main">
-            {{flash()}}
             <form method="post" action="{{ url_for('files.search') }}">
                     {% if g.wakalaka %}
                         <input type="hidden" name="wklk" value="1">
