@@ -648,14 +648,13 @@ div.result-actions{
   }
 
   legend{
-    font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
-    color:#fff;
+    font-family: $generalfontfamily;
     font-size:1.2em;
     overflow:hidden;
     font-size:1.2em;
     font-weight:bold;
     line-height:1.4em;
-    color:$color1;
+    color:$color3;
     margin-bottom:1em;
   }
 
@@ -685,7 +684,7 @@ div.result-actions{
     background: none;
     display: block;
     a{
-      color:$color1;
+      color:$color3;
     }
   }
   textarea{
