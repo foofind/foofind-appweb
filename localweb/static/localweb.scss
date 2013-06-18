@@ -12,7 +12,7 @@
   left:0; bottom:0; top:6em;
   overflow-y: auto;
   width: 18em;
-  background-color: #02a0dd;
+  background-color: $bcolor2;
   padding-bottom:3em;
 }
 
@@ -27,7 +27,7 @@
 .play-category li a, .settings-category li a{
   display:block;
   padding:0.75em 1em 0.75em 1.8em;
-  color: #def6ff;
+  color: $bgcolor1;
 }
 .play-category li:hover a, .settings-category li:hover a{
   color: #fff;
@@ -109,7 +109,7 @@ p.section-subtitle2{
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - play BREADCRUMBS */
 .play-breadcrumbs {
-  background-color: #0080b2;
+  background-color: $bgcolor2;
   ul{
     padding-left:3em;
     li{
@@ -214,7 +214,7 @@ p.section-subtitle2{
         display:block;
         width:10em;
         height:0.5em;
-        background:#19c0ff;
+        background:$color1;
         border-radius: 4px;
         -webkit-border-radius: 4px;
         -moz-border-radius: 4px;
@@ -338,7 +338,7 @@ p.section-subtitle2{
   right:0.7em;
   top:0.7em;
   padding:0.2em 0.5em;
-  background:#dc01bb;
+  background:$bgcolor3;
   color:#fff;
   text-transform: lowercase;
 }
@@ -506,7 +506,7 @@ p.section-subtitle2{
 .bubble{
   position:absolute;
   display:block;
-  background:#0080b2;
+  background:$bgcolor2;
   width:19em;
   height:16em;
   padding:1em;
@@ -763,7 +763,7 @@ p.section-subtitle2{
   padding:3em;
 }
 .report{
-  background:#0080b2;
+  background:$bgcolor2;
 }
 .settings-options legend,
 .report legend{
