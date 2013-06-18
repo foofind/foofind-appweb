@@ -4,7 +4,7 @@
   position:absolute;
   left:18em; right:0; top:6em; bottom:0;
   overflow-y: auto;
-  background-color: #eaeaea;
+  background-color: $generalbackgroundcolor;
 }
 
 .play-left, .settings-left {
@@ -150,7 +150,7 @@ p.section-subtitle2{
   height:22.5em;
 
   a.a-image, a.a-text{
-    color:#333;
+    color:$generaltextcolor;
     display:block;
   }
 
@@ -159,7 +159,7 @@ p.section-subtitle2{
   }
 
   &:hover{
-    background:#bde0ec url(../imgs/bg.corner-edit-o020.png) bottom right no-repeat;
+    background:$bgcolor1 url(../imgs/bg.corner-edit-o020.png) bottom right no-repeat;
   }
 
   .a-image{
@@ -241,7 +241,7 @@ p.section-subtitle2{
     p{
       height:2.6em;
       overflow:hidden;
-      font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
+      font-family: $generalfontfamily;
       font-size:1.2em;
       font-weight:bold;
       line-height:1.4em;
@@ -329,7 +329,7 @@ p.section-subtitle2{
 
 
 .new{
-  font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
+  font-family: $generalfontfamily;
   font-size:1.2em;
   display:inline-block;
   width:auto;
@@ -380,7 +380,7 @@ p.section-subtitle2{
   }
 
   p.title{
-    font-family: 'Open Sans','helvetica neue',helvetica,arial,sans-serif;
+    font-family: $generalfontfamily;
     color:#fff;
     font-size:1.2em;
     height:2.6em;
@@ -388,7 +388,7 @@ p.section-subtitle2{
     font-size:1.2em;
     font-weight:bold;
     line-height:1.4em;
-    color:#19bffe;
+    color:$color1;
     margin-bottom:1em;
   }
 
@@ -553,7 +553,7 @@ p.section-subtitle2{
     font-size:1.2em;
     margin-bottom:0;
     font-weight:bold;
-    color:#19bffe;
+    color:$color1;
 
     &:hover{
       margin-bottom:0;
@@ -565,7 +565,7 @@ p.section-subtitle2{
     font-size:1.2em;
     margin-bottom:0.5em;
     font-weight:normal;
-    color:#19bffe;
+    color:$color1;
 
     .cog{
       position:absolute;
@@ -734,14 +734,14 @@ p.section-subtitle2{
   }
 }
 .button-on{
-  background:#19bffe;
-  border:1px solid #17afe8;
+  background:$color1;
+  border:1px solid $bcolor2;
   span img:first-child {
     display:none;
   }
 
   &:hover{
-    background:#19bffe url(../imgs/bg.button-on.png) 50% 50% repeat-x;
+    background:$color1 url(../imgs/bg.button-on.png) 50% 50% repeat-x;
   }
 
   p{
@@ -823,7 +823,7 @@ p.section-subtitle2{
   color:#fff;
 
   a{
-    color:#19bffe;
+    color:$color1;
   }
 }
 .settings-options textarea,
