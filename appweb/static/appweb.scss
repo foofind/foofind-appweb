@@ -284,7 +284,16 @@ $minwidth:600px;
   height:6em;
   overflow:hidden;
   background-position: 1.5em 1.5em;
+
+  .result-action-download .button-off {
+    cursor:default;
+    &:hover{
+      background:#ccc;
+      opacity:inherit;
+    }
+  }
 }
+
 .result-odd{
   background-color:#eaeaea;
 }

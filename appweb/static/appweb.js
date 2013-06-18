@@ -209,6 +209,8 @@ function item_click(event) {
                 report.button = button;
             }
             stop_event = true;
+        } else if (button.up(".result-action-download")) {
+            button.addClassName("button-off").removeClassName("button-on");
         }
     }
 }
