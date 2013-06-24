@@ -96,3 +96,39 @@ abbr {
   }
 }
 }
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ERROR PAGE */
+.error {
+  position:absolute;
+  margin-top:-21em;
+  top:50%;
+  left:50%;
+  width:50em;
+  margin-left:-25em;
+
+  .error-img{
+    height:28em;
+    text-align: center;
+    top:0;
+    img{
+      margin:0 auto;
+    }
+  }
+
+  .error-text{
+    margin:2em 0em 5em;
+
+    p {
+      text-align: center;
+      color: #333;
+      font-size:1.4em;
+      line-height:1.4em;
+
+      &.error-title{
+        font-size:1.8em;
+        font-weight:bold;
+        margin-bottom:1em;
+      }
+    }
+  }
+}
