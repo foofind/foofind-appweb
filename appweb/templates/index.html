@@ -16,18 +16,18 @@
                         <label for="q">Search:</label>
                         <input type="text" class="search-text" placeholder="Type here your search" id="q" name="q" autocomplete="off" value="">
                     </div>
+                    <div class="separator"></div>
                     <div class="search-filetype">
-                        <div id="filetype_active"></div>
-                        <ul id="filetype_select" class="loading">
-                            <li><span class="all">All</span></li>
-                            <li><span class="video">Video</span></li>
-                            <li><span class="audio">Audio</span></li>
-                            <li><span class="image">Image</span></li>
-                            <li><span class="document">Document</span></li>
-                            <li><span class="software">Software</span></li>
-                        </ul>
-                        <input type="hidden" id="new_filetype" name="t" value="all">
+                        <select id="new_filetype" name="t" data-placeholder="All">
+                            <option class="all" value="">All</option>
+                            <option class="video" value="video">Video</option>
+                            <option class="audio" value="audio">Audio</option>
+                            <option class="image" value="image">Image</option>
+                            <option class="document" value="document">Document</option>
+                            <option class="software" value="software">Software</option>
+                        </select>
                     </div>
+                    <div class="separator"></div>
                     <div class="search-button-find">
                         <button type="submit" class="search-button-find"><img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-magni-off.png" alt="Find"></button>
                     </div>

@@ -5,7 +5,7 @@ var EMAIL_REQUEST = "In the meantime, you can send your request to the following
 var VALIDATION_MESSAGES = ["Some values are missing. Please fill all the fields marked with a star (*).\n\n", "Invalid format for the email. Please check that it is a valid email address.\n\n", "You have to accept our terms of use and privacy policy by clicking on the checkbox.\n\n"];
 
 // objetos de la pagina
-var content, new_filetype, filetype_select, filetype_active; // siempre
+var content, new_filetype, filetype_select; // siempre
 var results, loading_results, current_search_form, results_count=0, report, close_report, report_form, report_file_id, report_request, vote_request; // busqueda
 
 // estado de la pagina
@@ -16,24 +16,15 @@ var requesting = null, stopped = false;
 
 document.observe("dom:loaded", function() {
     content = $("content");
-    new_filetype = $("new_filetype");
-
-    filetype_select = $("filetype_select");
-    filetype_active = $("filetype_active");
-    filetype_active.innerHTML = $$("#filetype_select li ."+new_filetype.value)[0].outerHTML;
-    filetype_select.toggle(false);
-    filetype_select.removeClassName("loading");
-    filetype_active.observe("click", filetype_active_click);
-
-    $$("#filetype_select li").each(function(item){
-        item.observe("click", filetype_select_click);
-    });
+    if (Chosen.browser_is_supported()) {
+        $("new_filetype").firstChild.innerHTML = "";
+        new_filetype = new Chosen($("new_filetype"), {disable_search_threshold: 100, allow_single_deselect: true, width:"13em"});
+        $("new_filetype").observe("change", filetype_update_icon);
+        filetype_update_icon();
+    }
 
     $(document).observe('click', function(event) {
         var source = Event.element(event);
-        if (filetype_select.visible() && !source.descendantOf(filetype_select) && !source.descendantOf(filetype_active)) {
-            filetype_select.toggle(false);
-        }
         if (report && report.button && (source==close_report || (source!=report.button && !source.descendantOf(report.button) && !source.descendantOf(report))))
         {
             clearReport();
@@ -85,14 +76,12 @@ document.observe("dom:loaded", function() {
     }
 });
 
-function filetype_active_click(event) {
-    filetype_select.toggle(true);
-}
-function filetype_select_click() {
-    var html = this.innerHTML;
-    filetype_active.innerHTML = html;
-    filetype_select.toggle(false);
-    new_filetype.value = $(this).firstDescendant().className;
+function filetype_update_icon(){
+    if (new_filetype.form_field.selectedIndex>0) {
+        new_filetype.selected_item.firstChild.className = new_filetype.form_field.options[new_filetype.form_field.selectedIndex].innerHTML.toLowerCase();
+    } else {
+        new_filetype.selected_item.firstChild.className = new_filetype.default_text.toLowerCase();
+    }
 }
 
 function scrollHandler() {
