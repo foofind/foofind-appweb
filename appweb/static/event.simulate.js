@@ -1,6 +1,6 @@
 /**
  * Event.simulate(@element, eventName[, options]) -> Element
- * 
+ *
  * - @element: element to fire event on
  * - eventName: name of event to fire (only MouseEvents and HTMLEvents interfaces are supported)
  * - options: optional object to fine-tune event properties - pointerX, pointerY, ctrlKey, etc.
@@ -9,7 +9,7 @@
  *
  **/
 (function(){
-  
+
   var eventMatchers = {
     'HTMLEvents': /^(?:load|unload|abort|error|select|change|submit|reset|focus|blur|resize|scroll)$/,
     'MouseEvents': /^(?:click|mouse(?:down|up|over|move|out))$/
@@ -25,13 +25,13 @@
     bubbles: true,
     cancelable: true
   }
-  
+
   Event.simulate = function(element, eventName) {
     var options = Object.extend(defaultOptions, arguments[2] || { });
     var oEvent, eventType = null;
-    
+
     element = $(element);
-    
+
     for (var name in eventMatchers) {
       if (eventMatchers[name].test(eventName)) { eventType = name; break; }
     }
@@ -45,7 +45,7 @@
         oEvent.initEvent(eventName, options.bubbles, options.cancelable);
       }
       else {
-        oEvent.initMouseEvent(eventName, options.bubbles, options.cancelable, document.defaultView, 
+        oEvent.initMouseEvent(eventName, options.bubbles, options.cancelable, document.defaultView,
           options.button, options.pointerX, options.pointerY, options.pointerX, options.pointerY,
           options.ctrlKey, options.altKey, options.shiftKey, options.metaKey, options.button, element);
       }
@@ -59,6 +59,6 @@
     }
     return element;
   }
-  
+
   Element.addMethods({ simulate: Event.simulate });
-})()
+})();
