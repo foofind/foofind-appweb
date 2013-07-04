@@ -1,5 +1,5 @@
 {%- for file in files %}{%- set source_data=file['view']['sources'][file['view']['sources']|first] %}
-<!--FI:{{ file['file']['id'] }} {{ {"name":file['view']['fn'],"type":file['view']['file_type'],"seeds":file['view']['seeds'],"leechs":file['view']['leechs'] , "img":('http://'~file['view']['first_image_server']~'/'~file['view']['images_id']~'0' if 'images_server' in file['view'] else ""), "magnet": file['view']['torrent_sources']['magnet'], "sources_list":file['view']['torrent_sources']['sources_list'] }|tojson|safe }}-->
+<!--FI:{{ file['file']['id'] }} {{ {"name":file['view']['fn'],"type":file['view']['file_type'],"seeds":file['view']['seeds'],"leechs":file['view']['leechs'] , "img":('http://'~file['view']['first_image_server']~'/'~file['view']['images_id']~'0' if 'images_server' in file['view'] else ""), "magnet": file['view']['torrent_sources']['magnet'], "sources":file['view']['torrent_sources']['sources_list'] }|tojson|safe }}-->
 <li data-id="{{ file['file']['id'] }}" data-server="{{ file['file']['s'] }}" class="result-item just-added result-{{ file['view']['file_type'] }}">
     <div class="wrap-result">
         <div class="result-main-data">
