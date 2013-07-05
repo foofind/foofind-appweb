@@ -9,7 +9,6 @@ from foofind import defaults
 from collections import OrderedDict
 from flask import Flask, g, request, render_template, redirect, abort, url_for, make_response
 from flask.ext.assets import Environment, Bundle
-from flask.ext.babel import get_translations, gettext as _
 from flask.ext.login import current_user
 from babel import support, localedata, Locale
 from raven.contrib.flask import Sentry
@@ -227,4 +226,5 @@ def init_g(app):
     g.args = {}
 
     g.page_description=g.title=""
+
 

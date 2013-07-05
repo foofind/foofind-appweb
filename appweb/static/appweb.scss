@@ -695,30 +695,29 @@ div.result-actions{
 @mixin combo_icons($spacing) {
 
   background-repeat: no-repeat;
-  background-position-y: 0.55em - $spacing;
   &.all{
     background-image:url(../imgs/ico.filetype-18-all-off.png);
-    background-position-x: 0.5em - $spacing;
+    background-position: (0.55em - $spacing) (0.5em - $spacing);
   }
   &.video{
     background-image:url(../imgs/ico.filetype-18-vid-off.png);
-    background-position-x: 0.6em - $spacing;
+    background-position: (0.55em - $spacing) (0.6em - $spacing);
   }
   &.audio{
     background-image:url(../imgs/ico.filetype-18-mus-off.png);
-    background-position-x: 0.6em - $spacing;
+    background-position: (0.55em - $spacing) (0.6em - $spacing);
   }
   &.image{
     background-image:url(../imgs/ico.filetype-18-img-off.png);
-    background-position-x: 0.5em - $spacing;
+    background-position: (0.55em - $spacing) (0.5em - $spacing);
   }
   &.document{
     background-image:url(../imgs/ico.filetype-18-doc-off.png);
-    background-position-x: 0.6em - $spacing;
+    background-position: (0.55em - $spacing) (0.6em - $spacing);
   }
   &.software{
     background-image:url(../imgs/ico.filetype-18-pc-off.png);
-    background-position-x: 0.4em - $spacing;
+    background-position: (0.55em - $spacing) (0.4em - $spacing);
   }
 }
 
