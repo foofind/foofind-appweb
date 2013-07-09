@@ -17,6 +17,10 @@
     // actividad de la pagina
     var requesting = null, stopped = false;
 
+    document.observe("dom:ready", function() {
+        $("q").focus();
+    });
+
     document.observe("dom:loaded", function() {
         content = $("content");
         q = $("q");
