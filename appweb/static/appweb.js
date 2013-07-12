@@ -85,7 +85,7 @@
 
     function document_click(event) {
         var source = Event.element(event);
-        if (report.button && (source==close_report || (source!=report.button && !source.descendantOf(report.button) && !source.descendantOf(report))))
+        if (report && report.button && (source==close_report || (source!=report.button && !source.descendantOf(report.button) && !source.descendantOf(report))))
         {
             clearReport();
         }
