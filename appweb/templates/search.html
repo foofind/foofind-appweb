@@ -27,13 +27,12 @@
                         </div>
                         <div class="separator"></div>
                         <div class="search-filetype">
+                            
                             <select id="new_filetype" name="t" data-placeholder="All">
                                 <option class="all" value="all">All</option>
-                                <option class="video" value="video" {{"selected" if "video" in g.args['type']}}>Video</option>
-                                <option class="audio" value="audio" {{"selected" if "audio" in g.args['type']}}>Audio</option>
-                                <option class="image" value="image" {{"selected" if "image" in g.args['type']}}>Image</option>
-                                <option class="document" value="document" {{"selected" if "document" in g.args['type']}}>Document</option>
-                                <option class="software" value="software" {{"selected" if "software" in g.args['type']}}>Software</option>
+                                {% for cat in g.categories %}
+                                    <option class="{{ cat[0] }}" value="{{ cat[0] }}" {{"selected" if cat[1]["q"] in g.args['type']}}>{{ cat[0] | capitalize }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div class="separator"></div>

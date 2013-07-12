@@ -20,11 +20,9 @@
                     <div class="search-filetype">
                         <select id="new_filetype" name="t" data-placeholder="All">
                             <option class="all" value="">All</option>
-                            <option class="video" value="video">Video</option>
-                            <option class="audio" value="audio">Audio</option>
-                            <option class="image" value="image">Image</option>
-                            <option class="document" value="document">Document</option>
-                            <option class="software" value="software">Software</option>
+                             {% for cat in g.categories %}
+                                    <option class="{{ cat[0] }}" value="{{ cat[0] }}" >{{ cat[0] | capitalize }}</option>
+                                {% endfor %}
                         </select>
                     </div>
                     <div class="separator"></div>

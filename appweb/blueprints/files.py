@@ -49,10 +49,22 @@ def search():
         query = query.replace("_"," ") if query is not None else None #para que funcionen la busqueda cuando vienen varias palabras
 
     filters = {"src":"torrent"}
-    if filetype and filetype in CONTENTS_CATEGORY:
-        filters["type"] = [filetype]
+    
+    ori_query = query
+    
+    _in = [i for i, v in enumerate(g.categories) if v[0] == filetype]
+    if filetype and _in :
+        _id = _in[0]
+        if "t" in g.categories[_id][1]:
+            filters["type"] = g.categories[_id][1]['t']
+        if "q" in g.categories[_id][1]:
+            _type = g.categories[_id][1]['q']
+            query = "%s (%s)" % (query, _type)
+            
     args = filters.copy()
-    args["q"] = query
+    args["q"] = ori_query
+    if ori_query != query:
+        args['type'] = _type
     g.args=args
 
     sure = False
@@ -63,8 +75,11 @@ def search():
     else:
         search_results = {"last_items":[], "files":[], "result_number":""}
 
+    #~ for result in search_results:
+        
+
     return render_template('search.html',
-        query=query, filetype=filetype, last_items=search_results["last_items"],
+        query=ori_query, filetype=filetype, last_items=search_results["last_items"],
         files=[torrents_data(afile) for afile in search_results["files"]],
         result_number=search_results["result_number"]
     )
@@ -85,10 +100,21 @@ def searcha():
 
     query = query.replace("_"," ") if query is not None else None #para que funcionen la busqueda cuando vienen varias palabras
     filters = {"src":"torrent"}
-    if filetype and filetype in CONTENTS_CATEGORY:
-        filters["type"] = [filetype]
+    ori_query = query
+    
+    _in = [i for i, v in enumerate(g.categories) if v[0] == filetype]
+    if filetype and _in :
+        _id = _in[0]
+        if "t" in g.categories[_id][1]:
+            filters["type"] = g.categories[_id][1]['t']
+        if "q" in g.categories[_id][1]:
+            _type = g.categories[_id][1]['q']
+            query = "%s (%s)" % (query, _type)
+            
     args = filters.copy()
-    args["q"] = query
+    args["q"] = ori_query
+    if ori_query != query:
+        args['type'] = _type
     g.args=args
 
     last_items = []
