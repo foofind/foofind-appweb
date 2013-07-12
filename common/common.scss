@@ -87,6 +87,16 @@ abbr {
     line-height:1.2em;
   }
 }
+#app #infotasks .tasks {
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-top: 1.75em;
+  p {
+    font-size: 1.5em;
+    line-height: 1.5em;
+    height: 1.5em;
+  }
+}
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ERROR PAGE */
 .error {
