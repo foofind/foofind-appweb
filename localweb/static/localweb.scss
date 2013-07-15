@@ -899,9 +899,9 @@ input.long-auto, label.long-auto, select.long-auto, textarea.long-auto{
   margin-left:3em !important;
 }
 
-file div.image.background-folder{
-    background-colour:$backgroundcolorfolder;
+.file .a-image.background-folder{
+    background-color:$backgroundcolorfolder;
 }
-file div.image.background-file{
-    background-colour:$backgroundcolorfile;
+.file .a-image.background-file{
+    background-color:$backgroundcolorfile;
 }
