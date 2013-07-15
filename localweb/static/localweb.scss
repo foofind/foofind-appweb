@@ -898,3 +898,10 @@ input.long-auto, label.long-auto, select.long-auto, textarea.long-auto{
 .margin-left3{
   margin-left:3em !important;
 }
+
+file div.image.background-folder{
+    background-colour:$backgroundcolorfolder;
+}
+file div.image.background-file{
+    background-colour:$backgroundcolorfile;
+}
