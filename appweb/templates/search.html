@@ -106,7 +106,7 @@
                     </li>
                     <li>
                         <input type="checkbox" name="accept_tos" id="accept_tos" class="checkbox margin-left2">
-                        <label for="accept_tos" class="long-auto">* I have read and accept the <a href="http://foofind.com/es/tos" target="_blank">Terms of use</a> and <a href="http://foofind.com/es/privacy" target="_blank">Privacy policy</a>.</label>
+                        <label for="accept_tos" class="long-auto">* I have read and accept the <a href="{{ g.tos_link|default('http://foofind.com/es/tos') }}" target="_blank">Terms of use</a> and <a href="{{ g.privacy_link|default('http://foofind.com/es/privacy') }}" target="_blank">Privacy policy</a>.</label>
                     </li>
                 </ul>
                 <input type="submit" class="button button-off submit">
