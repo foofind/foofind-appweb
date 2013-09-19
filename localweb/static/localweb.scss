@@ -388,7 +388,7 @@ p.section-subtitle2{
     font-size:1.2em;
     font-weight:bold;
     line-height:1.4em;
-    color:$color3;
+    color:$color4;
     margin-bottom:1em;
   }
 
@@ -823,7 +823,7 @@ p.section-subtitle2{
   color:#fff;
 
   a{
-    color:$color3;
+    color:$color4;
   }
 }
 .settings-options textarea,
@@ -897,4 +897,11 @@ input.long-auto, label.long-auto, select.long-auto, textarea.long-auto{
 }
 .margin-left3{
   margin-left:3em !important;
+}
+
+.file .a-image.background-folder{
+    background-color:$backgroundcolorfolder;
+}
+.file .a-image.background-file{
+    background-color:$backgroundcolorfile;
 }

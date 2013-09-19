@@ -81,7 +81,7 @@ def search():
     return render_template('search.html',
         query=ori_query, filetype=filetype, last_items=search_results["last_items"],
         files=[torrents_data(afile) for afile in search_results["files"]],
-        result_number=search_results["result_number"]
+        result_number=search_results["result_number"].replace(query, ori_query)
     )
 
 @files.route('/<lang>/searcha',methods=['POST'])
