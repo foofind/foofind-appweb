@@ -227,4 +227,9 @@ def init_g(app):
 
     g.page_description=g.title=""
 
-
+    g.categories = (('video',{"t":"video"}),
+                     ('audio',{"t":"audio"}),
+                     ('document',{"t":"document"}),
+                     ('image',{"t":"image"}),
+                     ('software',{"t":"software"})
+                     )

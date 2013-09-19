@@ -254,7 +254,7 @@
             method: 'post',
             parameters: report_form.serialize(true),
             onSuccess: function(transport) {
-                result = eval(transport.responseText);
+                var result = eval(transport.responseText);
                 if (result===true) {
                     clearReport();
                     alert("Your complaint has been sent.");
