@@ -49,9 +49,9 @@ def search():
         query = query.replace("_"," ") if query is not None else None #para que funcionen la busqueda cuando vienen varias palabras
 
     filters = {"src":"torrent"}
-    
+
     ori_query = query
-    
+
     _in = [i for i, v in enumerate(g.categories) if v[0] == filetype]
     if filetype and _in :
         _id = _in[0]
@@ -60,7 +60,7 @@ def search():
         if "q" in g.categories[_id][1]:
             _type = g.categories[_id][1]['q']
             query = "%s (%s)" % (query, _type)
-            
+
     args = filters.copy()
     args["q"] = ori_query
     if ori_query != query:
@@ -76,7 +76,7 @@ def search():
         search_results = {"last_items":[], "files":[], "result_number":""}
 
     #~ for result in search_results:
-        
+
 
     return render_template('search.html',
         query=ori_query, filetype=filetype, last_items=search_results["last_items"],
@@ -101,7 +101,7 @@ def searcha():
     query = query.replace("_"," ") if query is not None else None #para que funcionen la busqueda cuando vienen varias palabras
     filters = {"src":"torrent"}
     ori_query = query
-    
+
     _in = [i for i, v in enumerate(g.categories) if v[0] == filetype]
     if filetype and _in :
         _id = _in[0]
@@ -110,7 +110,7 @@ def searcha():
         if "q" in g.categories[_id][1]:
             _type = g.categories[_id][1]['q']
             query = "%s (%s)" % (query, _type)
-            
+
     args = filters.copy()
     args["q"] = ori_query
     if ori_query != query:
@@ -254,12 +254,15 @@ def complaint():
         if form.validate():
             urlreported = "/download/"+form.file_id.data+"/"
             pagesdb.create_complaint(dict([("linkreported","-"),("urlreported",urlreported),("ip",request.remote_addr)]+[(field.name,field.data) for field in form]))
-            return "true"
+            response = make_response("true")
         else:
-            return repr(form.errors.keys())
+            response = make_response(repr(form.errors.keys()))
     except BaseException as e:
         logging.error("Error on file complaint.")
-        return "false"
+        response = make_response("false")
+
+    response.mimetype = "application/json"
+    return response
 
 @files.route('/<lang>/vote',methods=['POST'])
 def vote():
@@ -278,7 +281,9 @@ def vote():
     except BaseException as e:
         logging.error("Error on vote.")
 
-    return "true" if ok else "false"
+    response = make_response("true" if ok else "false")
+    response.mimetype = "application/json"
+    return response
 
 class ReportLinkForm(Form):
     '''
