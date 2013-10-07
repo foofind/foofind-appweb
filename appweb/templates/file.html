@@ -5,7 +5,7 @@
         <div class="result-main-data">
             <div class="wrap-result-title">
                 <div class="result-title-info">
-                    <div class="result-title" title="{% if 'fnhs' in file['view'] %}{{ file['view']['fnhs']|safe }}{% else %}{{ file['view']['fn']|safe }}{% endif %}">
+                    <div class="result-title" title="{{ file['view']['fn']|safe }}">
                         <p class="result-title">
                             <span>
                                 {% if 'fnhs' in file['view'] %}{{ file['view']['fnhs']|safe }}{% else %}{{ file['view']['fn']|safe }}{% endif %}
