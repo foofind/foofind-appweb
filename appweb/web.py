@@ -24,6 +24,7 @@ from foofind.utils import u, logging
 from foofind.utils.bots import is_search_bot, is_full_browser, check_rate_limit
 
 from appweb.blueprints.files import files
+from appweb.blueprints.extras import extras
 from appweb.templates import register_filters
 
 import scss
@@ -93,6 +94,7 @@ def create_app(config=None, debug=False):
 
     # Blueprints
     app.register_blueprint(files)
+    app.register_blueprint(extras)
 
     # Web Assets
     scss.config.LOAD_PATHS = [os.path.dirname(os.path.dirname(app.static_folder))]
@@ -133,6 +135,7 @@ def create_app(config=None, debug=False):
     feedbackdb.init_app(app)
     entitiesdb.init_app(app)
     usersdb.init_app(app)
+    plugindb.init_app(app)
 
     # Servicio de búsqueda
     @app.before_first_request
@@ -156,7 +159,7 @@ def create_app(config=None, debug=False):
         if values is None:
             g.lang = "en"
         else:
-            g.lang = values.pop('lang', None)
+            g.lang = values.pop('lang', "en")
 
     @app.url_defaults
     def add_language_code(endpoint, values):
