@@ -1037,3 +1037,172 @@ div.result-actions{
   }
 }
 /* @end */
+
+ul.plugincards{
+    list-style:none;
+    padding:27px 0 0;
+    margin:0;
+    display:block;
+
+    li{
+        font-size: 1.1em;
+        display:block;
+        float:left;
+        width:178px;
+        height:224px;
+        background:#dedede;
+        padding:0;
+        margin:0 0 27px 27px;
+        position:relative;
+
+        p{
+            display:block;
+            margin:0;
+            color:black;
+            padding:0 15px;
+            text-decoration:none;
+            }
+
+        h3{
+            display:block;
+            font-weight:bold;
+            margin:0;
+            padding:15px 15px 5px;
+            }
+
+        }
+    }
+
+h2.plugin_category{
+    font-size: 1.6em;
+    margin:15px 15px 0;
+    }
+
+.clearer{
+    clear:both;
+    display:block;
+    }
+
+.plugincard{
+    text-decoration:none;
+    color:black;
+    position:absolute;
+    top:0;left:0;right:0;bottom:65px;
+
+    &:hover{
+        background-color:#CACACA;
+        }
+    }
+
+.installbutton{
+    text-shadow: 1px 1px 0 #555, -1px -1px 0 #555, 1px -1px 0 #555, -1px 1px 0 #555;
+    text-decoration:none; text-align:center;
+    line-height:40px;
+    font-weight:bold;
+
+    font-size:1.2em;
+
+    height:40px;
+    border:1px solid #c8c8c8;
+
+    color: white;
+    background-color:#c8c8c8;
+
+    display:block;
+    position:absolute;
+    bottom:15px;
+    left:15px;
+    right:15px;
+    z-index:0;
+
+    cursor:default;
+    border-radius:5px;
+
+    &.state_install{
+        border:1px solid darkgreen;
+        background:green;
+        cursor:pointer;
+        }
+    &.state_update{
+        border:1px solid navy;
+        background:blue;
+        cursor:pointer;
+        }
+
+    &.state_failed{
+        border:1px solid brown;
+        background:red;
+        cursor:pointer;
+        }
+    &.state_non_compatible{
+        border:1px solid #CCC;
+        }
+    &.state_downloading{
+
+        }
+    &.state_installed{
+        background-color:transparent;
+        border:1px dashed #888;
+        }
+    }
+
+#infotasks{
+    .title{
+        padding:1.3em;
+        margin:0;
+        font-size:1.5em;
+        float:left;
+        }
+
+    .goback{
+        float:right;
+        text-align:right;
+        margin-right:15px;
+        line-height:6em;
+        font-size:1.5em:
+
+        a{
+            color:black;
+            text-decoration:none;
+            }
+        }
+    }
+
+#content .plugin{
+    font-size:1.3em;
+    padding:15px;
+
+    .images{
+        background:#DDD;
+        line-height:200px;
+        text-align:center;
+        margin: -15px -15px 15px;
+        border-bottom:1px solid #ccc;
+        padding: 15px 0;
+
+        img{
+            vertical-align:middle;
+            outline:1px solid #ccc;
+            border:1px solid #ddd;
+            max-height:200px;
+            width:auto;
+            }
+        }
+    .author{
+        margin-bottom:0.5em;
+        }
+    .description{
+        p{
+            margin-top:0;
+            }
+        }
+    .download{
+        height:60px; /* Adds margin at bottom for download installbutton */
+        }
+    .installbutton{
+        position:fixed;
+        width:350px;
+        left:50%;
+        margin-left:-175px;
+        }
+    }
