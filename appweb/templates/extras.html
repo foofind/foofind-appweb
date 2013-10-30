@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% macro installbutton(plugin) %}
+<a class="installbutton" id="plugin:{{plugin.name}}"
+    {% if plugin.checksum %}
+    data-checksum="{{plugin.checksum}}"
+    {% endif %}
+    {% if plugin.minversion %}
+    data-minversion="{{plugin.minversion}}"
+    {% endif %}
+    href="action:download({{plugin.get_download_json(reqos)}})"></a>
+{% endmacro %}
+
+{% macro plugins(category, in_category=False) %}
+{% if category.plugins %}
+<ul class="plugincards">
+{% for plugin in category.plugins %}
+    <li>
+        <a class="plugincard" href="{{
+            url_for('extras.info', lang=g.lang, category=category.name, name=plugin.name, page=page)
+            if in_category else
+            url_for('extras.info', lang=g.lang, name=plugin.name, page=page)
+            }}" title="More...">
+            <h3>{{plugin.title|capitalize}}</h3>
+            <p>{{plugin.summary}}</p>
+        </a>
+        {{ installbutton(plugin) }}
+    </li>
+{% endfor %}
+</ul>
+<span class="clearer"></span>
+{% endif %}
+{% endmacro %}
+
+{% block head %}
+<script type="text/javascript">
+window.update_plugin_state=function(data){
+    var c="", t="", n, p = 0;
+    for(var i in data){
+        switch(parseInt(data[i])){
+            case -3:
+                c = "state_non_compatible";
+                t = "not compatible";
+                break;
+            case -2:
+                c = "state_failed";
+                t = "failed";
+                break;
+            case -1:
+                c = "state_update";
+                t = "update";
+                break;
+            case 0:
+                c = "state_install";
+                t = "install";
+                break;
+            case 1:
+                p = Math.round((data[i]-1)*100); // Progress
+                c = "state_downloading";
+                t = "downloading ( " + p + "% )";
+                break;
+            case 2:
+            case 3:
+            default:
+                c = "state_installed";
+                t = "installed";
+            }
+        n = $("plugin:" + i);
+        if(n===null) continue;
+        n.className = "installbutton " + c;
+        n.update(t);
+        }
+    };
+var domloaded=function(){
+    var elements=$$(".installbutton"), r=[],
+        cback = function(e){
+            if(!(
+                this.hasClassName("state_install")||
+                this.hasClassName("state_update")||
+                this.hasClassName("state_failed")
+                ))
+                e.stop();
+        };
+    for(var i=0,l=elements.length;i<l;i++){
+        r[r.length] = {name:elements[i].id.substr(7)};
+        if(elements[i].hasAttribute("data-checksum"))
+            r[r.length-1]["checksum"] = parseInt(elements[i].readAttribute("data-checksum"));
+        if(elements[i].hasAttribute("data-minversion"))
+            r[r.length-1]["minversion"] = elements[i].readAttribute("data-minversion");
+        elements[i].observe("click", cback);
+        }
+    document.location.href = "action:state(" + Object.toJSON(r) + ")";
+    };
+document.observe("dom:loaded", domloaded);
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="infotasks">
+    {% if plugin %}
+    <p class="title">{{plugin.title|capitalize}}</p>
+    <p class="goback"><a href="{{
+        url_for('extras.category', lang=g.lang, page=page, category=category.name)
+        if category else
+        url_for('extras.category', lang=g.lang, page=page)
+        }}">Go back</a></p>
+    {% elif category %}
+    <p class="title">{{category.title|capitalize}}</p>
+    <p class="goback"><a href="{{url_for('extras.category', lang=g.lang)}}">Go back</a></p>
+    {% else %}
+    <p class="title">Categories</p>
+    {% endif %}
+</div>
+<div id="content">
+    {% if plugin %}
+    <div class="plugin">
+        {% if plugin.images %}
+        <div class="images">
+            {% for image, alt in plugin.images %}
+                <img src="{{url_for('extras.image', lang=g.lang, name=plugin.name, image=image)}}" alt="{{alt}}"/>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="author">Uploaded by: <strong>{{ plugin.user }}</strong></div>
+        <div class="description">{{ plugin.description|markdown }}</div>
+        <div class="download">{{ installbutton(plugin) }}</div>
+    </div>
+    {% elif category %}
+        {{ plugins(category, True) }}
+        {% for p in range(page) %}
+            <a href="{{url_for('extras.category', lang=g.lang, category=category.name, page=p)}}">{{p+1}}</a>
+        {% endfor %}
+        {% if page > 0 %}
+        <a href="{{url_for('extras.category', lang=g.lang, category=category.name, page=page-1)}}">previous</a>
+        {% endif %}
+        <a href="{{url_for('extras.category', lang=g.lang, category=category.name, page=page+1)}}">next</a>
+    {% elif categories %}
+        {% for category in categories %}
+        <h2 class="plugin_category">{{category.title|capitalize}}</h2>
+        {{ plugins(category) }}
+        <a href="{{url_for('extras.category', lang=g.lang, category=category.name, page=1)}}">More...</a>
+        {% endfor %}
+    {% else %}
+    <p>Nothing to show</p>
+    {% endif %}
+</div>
+{% endblock %}
