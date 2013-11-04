@@ -53,6 +53,9 @@ def create_app(config=None, debug=False):
     if config:
         app.config.from_object(config)
 
+    # Modo de appweb
+    appmode = app.config["APPWEB_MODE"]
+
     # Gestión centralizada de errores
     if app.config["SENTRY_DSN"]:
         sentry.init_app(app)
@@ -93,8 +96,12 @@ def create_app(config=None, debug=False):
     csrf.init_app(app)
 
     # Blueprints
-    app.register_blueprint(files)
-    app.register_blueprint(extras)
+    if appmode == "search":
+        app.register_blueprint(files)
+    elif appmode == "extras":
+        app.register_blueprint(extras)
+    else:
+        logging.error("No se ha especificado modo en la configuración. Blueprints sin cargar.")
 
     # Web Assets
     scss.config.LOAD_PATHS = [os.path.dirname(os.path.dirname(app.static_folder))]
@@ -111,8 +118,6 @@ def create_app(config=None, debug=False):
 
     assets.register('css_blubster', Bundle('blubster/css/blubster.scss', filters='pyscss', output='blubster/gen/blubster.css', debug=False, depends='appweb.scss'), filters='css_slimmer', output='blubster/gen/blubster.css')
     assets.register('css_foofind', Bundle('foofind/css/foofind.scss', filters='pyscss', output='foofind/gen/foofind.css', debug=False), filters='css_slimmer', output='foofind/gen/foofind.css')
-    assets.register('js_appweb', Bundle('prototype.js', 'event.simulate.js', 'chosen.proto.min.js', 'appweb.js', filters='rjsmin', output='gen/appweb.js'), )
-
 
     # Traducciones
     babel.init_app(app)
@@ -198,12 +203,14 @@ def create_app(config=None, debug=False):
         503: ("Service unavailable", "This page is temporarily unavailable. Please try again later.")
     }
 
-    @allerrors(app, 400, 401, 403, 404, 405, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 500, 501, 502, 503)
+    @allerrors(app, 400, 401, 403, 404, 405, 408, 409, 410, 411, 412, 413,
+                   414, 415, 416, 417, 418, 500, 501, 502, 503)
     def all_errors(e):
         error = e.code if hasattr(e,"code") else 500
         title, description = errors[error if error in errors else 500]
         init_g(app)
-        return render_template('error.html', code=str(error), title=title, description=description), error
+        return render_template('error.html', code=str(error), title=title,
+                               description=description), error
 
     return app
 
@@ -213,10 +220,19 @@ def init_g(app):
     g.license_name = "foofind" if "foofind" in request.url_root else "blubster"
 
     # caracteristicas del cliente
-    g.search_bot=is_search_bot()
+    g.search_bot = is_search_bot()
 
     # peticiones en modo preproduccion
     g.beta_request = request.url_root[request.url_root.index("//")+2:].startswith("beta.")
+
+    # endpoint de entrada (usado en la página de error)
+    if app.config["APPWEB_MODE"] == "search":
+        g.home_route = "files.home"
+    elif app.config["APPWEB_MODE"] == "extras":
+        g.home_route = "extras.home"
+    else:
+        logging.error(u"APPWEB_MODE no especificado en la configuración")
+        g.home_route = "files.home"
 
     # prefijo para los contenidos estáticos
     if g.beta_request:
