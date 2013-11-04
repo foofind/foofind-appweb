@@ -5,6 +5,7 @@ import itertools
 import operator
 import sys
 import os.path
+import functools
 
 from flask import g, Blueprint, render_template, url_for, abort, send_file, current_app, request, redirect
 
@@ -12,32 +13,50 @@ extras = Blueprint("extras", __name__)
 
 from foofind.services import plugindb
 
-@extras.route("/<lang>/extras", methods=("GET", "POST"), defaults={"page":0, "category":None}) # TODO(felipe): remove GET method
-@extras.route("/<lang>/extras/<category>", methods=("GET", "POST"), defaults={"page":0})
-@extras.route("/<lang>/extras/<category>/<int:page>", methods=("GET", "POST"))
+def referrer_check(fnc):
+    @functools.wraps(fnc)
+    def wrapped(*args, **kwargs):
+        if request.referrer and request.referrer.startswith(request.url_root):
+            return fnc(*args, **kwargs)
+        abort(404)
+    return wrapped
+
+# someone's spaggheti code workaround
+from foofind.blueprints.files.helpers import csrf
+@extras.route("/<lang>/extras", methods=("POST",))
+@csrf.exempt
+def home():
+    return redirect(url_for(".category"))
+
+@extras.route("/<lang>/extras", defaults={"page":1, "category":None})
+@extras.route("/<lang>/extras/<category>", defaults={"page":1})
+@extras.route("/<lang>/extras/<category>/<int:page>")
+@referrer_check
 def category(category, page):
     '''
     Extras front page
     '''
+    page = max(page, 1)
     if category:
-        plugins = plugindb.get_plugins(category, page)
+        plugins = plugindb.get_plugins(category, page-1)
         categories = None
         category = plugins[0].category if plugins else plugindb.get_category(category)
     else:
-        plugins, categories = plugindb.get_plugins_with_categories(page=page)
+        plugins, categories = plugindb.get_plugins_with_categories(page=page-1)
         categories = sorted(categories.itervalues(), key=operator.attrgetter("title"))
         category = None
 
     reqos = request.user_agent.platform # operative system for params
     return render_template('extras.html', categories=categories, category=category, page=page, reqos=reqos)
 
-@extras.route("/<lang>/extras/info/<category>/<int:page>/<name>")
-@extras.route("/<lang>/extras/info/<int:page>/<name>", defaults={"category":None})
-@extras.route("/<lang>/extras/info/<name>", defaults={"category":None, "page":0})
+@extras.route("/<lang>/extras/info/<name>", defaults={"page":1, "category":None})
+@extras.route("/<lang>/extras/<category>/<int:page>/<name>")
+@referrer_check
 def info(category, page, name):
     '''
 
     '''
+    page = max(page, 1)
     plugin = plugindb.get_plugin(name)
     if plugin is None:
         abort(404)

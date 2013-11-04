@@ -50,7 +50,7 @@ hr {
   width: 100%;
   color: $generalbackgroundcolor;
   border: none;
-  background: $generalbackground_color;
+  background: $generalbackgroundcolor;
   font-size: 0.1em;
   line-height: 0.1em;
 }
@@ -73,7 +73,6 @@ abbr {
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - INFOTASKS */
 #infotasks{
-  min-width:$minwidth;
   background:#fff;
   width:100%;
   padding:0;

@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+
 """
-    Controladores de las páginas de búsqueda y de fichero.
+Controladores de las páginas de búsqueda y de fichero.
 """
+
 import json
 from flask import request, render_template, g, current_app, redirect, url_for, jsonify, make_response
 from flask.ext.wtf import Form, BooleanField, TextField, TextAreaField, SubmitField, Required, Email, Length
@@ -46,7 +48,7 @@ def search():
     filetype=request.form.get("t",None)
 
     if query: #si no se ha buscado nada se manda al inicio
-        query = query.replace("_"," ") if query is not None else None #para que funcionen la busqueda cuando vienen varias palabras
+        query = query.replace("_"," ")  #para que funcionen la busqueda cuando vienen varias palabras
 
     filters = {"src":"torrent"}
 

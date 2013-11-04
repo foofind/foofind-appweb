@@ -15,7 +15,7 @@
 </head>
 <body>
 <div id="app">
-    <form id="go_home" method="POST" action="{{url_for('files.home')}}"></form>
+    <form id="go_home" method="POST" action="{{url_for(g.home_route)}}"></form>
     <div class="error">
         <div class="error-img">
             <img src="{{g.static_prefix}}/blubster/imgs/ico.error-oops-280.png" alt="Error">
