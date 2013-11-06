@@ -26,7 +26,12 @@ from foofind.blueprints.files.helpers import csrf
 @extras.route("/<lang>/extras", methods=("POST",))
 @csrf.exempt
 def home():
-    return redirect(url_for(".category"))
+    # like category without referer check
+    plugins, categories = plugindb.get_plugins_with_categories()
+    categories = sorted(categories.itervalues(), key=operator.attrgetter("title"))
+    category = None
+    reqos = request.user_agent.platform # operative system for params
+    return render_template('extras.html', categories=categories, category=category, page=page, reqos=reqos)
 
 @extras.route("/<lang>/extras", defaults={"page":1, "category":None})
 @extras.route("/<lang>/extras/<category>", defaults={"page":1})
