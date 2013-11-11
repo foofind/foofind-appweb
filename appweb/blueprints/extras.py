@@ -21,15 +21,21 @@ def referrer_check(fnc):
         abort(404)
     return wrapped
 
+INFINITE = float("inf")
+
+def category_order(data):
+    if data.title.lower() == "featured":
+        return -INFINITE
+    return data.title
+
 # someone's spaggheti code workaround
 from foofind.blueprints.files.helpers import csrf
 @extras.route("/<lang>/extras", methods=("POST",))
 @csrf.exempt
 def home():
     # like category without referer check
-    page = 0
     plugins, categories = plugindb.get_plugins_with_categories()
-    categories = sorted(categories.itervalues(), key=operator.attrgetter("title"))
+    categories = sorted(categories.itervalues(), key=category_order)
     category = None
     reqos = request.user_agent.platform # operative system for params
     return render_template('extras.html', categories=categories, category=category, page=1, reqos=reqos)
@@ -49,7 +55,7 @@ def category(category, page):
         category = plugins[0].category if plugins else plugindb.get_category(category)
     else:
         plugins, categories = plugindb.get_plugins_with_categories(page=page-1)
-        categories = sorted(categories.itervalues(), key=operator.attrgetter("title"))
+        categories = sorted(categories.itervalues(), key=category_order)
         category = None
 
     reqos = request.user_agent.platform # operative system for params
