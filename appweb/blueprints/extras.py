@@ -31,7 +31,7 @@ def home():
     categories = sorted(categories.itervalues(), key=operator.attrgetter("title"))
     category = None
     reqos = request.user_agent.platform # operative system for params
-    return render_template('extras.html', categories=categories, category=category, page=page, reqos=reqos)
+    return render_template('extras.html', categories=categories, category=category, page=0, reqos=reqos)
 
 @extras.route("/<lang>/extras/all", defaults={"page":1, "category":None})
 @extras.route("/<lang>/extras/<category>", defaults={"page":1})
