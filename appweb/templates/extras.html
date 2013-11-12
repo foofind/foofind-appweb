@@ -134,7 +134,7 @@ window.update_plugin_state=function(data){
 window.update_plugin_list=function(data){
     // Show information about plugins for given client data
     var form=$("plugin_list_form"), pluginlist="";
-    for(var i=0,l=data.length;i<l;i++) pluginlist = "," + data[i].name;
+    for(var i=0,l=data.length;i<l;i++) pluginlist += "," + data[i].name;
     form.plugins.value = pluginlist.substr(1);
     form.submit();
     };
