@@ -179,7 +179,7 @@ var domloaded=function(){
         elm = elements[i];
         elm.observe("click", info_cback);
         }
-    //document.location.href = "action:state(" + Object.toJSON(r) + ")";
+    document.location.href = "action:state(" + Object.toJSON(r) + ")";
     };
 document.observe("dom:loaded", domloaded);
 </script>
