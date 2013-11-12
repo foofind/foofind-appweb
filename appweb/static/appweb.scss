@@ -1128,7 +1128,6 @@ h2.plugin_category{
         background:#685fff;
         cursor:pointer;
         }
-
     &.state_failed{
         border:1px solid brown;
         background:#f76a73;
@@ -1143,6 +1142,11 @@ h2.plugin_category{
     &.state_installed{
         background-color:transparent;
         border:1px dashed #888;
+        }
+    &.state_uninstall{
+        border:1px solid brown;
+        background:#f76a73;
+        cursor:pointer;
         }
     }
 

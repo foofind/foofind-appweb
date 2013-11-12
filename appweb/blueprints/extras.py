@@ -36,9 +36,8 @@ def home():
     # like category without referer check
     plugins, categories = plugindb.get_plugins_with_categories()
     categories = sorted(categories.itervalues(), key=category_order)
-    category = None
     reqos = request.user_agent.platform # operative system for params
-    return render_template('extras.html', categories=categories, category=category, page=1, reqos=reqos)
+    return render_template('extras.html', categories=categories, page=1, reqos=reqos)
 
 @extras.route("/<lang>/extras", defaults={"page":1, "category":None})
 @extras.route("/<lang>/extras/<category>", defaults={"page":1})
@@ -60,6 +59,18 @@ def category(category, page):
 
     reqos = request.user_agent.platform # operative system for params
     return render_template('extras.html', categories=categories, category=category, page=page, reqos=reqos)
+
+@extras.route("/<lang>/list", methods=("POST",))
+def list():
+    '''
+
+    '''
+    if "names" in request.form:
+        plugins = plugindb.get_plugins_by_name(request.form["names"].split(","))
+    else:
+        plugins = []
+    reqos = request.user_agent.platform # operative system for params
+    return render_template('extras.html', plugins=plugins, reqos=reqos)
 
 @extras.route("/<lang>/extras/info/<name>", defaults={"page":1, "category":None})
 @extras.route("/<lang>/extras/<category>/<int:page>/<name>")

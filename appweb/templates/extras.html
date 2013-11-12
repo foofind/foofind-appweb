@@ -1,14 +1,17 @@
 {% extends "base.html" %}
 
-{% macro installbutton(plugin) %}
+{% macro installbutton(plugin, action="download") %}
 <a class="installbutton" id="plugin:{{plugin.name}}"
-    {% if plugin.checksum %}
+    {%- if action != "download" %}
+    data-action="{{action}}"
+    {%- endif %}
+    {%- if plugin.checksum %}
     data-checksum="{{plugin.checksum}}"
-    {% endif %}
-    {% if plugin.minversion %}
+    {%- endif %}
+    {%- if plugin.minversion %}
     data-minversion="{{plugin.minversion}}"
-    {% endif %}
-    href="action:download({{plugin.get_download_json(reqos)}})"></a>
+    {%- endif %}
+    href="action:{{action}}({{plugin.get_download_json(reqos)}})"></a>
 {% endmacro %}
 
 {% macro plugins(category, in_category=False) %}
@@ -32,11 +35,56 @@
 {% endif %}
 {% endmacro %}
 
+{% macro plugin_list(plugins) %}
+<ul>
+{% for plugin in plugins %}
+    <li class="result-item just-added result-plugin">
+        <div class="wrap-result">
+            <div class="result-main-data">
+                <div class="wrap-result-title">
+                    <div class="result-title-info">
+                        <div class="result-title" title="{{ plugin.title }}">
+                            <p class="result-title">
+                                <span>{{ plugin.title }}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-more-info">
+                    <div class="result-more-info-text">
+                        <p>{{ plugin.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="result-actions">
+            <ul class="result-actions">
+                <li class="result-action-download">
+                    {{ installbutton(plugin, 'uninstall') }}
+                </li>
+                <li class="result-action-info">
+                    <a class="button button-off">
+                        <span>
+                            {{- "" -}}<img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-info-off.png">
+                            {{- "" -}}<img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-info-on.png">
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+{% endfor %}
+</ul>
+{% endmacro %}
+
 {% block head %}
 <script type="text/javascript">
 window.update_plugin_state=function(data){
+    // Update plugin data of current page according to given client state
     var c="", t="", n, p = 0;
     for(var i in data){
+        n = $("plugin:" + i);
+        if(n===null) continue;
         switch(parseInt(data[i])){
             case -3:
                 c = "state_non_compatible";
@@ -53,6 +101,7 @@ window.update_plugin_state=function(data){
             case 0:
                 c = "state_install";
                 t = "install";
+                else
                 break;
             case 1:
                 p = Math.round((data[i]-1)*100); // Progress
@@ -62,31 +111,55 @@ window.update_plugin_state=function(data){
             case 2:
             case 3:
             default:
-                c = "state_installed";
-                t = "installed";
+                if(n.readAttribute("data-action")=="uninstall"){
+                    c = "state_uninstall";
+                    t = "uninstall";
+                    }
+                else{
+                    c = "state_installed";
+                    t = "installed";
+                    }
             }
-        n = $("plugin:" + i);
-        if(n===null) continue;
+
         n.className = "installbutton " + c;
         n.update(t);
         }
     };
+window.update_plugin_list=function(data){
+    // Show information about plugins for given client data
+    var form=$("plugin_list_form"), pluginlist="";
+    for(var i in data) pluginlist = "," + i.name;
+    form.plugins.value = pluginlist.substr(1);
+    form.submit();
+    };
 var domloaded=function(){
-    var elements=$$(".installbutton"), r=[],
+    // Initialize events and call 'state' action with current shown plugins
+    var elements=$$(".installbutton"), elm, data, r=[],
+        valid_states=["uninstall", "install", "update", "failed"],
+        valid_int_data=["checksum"],
+        valid_str_data=["minversion", "action"],
         cback = function(e){
-            if(!(
-                this.hasClassName("state_install")||
-                this.hasClassName("state_update")||
-                this.hasClassName("state_failed")
-                ))
-                e.stop();
+            // Block non-clickable states
+            for(var i=0,l=valid_states.length;i<l;i++)
+                if(this.hasClassName("state_" + valid_states[i]))
+                    return true;
+            e.stop();
         };
     for(var i=0,l=elements.length;i<l;i++){
-        r[r.length] = {name:elements[i].id.substr(7)};
-        if(elements[i].hasAttribute("data-checksum"))
-            r[r.length-1]["checksum"] = parseInt(elements[i].readAttribute("data-checksum"));
-        if(elements[i].hasAttribute("data-minversion"))
-            r[r.length-1]["minversion"] = elements[i].readAttribute("data-minversion");
+        elm = elements[i];
+        data = {name: elm.id.substr(7)};
+
+        // Numeric data properties
+        for(var j=0,k=valid_int_data.length;i<l;i++)
+            if(elm.hasAttribute("data-" + valid_int_data[i]))
+                data[valid_int_data[i]] = parseInt(elm.readAttribute("data-checksum"));
+
+        // String data properties
+        for(var j=0,k=valid_str_data.length;i<l;i++)
+            if(elm.hasAttribute("data-" + valid_str_data[i]))
+                data[valid_str_data[i]] = elm.readAttribute("data-checksum");
+
+        r[r.length] = data;
         elements[i].observe("click", cback);
         }
     document.location.href = "action:state(" + Object.toJSON(r) + ")";
@@ -96,6 +169,10 @@ document.observe("dom:loaded", domloaded);
 {% endblock %}
 
 {% block content %}
+<form id="plugin_list_form" class="hiddenform" action="{{url_for('extras.list', lang=g.lang)}}">
+<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}"/>
+<input type="hidden" name="plugins" value=""/>
+</form>
 <div id="infotasks">
     {% if plugin %}
     <p class="title">{{plugin.title|capitalize}}</p>
@@ -104,11 +181,15 @@ document.observe("dom:loaded", domloaded);
         if category else
         url_for('extras.category', lang=g.lang, page=page)
         }}">Go back</a></p>
+    {% elif plugins %}
+    <p class="title">{{ len(plugins) }} installed plugins</p>
+    <p class="goback"><a href="{{url_for('extras.category', lang=g.lang)}}">Go back</a></p>
     {% elif category %}
     <p class="title">{{category.title|capitalize}}</p>
     <p class="goback"><a href="{{url_for('extras.category', lang=g.lang)}}">Go back</a></p>
     {% else %}
     <p class="title">Categories</p>
+    <p class="goback"><a href="action:list()">My installed plugins</a></p>
     {% endif %}
 </div>
 <div id="content">
@@ -125,6 +206,8 @@ document.observe("dom:loaded", domloaded);
         <div class="description">{{ plugin.description|markdown }}</div>
         <div class="download">{{ installbutton(plugin) }}</div>
     </div>
+    {% elif plugins %}
+        {{ plugin_list(plugins) }}
     {% elif category %}
         {{ plugins(category, True) }}
         {% if page > 1 %}
