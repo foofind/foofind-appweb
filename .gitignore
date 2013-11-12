@@ -3,3 +3,8 @@
 .DS_Store
 **.sass-cache
 force
+*.pyc
+appweb/static
+development.py
+production.py
+runserver
