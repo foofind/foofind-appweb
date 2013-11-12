@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% macro installbutton(plugin, action="download") %}
+{% macro render_installbutton(plugin, action="download") %}
 <a class="installbutton" id="plugin:{{plugin.name}}"
     {%- if action != "download" %}
     data-action="{{action}}"
@@ -14,7 +14,7 @@
     href="action:{{action}}({{plugin.get_download_json(reqos)}})"></a>
 {% endmacro %}
 
-{% macro plugins(category, in_category=False) %}
+{% macro render_plugins(category, in_category=False) %}
 {% if category.plugins %}
 <ul class="plugincards">
 {% for plugin in category.plugins %}
@@ -27,7 +27,7 @@
             <h3>{{plugin.title|capitalize}}</h3>
             <p>{{plugin.summary}}</p>
         </a>
-        {{ installbutton(plugin) }}
+        {{ render_installbutton(plugin) }}
     </li>
 {% endfor %}
 </ul>
@@ -35,10 +35,10 @@
 {% endif %}
 {% endmacro %}
 
-{% macro plugin_list(plugins) %}
+{% macro render_plugin_list(plugins) %}
 <ul>
 {% for plugin in plugins %}
-    <li class="result-item just-added result-plugin">
+    <li class="result-item just-added result-plugin result-{{ 'even' if loop.index is divisibleby(2) else 'odd' }}">
         <div class="wrap-result">
             <div class="result-main-data">
                 <div class="wrap-result-title">
@@ -49,10 +49,17 @@
                             </p>
                         </div>
                     </div>
+                    <div class="result-info">
+                        <ul class="result-info">
+                            <li class="sele-summary">
+                                <span>{{ plugin.summary }}</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="result-more-info">
                     <div class="result-more-info-text">
-                        <p>{{ plugin.description }}</p>
+                        <p>{{ plugin.description|markdown }}</p>
                     </div>
                 </div>
             </div>
@@ -60,7 +67,7 @@
         <div class="result-actions">
             <ul class="result-actions">
                 <li class="result-action-download">
-                    {{ installbutton(plugin, 'uninstall') }}
+                    {{ render_installbutton(plugin, 'uninstall') }}
                 </li>
                 <li class="result-action-info">
                     <a class="button button-off">
@@ -101,7 +108,6 @@ window.update_plugin_state=function(data){
             case 0:
                 c = "state_install";
                 t = "install";
-                else
                 break;
             case 1:
                 p = Math.round((data[i]-1)*100); // Progress
@@ -128,16 +134,21 @@ window.update_plugin_state=function(data){
 window.update_plugin_list=function(data){
     // Show information about plugins for given client data
     var form=$("plugin_list_form"), pluginlist="";
-    for(var i in data) pluginlist = "," + i.name;
+    for(var i=0,l=data.length;i<l;i++) pluginlist = "," + data[i].name;
     form.plugins.value = pluginlist.substr(1);
     form.submit();
     };
 var domloaded=function(){
     // Initialize events and call 'state' action with current shown plugins
-    var elements=$$(".installbutton"), elm, data, r=[],
+    var elements, elm, data, r=[],
         valid_states=["uninstall", "install", "update", "failed"],
         valid_int_data=["checksum"],
         valid_str_data=["minversion", "action"],
+        info_cback = function(){
+            var item=this.up(".result-item");
+            this.className=item.hasClassName("result-expanded")?"button button-off":"button button-on";
+            item.toggleClassName("result-expanded");
+            },
         cback = function(e){
             // Block non-clickable states
             for(var i=0,l=valid_states.length;i<l;i++)
@@ -145,6 +156,7 @@ var domloaded=function(){
                     return true;
             e.stop();
         };
+    elements=$$(".installbutton");
     for(var i=0,l=elements.length;i<l;i++){
         elm = elements[i];
         data = {name: elm.id.substr(7)};
@@ -160,16 +172,21 @@ var domloaded=function(){
                 data[valid_str_data[i]] = elm.readAttribute("data-checksum");
 
         r[r.length] = data;
-        elements[i].observe("click", cback);
+        elm.observe("click", cback);
         }
-    document.location.href = "action:state(" + Object.toJSON(r) + ")";
+    elements=$$(".result-action-info .button");
+    for(var i=0,l=elements.length;i<l;i++){
+        elm = elements[i];
+        elm.observe("click", info_cback);
+        }
+    //document.location.href = "action:state(" + Object.toJSON(r) + ")";
     };
 document.observe("dom:loaded", domloaded);
 </script>
 {% endblock %}
 
 {% block content %}
-<form id="plugin_list_form" class="hiddenform" action="{{url_for('extras.list', lang=g.lang)}}">
+<form id="plugin_list_form" method="post" class="hiddenform" action="{{url_for('extras.list', lang=g.lang)}}">
 <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}"/>
 <input type="hidden" name="plugins" value=""/>
 </form>
@@ -181,8 +198,8 @@ document.observe("dom:loaded", domloaded);
         if category else
         url_for('extras.category', lang=g.lang, page=page)
         }}">Go back</a></p>
-    {% elif plugins %}
-    <p class="title">{{ len(plugins) }} installed plugins</p>
+    {% elif plugins is defined %}
+    <p class="title">{{ plugins|length }} installed plugins</p>
     <p class="goback"><a href="{{url_for('extras.category', lang=g.lang)}}">Go back</a></p>
     {% elif category %}
     <p class="title">{{category.title|capitalize}}</p>
@@ -204,12 +221,12 @@ document.observe("dom:loaded", domloaded);
         {% endif %}
         <div class="author">Uploaded by: <strong>{{ plugin.user }}</strong></div>
         <div class="description">{{ plugin.description|markdown }}</div>
-        <div class="download">{{ installbutton(plugin) }}</div>
+        <div class="download">{{ render_installbutton(plugin) }}</div>
     </div>
     {% elif plugins %}
-        {{ plugin_list(plugins) }}
+        {{ render_plugin_list(plugins) }}
     {% elif category %}
-        {{ plugins(category, True) }}
+        {{ render_plugins(category, True) }}
         {% if page > 1 %}
         <a href="{{url_for('extras.category', lang=g.lang, category=category.name, page=page-1)}}">previous</a>
         {% endif %}
@@ -220,7 +237,7 @@ document.observe("dom:loaded", domloaded);
     {% elif categories %}
         {% for category in categories %}
         <h2 class="plugin_category">{{category.title|capitalize}}</h2>
-        {{ plugins(category) }}
+        {{ render_plugins(category) }}
         <a href="{{url_for('extras.category', lang=g.lang, category=category.name, page=1)}}">More...</a>
         {% endfor %}
     {% else %}

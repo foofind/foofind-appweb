@@ -1210,3 +1210,24 @@ h2.plugin_category{
         margin-left:-175px;
         }
     }
+
+.result-action-download .installbutton{
+    position:relative;
+    left: 0; top: 0;
+
+    width: 100px; height:30px;
+    padding: 0 1em;
+    margin: 0 0.5em 0 0;
+    line-height:30px;
+
+    cursor: pointer;
+
+    opacity: 0.80; filter: alpha(opacity=80);
+
+    border-radius: 2px; -webkit-border-radius: 2px; -moz-border-radius: 2px;
+
+    display: inline-block;
+    zoom: 1;
+
+    vertical-align: middle;
+    }

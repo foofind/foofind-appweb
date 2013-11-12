@@ -65,8 +65,8 @@ def list():
     '''
 
     '''
-    if "names" in request.form:
-        plugins = plugindb.get_plugins_by_name(request.form["names"].split(","))
+    if "plugins" in request.form:
+        plugins = plugindb.get_plugins_by_name(request.form["plugins"].split(","))
     else:
         plugins = []
     reqos = request.user_agent.platform # operative system for params
