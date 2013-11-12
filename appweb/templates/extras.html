@@ -162,14 +162,14 @@ var domloaded=function(){
         data = {name: elm.id.substr(7)};
 
         // Numeric data properties
-        for(var j=0,k=valid_int_data.length;i<l;i++)
-            if(elm.hasAttribute("data-" + valid_int_data[i]))
-                data[valid_int_data[i]] = parseInt(elm.readAttribute("data-checksum"));
+        for(var j=0,k=valid_int_data.length;j<k;j++)
+            if(elm.hasAttribute("data-" + valid_int_data[j]))
+                data[valid_int_data[j]] = parseInt(elm.readAttribute("data-checksum"));
 
         // String data properties
-        for(var j=0,k=valid_str_data.length;i<l;i++)
-            if(elm.hasAttribute("data-" + valid_str_data[i]))
-                data[valid_str_data[i]] = elm.readAttribute("data-checksum");
+        for(var j=0,k=valid_str_data.length;j<k;j++)
+            if(elm.hasAttribute("data-" + valid_str_data[j]))
+                data[valid_str_data[j]] = elm.readAttribute("data-checksum");
 
         r[r.length] = data;
         elm.observe("click", cback);
