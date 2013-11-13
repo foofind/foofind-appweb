@@ -11,7 +11,7 @@
     {%- if plugin.minversion %}
     data-minversion="{{plugin.minversion}}"
     {%- endif %}
-    href="action:{{action}}({{plugin.get_download_json(reqos)}})"></a>
+    href="action:install({{plugin.get_download_json(reqos)}})"></a>
 {% endmacro %}
 
 {% macro render_plugins(category, in_category=False) %}
@@ -88,7 +88,8 @@
 <script type="text/javascript">
 window.update_plugin_state=function(data){
     // Update plugin data of current page according to given client state
-    var c="", t="", n, p = 0;
+    var c="", t="", a="", n, p = 0,
+        actions = ["action:install", "action:uninstall"];
     for(var i in data){
         n = $("plugin:" + i);
         if(n===null) continue;
@@ -96,29 +97,31 @@ window.update_plugin_state=function(data){
             case -3:
                 c = "state_non_compatible";
                 t = "not compatible";
+                a = "action:install";
                 break;
             case -2:
                 c = "state_failed";
                 t = "failed";
+                a = "action:install";
                 break;
             case -1:
                 c = "state_update";
                 t = "update";
+                a = "action:install";
                 break;
             case 0:
-                if(n.readAttribute("data-action")=="uninstall"){
-                    c = "state_install";
-                    t = "install";
-                    }
-                else{
-                    c = "state_install";
+                c = "state_install";
+                if(n.readAttribute("data-action")=="uninstall")
                     t = "reinstall";
-                    }
+                else
+                    t = "install";
+                a = "action:install";
                 break;
             case 1:
                 p = Math.round((data[i]-1)*100); // Progress
                 c = "state_downloading";
                 t = "downloading ( " + p + "% )";
+                a = "action:install";
                 break;
             case 2:
             case 3:
@@ -126,13 +129,24 @@ window.update_plugin_state=function(data){
                 if(n.readAttribute("data-action")=="uninstall"){
                     c = "state_uninstall";
                     t = "uninstall";
+                    a = "action:uninstall";
                     }
                 else{
                     c = "state_installed";
                     t = "installed";
+                    a = "action:install";
                     }
             }
+        // Update action with new action
+        for(var i=0,l=actions.length;i<l;l++)
+            if(n.href.substr(0, actions[i].length)==actions[i]){
+                if(actions[i] != a)
+                    n.href = a + n.href.substr(actions[i].length);
+                break;
+                }
+        // Update class
         n.className = "installbutton " + c;
+        // Update text
         n.update(t);
         }
     };
@@ -194,6 +208,7 @@ document.observe("dom:loaded", domloaded);
 <form id="plugin_list_form" method="post" class="hiddenform" action="{{url_for('extras.list', lang=g.lang)}}">
 <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}"/>
 <input type="hidden" name="plugins" value=""/>
+<input type="hidden" name="uninstallable" value=""/>
 </form>
 <div id="infotasks">
     {% if plugin %}
