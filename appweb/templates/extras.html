@@ -106,8 +106,14 @@ window.update_plugin_state=function(data){
                 t = "update";
                 break;
             case 0:
-                c = "state_install";
-                t = "install";
+                if(n.readAttribute("data-action")=="uninstall"){
+                    c = "state_install";
+                    t = "install";
+                    }
+                else{
+                    c = "state_install";
+                    t = "reinstall";
+                    }
                 break;
             case 1:
                 p = Math.round((data[i]-1)*100); // Progress
@@ -126,7 +132,6 @@ window.update_plugin_state=function(data){
                     t = "installed";
                     }
             }
-
         n.className = "installbutton " + c;
         n.update(t);
         }
