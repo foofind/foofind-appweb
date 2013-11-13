@@ -93,6 +93,7 @@
     window.update_plugin_state=function(data){
         // Update plugin data of current page according to given client state
         var c="", t="", a="", d="", n, p = 0,
+            installed = 0,
             actions = ["action:download", "action:uninstall"];
         for(var name in data){
             n = $("plugin:" + name);
@@ -154,6 +155,7 @@
                         a = "action:download";
                         d = "Plugin already installed";
                         }
+                    installed += 1;
                 }
             // Update old action with new action
             for(var i=0,l=actions.length;i<l;i++)
@@ -166,6 +168,8 @@
             n.update(t); // Update text
             n.title = d; // Update tooltip
             }
+        n = $("numinstalled");
+        if(n) n.update(installed);
         };
     window.update_plugin_list=function(data){
         // Show information about plugins for given client data
@@ -246,7 +250,7 @@
         url_for('extras.category', lang=g.lang, page=page)
         }}">Go back</a></p>
     {% elif plugins is defined %}
-    <p class="title">{{ plugins|length }} installed plugins</p>
+    <p class="title"><span id="numinstalled">{{ plugins|length }}</span> installed plugins</p>
     <p class="goback"><a href="{{url_for('extras.category', lang=g.lang)}}">Go back</a></p>
     {% elif category %}
     <p class="title">{{category.title|capitalize}}</p>
