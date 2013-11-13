@@ -99,25 +99,47 @@
             n = $("plugin:" + name);
             if(n===null) continue;
             switch(parseInt(data[name])){
+                case -4:
+                    // Installed, but server version is incompatible
+                    if(n.readAttribute("data-action")=="uninstall"){
+                        c = "state_uninstall";
+                        t = "uninstall";
+                        a = "action:uninstall";
+                        d = "Uninstall this plugin";
+                        }
+                    else{
+                        c = "state_non_compatible";
+                        t = "non updateable";
+                        a = "action:download";
+                        d = "Plugin update is not compatible with current program version";
+                        }
+                    break;
                 case -3:
+                    // Server version is incompatible
                     c = "state_non_compatible";
-                    t = "not compatible";
+                    t = "uncompatible";
                     a = "action:download";
                     d = "Plugin not compatible with current program version";
                     break;
                 case -2:
+                    // Download or install failed
                     c = "state_failed";
                     t = "failed";
                     a = "action:download";
                     d = "Install failed, click for retry";
                     break;
                 case -1:
+                    // Server version is different than installed version
                     c = "state_update";
-                    t = "update";
+                    if(n.readAttribute("data-action")=="uninstall")
+                        t = "outdated";
+                    else
+                        t = "update";
                     a = "action:download";
                     d = "Click to install an updated version of this plugin";
                     break;
                 case 0:
+                    // Server version is available
                     c = "state_install";
                     if(n.readAttribute("data-action")=="uninstall")
                         t = "reinstall";
@@ -127,6 +149,7 @@
                     d = "Click to install this plugin";
                     break;
                 case 1:
+                    // Downloading and installing
                     p = Math.round((data[name]-1)*100); // Progress
                     c = "state_downloading";
                     t = "downloading ( " + p + "% )";
@@ -134,7 +157,9 @@
                     d = "This plugin is being downloaded";
                     break;
                 case 2:
+                    // Installed but not initialized
                 case 3:
+                    // Installed
                 default:
                     if(n.readAttribute("data-action")=="uninstall"){
                         if(ununinstallable.indexOf(name)==-1){
