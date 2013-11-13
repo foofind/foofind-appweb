@@ -235,7 +235,7 @@
 <form id="plugin_list_form" method="post" class="hiddenform" action="{{url_for('extras.list', lang=g.lang)}}">
 <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}"/>
 <input type="hidden" name="plugins" value="{{ form_plugins if form_plugins is defined else ''}}"/>
-<input type="hidden" name="ununinstallablelist" value="{{ form_ununinstallablelist if form_ununinstallablelist is defined else ''}}"/>
+<input type="hidden" name="ununinstallable" value="{{ form_ununinstallable if form_ununinstallable is defined else ''}}"/>
 </form>
 <div id="infotasks">
     {% if plugin %}
