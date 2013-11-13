@@ -86,129 +86,149 @@
 
 {% block head %}
 <script type="text/javascript">
-window.update_plugin_state=function(data){
-    // Update plugin data of current page according to given client state
-    var c="", t="", a="", n, p = 0,
-        actions = ["action:download", "action:uninstall"];
-    for(var i in data){
-        n = $("plugin:" + i);
-        if(n===null) continue;
-        switch(parseInt(data[i])){
-            case -3:
-                c = "state_non_compatible";
-                t = "not compatible";
-                a = "action:download";
-                break;
-            case -2:
-                c = "state_failed";
-                t = "failed";
-                a = "action:download";
-                break;
-            case -1:
-                c = "state_update";
-                t = "update";
-                a = "action:download";
-                break;
-            case 0:
-                c = "state_install";
-                if(n.readAttribute("data-action")=="uninstall")
-                    t = "reinstall";
-                else
-                    t = "install";
-                a = "action:download";
-                break;
-            case 1:
-                p = Math.round((data[i]-1)*100); // Progress
-                c = "state_downloading";
-                t = "downloading ( " + p + "% )";
-                a = "action:download";
-                break;
-            case 2:
-            case 3:
-            default:
-                if(n.readAttribute("data-action")=="uninstall"){
-                    c = "state_uninstall";
-                    t = "uninstall";
-                    a = "action:uninstall";
-                    }
-                else{
-                    c = "state_installed";
-                    t = "installed";
+(function(){
+    // Global variables
+    var uninstallable = $A(); // updated on dom:ready
+    // Public JS interface
+    window.update_plugin_state=function(data){
+        // Update plugin data of current page according to given client state
+        var c="", t="", a="", n, p = 0,
+            actions = ["action:download", "action:uninstall"];
+        for(var i in data){
+            n = $("plugin:" + i);
+            if(n===null) continue;
+            switch(parseInt(data[i])){
+                case -3:
+                    c = "state_non_compatible";
+                    t = "not compatible";
                     a = "action:download";
-                    }
-            }
-        // Update action with new action
-        for(var i=0,l=actions.length;i<l;l++)
-            if(n.href.substr(0, actions[i].length)==actions[i]){
-                if(actions[i] != a)
-                    n.href = a + n.href.substr(actions[i].length);
-                break;
+                    break;
+                case -2:
+                    c = "state_failed";
+                    t = "failed";
+                    a = "action:download";
+                    break;
+                case -1:
+                    c = "state_update";
+                    t = "update";
+                    a = "action:download";
+                    break;
+                case 0:
+                    c = "state_install";
+                    if(n.readAttribute("data-action")=="uninstall")
+                        t = "reinstall";
+                    else
+                        t = "install";
+                    a = "action:download";
+                    break;
+                case 1:
+                    p = Math.round((data[i]-1)*100); // Progress
+                    c = "state_downloading";
+                    t = "downloading ( " + p + "% )";
+                    a = "action:download";
+                    break;
+                case 2:
+                case 3:
+                default:
+                    if(n.readAttribute("data-action")=="uninstall"){
+                        if(uninstallable.indexOf(i)==-1){
+                            c = "state_uninstall";
+                            t = "uninstall";
+                            }
+                        else{
+                            c = "state_non_compatible";
+                            t = "internal";
+                            }
+                        a = "action:uninstall";
+                        }
+                    else{
+                        c = "state_installed";
+                        t = "installed";
+                        a = "action:download";
+                        }
                 }
-        // Update class
-        n.className = "installbutton " + c;
-        // Update text
-        n.update(t);
-        }
-    };
-window.update_plugin_list=function(data){
-    // Show information about plugins for given client data
-    var form=$("plugin_list_form"), pluginlist="";
-    for(var i=0,l=data.length;i<l;i++) pluginlist += "," + data[i].name;
-    form.plugins.value = pluginlist.substr(1);
-    form.submit();
-    };
-var domloaded=function(){
-    // Initialize events and call 'state' action with current shown plugins
-    var elements, elm, data, r=[],
-        valid_states=["uninstall", "install", "update", "failed"],
-        valid_int_data=["checksum"],
-        valid_str_data=["minversion", "action"],
-        info_cback = function(){
-            var item=this.up(".result-item");
-            this.className=item.hasClassName("result-expanded")?"button button-off":"button button-on";
-            item.toggleClassName("result-expanded");
-            },
-        cback = function(e){
-            // Block non-clickable states
-            for(var i=0,l=valid_states.length;i<l;i++)
-                if(this.hasClassName("state_" + valid_states[i]))
-                    return true;
-            e.stop();
+            // Update action with new action
+            for(var i=0,l=actions.length;i<l;l++)
+                if(n.href.substr(0, actions[i].length)==actions[i]){
+                    if(actions[i] != a)
+                        n.href = a + n.href.substr(actions[i].length);
+                    break;
+                    }
+            // Update class
+            n.className = "installbutton " + c;
+            // Update text
+            n.update(t);
+            }
         };
-    elements=$$(".installbutton");
-    for(var i=0,l=elements.length;i<l;i++){
-        elm = elements[i];
-        data = {name: elm.id.substr(7)};
+    window.update_plugin_list=function(data){
+        // Show information about plugins for given client data
+        var form=$("plugin_list_form"), pluginlist="", uninstallablelist="";
+        for(var i=0,l=data.length;i<l;i++){
+            pluginlist += "," + data[i].name;
+            if(data[i].uninstallable) uninstallablelist += "," + data[i].name;
+            };
+        form.plugins.value = pluginlist.substr(1);
+        form.uninstallable.value = uninstallable.substr(1);
+        form.submit();
+        };
+    // dom:ready initialization
+    document.observe("dom:loaded", function(){
+        // Initialize events and call 'state' action with current shown plugins
+        var elements, elm, data, r=[],
+            valid_states=["uninstall", "install", "update", "failed"],
+            valid_int_data=["checksum"],
+            valid_str_data=["minversion", "action"],
+            info_cback = function(){
+                var item=this.up(".result-item");
+                this.className=item.hasClassName("result-expanded")?"button button-off":"button button-on";
+                item.toggleClassName("result-expanded");
+                },
+            cback = function(e){
+                // Block non-clickable states
+                for(var i=0,l=valid_states.length;i<l;i++)
+                    if(this.hasClassName("state_" + valid_states[i]))
+                        return true;
+                e.stop();
+            };
+        // Update uninstallable plugin list
+        uninstallable = $A($("plugin_list_form").uninstallable.value.split(","));
+        // Create shown plugin data array and attach click restriction events
+        elements=$$(".installbutton");
+        for(var i=0,l=elements.length;i<l;i++){
+            elm = elements[i];
+            data = {name: elm.id.substr(7)};
 
-        // Numeric data properties
-        for(var j=0,k=valid_int_data.length;j<k;j++)
-            if(elm.hasAttribute("data-" + valid_int_data[j]))
-                data[valid_int_data[j]] = parseInt(elm.readAttribute("data-checksum"));
+            // Numeric data properties
+            for(var j=0,k=valid_int_data.length;j<k;j++)
+                if(elm.hasAttribute("data-" + valid_int_data[j]))
+                    data[valid_int_data[j]] = parseInt(elm.readAttribute("data-checksum"));
 
-        // String data properties
-        for(var j=0,k=valid_str_data.length;j<k;j++)
-            if(elm.hasAttribute("data-" + valid_str_data[j]))
-                data[valid_str_data[j]] = elm.readAttribute("data-checksum");
+            // String data properties
+            for(var j=0,k=valid_str_data.length;j<k;j++)
+                if(elm.hasAttribute("data-" + valid_str_data[j]))
+                    data[valid_str_data[j]] = elm.readAttribute("data-checksum");
 
-        r[r.length] = data;
-        elm.observe("click", cback);
-        }
-    elements=$$(".result-action-info .button");
-    for(var i=0,l=elements.length;i<l;i++){
-        elm = elements[i];
-        elm.observe("click", info_cback);
-        }
-    document.location.href = "action:state(" + Object.toJSON(r) + ")";
-    };
-document.observe("dom:loaded", domloaded);
+            r[r.length] = data;
+            elm.observe("click", cback);
+            }
+        // Attach info button
+        elements=$$(".result-action-info .button");
+        for(var i=0,l=elements.length;i<l;i++){
+            elm = elements[i];
+            elm.observe("click", info_cback);
+            }
+        // Send plugin data to client using action:state(JSON)
+        document.location.href = "action:state(" + Object.toJSON(r) + ")";
+        });
+    }());
 </script>
 {% endblock %}
 
 {% block content %}
 <form id="plugin_list_form" method="post" class="hiddenform" action="{{url_for('extras.list', lang=g.lang)}}">
 <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}"/>
-<input type="hidden" name="plugins" value=""/>
-<input type="hidden" name="uninstallable" value=""/>
+<input type="hidden" name="plugins" value="{{ form_plugins if form_plugins is defined else ''}}"/>
+<input type="hidden" name="uninstallable" value="{{ form_uninstallable if form_uninstallable is defined else ''}}"/>
 </form>
 <div id="infotasks">
     {% if plugin %}

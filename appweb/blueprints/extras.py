@@ -69,8 +69,11 @@ def list():
         plugins = plugindb.get_plugins_by_name(request.form["plugins"].split(","))
     else:
         plugins = []
+
     reqos = request.user_agent.platform # operative system for params
-    return render_template('extras.html', plugins=plugins, reqos=reqos)
+    return render_template('extras.html', plugins=plugins, reqos=reqos,
+                form_plugins=request.form.get("plugins", ""),
+                form_uninstallable=request.form.get("uninstallable", ""))
 
 @extras.route("/<lang>/extras/info/<name>", defaults={"page":1, "category":None})
 @extras.route("/<lang>/extras/<category>/<int:page>/<name>")
