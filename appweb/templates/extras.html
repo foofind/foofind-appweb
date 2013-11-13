@@ -11,7 +11,7 @@
     {%- if plugin.minversion %}
     data-minversion="{{plugin.minversion}}"
     {%- endif %}
-    href="action:install({{plugin.get_download_json(reqos)}})"></a>
+    href="action:download({{plugin.get_download_json(reqos)}})"></a>
 {% endmacro %}
 
 {% macro render_plugins(category, in_category=False) %}
@@ -89,7 +89,7 @@
 window.update_plugin_state=function(data){
     // Update plugin data of current page according to given client state
     var c="", t="", a="", n, p = 0,
-        actions = ["action:install", "action:uninstall"];
+        actions = ["action:download", "action:uninstall"];
     for(var i in data){
         n = $("plugin:" + i);
         if(n===null) continue;
@@ -97,17 +97,17 @@ window.update_plugin_state=function(data){
             case -3:
                 c = "state_non_compatible";
                 t = "not compatible";
-                a = "action:install";
+                a = "action:download";
                 break;
             case -2:
                 c = "state_failed";
                 t = "failed";
-                a = "action:install";
+                a = "action:download";
                 break;
             case -1:
                 c = "state_update";
                 t = "update";
-                a = "action:install";
+                a = "action:download";
                 break;
             case 0:
                 c = "state_install";
@@ -115,13 +115,13 @@ window.update_plugin_state=function(data){
                     t = "reinstall";
                 else
                     t = "install";
-                a = "action:install";
+                a = "action:download";
                 break;
             case 1:
                 p = Math.round((data[i]-1)*100); // Progress
                 c = "state_downloading";
                 t = "downloading ( " + p + "% )";
-                a = "action:install";
+                a = "action:download";
                 break;
             case 2:
             case 3:
@@ -134,7 +134,7 @@ window.update_plugin_state=function(data){
                 else{
                     c = "state_installed";
                     t = "installed";
-                    a = "action:install";
+                    a = "action:download";
                     }
             }
         // Update action with new action
