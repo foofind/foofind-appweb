@@ -94,10 +94,10 @@
         // Update plugin data of current page according to given client state
         var c="", t="", a="", d="", n, p = 0,
             actions = ["action:download", "action:uninstall"];
-        for(var i in data){
-            n = $("plugin:" + i);
+        for(var name in data){
+            n = $("plugin:" + name);
             if(n===null) continue;
-            switch(parseInt(data[i])){
+            switch(parseInt(data[name])){
                 case -3:
                     c = "state_non_compatible";
                     t = "not compatible";
@@ -126,7 +126,7 @@
                     d = "Click to install this plugin.";
                     break;
                 case 1:
-                    p = Math.round((data[i]-1)*100); // Progress
+                    p = Math.round((data[name]-1)*100); // Progress
                     c = "state_downloading";
                     t = "downloading ( " + p + "% )";
                     a = "action:download";
@@ -136,7 +136,7 @@
                 case 3:
                 default:
                     if(n.readAttribute("data-action")=="uninstall"){
-                        if(ununinstallable.indexOf(i)==-1){
+                        if(ununinstallable.indexOf(name)==-1){
                             c = "state_uninstall";
                             t = "uninstall";
                             d = "Uninstall this plugin";
