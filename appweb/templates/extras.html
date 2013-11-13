@@ -92,7 +92,7 @@
     // Public JS interface
     window.update_plugin_state=function(data){
         // Update plugin data of current page according to given client state
-        var c="", t="", a="", n, p = 0,
+        var c="", t="", a="", d="", n, p = 0,
             actions = ["action:download", "action:uninstall"];
         for(var i in data){
             n = $("plugin:" + i);
@@ -102,16 +102,19 @@
                     c = "state_non_compatible";
                     t = "not compatible";
                     a = "action:download";
+                    d = "Plugin not compatible with current program version";
                     break;
                 case -2:
                     c = "state_failed";
                     t = "failed";
                     a = "action:download";
+                    d = "Install failed, click for retry";
                     break;
                 case -1:
                     c = "state_update";
                     t = "update";
                     a = "action:download";
+                    d = "Click to install an updated version of this plugin";
                     break;
                 case 0:
                     c = "state_install";
@@ -120,12 +123,14 @@
                     else
                         t = "install";
                     a = "action:download";
+                    d = "Click to install this plugin.";
                     break;
                 case 1:
                     p = Math.round((data[i]-1)*100); // Progress
                     c = "state_downloading";
                     t = "downloading ( " + p + "% )";
                     a = "action:download";
+                    d = "This plugin is being downloaded";
                     break;
                 case 2:
                 case 3:
@@ -134,10 +139,12 @@
                         if(uninstallable.indexOf(i)==-1){
                             c = "state_uninstall";
                             t = "uninstall";
+                            d = "Uninstall this plugin";
                             }
                         else{
                             c = "state_non_compatible";
                             t = "internal";
+                            d = "This plugin cannot be uninstalled";
                             }
                         a = "action:uninstall";
                         }
@@ -145,19 +152,19 @@
                         c = "state_installed";
                         t = "installed";
                         a = "action:download";
+                        d = "Plugin already installed";
                         }
                 }
-            // Update action with new action
+            // Update old action with new action
             for(var i=0,l=actions.length;i<l;l++)
                 if(n.href.substr(0, actions[i].length)==actions[i]){
                     if(actions[i] != a)
                         n.href = a + n.href.substr(actions[i].length);
                     break;
                     }
-            // Update class
-            n.className = "installbutton " + c;
-            // Update text
-            n.update(t);
+            n.className = "installbutton " + c; // Update class
+            n.update(t); // Update text
+            n.title = d; // Update tooltip
             }
         };
     window.update_plugin_list=function(data){
@@ -168,7 +175,7 @@
             if(data[i].uninstallable) uninstallablelist += "," + data[i].name;
             };
         form.plugins.value = pluginlist.substr(1);
-        form.uninstallable.value = uninstallable.substr(1);
+        form.uninstallable.value = uninstallablelist.substr(1);
         form.submit();
         };
     // dom:ready initialization
