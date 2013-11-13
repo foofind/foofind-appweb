@@ -73,7 +73,7 @@ def list():
     reqos = request.user_agent.platform # operative system for params
     return render_template('extras.html', plugins=plugins, reqos=reqos,
                 form_plugins=request.form.get("plugins", ""),
-                form_uninstallable=request.form.get("uninstallable", ""))
+                form_ununinstallable=request.form.get("ununinstallable", ""))
 
 @extras.route("/<lang>/extras/info/<name>", defaults={"page":1, "category":None})
 @extras.route("/<lang>/extras/<category>/<int:page>/<name>")

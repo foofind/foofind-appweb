@@ -88,7 +88,7 @@
 <script type="text/javascript">
 (function(){
     // Global variables
-    var uninstallable = $A(); // updated on dom:ready
+    var ununinstallable = $A(); // updated on dom:ready
     // Public JS interface
     window.update_plugin_state=function(data){
         // Update plugin data of current page according to given client state
@@ -136,7 +136,7 @@
                 case 3:
                 default:
                     if(n.readAttribute("data-action")=="uninstall"){
-                        if(uninstallable.indexOf(i)==-1){
+                        if(ununinstallable.indexOf(i)==-1){
                             c = "state_uninstall";
                             t = "uninstall";
                             d = "Uninstall this plugin";
@@ -169,13 +169,13 @@
         };
     window.update_plugin_list=function(data){
         // Show information about plugins for given client data
-        var form=$("plugin_list_form"), pluginlist="", uninstallablelist="";
+        var form=$("plugin_list_form"), pluginlist="", ununinstallablelist="";
         for(var i=0,l=data.length;i<l;i++){
             pluginlist += "," + data[i].name;
-            if(data[i].uninstallable) uninstallablelist += "," + data[i].name;
+            if(!data[i].uninstallable) ununinstallablelist += "," + data[i].name;
             };
         form.plugins.value = pluginlist.substr(1);
-        form.uninstallable.value = uninstallablelist.substr(1);
+        form.ununinstallablelist.value = ununinstallablelist.substr(1);
         form.submit();
         };
     // dom:ready initialization
@@ -197,8 +197,8 @@
                         return true;
                 e.stop();
             };
-        // Update uninstallable plugin list
-        uninstallable = $A($("plugin_list_form").uninstallable.value.split(","));
+        // Update ununinstallablelist plugin list
+        ununinstallable = $A($("plugin_list_form").ununinstallable.value.split(","));
         // Create shown plugin data array and attach click restriction events
         elements=$$(".installbutton");
         for(var i=0,l=elements.length;i<l;i++){
@@ -235,7 +235,7 @@
 <form id="plugin_list_form" method="post" class="hiddenform" action="{{url_for('extras.list', lang=g.lang)}}">
 <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}"/>
 <input type="hidden" name="plugins" value="{{ form_plugins if form_plugins is defined else ''}}"/>
-<input type="hidden" name="uninstallable" value="{{ form_uninstallable if form_uninstallable is defined else ''}}"/>
+<input type="hidden" name="ununinstallablelist" value="{{ form_ununinstallablelist if form_ununinstallablelist is defined else ''}}"/>
 </form>
 <div id="infotasks">
     {% if plugin %}
