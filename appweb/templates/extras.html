@@ -153,9 +153,10 @@
                     p = Math.round((data[name]-1)*100); // Progress
                     c = "state_downloading";
                     t = "downloading ( " + p + "% )";
-                    a = "action:download";
-                    d = "This plugin is being downloaded";
+                    a = "action:uninstall";
+                    d = "This plugin is being downloaded. Click to cancel.";
                     break;
+                    }
                 case 2:
                     // Installed but not initialized
                 case 3:
@@ -211,7 +212,7 @@
     document.observe("dom:loaded", function(){
         // Initialize events and call 'state' action with current shown plugins
         var elements, elm, data, r=[],
-            valid_states=["uninstall", "install", "update", "failed"],
+            clickable_states=["uninstall",  "install", "update", "failed"],
             valid_int_data=["checksum"],
             valid_str_data=["minversion", "action"],
             info_cback = function(){
@@ -221,8 +222,8 @@
                 },
             cback = function(e){
                 // Block non-clickable states
-                for(var i=0,l=valid_states.length;i<l;i++)
-                    if(this.hasClassName("state_" + valid_states[i]))
+                for(var i=0,l=clickable_states.length;i<l;i++)
+                    if(this.hasClassName("state_" + clickable_states[i]))
                         return true;
                 e.stop();
             };
