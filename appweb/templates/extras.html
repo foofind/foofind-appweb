@@ -211,7 +211,7 @@
     document.observe("dom:loaded", function(){
         // Initialize events and call 'state' action with current shown plugins
         var elements, elm, data, r=[],
-            clickable_states=["uninstall",  "install", "update", "failed"],
+            clickable_states=["uninstall",  "install", "update", "failed", "downloading"],
             valid_int_data=["checksum"],
             valid_str_data=["minversion", "action"],
             info_cback = function(){
