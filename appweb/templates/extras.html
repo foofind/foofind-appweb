@@ -88,13 +88,12 @@
 <script type="text/javascript">
 (function(){
     // Global variables
-    var ununinstallable = $A(); // updated on dom:ready
+    var ununinstallable = $A(), // updated on dom:ready
+        clickable_states = ["uninstall",  "install", "update", "failed", "downloading"];
     // Public JS interface
     window.update_plugin_state=function(data){
         // Update plugin data of current page according to given client state
         var c="", t="", a="", d="", n, p = 0,
-            installed = 0,
-            update_installed = true,
             actions = ["action:download", "action:uninstall"];
         for(var name in data){
             n = $("plugin:" + name);
@@ -114,7 +113,6 @@
                         a = "action:download";
                         d = "Plugin update is not compatible with current program version";
                         }
-                    installed += 1;
                     break;
                 case -3:
                     // Server version is incompatible
@@ -129,7 +127,6 @@
                     t = "failed";
                     a = "action:download";
                     d = "Install failed, click for retry";
-                    update_installed = false; // we do not know if installed or not
                     break;
                 case -1:
                     // Server version is different than installed version
@@ -140,7 +137,6 @@
                         t = "update";
                     a = "action:download";
                     d = "Click to install an updated version of this plugin";
-                    installed += 1;
                     break;
                 case 0:
                     // Server version is available
@@ -159,7 +155,6 @@
                     t = "downloading ( " + p + "% )";
                     a = "action:uninstall";
                     d = "This plugin is being downloaded. Click to cancel.";
-                    installed += 1; // will be installed soon
                     break;
                 case 2:
                     // Installed but not initialized
@@ -185,7 +180,6 @@
                         a = "action:download";
                         d = "Plugin already installed";
                         }
-                    installed += 1;
                 }
             // Update old action with new action
             for(var i=0,l=actions.length;i<l;i++)
@@ -194,12 +188,14 @@
                         n.href = a + n.href.substr(actions[i].length);
                     break;
                     }
-            n.className = "installbutton " + c; // Update class
+            // Update class
+            n.className = "installbutton " + c;
             n.update(t); // Update text
             n.title = d; // Update tooltip
             }
-        n = $("numinstalled");
-        if(n&&update_installed) n.update(installed);
+        // Update numinstalled
+        if($("numinstalled"))
+            $("numinstalled").content($$(".installbutton").length - $$(".installbutton .state_install").length);
         };
     window.update_plugin_list=function(data){
         // Show information about plugins for given client data
@@ -216,7 +212,6 @@
     document.observe("dom:loaded", function(){
         // Initialize events and call 'state' action with current shown plugins
         var elements, elm, data, r=[],
-            clickable_states=["uninstall",  "install", "update", "failed", "downloading"],
             valid_int_data=["checksum"],
             valid_str_data=["minversion", "action"],
             info_cback = function(){
