@@ -195,7 +195,7 @@
             }
         // Update numinstalled
         if($("numinstalled"))
-            $("numinstalled").content($$(".installbutton").length - $$(".installbutton .state_install").length);
+            $("numinstalled").update($$(".installbutton").length - $$(".installbutton .state_install").length);
         };
     window.update_plugin_list=function(data){
         // Show information about plugins for given client data
