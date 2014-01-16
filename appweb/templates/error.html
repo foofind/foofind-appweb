@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>App - FIND</title>
     {%- assets "css_" + g.license_name -%}
         <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
     {%- endassets -%}
@@ -21,8 +20,8 @@
             <img src="{{g.static_prefix}}/blubster/imgs/ico.error-oops-280.png" alt="Error">
         </div><!--end of .error-img-->
         <div class="error-text">
-            <p class="error-title">Oops, you found an error!</p>
-            <p>Sorry we couldn't complete the request. <a href="javascript:$('go_home').submit()">Click here</a> to try another search.</p>
+            <p class="error-title">{{_("Oops, you found an error!")}}</p>
+            <p>{{_("Sorry we couldn't complete the request.")}} {{_("%(click)s to try another search.", click="<a href=\"javascript:$('go_home').submit()\">"|safe+_("click here")+"</a>"|safe)|capitalize}}</p>
         </div><!--end of .error-text-->
     </div><!--end of .error-->
 </div><!--end of #app-->

@@ -73,12 +73,9 @@ def search():
     total_found=0
 
     if query:
-        search_results = search_files(query, filters, min_results=50, last_items=[], non_group=True, order=("@weight*(r+10)", "e DESC, ok DESC, r2 DESC, fs DESC, uri1 DESC", "@weight*(r+10)"), weight_processor=weight_processor, tree_visitor=tree_visitor)
+        search_results = search_files(query, filters, min_results=50, last_items=[], non_group=True, order=("@weight*r", "e DESC, ok DESC, r DESC, fs DESC", "@weight*r"), weight_processor=weight_processor, tree_visitor=tree_visitor)
     else:
         search_results = {"last_items":[], "files":[], "result_number":""}
-
-    #~ for result in search_results:
-
 
     return render_template('search.html',
         query=ori_query, filetype=filetype, last_items=search_results["last_items"],
@@ -130,7 +127,7 @@ def searcha():
     sure = False
     total_found=0
 
-    search_results = search_files(query, filters, min_results=0, last_items=last_items, non_group=True, order=("@weight*(r+10)", "e DESC, ok DESC, r2 DESC, fs DESC, uri1 DESC", "@weight*(r+10)"), weight_processor=weight_processor, tree_visitor=tree_visitor)
+    search_results = search_files(query, filters, min_results=0, last_items=last_items, non_group=True, order=("@weight*r", "e DESC, ok DESC, r DESC, fs DESC", "@weight*r"), weight_processor=weight_processor, tree_visitor=tree_visitor)
 
     response = make_response(render_template('file.html',files=[torrents_data(afile) for afile in search_results["files"]]))
     del search_results["files"]

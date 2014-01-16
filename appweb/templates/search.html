@@ -15,29 +15,29 @@
                     <input type="hidden" id="last_items" name="last_items" value="{{last_items}}">
                 </form>
                 <form id="new_search" method="post" action="{{ url_for('files.search') }}">
-                    {% if g.wakalaka %}
+                    {% if g.design %}
                         <input type="hidden" name="wklk" value="1">
                     {%endif%}
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                     <fieldset>
-                        <legend>Search form</legend>
+                        <legend>{{_("Search form")}}</legend>
                         <div class="search-text">
-                            <label for="q">Search:</label>
-                            <input type="text" class="search-text" placeholder="Type here your search" id="q" name="q" autocomplete="off" value="{{g.args['q']}}">
+                            <label for="q">{{_("Search:")}}</label>
+                            <input type="text" class="search-text" placeholder="{{_('Type here your search')}}" id="q" name="q" autocomplete="off" value="{{g.args['q']}}">
                         </div>
                         <div class="separator"></div>
                         <div class="search-filetype">
-                            
-                            <select id="new_filetype" name="t" data-placeholder="All">
-                                <option class="all" value="all">All</option>
+
+                            <select id="new_filetype" name="t" data-placeholder="{{_('all')|capitalize}}">
+                                <option class="all" value="all">{{_("all")|capitalize}}</option>
                                 {% for cat in g.categories %}
-                                    <option class="{{ cat[0] }}" value="{{ cat[0] }}" {{"selected" if cat[1]["q"] in g.args['type']}}>{{ cat[0] | capitalize }}</option>
+                                    <option class="{{ cat[0] }}" value="{{ cat[0] }}" {{"selected" if cat[1]["q"] in g.args['type']}}>{{ _(cat[0]) | capitalize }}</option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="separator"></div>
                         <div class="search-button-find">
-                            <button type="submit" class="search-button-find"><img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-magni-off.png" alt="Find"></button>
+                            <button type="submit" class="search-button-find"><img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-magni-off.png" alt="{{_('Find')}}"></button>
                         </div>
                     </fieldset>
                 </form>
@@ -52,15 +52,15 @@
         </ul><!--end of .results-->
         <div id="no-results" class="error">
             <div class="error-img">
-                <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.error-sad-280.png" alt="No results">
+                <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.error-sad-280.png" alt="{{_('No results')}}">
             </div><!--end of .error-img-->
             <div class="error-text">
                 {%- if query %}
-                    <p class="error-title">No results!</p>
-                    <p>There are no results for this search. Feel free to try with other search terms.</p>
+                    <p class="error-title">{{_("No results!")}}</p>
+                    <p>{{_("There are no results for this search. Feel free to try with other search terms.")}}</p>
                 {%- else %}
-                    <p class="error-title">Please write something!</p>
-                    <p>No search terms. Please write something to search and try again.</p>
+                    <p class="error-title">{{_("Please write something!")}}</p>
+                    <p>{{_("No search terms. Please write something to search and try again.")}}</p>
                 {%- endif %}
             </div>
         </div>
@@ -73,43 +73,43 @@
             <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
             <input type="hidden" id="file_id" name="file_id" value="">
             <fieldset>
-                <legend>Report</legend>
-                <label>Fields marked with a star (*) are required.</label>
+                <legend>{{_("Report")}}</legend>
+                <label>{{_("Fields marked with a star (*) are required.")}}</label>
                 <ul>
                     <li>
-                        <label for="name" class="medium label-textright">* Name:</label>
+                        <label for="name" class="medium label-textright">* {{_("Name:")}}</label>
                         <input type="text" name="name" id="name" class="medium">
                     </li>
                     <li>
-                        <label for="surname" class="medium label-textright">* Surname:</label>
+                        <label for="surname" class="medium label-textright">* {{_("Surname:")}}</label>
                         <input type="text" name="surname" id="surname" class="medium">
                     </li>
                     <li>
-                        <label for="company" class="medium label-textright">Company:</label>
+                        <label for="company" class="medium label-textright">{{_("Company:")}}</label>
                         <input type="text" name="company" id="company" class="medium">
                     </li>
                     <li>
-                        <label for="email" class="medium label-textright">* Email:</label>
+                        <label for="email" class="medium label-textright">* {{_("Email:")}}</label>
                         <input type="text" name="email" id="email" class="medium">
                     </li>
                     <li>
-                        <label for="phone" class="medium label-textright">Phone:</label>
+                        <label for="phone" class="medium label-textright">{{_("Phone:")}}</label>
                         <input type="text" name="phone" id="phone" class="medium">
                     </li>
                     <li>
-                        <label for="reason" class="medium label-textright">* Complaint reason:</label>
+                        <label for="reason" class="medium label-textright">* {{_("Complaint reason:")}}</label>
                         <input type="text" name="reason" id="reason" class="medium">
                     </li>
                     <li>
-                        <label for="message" class="medium label-textright">* Message:</label>
+                        <label for="message" class="medium label-textright">* {{_("Message:")}}</label>
                         <textarea name="message" id="message" class="medium" rows="5" cols="25"></textarea>
                     </li>
                     <li>
                         <input type="checkbox" name="accept_tos" id="accept_tos" class="checkbox margin-left2">
-                        <label for="accept_tos" class="long-auto">* I have read and accept the <a href="{{ g.tos_link|default('http://foofind.com/es/tos') }}" target="_blank">Terms of use</a> and <a href="{{ g.privacy_link|default('http://foofind.com/es/privacy') }}" target="_blank">Privacy policy</a>.</label>
+                        <label for="accept_tos" class="long-auto">* {{_("I have read and accept the %(tos)s and %(privacy)s.", tos='<a href="'|safe+ g.tos_link+'" target="_blank">'|safe+_("Terms of use")+'</a>'|safe, privacy='<a href="'|safe+g.privacy_link+'" target="_blank">'|safe+_("Privacy policy")+'</a>'|safe)}}</label>
                     </li>
                 </ul>
-                <input type="submit" class="button button-off submit">
+                <input type="submit" class="button button-off submit" value="{{_('Submit')}}">
             </fieldset>
         </form>
     </div> <!--end of .report-->

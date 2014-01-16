@@ -119,12 +119,26 @@ def create_app(config=None, debug=False):
     assets.register('css_blubster', Bundle('blubster/css/blubster.scss', filters='pyscss', output='blubster/gen/blubster.css', debug=False, depends='appweb.scss'), filters='css_slimmer', output='blubster/gen/blubster.css')
     assets.register('css_foofind', Bundle('foofind/css/foofind.scss', filters='pyscss', output='foofind/gen/foofind.css', debug=False), filters='css_slimmer', output='foofind/gen/foofind.css')
 
+    if appmode == "search":
+        app.assets.register(
+            'js_appweb',
+            Bundle('prototype.js', 'event.simulate.js', 'chosen.proto.min.js','appweb.js',
+                   filters='rjsmin', output='gen/appweb.js'))
+    else:
+        app.assets.register(
+            'js_appweb',
+            Bundle('prototype.js', filters='rjsmin', output='gen/appweb.js'))
+
     # Traducciones
     babel.init_app(app)
 
     @babel.localeselector
     def get_locale():
-        return "en"
+        '''
+        Devuelve el código del idioma activo.
+        '''
+        try: return g.lang
+        except: return "en"
 
     # Autenticación
     auth.setup_app(app)
@@ -157,7 +171,6 @@ def create_app(config=None, debug=False):
     # Refresco de conexiones
     eventmanager.once(filesdb.load_servers_conn)
     eventmanager.interval(app.config["FOOCONN_UPDATE_INTERVAL"], filesdb.load_servers_conn)
-    eventmanager.interval(app.config["FOOCONN_UPDATE_INTERVAL"], entitiesdb.connect)
 
     @app.url_value_preprocessor
     def pull_lang_code(endpoint, values):
@@ -208,6 +221,8 @@ def create_app(config=None, debug=False):
     def all_errors(e):
         error = e.code if hasattr(e,"code") else 500
         title, description = errors[error if error in errors else 500]
+
+        g.lang = request.path[1:3] if len(request.path)>2 else "en"
         init_g(app)
         return render_template('error.html', code=str(error), title=title,
                                description=description), error
@@ -216,7 +231,7 @@ def create_app(config=None, debug=False):
 
 def init_g(app):
 
-    g.wakalaka = bool(request.form.get("wklk", False))
+    g.design = bool(request.form.get("wklk", False))
     g.license_name = "foofind" if "foofind" in request.url_root else "blubster"
 
     # caracteristicas del cliente
@@ -245,6 +260,9 @@ def init_g(app):
     g.args = {}
 
     g.page_description=g.title=""
+
+    g.tos_link = app.config["TOS_LINK"]
+    g.privacy_link = app.config["PRIVACY_LINK"]
 
     g.categories = (('video',{"t":"video"}),
                      ('audio',{"t":"audio"}),

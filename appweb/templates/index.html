@@ -1,33 +1,33 @@
 {% extends "base.html" %}
-{% block content %} 
+{% block content %}
     <div class="find-main">
         <div class="find-logo">
             <img src="{{g.static_prefix}}/{{g.license_name}}/logo.png" alt="{{g.license_name|capitalize}}">
         </div><!--end of .logo-->
         <div class="search-main">
             <form method="post" action="{{ url_for('files.search') }}">
-                    {% if g.wakalaka %}
+                    {% if g.design %}
                         <input type="hidden" name="wklk" value="1">
                     {%endif%}
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                 <fieldset>
-                    <legend>Search form</legend>
+                    <legend>{{_("Search form")}}</legend>
                     <div class="search-text">
-                        <label for="q">Search:</label>
-                        <input type="text" class="search-text" placeholder="Type here your search" id="q" name="q" autocomplete="off" value="">
+                        <label for="q">{{_("Search:")}}</label>
+                        <input type="text" class="search-text" placeholder="{{_('Type here your search')}}" id="q" name="q" autocomplete="off" value="">
                     </div>
                     <div class="separator"></div>
                     <div class="search-filetype">
-                        <select id="new_filetype" name="t" data-placeholder="All">
-                            <option class="all" value="">All</option>
+                        <select id="new_filetype" name="t" data-placeholder="{{_('all')|capitalize}}">
+                            <option class="all" value="">{{_("all")|capitalize}}</option>
                              {% for cat in g.categories %}
-                                    <option class="{{ cat[0] }}" value="{{ cat[0] }}" >{{ cat[0] | capitalize }}</option>
+                                    <option class="{{ cat[0] }}" value="{{ cat[0] }}" >{{ _(cat[0]) | capitalize }}</option>
                                 {% endfor %}
                         </select>
                     </div>
                     <div class="separator"></div>
                     <div class="search-button-find">
-                        <button type="submit" class="search-button-find"><img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-magni-off.png" alt="Find"></button>
+                        <button type="submit" class="search-button-find"><img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-magni-off.png" alt="{{_('Find')}}"></button>
                     </div>
                 </fieldset>
             </form>

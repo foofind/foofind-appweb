@@ -1,0 +1,14 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: appweb\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+
+# search
+msgid "approx_results_for"
+msgstr "approximately %(num)s results for"
+msgid "results_for"
+msgstr "%(num)s results for"

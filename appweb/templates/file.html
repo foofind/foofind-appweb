@@ -17,15 +17,15 @@
                             <li class="sele-rating sele-rating-{{file['view']['health']}}">
                                 <span class="sele-seeds">
                                     {{file['view']['md']['seeds'] or "0"}}
-                                    <abbr title="seeds">
-                                    se.
+                                    <abbr title="{{_('seeds')}}">
+                                    {{_("se.")}}
                                     </abbr>
                                 </span>
                                 <span class="sele-dot"> · </span>
                                 <span class="sele-leechers">
                                     {{file['view']['md']['leechs'] or "0"}}
-                                    <abbr title="leechers">
-                                    le.
+                                    <abbr title="{{_('leechers')}}">
+                                    {{_("le.")}}
                                     </abbr>
                                 </span>
                             </li>{# end of .sele-rating #}
@@ -99,7 +99,7 @@
                 <a href="download:{{ file['file']['id'] }}" class="button button-on">
                     <span>
                         <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-download-off.png">
-                        <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-download-on.png"><p>Download</p>
+                        <img src="{{g.static_prefix}}/{{g.license_name}}/imgs/ico.button-18-download-on.png"><p>{{_("Download")}}</p>
                     </span>
                 </a>
             </li>
