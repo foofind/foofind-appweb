@@ -1,96 +1,141 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: appweb\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Jordi Burguet-Castell <jordi@mp2p.net>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.5.4\n"
 
 # error
 msgid "Oops, you found an error!"
-msgstr "Ups, has encontrado un error!"
+msgstr "Oups, vous avez trouvé une erreur!"
+
 msgid "Sorry we couldn't complete the request."
-msgstr "Lamentablemente no podemos procesar tu petición."
+msgstr "Désolé, nous n'avons pas pu compléter la demande."
+
 msgid "%(click)s to try another search."
-msgstr "Haz %(click)s para realizar otra búsqueda."
+msgstr "%(click)s pour faire une autre recherche."
+
 msgid "click here"
-msgstr "click aquí"
+msgstr "cliquez ici"
 
 # file
 msgid "seeds"
 msgstr "seeds"
+
 msgid "se."
 msgstr "se."
+
 msgid "leechers"
 msgstr "leechers"
+
 msgid "le."
 msgstr "le."
+
 msgid "Download"
-msgstr "Descargar"
+msgstr "Télécharger"
 
 # search
 msgid "approx_results_for"
-msgstr "aproximadamente %(num)s resultados para"
+msgstr "environ %(num)s résultats pour"
+
 msgid "results_for"
-msgstr "%(num)s resultados para"
+msgstr "%(num)s résultats pour"
+
 msgid "Search form"
-msgstr "Formulario de búsqueda"
+msgstr "Formulaire de recherche"
+
 msgid "Search:"
-msgstr "Buscar:"
+msgstr "Rechercher:"
+
 msgid "Type here your search"
-msgstr "Escribe aquí tu búsqueda"
+msgstr "Tapez ici votre recherche"
+
 msgid "Find"
-msgstr "Buscar"
+msgstr "Rechercher"
+
 msgid "No results"
-msgstr "No hay resultados"
+msgstr "Aucun résultat"
+
 msgid "No results!"
-msgstr "¡No hay resultados!"
-msgid "There are no results for this search. Feel free to try with other search terms."
-msgstr "No hay resultados para está búsqueda. Prueba con otros términos de búsqueda."
+msgstr "Aucun résultat!"
+
+msgid ""
+"There are no results for this search. Feel free to try with other search "
+"terms."
+msgstr ""
+"Il n'y a pas de résultats pour cette recherche. N'hésitez pas à essayer avec "
+"d'autres termes de recherche."
+
 msgid "Please write something!"
-msgstr "¡Escribe algo!"
+msgstr "Écrivez quelque chose!"
+
 msgid "No search terms. Please write something to search and try again."
-msgstr "No hay términos de búsqueda. Por favor, escribe algo para buscar e intenta de nuevo."
+msgstr ""
+"Pas de termes de recherche. S'il vous plaît écrivez quelque chose à chercher "
+"et essayez à nouveau."
 
 # report
 msgid "Report"
-msgstr "Reportar"
+msgstr "Rapporter"
+
 msgid "Fields marked with a star (*) are required."
-msgstr "Los campos marcados con un asterisco (*) son obligatorios."
+msgstr "Les champs marqués d'un astérisque (*) sont obligatoires."
+
 msgid "Name:"
-msgstr "Nombre:"
+msgstr "Nom:"
+
 msgid "Surname:"
-msgstr "Apellido:"
+msgstr "Nom de famille:"
+
 msgid "Company:"
-msgstr "Empresa:"
+msgstr "Enterprise:"
+
 msgid "Email:"
-msgstr "Correo electrónico:"
+msgstr "E-mail:"
+
 msgid "Phone:"
-msgstr "Teléfono:"
+msgstr "Téléphone:"
+
 msgid "Complaint reason:"
-msgstr "Razón de la reclamación:"
+msgstr "Raison de la plainte:"
+
 msgid "Message:"
-msgstr "Mensaje:"
+msgstr "Message:"
+
 msgid "I have read and accept the %(tos)s and %(privacy)s."
-msgstr "He leído y acepto los %(tos)s y la %(privacy)s."
+msgstr "J'ai lu et j'accepte les %(tos)s et la %(privacy)s."
+
 msgid "Terms of use"
-msgstr "Términos de uso"
+msgstr "Conditions d'utilisation"
+
 msgid "Privacy policy"
-msgstr "Política de privacidad"
+msgstr "Politique de confidentialité"
+
 msgid "Submit"
-msgstr "Enviar"
+msgstr "Envoyer"
 
 # categories
 msgid "all"
-msgstr "todos"
+msgstr "tous"
+
 msgid "audio"
 msgstr "audio"
+
 msgid "video"
-msgstr "vídeo"
+msgstr "vidéo"
+
 msgid "document"
-msgstr "documentos"
+msgstr "documents"
+
 msgid "software"
-msgstr "programas"
+msgstr "logiciels"
+
 msgid "image"
-msgstr "imágenes"
+msgstr "images"
