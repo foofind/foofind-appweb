@@ -9,6 +9,7 @@ from foofind import defaults
 from collections import OrderedDict
 from flask import Flask, g, request, render_template, redirect, abort, url_for, make_response
 from flask.ext.assets import Environment, Bundle
+from flask.ext.babelex import get_domain, gettext as _
 from flask.ext.login import current_user
 from babel import support, localedata, Locale
 from raven.contrib.flask import Sentry
@@ -153,7 +154,6 @@ def create_app(config=None, debug=False):
     pagesdb.init_app(app)
     feedbackdb.init_app(app)
     entitiesdb.init_app(app)
-    usersdb.init_app(app)
     plugindb.init_app(app)
 
     # Servicio de búsqueda

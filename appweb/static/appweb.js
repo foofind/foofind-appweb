@@ -25,7 +25,7 @@
         content = $("content");
         q = $("q");
         new_filetype = $("new_filetype");
-        if (Chosen.browser_is_supported()) {
+        if (new_filetype && Chosen.browser_is_supported()) {
             new_filetype_select = new_filetype;
             new_filetype.firstChild.innerHTML = "";
             new_filetype = new Chosen(new_filetype, {disable_search_threshold: 100, allow_single_deselect: true, width:"13em"});
@@ -107,11 +107,7 @@
     }
 
     function filetype_update_icon(){
-        if (new_filetype.form_field.selectedIndex>0) {
-            new_filetype.selected_item.firstChild.className = new_filetype.form_field.options[new_filetype.form_field.selectedIndex].innerHTML.toLowerCase();
-        } else {
-            new_filetype.selected_item.firstChild.className = new_filetype.default_text.toLowerCase();
-        }
+        new_filetype.selected_item.firstChild.className = new_filetype.form_field.options[new_filetype.form_field.selectedIndex].className;
     }
 
     function scrollHandler() {
