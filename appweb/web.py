@@ -234,6 +234,8 @@ def init_g(app):
     g.design = bool(request.form.get("wklk", False))
     g.license_name = "foofind" if "foofind" in request.url_root else "blubster"
 
+    g.analytics_code = app.config["ANALYTICS_CODE"]
+
     # caracteristicas del cliente
     g.search_bot = is_search_bot()
 
