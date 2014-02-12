@@ -106,7 +106,7 @@
                     </li>
                     <li>
                         <input type="checkbox" name="accept_tos" id="accept_tos" class="checkbox margin-left2">
-                        <label for="accept_tos" class="verylarge">* {{_("I have read and accept the %(tos)s and %(privacy)s.", tos='<a href="'|safe+ g.tos_link+'" target="_blank">'|safe+_("Terms of use")+'</a>'|safe, privacy='<a href="'|safe+g.privacy_link+'" target="_blank">'|safe+_("Privacy policy")+'</a>'|safe)}}</label>
+                        <label for="accept_tos" class="verylarge">* {{_("I have read and accept the %(tos)s and %(privacy)s.", tos='<a href="'|safe+ g.tos_link|replace('LANG', g.lang)+'" target="_blank">'|safe+_("Terms of use")+'</a>'|safe, privacy='<a href="'|safe+g.privacy_link|replace('LANG', g.lang)+'" target="_blank">'|safe+_("Privacy policy")+'</a>'|safe)}}</label>
                     </li>
                 </ul>
                 <input type="submit" class="button button-off submit" value="{{_('Submit')}}">
