@@ -264,9 +264,9 @@ def init_g(app):
     g.tos_link = app.config["TOS_LINK"]
     g.privacy_link = app.config["PRIVACY_LINK"]
 
-    g.categories = (('video',{"t":"video"}),
-                     ('audio',{"t":"audio"}),
-                     ('document',{"t":"document"}),
-                     ('image',{"t":"image"}),
-                     ('software',{"t":"software"})
+    g.categories = (('video',{"t":["video"]}),
+                     ('audio',{"t":["audio"]}),
+                     ('document',{"t":["document"]}),
+                     ('image',{"t":["image"]}),
+                     ('software',{"t":["software"]})
                      )
