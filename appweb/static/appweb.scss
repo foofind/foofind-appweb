@@ -698,27 +698,27 @@ div.result-actions{
   background-repeat: no-repeat;
   &.all{
     background-image:url(../imgs/ico.filetype-18-all-off.png);
-    background-position: (0.55em - $spacing) (0.5em - $spacing);
+    background-position: (0.55em - $spacing) (0.55em - $spacing);
   }
   &.video{
     background-image:url(../imgs/ico.filetype-18-vid-off.png);
-    background-position: (0.55em - $spacing) (0.6em - $spacing);
+    background-position: (0.55em - $spacing) (0.55em - $spacing);
   }
   &.audio{
     background-image:url(../imgs/ico.filetype-18-mus-off.png);
-    background-position: (0.55em - $spacing) (0.6em - $spacing);
+    background-position: (0.55em - $spacing) (0.55em - $spacing);
   }
   &.image{
     background-image:url(../imgs/ico.filetype-18-img-off.png);
-    background-position: (0.55em - $spacing) (0.5em - $spacing);
+    background-position: (0.55em - $spacing) (0.55em - $spacing);
   }
   &.document{
     background-image:url(../imgs/ico.filetype-18-doc-off.png);
-    background-position: (0.55em - $spacing) (0.6em - $spacing);
+    background-position: (0.55em - $spacing) (0.55em - $spacing);
   }
   &.software{
     background-image:url(../imgs/ico.filetype-18-pc-off.png);
-    background-position: (0.55em - $spacing) (0.4em - $spacing);
+    background-position: (0.55em - $spacing) (0.55em - $spacing);
   }
 }
 
@@ -1105,10 +1105,10 @@ h2.plugin_category{
     font-size:1.2em;
 
     height:40px;
-    border:1px solid #c8c8c8;
+    border:1px solid $bcolor2;
 
     color: white;
-    background-color:#c8c8c8;
+    background-color: $color1;
 
     display:block;
     position:absolute;
@@ -1121,13 +1121,13 @@ h2.plugin_category{
     border-radius:5px;
 
     &.state_install{
-        border:1px solid darkgreen;
-        background:#84c42c;
+        border:1px solid $bcolor2;
+        background:$color1;
         cursor:pointer;
         }
     &.state_update{
-        border:1px solid navy;
-        background:#685fff;
+        border:1px solid $bcolor2;
+        background:$color1;
         cursor:pointer;
         }
     &.state_failed{

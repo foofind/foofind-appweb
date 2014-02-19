@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% macro render_installbutton(plugin, action="download") %}
-<a class="installbutton" id="plugin:{{plugin.name}}"
+<a class="installbutton button" id="plugin:{{plugin.name}}"
     {%- if action != "download" %}
     data-action="{{action}}"
     {%- endif %}

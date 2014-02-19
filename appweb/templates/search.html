@@ -27,11 +27,10 @@
                         </div>
                         <div class="separator"></div>
                         <div class="search-filetype">
-
                             <select id="new_filetype" name="t" data-placeholder="{{_('all')|capitalize}}">
-                                <option class="all" value="all">{{_("all")|capitalize}}</option>
+                                <option class="all" value="all">{{_("all")|capitalize}}</option>}
                                 {% for cat in g.categories %}
-                                    <option class="{{ cat[0] }}" value="{{ cat[0] }}" {{"selected" if cat[1]["q"] in g.args['type']}}>{{ _(cat[0]) | capitalize }}</option>
+                                    <option class="{{ cat[0] }}" value="{{ cat[0] }}" {{"selected" if cat[0]==g.filetype}}>{{ _(cat[0]) | capitalize }}</option>
                                 {% endfor %}
                             </select>
                         </div>

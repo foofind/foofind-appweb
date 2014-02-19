@@ -45,7 +45,7 @@ def search():
     Gestiona las URL de busqueda de archivos para la aplicacion.
     '''
     query=request.form.get("q",None)
-    filetype=request.form.get("t",None)
+    g.filetype=filetype=request.form.get("t",None)
 
     if query: #si no se ha buscado nada se manda al inicio
         query = query.replace("_"," ")  #para que funcionen la busqueda cuando vienen varias palabras
@@ -91,7 +91,7 @@ def searcha():
     '''
 
     query=request.form.get("query",None)
-    filetype=request.form.get("filetype",None)
+    g.filetype=filetype=request.form.get("filetype",None)
 
     if not query: #si no se ha buscado nada se manda al inicio
         logging.error("Invalid data for AJAX search request.")
@@ -102,7 +102,7 @@ def searcha():
     ori_query = query
 
     _in = [i for i, v in enumerate(g.categories) if v[0] == filetype]
-    if filetype and _in :
+    if filetype and _in:
         _id = _in[0]
         if "t" in g.categories[_id][1]:
             filters["type"] = g.categories[_id][1]['t']
