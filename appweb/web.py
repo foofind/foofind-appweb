@@ -156,10 +156,12 @@ def create_app(config=None, debug=False):
     pagesdb.init_app(app)
     feedbackdb.init_app(app)
     entitiesdb.init_app(app)
+    datastores = ["filesdb","pagesdb","feedbackdb","entitiesdb"]
     if appmode=="extras":
         plugindb.init_app(app)
+        datastores.append("plugindb")
 
-    for service_name, params in app.config["DATA_SOURCE_SHARING"].iteritems():
+    for service_name, params in app.config["DATA_SOURCE_SHARING"].iteritems() if service_name in datastores:
         eval(service_name).share_connections(**{key:eval(value) for key, value in params.iteritems()})
 
     # Servicio de búsqueda
