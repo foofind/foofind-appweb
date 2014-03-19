@@ -23,7 +23,7 @@ def contact():
     )
 
 @csrf.exempt
-@external.route('/external/cookie')
+@external.route('/external/cookie', defaults={'lang': "en"})
 @nocache
 def cookie():
     g.accept_cookies=None
