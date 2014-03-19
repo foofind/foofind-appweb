@@ -151,6 +151,9 @@ def create_app(config=None, debug=False):
     # Cache
     cache.init_app(app)
 
+    # IPs españolas
+    spanish_ips.load(os.path.join(os.path.dirname(app.root_path),app.config["SPANISH_IPS_FILENAME"]))
+
     # Acceso a bases de datos
     filesdb.init_app(app)
     pagesdb.init_app(app)
