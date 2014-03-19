@@ -8,6 +8,7 @@
     {%- assets "js_appweb" -%}
         <script src="{{ ASSET_URL }}"></script>
     {%- endassets -%}
+    {{ g.analytics_code|safe }}
     <![if !IE]>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css'>
     <![endif]>
