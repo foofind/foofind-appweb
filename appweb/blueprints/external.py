@@ -14,21 +14,29 @@ def contact():
     '''
     Muestra el formulario de contacto
     '''
-    g.accept_cookies=None
-    form = ExternalContactForm(request.form)
-    sent = (request.method=='POST' and form.validate() and send_mail("Contact Form",current_app.config["CONTACT_EMAIL"], "pages",form=form))
-    return render_template(
-        'contact.html',
-        form=form, sent=sent
-    )
+    try:
+        g.accept_cookies=None
+        form = ExternalContactForm(request.form)
+        sent = (request.method=='POST' and form.validate() and send_mail("Contact Form",current_app.config["CONTACT_EMAIL"], "pages",form=form))
+        return render_template(
+            'contact.html',
+            form=form, sent=sent
+        )
+    except:
+        return "Service unavailable temporarily."
 
 @csrf.exempt
 @external.route('/external/cookie', defaults={'lang': "en"})
 @nocache
 def cookie():
-    g.accept_cookies=None
-    ip = (request.headers.getlist("X-Forwarded-For") or [request.remote_addr])[0]
-    response = make_response("cookieLawApplies(%s)"%str(any(lang_code in request.accept_languages.values() for lang_code in current_app.config["SPANISH_LANG_CODES"]) or ip in spanish_ips).lower())
+    try:
+        g.accept_cookies=None
+        ip = (request.headers.getlist("X-Forwarded-For") or [request.remote_addr])[0]
+        cookieLawApplies = any(lang_code in request.accept_languages.values() for lang_code in current_app.config["SPANISH_LANG_CODES"]) or ip in spanish_ips).lower()
+    except:
+        cookieLawApplies = True
+
+    response = make_response("cookieLawApplies(true)"%str(any(lang_code in request.accept_languages.values() for lang_code in current_app.config["SPANISH_LANG_CODES"]) or ip in spanish_ips).lower())
     response.headers['content-type']='application/javascript'
     return response
 
