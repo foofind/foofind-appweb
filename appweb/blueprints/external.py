@@ -32,11 +32,11 @@ def cookie():
     try:
         g.accept_cookies=None
         ip = (request.headers.getlist("X-Forwarded-For") or [request.remote_addr])[0]
-        cookieLawApplies = any(lang_code in request.accept_languages.values() for lang_code in current_app.config["SPANISH_LANG_CODES"]) or ip in spanish_ips).lower()
+        cookieLawApplies = any(lang_code in request.accept_languages.values() for lang_code in current_app.config["SPANISH_LANG_CODES"]) or ip in spanish_ips
     except:
         cookieLawApplies = True
 
-    response = make_response("cookieLawApplies(true)"%str(any(lang_code in request.accept_languages.values() for lang_code in current_app.config["SPANISH_LANG_CODES"]) or ip in spanish_ips).lower())
+    response = make_response("cookieLawApplies(true)"%str(cookieLawApplies).lower())
     response.headers['content-type']='application/javascript'
     return response
 
