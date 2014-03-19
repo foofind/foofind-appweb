@@ -36,7 +36,7 @@ def cookie():
     except:
         cookieLawApplies = True
 
-    response = make_response("cookieLawApplies(true)"%str(cookieLawApplies).lower())
+    response = make_response("cookieLawApplies(%s)"%str(cookieLawApplies).lower())
     response.headers['content-type']='application/javascript'
     return response
 
