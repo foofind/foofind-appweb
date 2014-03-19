@@ -235,6 +235,7 @@ def create_app(config=None, debug=False):
         title, description = errors[error if error in errors else 500]
 
         g.lang = request.path[1:3] if len(request.path)>2 else "en"
+
         init_g(app)
         return render_template('error.html', code=str(error), title=title,
                                description=description), error
@@ -242,6 +243,8 @@ def create_app(config=None, debug=False):
     return app
 
 def init_g(app):
+    if not g.lang in current_app.config["APPWEB_AVAILABLE_LANGS"]:
+        g.lang = "en"
 
     g.design = bool(request.form.get("wklk", False))
     g.license_name = license_name = "foofind" if "foofind" in request.url_root else "blubster"
