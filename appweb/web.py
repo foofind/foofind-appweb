@@ -161,8 +161,9 @@ def create_app(config=None, debug=False):
         plugindb.init_app(app)
         datastores.append("plugindb")
 
-    for service_name, params in app.config["DATA_SOURCE_SHARING"].iteritems() if service_name in datastores:
-        eval(service_name).share_connections(**{key:eval(value) for key, value in params.iteritems()})
+    for service_name, params in app.config["DATA_SOURCE_SHARING"].iteritems():
+        if service_name in datastores:
+            eval(service_name).share_connections(**{key:eval(value) for key, value in params.iteritems()})
 
     # Servicio de búsqueda
     @app.before_first_request
