@@ -28,7 +28,7 @@ def contact():
 def cookie():
     g.accept_cookies=None
     ip = (request.headers.getlist("X-Forwarded-For") or [request.remote_addr])[0]
-    response = make_response("cookieLawApplies(%s)"%str(ip in spanish_ips or any(lang_code in request.accept_languages.values() for lang_code in current_app.config["SPANISH_LANG_CODES"])).lower())
+    response = make_response("cookieLawApplies(%s)"%str(any(lang_code in request.accept_languages.values() for lang_code in current_app.config["SPANISH_LANG_CODES"]) or ip in spanish_ips).lower())
     response.headers['content-type']='application/javascript'
     return response
 
