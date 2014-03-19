@@ -1,5 +1,9 @@
-{% extends "email/base.html" %}
-{% block content %}
+<!doctype html>
+<html>
+    <head>
+        <title>{{ title }}</title>
+    </head>
+    <body>
     <dl>
     {% for field in form %}
         {% if field.type != "SubmitField" and field.id != "captcha" and field.id != "accept_tos" %}
@@ -9,4 +13,5 @@
     {% endfor %}
     </dl>
     <p>{{ request.remote_addr }} {{ request.user_agent }}</p>
-{% endblock %}
+    </body>
+</html>
