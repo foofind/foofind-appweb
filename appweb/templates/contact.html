@@ -1,0 +1,59 @@
+{%- macro render_field(field) %}
+    <label for="{{ field.name }}">{% if field.flags.required %}<span>*</span>{% endif %} {{ field.label.text|safe }}</label> {{field}}
+    {%- if field.errors %}
+        <ul class="errors">
+        {%- for error in field.errors %}
+            <li>{{ error }}</li>
+        {%- endfor %}
+        </ul>
+    {%- endif %}
+{%- endmacro %}
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+<style>
+    * {font-family:"Helvetica Neue",Helvetica,Arial,Verdana; margin: 0;}
+    fieldset { border: none; font-size:14px; color: #1d1d1b }
+    #sent { font-size:14px; text-align:center; background:#efefef; padding:1em}
+    label {
+        margin: 8px 0 2px;
+        display: block;
+        color: #1d1d1b;
+    }
+    input[type=text], textarea, select {
+        width:310px;
+        color: #1d1d1b;
+    }
+    .errors {
+        position: absolute;
+        color: red;
+        left:330px;
+        margin-top:-25px;
+    }
+</style>
+</head>
+<body>
+{% if sent %}
+<div id="sent">
+<p>Your inquiry was succesfuly sent.</p>
+<p>You just made a difference. Our development is supported by people like you, our heroes!</p>
+</div>
+{%- else %}
+<form method="post" target="iframe">
+    <fieldset>
+        {{ render_field(form.name) }}
+        {{ render_field(form.email) }}
+        {{ render_field(form.company) }}
+        {{ render_field(form.website) }}
+        {{ render_field(form.phone) }}
+        {{ render_field(form.inquiry) }}
+        {{ render_field(form.message) }}
+        {{ render_field(form.captcha) }}
+    </fieldset>
+    <fieldset>
+        {{ form.submit }}
+    </fieldset>
+</form>
+{%- endif %}
+</body>
+</html>

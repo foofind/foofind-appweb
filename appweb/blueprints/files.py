@@ -5,9 +5,8 @@ Controladores de las páginas de búsqueda y de fichero.
 """
 
 import json
-from flask import request, render_template, g, current_app, redirect, url_for, jsonify, make_response
+from flask import request, render_template, g, current_app, redirect, url_for, jsonify, make_response, Blueprint
 from flask.ext.wtf import Form, BooleanField, TextField, TextAreaField, SubmitField, Required, Email, Length
-from flask.ext.login import current_user
 
 from base64 import b64decode
 from struct import unpack
@@ -18,9 +17,8 @@ from foofind.blueprints.files.helpers import *
 from foofind.services import *
 from foofind.utils import logging, hex2url, url2mid
 from foofind.utils.content_types import *
-from foofind.utils.fooprint import Fooprint
 
-files = Fooprint('files', __name__)
+files = Blueprint('files', __name__)
 
 def weight_processor(w, ct, r, nr):
     return w if w else -10
@@ -32,7 +30,6 @@ def tree_visitor(item):
         return item[1]["_w"]
 
 @files.route('/<lang>', methods=["POST"])
-@csrf.exempt
 def home():
     '''
     Renderiza la portada de la pestaña find de la aplicación.
@@ -84,7 +81,6 @@ def search():
     )
 
 @files.route('/<lang>/searcha',methods=['POST'])
-@csrf.exempt
 def searcha():
     '''
     Responde las peticiones de busqueda por ajax
@@ -260,27 +256,6 @@ def complaint():
         logging.error("Error on file complaint.")
         response = make_response("false")
 
-    response.mimetype = "application/json"
-    return response
-
-@files.route('/<lang>/vote',methods=['POST'])
-def vote():
-    '''
-    Gestiona las votaciones de archivos
-    '''
-    ok = False
-    try:
-        file_id=url2mid(request.form.get("file_id",None))
-        server=int(request.form.get("server",0))
-        vote=int(request.form.get("vote",0))
-        if server>1 and file_id and vote in (0,1):
-            file_info = usersdb.set_file_vote(file_id, current_user, g.lang, vote)
-            filesdb.update_file({"_id":file_id, "vs":file_info, "s":server}, direct_connection=True)
-            ok = True
-    except BaseException as e:
-        logging.error("Error on vote.")
-
-    response = make_response("true" if ok else "false")
     response.mimetype = "application/json"
     return response
 

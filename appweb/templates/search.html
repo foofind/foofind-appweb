@@ -9,7 +9,6 @@
         <div class="search-main">
             <div class="search-border">
                 <form id="current_search">
-                    <input type="hidden" id="_csrf_token" name="_csrf_token" value="{{ csrf_token() }}">
                     <input type="hidden" id="query" name="query" value="{{query}}">
                     <input type="hidden" id="filetype" name="filetype" value="{{filetype}}">
                     <input type="hidden" id="last_items" name="last_items" value="{{last_items}}">
@@ -18,7 +17,6 @@
                     {% if g.design %}
                         <input type="hidden" name="wklk" value="1">
                     {%endif%}
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                     <fieldset>
                         <legend>{{_("Search form")}}</legend>
                         <div class="search-text">
@@ -69,7 +67,6 @@
     <div id="report">
         <a href="#" id="close_report" class="close"></a>
         <form id="report_form" method="post" action="{{url_for('files.complaint')}}">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
             <input type="hidden" id="file_id" name="file_id" value="">
             <fieldset>
                 <legend>{{_("Report")}}</legend>

@@ -8,9 +8,9 @@ import os, os.path
 from foofind import defaults
 from collections import OrderedDict
 from flask import Flask, g, request, render_template, redirect, abort, url_for, make_response, current_app
+from flask.sessions import SessionInterface
 from flask.ext.assets import Environment, Bundle
 from flask.ext.babelex import get_domain, gettext as _
-from flask.ext.login import current_user
 from babel import support, localedata, Locale
 from raven.contrib.flask import Sentry
 from webassets.filter import register_filter
@@ -26,9 +26,17 @@ from foofind.utils.bots import is_search_bot, is_full_browser, check_rate_limit
 
 from appweb.blueprints.files import files
 from appweb.blueprints.extras import extras
+from appweb.blueprints.external import external
 from appweb.templates import register_filters
 
 import scss
+
+class NoSessionInterface(SessionInterface):
+    def open_session(self, app, request):
+        return None
+
+    def save_session(self, app, session, response):
+        pass
 
 def create_app(config=None, debug=False):
     '''
@@ -49,6 +57,7 @@ def create_app(config=None, debug=False):
     app = Flask(__name__)
     app.config.from_object(defaults)
     app.debug = debug
+    app.session_interface = NoSessionInterface()
 
     # Configuración
     if config:
@@ -93,9 +102,6 @@ def create_app(config=None, debug=False):
     # Registra valores/funciones para plantillas
     app.jinja_env.globals["u"] = u
 
-    # proteccion CSRF
-    csrf.init_app(app)
-
     # Blueprints
     if appmode == "search":
         app.register_blueprint(files)
@@ -103,6 +109,7 @@ def create_app(config=None, debug=False):
         app.register_blueprint(extras)
     else:
         logging.error("No se ha especificado modo en la configuración. Blueprints sin cargar.")
+    app.register_blueprint(external)
 
     # Web Assets
     scss.config.LOAD_PATHS = [os.path.dirname(os.path.dirname(app.static_folder))]
@@ -141,11 +148,6 @@ def create_app(config=None, debug=False):
         try: return g.lang
         except: return "en"
 
-    # Autenticación
-    auth.setup_app(app)
-    auth.user_loader(User.current_user)
-    auth.anonymous_user = User.current_user
-
     # Cache
     cache.init_app(app)
 
@@ -155,6 +157,9 @@ def create_app(config=None, debug=False):
     feedbackdb.init_app(app)
     entitiesdb.init_app(app)
     plugindb.init_app(app)
+
+    for service_name, params in app.config["DATA_SOURCE_SHARING"].iteritems():
+        eval(service_name).share_connections(**{key:eval(value) for key, value in params.iteritems()})
 
     # Servicio de búsqueda
     @app.before_first_request
