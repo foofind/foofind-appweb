@@ -148,6 +148,9 @@ def create_app(config=None, debug=False):
         try: return g.lang
         except: return "en"
 
+    # Mail
+    mail.init_app(app)
+
     # Cache
     cache.init_app(app)
 
