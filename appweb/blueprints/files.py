@@ -263,13 +263,13 @@ class ReportLinkForm(Form):
     '''
     Formulario para reportar enlaces
     '''
-    file_id = TextField(validators=[Required(), Length(16,16)])
-    name = TextField(validators=[Required()])
-    surname = TextField(validators=[Required()])
-    company = TextField()
-    email = TextField(validators=[Required(),Email()])
-    phonenumber = TextField()
-    reason = TextField(validators=[Required()])
-    message = TextAreaField(validators=[Required()])
+    name = TextField("Your name:", validators=[Required()])
+    surname = TextField("Your surname:", validators=[Required()])
+    company = TextField("Your company:")
+    email = TextField("Your email:", validators=[Required(),Email()])
+    phonenumber = TextField("Your phone number:")
+    file_id = TextField("File identifier:", validators=[Required(), Length(16,16)])
+    reason = TextField("Reason of your complaint:", validators=[Required()])
+    message = TextAreaField("Your message:", validators=[Required()])
     accept_tos = BooleanField(validators=[Required()])
     submit = SubmitField()
