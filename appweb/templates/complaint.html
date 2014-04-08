@@ -1,0 +1,67 @@
+{%- macro render_field(field) %}
+    {%- if field.name=="accept_tos" %}
+    <label id="tos">{{ field }} I have read and accept the <a href="/eula/">End User License Agreement</a> and <a href="/privacy/">Privacy policy</a>.</label>
+    {%- else %}
+    <label for="{{ field.name }}">{% if field.flags.required %}<span>*</span>{% endif %} {{ field.label.text|safe }}</label> {{field}}
+    {%- endif %}
+    {%- if field.errors %}
+        <ul class="errors">
+        {%- for error in field.errors %}
+            <li>{{ error }}</li>
+        {%- endfor %}
+        </ul>
+    {%- endif %}
+{%- endmacro %}
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+<style>
+    * {font-family:"Helvetica Neue",Helvetica,Arial,Verdana; margin: 0;}
+    fieldset { border: none; font-size:14px; color: #1d1d1b }
+    #sent { font-size:14px; text-align:center; background:#efefef; padding:1em}
+    label {
+        margin: 8px 0 2px;
+        display: block;
+        color: #1d1d1b;
+    }
+    label#tos {
+        margin-bottom:30px;
+    }
+    input[type=text], textarea, select {
+        width:310px;
+        color: #1d1d1b;
+    }
+    .errors {
+        position: absolute;
+        color: red;
+        left:330px;
+        margin-top:-25px;
+    }
+</style>
+</head>
+<body>
+{% if sent %}
+<div id="sent">
+<p>Your complaint has been sent.</p>
+</div>
+{%- else %}
+<form method="post" target="iframe">
+    <fieldset>
+            {{ render_field(form.name) }}
+            {{ render_field(form.surname) }}
+            {{ render_field(form.company) }}
+            {{ render_field(form.email) }}
+            {{ render_field(form.phonenumber) }}
+            {{ render_field(form.file_id) }}
+            {{ render_field(form.reason) }}
+            {{ render_field(form.message) }}
+            {{ render_field(form.captcha) }}
+            {{ render_field(form.accept_tos) }}
+    </fieldset>
+    <fieldset>
+        {{ form.submit }}
+    </fieldset>
+</form>
+{%- endif %}
+</body>
+</html>
