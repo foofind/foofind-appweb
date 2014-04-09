@@ -27,6 +27,7 @@ from foofind.utils.bots import is_search_bot, is_full_browser, check_rate_limit
 from appweb.blueprints.files import files
 from appweb.blueprints.extras import extras
 from appweb.blueprints.external import external
+from foofind.blueprints.downloader import get_downloader_properties
 from appweb.templates import register_filters
 
 import scss
@@ -171,6 +172,19 @@ def create_app(config=None, debug=False):
         if service_name in datastores:
             eval(service_name).share_connections(**{key:eval(value) for key, value in params.iteritems()})
 
+
+    # downloader files
+    downloader_files = app.config["DOWNLOADER_FILES"]
+    base_path = os.path.abspath(os.path.join(app.root_path,"../downloads"))
+    def update_downloader_properties():
+        '''
+        Downloader updated.
+        '''
+        local_cache["downloader_properties"] = get_downloader_properties(base_path, downloader_files)
+
+    configdb.register_action("update_downloader", update_downloader_properties)
+    local_cache["downloader_properties"] = get_downloader_properties(base_path, downloader_files)
+
     # Servicio de búsqueda
     @app.before_first_request
     def init_process():
@@ -290,3 +304,5 @@ def init_g(app):
                      ('image',{"t":["image"]}),
                      ('software',{"t":["software"]})
                      )
+
+    g.downloader_properties = local_cache["downloader_properties"]

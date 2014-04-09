@@ -1,15 +1,31 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-from flask import g, request, render_template, current_app, make_response, session, Blueprint
+import functools
+from flask import g, request, render_template, current_app, make_response, session, Blueprint, redirect, abort
 from flask.ext.wtf import Form, BooleanField, TextField, TextAreaField, SubmitField, SelectField, Required, RecaptchaField, Email, Length
 from foofind.utils import nocache
 from foofind.services import *
 from .files import ReportLinkForm
+from foofind.blueprints.downloader import update as downloader_update
 
 external = Blueprint('external', __name__)
+
+def restricted_domain(fnc):
+    '''
+    External views could be restricted to some domains.
+    '''
+    @functools.wraps(fnc)
+    def wrapped(*args, **kwargs):
+        if current_app.config["EXTERNAL_DOMAIN"] in request.url_root:
+            return fnc(*args, **kwargs)
+        abort(404)
+    return wrapped
 
 @csrf.exempt
 @external.route('/external/contact', methods=['GET', 'POST'], defaults={'lang': "en"})
 @nocache
+@restricted_domain
 def contact():
     '''
     Muestra el formulario de contacto
@@ -28,6 +44,7 @@ def contact():
 @csrf.exempt
 @external.route('/external/complaint', methods=['GET', 'POST'], defaults={'lang': "en"})
 @nocache
+@restricted_domain
 def complaint():
     '''
     Procesa los datos del formulario para reportar enlaces.
@@ -51,6 +68,7 @@ def complaint():
 @csrf.exempt
 @external.route('/external/cookie', defaults={'lang': "en"})
 @nocache
+@restricted_domain
 def cookie():
     try:
         g.accept_cookies=None
@@ -62,6 +80,20 @@ def cookie():
     response = make_response("cookieLawApplies(%s)"%str(cookieLawApplies).lower())
     response.headers['content-type']='application/javascript'
     return response
+
+@csrf.exempt
+@external.route('/<lang>/update')
+@nocache
+@restricted_domain
+def update():
+    return downloader_update()
+
+@csrf.exempt
+@external.route("/<lang>/downloader/<build>/<instfile>")
+@nocache
+@restricted_domain
+def download(instfile, build):
+    return send_instfile(instfile, build)
 
 class ExternalContactForm(Form):
     '''
