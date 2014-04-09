@@ -86,7 +86,7 @@ def cookie():
 @nocache
 @restricted_domain
 def update():
-    return jsonify({})
+    return jsonify({"messages":[]})
     #return downloader_update()
 
 @csrf.exempt
