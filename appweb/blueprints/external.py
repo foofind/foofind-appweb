@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import functools
-from flask import g, request, render_template, current_app, make_response, session, Blueprint, redirect, abort
+from flask import g, request, render_template, current_app, make_response, session, Blueprint, redirect, abort, jsonify
 from flask.ext.wtf import Form, BooleanField, TextField, TextAreaField, SubmitField, SelectField, Required, RecaptchaField, Email, Length
 from foofind.utils import nocache
 from foofind.services import *
@@ -86,7 +86,8 @@ def cookie():
 @nocache
 @restricted_domain
 def update():
-    return downloader_update()
+    return jsonify({})
+    #return downloader_update()
 
 @csrf.exempt
 @external.route("/<lang>/downloader/<build>/<instfile>")
