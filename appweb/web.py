@@ -175,7 +175,7 @@ def create_app(config=None, debug=False):
 
     # downloader files
     downloader_files = app.config["DOWNLOADER_FILES"]
-    base_path = os.path.abspath(os.path.join(app.root_path,"../downloads"))
+    base_path = os.path.abspath(os.path.join(app.root_path,"downloads"))
     def update_downloader_properties():
         '''
         Downloader updated.
