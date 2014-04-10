@@ -13,6 +13,7 @@
                     {% if g.design %}
                         <input type="hidden" name="wklk" value="1">
                     {%endif%}
+                    {%- if g.version_code %}<input type="hidden" name="version" value="{{g.version_code}}">{%- endif %}
                     <fieldset>
                         <legend>{{_("Search form")}}</legend>
                         <div class="search-text">
