@@ -266,6 +266,7 @@
 
 {% block content %}
 <form id="plugin_list_form" method="post" class="hiddenform" action="{{url_for('extras.list', lang=g.lang)}}">
+{%- if g.version_code %}<input type="hidden" name="version" value="{{g.version_code}}">{%- endif %}
 <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}"/>
 <input type="hidden" name="plugins" value="{{ form_plugins if form_plugins is defined else ''}}"/>
 <input type="hidden" name="ununinstallable" value="{{ form_ununinstallable if form_ununinstallable is defined else ''}}"/>

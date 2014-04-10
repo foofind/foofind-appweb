@@ -4,11 +4,12 @@
         <div class="search-main">
             <div class="search-border">
                 <form id="current_search">
+                    {%- if g.version_code %}<input type="hidden" name="version" value="{{g.version_code}}">{%- endif %}
                     <input type="hidden" id="query" name="query" value="{{query}}">
                     <input type="hidden" id="filetype" name="filetype" value="{{filetype}}">
                     <input type="hidden" id="last_items" name="last_items" value="{{last_items}}">
                 </form>
-                <form id="new_search" method="post" action="{{ url_for('files.search') }}">
+                <form id="new_search" method="post" action="{{ url_for('files.search', cv=g.version_code) }}">
                     {% if g.design %}
                         <input type="hidden" name="wklk" value="1">
                     {%endif%}
@@ -62,6 +63,7 @@
     <div id="report">
         <a href="#" id="close_report" class="close"></a>
         <form id="report_form" method="post" action="{{url_for('files.complaint')}}">
+            {%- if g.version_code %}<input type="hidden" name="version" value="{{g.version_code}}">{%- endif %}
             <input type="hidden" id="file_id" name="file_id" value="">
             <fieldset>
                 <legend>{{_("Report")}}</legend>
