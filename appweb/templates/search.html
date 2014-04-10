@@ -9,7 +9,7 @@
                     <input type="hidden" id="filetype" name="filetype" value="{{filetype}}">
                     <input type="hidden" id="last_items" name="last_items" value="{{last_items}}">
                 </form>
-                <form id="new_search" method="post" action="{{ url_for('files.search', cv=g.version_code) }}">
+                <form id="new_search" method="post" action="{{ url_for('files.search') }}">
                     {% if g.design %}
                         <input type="hidden" name="wklk" value="1">
                     {%endif%}
