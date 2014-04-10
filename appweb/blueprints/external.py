@@ -8,6 +8,7 @@ from foofind.utils import nocache
 from foofind.services import *
 from .files import ReportLinkForm
 from foofind.blueprints.downloader import update as downloader_update
+from foofind.utils.downloader import downloader_url
 
 external = Blueprint('external', __name__)
 
@@ -85,9 +86,9 @@ def cookie():
 @external.route('/<lang>/update')
 @nocache
 @restricted_domain
+@downloader_url
 def update():
-    return jsonify({"messages":[]})
-    #return downloader_update()
+    return downloader_update()
 
 @csrf.exempt
 @external.route("/<lang>/downloader/<build>/<instfile>")
