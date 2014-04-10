@@ -266,7 +266,7 @@ def init_g(app):
     g.design = bool(request.form.get("wklk", False))
     g.license_name = license_name = "foofind" if "foofind" in request.url_root else "blubster"
 
-    g.version_code = request.args.get("version",None)
+    g.version_code = request.form.get("version",None)
     g.analytics_code = current_app.config["ANALYTICS_CODE"][license_name] % {"client_version":g.version_code or ""}
 
     # caracteristicas del cliente
