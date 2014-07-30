@@ -12,3 +12,9 @@ msgid "approx_results_for"
 msgstr "approximately %(num)s results for"
 msgid "results_for"
 msgstr "%(num)s results for"
+
+# Downloader
+msgid "downloader_update_message"
+msgstr ""
+"A new version of %(appname)s (%(version)s) is ready to install.\n"
+"Do you want to upgrade?"

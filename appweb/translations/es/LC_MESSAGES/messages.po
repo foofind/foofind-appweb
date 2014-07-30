@@ -94,3 +94,9 @@ msgid "software"
 msgstr "programas"
 msgid "image"
 msgstr "imágenes"
+
+# Downloader
+msgid "downloader_update_message"
+msgstr ""
+"Una nueva versión %(appname)s (%(version)s) está lista para instalar.\n"
+"¿Quieres actualizar?"

@@ -7,7 +7,7 @@ from flask.ext.wtf import Form, BooleanField, TextField, TextAreaField, SubmitFi
 from foofind.utils import nocache
 from foofind.services import *
 from .files import ReportLinkForm
-from foofind.blueprints.downloader import update as downloader_update
+from foofind.blueprints.downloader import update as downloader_update, send_instfile
 from foofind.utils.downloader import downloader_url
 
 external = Blueprint('external', __name__)
