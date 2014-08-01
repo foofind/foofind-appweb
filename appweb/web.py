@@ -299,11 +299,11 @@ def init_g(app):
     g.tos_link = current_app.config["TOS_LINK"][license_name]
     g.privacy_link = current_app.config["PRIVACY_LINK"][license_name]
 
-    g.categories = (('video',{"t":["video"]}),
-                     ('audio',{"t":["audio"]}),
-                     ('document',{"t":["document"]}),
-                     ('image',{"t":["image"]}),
-                     ('software',{"t":["software"]})
+    g.categories = (('video',{"q":["video"]}),
+                     ('audio',{"q":["audio"]}),
+                     ('document',{"q":["document"]}),
+                     ('image',{"q":["image"]}),
+                     ('software',{"q":["software"]})
                      )
 
     g.downloader_properties = local_cache["downloader_properties"]
